@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Beats - Radio Online</title>
+    <title>RADIO FE 4:18</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
     
-    <!-- Meta etiquetas para optimización PWA e iOS Capable -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Neon Beats">
+    <meta name="apple-mobile-web-app-title" content="RADIO FE 4:18">
     <link class="apple-touch-icon" href="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=192&h=192&fit=crop">
     <meta name="theme-color" content="#09090b" id="meta-theme-color">
     
-    <!-- Vinculación del Manifest -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Tailwind CSS CDN & FontAwesome para Iconos -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -56,29 +54,75 @@
         .dark .neon-glow-pink { box-shadow: 0 0 20px rgba(236, 72, 153, 0.2); }
         .neon-glow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
         .neon-glow-pink { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+
+/* Estilos generales y scroll personalizado */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+    background: #06b6d4;
+    border-radius: 10px;
+}
+
+/* Efectos de brillo neón para los contenedores */
+.dark .neon-glow {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.dark .neon-glow-pink {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+}
+
+/* Ajustes para el reproductor y elementos visuales */
+#visualizer {
+    background: transparent;
+    display: block;
+}
+
+/* Asegurar que los botones tengan transiciones suaves */
+button {
+    transition: all 0.3s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Estilo para el contador de oyentes */
+#listener-count {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Ajuste de imagen de carátula para que sea responsiva */
+#track-cover {
+    transition: transform 0.5s ease;
+    object-fit: cover;
+}
     </style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
 
-    <!-- HEADER -->
     <header class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50 px-4 sm:px-6 py-4 flex justify-between items-center transition-colors duration-300">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-gradient-to-tr from-brand-neon to-brand-neonPink rounded-xl flex items-center justify-center neon-glow">
-                <i class="fa-solid fa-radio text-xl text-black"></i>
+                <img src="img/logo.png" alt="Logo Radio" class="h-10 w-auto object-contain">
             </div>
             <div>
-                <h1 class="text-xl font-black tracking-wider uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink bg-clip-text text-transparent">Neon Beats</h1>
-                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-widest uppercase">Estación Oficial</p>
+                <h1 class="text-xl font-black tracking-wider uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink bg-clip-text text-transparent">RADIO FE 4:18</h1>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-widest uppercase">Sonando por todo lo alto</p>
             </div>
         </div>
 
-        <!-- Redes sociales ahora fijas tanto en móvil como en escritorio -->
         <div class="flex items-center space-x-4 sm:space-x-5">
             <div class="flex items-center space-x-3 sm:space-x-4 text-zinc-500 dark:text-zinc-400">
-                <a href="#" target="_blank" class="hover:text-brand-neon transition-colors duration-200 text-lg"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" target="_blank" class="hover:text-brand-neonPink transition-colors duration-200 text-lg"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" target="_blank" class="hover:text-brand-neon transition-colors duration-200 text-lg"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="#" target="_blank" class="hover:text-green-500 transition-colors duration-200 text-lg"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/FE418" target="_blank" class="hover:text-brand-neon transition-colors duration-200 text-lg"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/fe4.18/" target="_blank" class="hover:text-brand-neonPink transition-colors duration-200 text-lg"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@eliaquinmarin" target="_blank" class="hover:text-brand-neon transition-colors duration-200 text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://whatsapp.com/channel/0029VaQ05S3CBtx7jtDfnE0f" target="_blank" class="hover:text-green-500 transition-colors duration-200 text-lg"><i class="fa-brands fa-whatsapp"></i></a>
+ <a href="https://www.youtube.com/@EliaquinMarin" target="_blank" class="hover:text-green-500 transition-colors duration-200 text-lg"><i class="fa-brands fa-youtube"></i></a>
             </div>
 
             <button id="theme-toggle" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
@@ -87,10 +131,8 @@
         </div>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL -->
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        <!-- COLUMNA IZQUIERDA: REPRODUCTOR -->
         <section class="lg:col-span-7 bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
             
             <div class="absolute top-6 left-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
@@ -99,18 +141,18 @@
                 <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
             </div>
 
-            <div class="w-60 h-60 md:w-72 md:h-72 my-6 relative group">
-                <img id="track-cover" src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=500&h=500&fit=crop" 
+            <div class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
+                <img id="track-cover" src="img/caratula.png?w=500&h=500&fit=crop" 
                      alt="Carátula" class="w-full h-full object-cover rounded-2xl shadow-xl dark:shadow-2xl border-2 border-zinc-300 dark:border-zinc-700/50 transition-all duration-500 group-hover:scale-[1.02]">
             </div>
 
-            <div class="w-full max-w-md h-16 mb-4 flex items-center justify-center">
+            <div class="w-full max-w-md h-10 flex items-center justify-center">
                 <canvas id="visualizer" class="w-full h-full"></canvas>
             </div>
 
-            <div class="text-center w-full max-w-md mb-6">
+            <div class="text-center w-full max-w-md mb-3">
                 <h2 id="track-title" class="text-2xl font-bold tracking-tight line-clamp-1 text-zinc-900 dark:text-white">Cargando señal...</h2>
-                <p id="track-artist" class="text-brand-neon font-semibold text-sm mt-1 tracking-wide uppercase line-clamp-1">Por favor, espera</p>
+                <p id="track-artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase line-clamp-1">Por favor, espera</p>
             </div>
 
             <div class="w-full max-w-md grid grid-cols-12 gap-4">
@@ -128,13 +170,18 @@
                 </div>
             </div>
 
+<!-- Contador de Oyentes -->
+<div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
+    <i class="fa-solid fa-users text-brand-neon mr-2"></i>
+    <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">0</span>
+</div>
+
             <div class="w-full max-w-md flex justify-between items-center mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500 dark:text-zinc-400">
                 <button id="share-btn" class="flex items-center space-x-1.5 hover:text-brand-neon transition-colors"><i class="fa-solid fa-share-node"></i> <span>Compartir</span></button>
                 <button id="report-btn" class="flex items-center space-x-1.5 hover:text-brand-neonPink transition-colors"><i class="fa-solid fa-circle-exclamation"></i> <span>Reportar Falla</span></button>
             </div>
         </section>
 
-        <!-- COLUMNA DERECHA: INFO Y PUBLICIDAD -->
         <div class="lg:col-span-5 space-y-6 w-full">
             
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
@@ -153,11 +200,10 @@
                 </div>
             </section>
 
-            <!-- CAROUSEL DE PUBLICIDAD INTERACTIVO -->
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
                 <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Patrocinadores</p>
-                <a id="ad-link" href="#" target="_blank" class="block w-full h-36 rounded-xl bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-inner">
-                    <img id="ad-banner" src="" alt="Publicidad" class="w-full h-full object-cover transition-all duration-500 opacity-100">
+                <a id="ad-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full h-auto rounded-xl bg-transparent border border-zinc-200 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-sm">
+                    <img id="ad-banner" src="" alt="Publicidad" class="w-full h-auto object-cover block transition-all duration-500 opacity-100">
                     <span class="absolute bottom-2 right-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-zinc-300 tracking-wider">VISITAR SITIO</span>
                 </a>
             </section>
@@ -174,30 +220,28 @@
         </div>
     </main>
 
-        <!-- PIE DE PÁGINA (FOOTER) -->
     <footer class="w-full bg-zinc-200/50 dark:bg-brand-card/30 border-t border-zinc-300 dark:border-zinc-900 mt-12 py-8 px-6 text-center text-zinc-500 text-xs transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-left md:text-left text-center">
-                <p class="font-semibold text-zinc-700 dark:text-zinc-400">&copy; <span id="footer-year"></span> Neon Beats Radio. Todos los derechos reservados.</p>
+                <p class="font-semibold text-zinc-700 dark:text-zinc-400">© <span id="footer-year"></span> Radio FE 4:18. Todos los derechos reservados.</p>
                 <p class="text-[11px] text-zinc-500 dark:text-zinc-600 mt-0.5">Transmitiendo alta fidelidad las 24 horas del día.</p>
             </div>
             
             <div class="bg-zinc-200 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-850 px-4 py-2 rounded-2xl flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
                 <span class="inline-block w-2 h-2 rounded-full bg-brand-neon compressed animate-pulse"></span>
-                <span class="text-[11px]">Desarrollado con <i class="fa-solid fa-heart text-brand-neonPink text-[10px]"></i> por <a href="#" class="font-bold text-zinc-800 dark:text-white hover:text-brand-neon transition-colors">TuNombre/Agencia</a></span>
+                <span class="text-[11px]">Desarrollado para RADIO FE 4:18 <i class="fa-solid fa-music text-brand-neonPink text-[10px]"></i> por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%20diseñador%20del%20sitio%20web." 
+   target="_blank" 
+   rel="noopener noreferrer" class="font-bold text-zinc-800 dark:text-white hover:text-brand-neon transition-colors">@EliaquinMarin</a></span>
             </div>
 
             <div class="flex items-center space-x-4 text-[11px] text-zinc-500 dark:text-zinc-600">
-                <a href="#" class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Términos de Uso</a>
-                <span>&bull;</span>
-                <a href="#" class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Política de Privacidad</a>
-                <span>&bull;</span>
-                <span class="text-zinc-400 dark:text-zinc-700 font-mono">v1.2.0-PWA</span>
+                <span  class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Sonando por todo lo alto</a>
+                <span> • </span>
+                <span class="text-zinc-400 dark:text-zinc-700 font-mono">Barinas - VeneZuela.</span>
             </div>
         </div>
     </footer>
 
-    <!-- Elemento de Audio Oculto -->
     <audio id="audio-player" src="https://icecast.omroep.nl/radio2-bb-mp3" preload="none" crossorigin="anonymous"></audio>
 
     <script>
@@ -236,12 +280,12 @@
         updateThemeUI(document.documentElement.classList.contains('dark'));
         themeToggleBtn.addEventListener('click', () => updateThemeUI(!document.documentElement.classList.contains('dark')));
 
-        // SLIDER AUTOMÁTICO DE ANUNCIOS
+        // SLIDER AUTOMÁTICO DE ANUNCIOS (CON TUS ENLACES EXTERNOS)
         const adsDatabase = [
-            { img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=250&fit=crop", url: "https://www.google.com" },
-            { img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&h=250&fit=crop", url: "https://www.apple.com" },
-            { img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=250&fit=crop", url: "https://www.spotify.com" },
-            { img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=250&fit=crop", url: "https://www.github.com" }
+            { img: "img/publicidad/contexto.png", url: "https://www.contextomediagroup.com/" },
+            { img: "img/publicidad/unisalud.png", url: "https://directoriounisalud.com/" },
+            { img: "img/publicidad/roraima.png", url: "https://www.instagram.com/serviautosroraima/" },
+            { img: "img/publicidad/iglesia.png", url: "https://ib-fe418.vercel.app/" }
         ];
         let currentAdIndex = 0;
 
@@ -310,7 +354,7 @@
 
         // REPRODUCCIÓN Y CONTROLADORES
         const mockMetadata = [
-            { title: "Blinding Highs (Neon Remix)", artist: "The Cyberpunks", album: "Cyber Radio Vol. 1", src: "https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=500&h=500&fit=crop" },
+            { title: "Blinding Highs (Neon Remix)", artist: "The Cyberpunks", album: "Cyber Radio Vol. 1", src: "img/caratula.png?w=500&h=500&fit=crop" },
             { title: "Synthwave Sunset", artist: "Future Cop 1986", album: "Neon Dreams", src: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&h=500&fit=crop" }
         ];
         let currentTrackIndex = 0;
@@ -362,5 +406,36 @@
             document.getElementById('current-time').textContent = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
         }, 1000);
     </script>
+
+<script>
+// Configuración de tu servidor
+const SHOUTCAST_URL = 'http://TU_URL_DE_SERVER:PUERTO'; 
+
+async function updateStationData() {
+    try {
+        // La mayoría de Shoutcast v2 usan esta ruta para JSON
+        const response = await fetch(`${SHOUTCAST_URL}/statistics.json?json=1`);
+        const data = await response.json();
+
+        // Actualizar Oyentes
+        const listeners = data.currentlisteners || 0;
+        document.getElementById('listener-count').textContent = listeners;
+
+        // Actualizar Metadata (Título y Artista)
+        const songTitle = data.songtitle || "Transmisión en vivo";
+        const parts = songTitle.split(' - ');
+        
+        trackTitle.textContent = parts[1] || songTitle;
+        trackArtist.textContent = parts[0] || "RADIO FE 4:18";
+
+    } catch (error) {
+        console.error("Error al conectar con Shoutcast:", error);
+    }
+}
+
+// Ejecutar cada 15 segundos para no saturar el servidor
+updateStationData();
+setInterval(updateStationData, 15000);
+</script>
 </body>
 </html>
