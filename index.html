@@ -101,6 +101,14 @@ button:active {
     transition: transform 0.5s ease;
     object-fit: cover;
 }
+/* Agrega esto a tus etiquetas <style> para mejorar el feedback visual */
+#share-btn {
+    transition: all 0.2s ease;
+}
+#share-btn:hover {
+    color: #06b6d4; /* Color neón de tu marca */
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -184,21 +192,17 @@ button:active {
 
         <div class="lg:col-span-5 space-y-6 w-full">
             
-            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center"><i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación de Hoy</h3>
-                    <span class="text-xs text-zinc-500" id="current-time">00:00</span>
-                </div>
-                <div class="space-y-3" id="schedule-container">
-                    <div class="p-3 bg-gradient-to-r from-brand-neonPink/10 to-transparent border-l-4 border-brand-neonPink rounded-r-xl flex justify-between items-center">
-                        <div>
-                            <p class="font-semibold text-sm text-zinc-900 dark:text-white">El Despertador Neón</p>
-                            <p class="text-xs text-zinc-500 dark:text-zinc-400">Con DJ Max & Laura</p>
-                        </div>
-                        <span class="text-xs font-bold bg-brand-neonPink/20 text-brand-neonPink px-2.5 py-1 rounded-md uppercase">Al Aire</span>
-                    </div>
-                </div>
-            </section>
+<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación de Hoy
+        </h3>
+        <span class="text-xs text-zinc-500" id="current-time">00:00</span>
+    </div>
+    
+    <div class="space-y-3" id="schedule-container">
+        </div>
+</section>
 
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
                 <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Patrocinadores</p>
@@ -409,7 +413,7 @@ button:active {
 
 <script>
 // Configuración de tu servidor
-const SHOUTCAST_URL = 'http://TU_URL_DE_SERVER:PUERTO'; 
+const SHOUTCAST_URL = 'http://app0102.sonicpanelradio.com:8246'; 
 
 async function updateStationData() {
     try {
@@ -437,5 +441,169 @@ async function updateStationData() {
 updateStationData();
 setInterval(updateStationData, 15000);
 </script>
+
+<script>
+    // 1. TU PROGRAMACIÓN (Se mantiene igual)
+    const miProgramacion = [
+        { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
+        { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
+        { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
+        { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
+        { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
+        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" }
+    ];
+
+    // FUNCIÓN AUXILIAR PARA FORMATO AM/PM
+    function formatearHora(hora24) {
+        let [h, m] = hora24.split(':');
+        h = parseInt(h);
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12;
+        h = h ? h : 12; // La hora 0 es 12
+        return `${h}:${m} ${ampm}`;
+    }
+
+    function actualizarProgramacion() {
+        const ahora = new Date();
+        const diaActual = ahora.getDay();
+        const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+
+        const contenedor = document.getElementById('schedule-container');
+        contenedor.innerHTML = ""; 
+
+        let programaEncontrado = null;
+        const programasDeHoy = miProgramacion.filter(p => p.dia === diaActual);
+
+        programasDeHoy.forEach(p => {
+            const [hI, mI] = p.horaInicio.split(':').map(Number);
+            const [hF, mF] = p.horaFin.split(':').map(Number);
+            const inicio = hI * 60 + mI;
+            const fin = hF * 60 + mF;
+
+            const estaAlAire = horaMinutos >= inicio && horaMinutos < fin;
+            if (estaAlAire) programaEncontrado = p;
+
+            const div = document.createElement('div');
+            div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
+            
+            // APLICAMOS EL FORMATO AQUÍ
+            div.innerHTML = `
+                <img src="${p.img}" alt="${p.nombre}" class="w-12 h-12 rounded-lg object-cover border border-zinc-300 dark:border-zinc-700">
+                <div class="flex-grow">
+                    <p class="font-bold text-sm text-zinc-900 dark:text-white">${p.nombre}</p>
+                    <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
+                </div>
+                ${estaAlAire ? '<span class="text-[10px] font-bold bg-brand-neonPink text-white px-2 py-1 rounded-full uppercase animate-pulse">En Vivo</span>' : ''}
+            `;
+            contenedor.appendChild(div);
+        });
+
+        if (programaEncontrado) {
+            trackTitle.textContent = programaEncontrado.nombre;
+            trackArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
+            trackCover.src = programaEncontrado.img;
+        } else {
+            updateStationData();
+        }
+    }
+
+    actualizarProgramacion();
+    setInterval(actualizarProgramacion, 30000);
+</script>
+
+<div id="install-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+    <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all scale-95" id="modal-content">
+        <div class="flex flex-col items-center text-center">
+            <img src="img/logo.png" alt="Logo" class="w-20 h-20 mb-4 rounded-2xl shadow-lg">
+            <h3 class="text-xl font-bold text-zinc-900 dark:text-white mb-2">¡Lleva Radio FE 4:18 contigo!</h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Instala nuestra app oficial. Es totalmente gratis, no ocupa espacio en tu dispositivo y tendrás acceso rápido a la señal en vivo.</p>
+            
+            <div class="flex w-full gap-3">
+                <button id="cancel-install" class="flex-1 py-3 text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-all">No, gracias</button>
+                <button id="confirm-install" class="flex-1 py-3 text-sm font-bold text-white bg-brand-neonPink rounded-xl shadow-lg hover:scale-[1.02] transition-all">Instalar Ahora</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deferredPrompt;
+    const installModal = document.getElementById('install-modal');
+    const btnCancel = document.getElementById('cancel-install');
+    const btnConfirm = document.getElementById('confirm-install');
+
+    // 1. Verificar si ya se instaló (standalone) o si ya rechazó antes
+    const isInstalled = window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-rejected') === 'true';
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault(); // Evita que aparezca el banner automático del navegador
+        deferredPrompt = e;
+
+        if (!isInstalled) {
+            // Mostrar modal después de 3 segundos de carga
+            setTimeout(() => {
+                installModal.classList.remove('hidden');
+                installModal.classList.add('flex');
+            }, 3000);
+        }
+    });
+
+    // 2. Acciones del modal
+    btnCancel.addEventListener('click', () => {
+        installModal.classList.add('hidden');
+        localStorage.setItem('pwa-rejected', 'true'); // Guardar que rechazó
+    });
+
+    btnConfirm.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('Usuario aceptó la instalación');
+            }
+            deferredPrompt = null;
+            installModal.classList.add('hidden');
+        }
+    });
+
+    // Detectar si ya se instaló correctamente
+    window.addEventListener('appinstalled', () => {
+        localStorage.setItem('pwa-installed', 'true');
+        installModal.classList.add('hidden');
+    });
+</script>
+
+<script>
+    const shareBtn = document.getElementById('share-btn');
+    
+    shareBtn.addEventListener('click', async () => {
+        const shareData = {
+            title: 'RADIO FE 4:18',
+            text: 'Escucha RADIO FE 4:18 en vivo, sonando por todo lo alto.',
+            url: window.location.href // Comparte la URL actual de tu web
+        };
+
+        try {
+            // Verifica si el navegador soporta Web Share API
+            if (navigator.share) {
+                await navigator.share(shareData);
+                console.log('Contenido compartido con éxito');
+            } else {
+                // Fallback: Si no soporta share, copia el enlace al portapapeles
+                await navigator.clipboard.writeText(window.location.href);
+                alert('¡Enlace copiado al portapapeles!');
+            }
+        } catch (err) {
+            console.error('Error al compartir:', err);
+        }
+    });
+</script>
+
 </body>
 </html>
