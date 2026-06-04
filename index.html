@@ -205,12 +205,12 @@ button:active {
 </section>
 
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
-                <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Colaboradores</p>
-                <a id="partner-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full h-auto rounded-xl bg-transparent border border-zinc-200 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-sm">
-                    <img id="partner-banner" src="" alt="Publicidad" class="w-full h-auto object-cover block transition-all duration-500 opacity-100">
-                    <span class="absolute bottom-2 right-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-zinc-300 tracking-wider">VISITAR SITIO</span>
-                </a>
-            </section>
+    <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Aliados</p>
+    <a id="partner-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full h-auto rounded-xl bg-transparent border border-zinc-200 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-sm">
+        <img id="partner-banner" src="" alt="Aliado" class="w-full h-auto object-cover block transition-all duration-500 opacity-100">
+        <span class="absolute bottom-2 right-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-zinc-300 tracking-wider">VISITAR SITIO</span>
+    </a>
+</section>
 
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
                 <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-500 dark:text-zinc-400 mb-3 flex items-center"><i class="fa-solid fa-history mr-2 text-zinc-400"></i> Sonado Recientemente</h4>
@@ -284,27 +284,33 @@ button:active {
         updateThemeUI(document.documentElement.classList.contains('dark'));
         themeToggleBtn.addEventListener('click', () => updateThemeUI(!document.documentElement.classList.contains('dark')));
 
-        // SLIDER AUTOMÁTICO DE ANUNCIOS (CON TUS ENLACES EXTERNOS)
-        const adsDatabase = [
-            { img: "img/publicidad/contexto.png", url: "https://www.contextomediagroup.com/" },
-            { img: "img/publicidad/unisalud.png", url: "https://directoriounisalud.com/" },
-            { img: "img/publicidad/roraima.png", url: "https://www.instagram.com/serviautosroraima/" },
-            { img: "img/publicidad/iglesia.png", url: "https://ib-fe418.vercel.app/" }
-        ];
-        let currentAdIndex = 0;
+       // SLIDER AUTOMÁTICO DE ALIADOS (Nombres neutrales para evitar filtros)
+const partnersDatabase = [
+    { img: "img/partners/contexto.png", url: "https://www.contextomediagroup.com/" },
+    { img: "img/partners/unisalud.png", url: "https://directoriounisalud.com/" },
+    { img: "img/partners/roraima.png", url: "https://www.instagram.com/serviautosroraima/" },
+    { img: "img/partners/iglesia.png", url: "https://ib-fe418.vercel.app/" }
+];
+let currentPartnerIndex = 0;
 
-        function rotateAds() {
-            const activeAd = adsDatabase[currentAdIndex];
-            adBanner.style.opacity = 0;
-            setTimeout(() => {
-                adBanner.src = activeAd.img;
-                adLink.href = activeAd.url;
-                adBanner.style.opacity = 1;
-                currentAdIndex = (currentAdIndex + 1) % adsDatabase.length;
-            }, 400);
-        }
-        rotateAds();
-        setInterval(rotateAds, 5000);
+function rotatePartners() {
+    const activePartner = partnersDatabase[currentPartnerIndex];
+    // Asegúrate de que estos IDs coincidan con tu HTML actualizado
+    const partnerBanner = document.getElementById('partner-banner'); 
+    const partnerLink = document.getElementById('partner-link');
+
+    if (partnerBanner && partnerLink) {
+        partnerBanner.style.opacity = 0;
+        setTimeout(() => {
+            partnerBanner.src = activePartner.img;
+            partnerLink.href = activePartner.url;
+            partnerBanner.style.opacity = 1;
+            currentPartnerIndex = (currentPartnerIndex + 1) % partnersDatabase.length;
+        }, 400);
+    }
+}
+rotatePartners();
+setInterval(rotatePartners, 5000);
 
         // ONDAS DE SONIDO EN CANVAS
         const canvas = document.getElementById('visualizer');
