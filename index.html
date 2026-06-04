@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Beats - Radio Online</title>
+    
+    <!-- Meta etiquetas para optimización PWA e iOS Capable -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Neon Beats">
+    <link class="apple-touch-icon" href="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=192&h=192&fit=crop">
+    <meta name="theme-color" content="#09090b" id="meta-theme-color">
+    
+    <!-- Vinculación del Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Tailwind CSS CDN & FontAwesome para Iconos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#09090b',
+                            card: '#18181b',
+                            lightBg: '#f4f4f5',
+                            lightCard: '#ffffff',
+                            neon: '#06b6d4',      /* Cian Vibrante */
+                            neonPink: '#ec4899'  /* Rosa Neón */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        html, body { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .dark .neon-glow { box-shadow: 0 0 20px rgba(6, 182, 212, 0.15); }
+        .dark .neon-glow-pink { box-shadow: 0 0 20px rgba(236, 72, 153, 0.2); }
+        .neon-glow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+        .neon-glow-pink { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- HEADER -->
+    <header class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50 px-4 sm:px-6 py-4 flex justify-between items-center transition-colors duration-300">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-tr from-brand-neon to-brand-neonPink rounded-xl flex items-center justify-center neon-glow">
+                <i class="fa-solid fa-radio text-xl text-black"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-black tracking-wider uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink bg-clip-text text-transparent">Neon Beats</h1>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-widest uppercase">Estación Oficial</p>
+            </div>
+        </div>
+
+        <!-- Redes sociales ahora fijas tanto en móvil como en escritorio -->
+        <div class="flex items-center space-x-4 sm:space-x-5">
+            <div class="flex items-center space-x-3 sm:space-x-4 text-zinc-500 dark:text-zinc-400">
+                <a href="#" target="_blank" class="hover:text-brand-neon transition-colors duration-200 text-lg"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" target="_blank" class="hover:text-brand-neonPink transition-colors duration-200 text-lg"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" target="_blank" class="hover:text-brand-neon transition-colors duration-200 text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" target="_blank" class="hover:text-green-500 transition-colors duration-200 text-lg"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+
+            <button id="theme-toggle" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
+                <i id="theme-icon" class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- COLUMNA IZQUIERDA: REPRODUCTOR -->
+        <section class="lg:col-span-7 bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
+            
+            <div class="absolute top-6 left-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
+                <span class="w-2.5 h-2.5 bg-red-500 rounded-full mr-2 animate-ping"></span>
+                <span class="w-2.5 h-2.5 bg-red-600 rounded-full mr-2 absolute"></span>
+                <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
+            </div>
+
+            <div class="w-60 h-60 md:w-72 md:h-72 my-6 relative group">
+                <img id="track-cover" src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=500&h=500&fit=crop" 
+                     alt="Carátula" class="w-full h-full object-cover rounded-2xl shadow-xl dark:shadow-2xl border-2 border-zinc-300 dark:border-zinc-700/50 transition-all duration-500 group-hover:scale-[1.02]">
+            </div>
+
+            <div class="w-full max-w-md h-16 mb-4 flex items-center justify-center">
+                <canvas id="visualizer" class="w-full h-full"></canvas>
+            </div>
+
+            <div class="text-center w-full max-w-md mb-6">
+                <h2 id="track-title" class="text-2xl font-bold tracking-tight line-clamp-1 text-zinc-900 dark:text-white">Cargando señal...</h2>
+                <p id="track-artist" class="text-brand-neon font-semibold text-sm mt-1 tracking-wide uppercase line-clamp-1">Por favor, espera</p>
+            </div>
+
+            <div class="w-full max-w-md grid grid-cols-12 gap-4">
+                <button id="mute-btn" class="col-span-3 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-brand-neon dark:hover:text-brand-neon hover:border-brand-neon/50 transition-all duration-300 active:scale-95 focus:outline-none">
+                    <i id="volume-icon" class="fa-solid fa-volume-high text-xl"></i>
+                </button>
+
+                <button id="play-btn" class="col-span-4 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
+                    <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
+                </button>
+
+                <div class="col-span-5 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4">
+                    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
+                           class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon">
+                </div>
+            </div>
+
+            <div class="w-full max-w-md flex justify-between items-center mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500 dark:text-zinc-400">
+                <button id="share-btn" class="flex items-center space-x-1.5 hover:text-brand-neon transition-colors"><i class="fa-solid fa-share-node"></i> <span>Compartir</span></button>
+                <button id="report-btn" class="flex items-center space-x-1.5 hover:text-brand-neonPink transition-colors"><i class="fa-solid fa-circle-exclamation"></i> <span>Reportar Falla</span></button>
+            </div>
+        </section>
+
+        <!-- COLUMNA DERECHA: INFO Y PUBLICIDAD -->
+        <div class="lg:col-span-5 space-y-6 w-full">
+            
+            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center"><i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación de Hoy</h3>
+                    <span class="text-xs text-zinc-500" id="current-time">00:00</span>
+                </div>
+                <div class="space-y-3" id="schedule-container">
+                    <div class="p-3 bg-gradient-to-r from-brand-neonPink/10 to-transparent border-l-4 border-brand-neonPink rounded-r-xl flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold text-sm text-zinc-900 dark:text-white">El Despertador Neón</p>
+                            <p class="text-xs text-zinc-500 dark:text-zinc-400">Con DJ Max & Laura</p>
+                        </div>
+                        <span class="text-xs font-bold bg-brand-neonPink/20 text-brand-neonPink px-2.5 py-1 rounded-md uppercase">Al Aire</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CAROUSEL DE PUBLICIDAD INTERACTIVO -->
+            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
+                <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Patrocinadores</p>
+                <a id="ad-link" href="#" target="_blank" class="block w-full h-36 rounded-xl bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-inner">
+                    <img id="ad-banner" src="" alt="Publicidad" class="w-full h-full object-cover transition-all duration-500 opacity-100">
+                    <span class="absolute bottom-2 right-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-zinc-300 tracking-wider">VISITAR SITIO</span>
+                </a>
+            </section>
+
+            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
+                <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-500 dark:text-zinc-400 mb-3 flex items-center"><i class="fa-solid fa-history mr-2 text-zinc-400"></i> Sonado Recientemente</h4>
+                <div class="space-y-3.5">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=80&h=80&fit=crop" class="w-9 h-9 object-cover rounded-md">
+                        <div class="flex-grow min-w-0"><p class="text-xs font-semibold text-zinc-800 dark:text-zinc-300 truncate">Midnight City</p><p class="text-[11px] text-zinc-500 truncate">M83</p></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+        <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="w-full bg-zinc-200/50 dark:bg-brand-card/30 border-t border-zinc-300 dark:border-zinc-900 mt-12 py-8 px-6 text-center text-zinc-500 text-xs transition-colors duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-left md:text-left text-center">
+                <p class="font-semibold text-zinc-700 dark:text-zinc-400">&copy; <span id="footer-year"></span> Neon Beats Radio. Todos los derechos reservados.</p>
+                <p class="text-[11px] text-zinc-500 dark:text-zinc-600 mt-0.5">Transmitiendo alta fidelidad las 24 horas del día.</p>
+            </div>
+            
+            <div class="bg-zinc-200 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-850 px-4 py-2 rounded-2xl flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+                <span class="inline-block w-2 h-2 rounded-full bg-brand-neon compressed animate-pulse"></span>
+                <span class="text-[11px]">Desarrollado con <i class="fa-solid fa-heart text-brand-neonPink text-[10px]"></i> por <a href="#" class="font-bold text-zinc-800 dark:text-white hover:text-brand-neon transition-colors">TuNombre/Agencia</a></span>
+            </div>
+
+            <div class="flex items-center space-x-4 text-[11px] text-zinc-500 dark:text-zinc-600">
+                <a href="#" class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Términos de Uso</a>
+                <span>&bull;</span>
+                <a href="#" class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Política de Privacidad</a>
+                <span>&bull;</span>
+                <span class="text-zinc-400 dark:text-zinc-700 font-mono">v1.2.0-PWA</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Elemento de Audio Oculto -->
+    <audio id="audio-player" src="https://icecast.omroep.nl/radio2-bb-mp3" preload="none" crossorigin="anonymous"></audio>
+
+    <script>
+        // DOM Elements
+        const audio = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeIcon = document.getElementById('volume-icon');
+        const muteBtn = document.getElementById('mute-btn');
+        const trackCover = document.getElementById('track-cover');
+        const trackTitle = document.getElementById('track-title');
+        const trackArtist = document.getElementById('track-artist');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const metaThemeColor = document.getElementById('meta-theme-color');
+        const adBanner = document.getElementById('ad-banner');
+        const adLink = document.getElementById('ad-link');
+
+        audio.volume = volumeSlider.value;
+
+        // SISTEMA DE TEMAS
+        function updateThemeUI(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeIcon.className = "fa-solid fa-sun text-base text-yellow-400";
+                metaThemeColor.setAttribute('content', '#09090b');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIcon.className = "fa-solid fa-moon text-base text-zinc-700";
+                metaThemeColor.setAttribute('content', '#f4f4f5');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        updateThemeUI(document.documentElement.classList.contains('dark'));
+        themeToggleBtn.addEventListener('click', () => updateThemeUI(!document.documentElement.classList.contains('dark')));
+
+        // SLIDER AUTOMÁTICO DE ANUNCIOS
+        const adsDatabase = [
+            { img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=250&fit=crop", url: "https://www.google.com" },
+            { img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&h=250&fit=crop", url: "https://www.apple.com" },
+            { img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=250&fit=crop", url: "https://www.spotify.com" },
+            { img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=250&fit=crop", url: "https://www.github.com" }
+        ];
+        let currentAdIndex = 0;
+
+        function rotateAds() {
+            const activeAd = adsDatabase[currentAdIndex];
+            adBanner.style.opacity = 0;
+            setTimeout(() => {
+                adBanner.src = activeAd.img;
+                adLink.href = activeAd.url;
+                adBanner.style.opacity = 1;
+                currentAdIndex = (currentAdIndex + 1) % adsDatabase.length;
+            }, 400);
+        }
+        rotateAds();
+        setInterval(rotateAds, 5000);
+
+        // ONDAS DE SONIDO EN CANVAS
+        const canvas = document.getElementById('visualizer');
+        const ctx = canvas.getContext('2d');
+        let audioCtx, analyser, bufferLength, dataArray, source;
+        let isAudioContextInitialized = false;
+
+        function initAudioAnalyzer() {
+            if (isAudioContextInitialized) return;
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 64;
+                source = audioCtx.createMediaElementSource(audio);
+                source.connect(analyser);
+                analyser.connect(audioCtx.destination);
+                bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+                isAudioContextInitialized = true;
+            } catch (err) {
+                console.warn("Análisis de audio no soportado.", err);
+            }
+        }
+
+        function drawVisualizer() {
+            requestAnimationFrame(drawVisualizer);
+            const width = canvas.width = canvas.clientWidth;
+            const height = canvas.height = canvas.clientHeight;
+            ctx.clearRect(0, 0, width, height);
+
+            if (isAudioContextInitialized && !audio.paused) {
+                analyser.getByteFrequencyData(dataArray);
+            }
+
+            const barWidth = (width / bufferLength) * 1.4;
+            let barHeight;
+            let x = 0;
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const waveColor = isDark ? '#06b6d4' : '#ec4899';
+
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = (isAudioContextInitialized && !audio.paused) ? (dataArray[i] / 2) : 4;
+                if(barHeight < 4) barHeight = 4;
+                ctx.fillStyle = waveColor;
+                ctx.fillRect(x, (height - barHeight) / 2, barWidth - 3, barHeight);
+                x += barWidth;
+            }
+        }
+        drawVisualizer();
+
+        // REPRODUCCIÓN Y CONTROLADORES
+        const mockMetadata = [
+            { title: "Blinding Highs (Neon Remix)", artist: "The Cyberpunks", album: "Cyber Radio Vol. 1", src: "https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=500&h=500&fit=crop" },
+            { title: "Synthwave Sunset", artist: "Future Cop 1986", album: "Neon Dreams", src: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&h=500&fit=crop" }
+        ];
+        let currentTrackIndex = 0;
+
+        function updateMetadata(track) {
+            trackTitle.textContent = track.title;
+            trackArtist.textContent = track.artist;
+            trackCover.src = track.src;
+        }
+        updateMetadata(mockMetadata[currentTrackIndex]);
+
+        playBtn.addEventListener('click', togglePlayback);
+
+        function togglePlayback() {
+            initAudioAnalyzer();
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (audio.paused) {
+                const currentSrc = audio.src;
+                audio.src = currentSrc;
+                audio.play().then(() => { playIcon.className = "fa-solid fa-pause text-xl"; }).catch(err => console.error(err));
+            } else {
+                audio.pause();
+                playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+            }
+        }
+
+        volumeSlider.addEventListener('input', (e) => {
+            const vol = e.target.value;
+            audio.volume = vol;
+            if (vol == 0) volumeIcon.className = "fa-solid fa-volume-xmark text-xl";
+            else if (vol < 0.5) volumeIcon.className = "fa-solid fa-volume-low text-xl";
+            else volumeIcon.className = "fa-solid fa-volume-high text-xl";
+        });
+
+        muteBtn.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                audio.volume = 0;
+                volumeSlider.value = 0;
+                volumeIcon.className = "fa-solid fa-volume-xmark text-xl";
+            } else {
+                audio.volume = 0.8;
+                volumeSlider.value = 0.8;
+                volumeIcon.className = "fa-solid fa-volume-high text-xl";
+            }
+        });
+
+        setInterval(() => {
+            document.getElementById('current-time').textContent = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        }, 1000);
+    </script>
+</body>
+</html>
