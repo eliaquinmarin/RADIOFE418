@@ -109,6 +109,17 @@ button:active {
     color: #06b6d4; /* Color neón de tu marca */
     transform: scale(1.05);
 }
+/* Asegurar que la imagen del widget respete tu diseño */
+#sonic_art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem; /* Borde redondeado */
+}
+/* Ocultar elementos si el widget intenta poner textos extraños */
+#sonic_title, #sonic_listeners {
+    display: inline-block;
+}
     </style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -149,21 +160,27 @@ button:active {
                 <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
             </div>
 
-            <div class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
-                <img id="track-cover" src="img/caratula.png?w=500&h=500&fit=crop" 
-                     alt="Carátula" class="w-full h-full object-cover rounded-2xl shadow-xl dark:shadow-2xl border-2 border-zinc-300 dark:border-zinc-700/50 transition-all duration-500 group-hover:scale-[1.02]">
-            </div>
+          <div class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
+    <img id="track-cover" 
+         src="img/caratula.png" 
+         alt="Carátula" 
+         class="sonic_art w-full h-full object-cover rounded-2xl shadow-xl dark:shadow-2xl border-2 border-zinc-300 dark:border-zinc-700/50 transition-all duration-500 group-hover:scale-[1.02]">
+</div>
 
-            <div class="w-full max-w-md h-10 flex items-center justify-center">
-                <canvas id="visualizer" class="w-full h-full"></canvas>
-            </div>
+<div class="text-center w-full max-w-md mb-3">
+    <h2 id="track-title" class="sonic_title text-2xl font-bold tracking-tight line-clamp-1 text-zinc-900 dark:text-white">
+        Cargando señal...
+    </h2>
+    <p id="track-artist" class="sonic_artist text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase line-clamp-1">
+        Por favor, espera
+    </p>
+</div>
 
-            <div class="text-center w-full max-w-md mb-3">
-                <h2 id="track-title" class="text-2xl font-bold tracking-tight line-clamp-1 text-zinc-900 dark:text-white">Cargando señal...</h2>
-                <p id="track-artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase line-clamp-1">Por favor, espera</p>
-            </div>
+<div class="w-full max-w-md h-10 flex items-center justify-center">
+    <canvas id="visualizer" class="w-full h-full"></canvas>
+</div>
 
-            <div class="w-full max-w-md grid grid-cols-12 gap-4">
+          <div class="w-full max-w-md grid grid-cols-12 gap-4">
                 <button id="mute-btn" class="col-span-3 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-brand-neon dark:hover:text-brand-neon hover:border-brand-neon/50 transition-all duration-300 active:scale-95 focus:outline-none">
                     <i id="volume-icon" class="fa-solid fa-volume-high text-xl"></i>
                 </button>
@@ -246,7 +263,8 @@ button:active {
         </div>
     </footer>
 
-    <audio id="audio-player" src="https://icecast.omroep.nl/radio2-bb-mp3" preload="none" crossorigin="anonymous"></audio>
+    <!-- Cambia la línea actual por esta -->
+<audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" preload="none" crossorigin="anonymous"></audio>
 
     <script>
         // DOM Elements
@@ -418,35 +436,30 @@ setInterval(rotatePartners, 5000);
     </script>
 
 <script>
-// Configuración de tu servidor
-const SHOUTCAST_URL = 'https://app0102.sonicpanelradio.com:8246/stream'; 
+    // Referencia al reproductor ya definido arriba
+    const audioPlayer = document.getElementById('audio-player');
+    
+    // Función de reproducción segura
+    function togglePlayback() {
+        initAudioAnalyzer();
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 
-async function updateStationData() {
-    try {
-        // La mayoría de Shoutcast v2 usan esta ruta para JSON
-        const response = await fetch(`${SHOUTCAST_URL}/statistics.json?json=1`);
-        const data = await response.json();
-
-        // Actualizar Oyentes
-        const listeners = data.currentlisteners || 0;
-        document.getElementById('listener-count').textContent = listeners;
-
-        // Actualizar Metadata (Título y Artista)
-        const songTitle = data.songtitle || "Transmisión en vivo";
-        const parts = songTitle.split(' - ');
-        
-        trackTitle.textContent = parts[1] || songTitle;
-        trackArtist.textContent = parts[0] || "RADIO FE 4:18";
-
-    } catch (error) {
-        console.error("Error al conectar con Shoutcast:", error);
+        if (audioPlayer.paused) {
+            // Aseguramos que cargue el stream correcto
+            audioPlayer.play().then(() => { 
+                playIcon.className = "fa-solid fa-pause text-xl"; 
+            }).catch(err => {
+                console.error("Error al reproducir:", err);
+                alert("No se pudo conectar con el servidor de radio.");
+            });
+        } else {
+            audioPlayer.pause();
+            playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+        }
     }
-}
-
-// Ejecutar cada 15 segundos para no saturar el servidor
-updateStationData();
-setInterval(updateStationData, 15000);
 </script>
+
+<script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
 
 <script>
     // 1. TU PROGRAMACIÓN (Se mantiene igual)
