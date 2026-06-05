@@ -120,6 +120,10 @@ button:active {
 #sonic_title, #sonic_listeners {
     display: inline-block;
 }
+/* Asegurar que los contenedores del widget no rompan el diseño */
+#sonic_listeners, #sonic_uniq {
+    display: inline-block;
+}
     </style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -160,45 +164,48 @@ button:active {
                 <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
             </div>
 
-          <div class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
-    <img id="track-cover" 
+<div id="sonic_art" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
+    <img id="sonic_art" 
          src="img/caratula.png" 
          alt="Carátula" 
-         class="sonic_art w-full h-full object-cover rounded-2xl shadow-xl dark:shadow-2xl border-2 border-zinc-300 dark:border-zinc-700/50 transition-all duration-500 group-hover:scale-[1.02]">
+         class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
 </div>
 
 <div class="text-center w-full max-w-md mb-3">
-    <h2 id="track-title" class="sonic_title text-2xl font-bold tracking-tight line-clamp-1 text-zinc-900 dark:text-white">
-        Cargando señal...
-    </h2>
-    <p id="track-artist" class="sonic_artist text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase line-clamp-1">
-        Por favor, espera
-    </p>
+    <!-- En lugar de tus etiquetas h2/p actuales, usa estas -->
+<h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+    Radio FE 4:18
+</h2>
+<p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
+   Sonando por todo lo alto
+</p>
 </div>
 
 <div class="w-full max-w-md h-10 flex items-center justify-center">
     <canvas id="visualizer" class="w-full h-full"></canvas>
 </div>
 
-          <div class="w-full max-w-md grid grid-cols-12 gap-4">
-                <button id="mute-btn" class="col-span-3 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-brand-neon dark:hover:text-brand-neon hover:border-brand-neon/50 transition-all duration-300 active:scale-95 focus:outline-none">
-                    <i id="volume-icon" class="fa-solid fa-volume-high text-xl"></i>
-                </button>
+        <div class="w-full max-w-md grid grid-cols-12 gap-4">
+    <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
+        <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
+    </button>
 
-                <button id="play-btn" class="col-span-4 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
-                    <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
-                </button>
+    <div class="col-span-5 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4">
+        <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
+               class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon">
+    </div>
+</div>
 
-                <div class="col-span-5 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4">
-                    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
-                           class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon">
-                </div>
-            </div>
-
-<!-- Contador de Oyentes -->
 <div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
     <i class="fa-solid fa-users text-brand-neon mr-2"></i>
-    <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">0</span>
+    
+    <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">
+        <span id="sonic_listeners">0</span>
+    </span>
+    
+    <span class="text-[9px] text-zinc-400 ml-2 border-l border-zinc-600 pl-2">
+        Uniq: <span id="sonic_uniq">0</span>
+    </span>
 </div>
 
             <div class="w-full max-w-md flex justify-between items-center mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500 dark:text-zinc-400">
@@ -264,14 +271,14 @@ button:active {
     </footer>
 
     <!-- Cambia la línea actual por esta -->
-<audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" preload="none" crossorigin="anonymous"></audio>
+<audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" autoplay preload="auto" crossorigin="anonymous"></audio>
 
     <script>
         // DOM Elements
-        const audio = document.getElementById('audio-player');
-        const playBtn = document.getElementById('play-btn');
-        const playIcon = document.getElementById('play-icon');
-        const volumeSlider = document.getElementById('volume-slider');
+const audio = document.getElementById('audio-player');
+const playBtn = document.getElementById('play-btn');
+const playIcon = document.getElementById('play-icon');
+const volumeSlider = document.getElementById('volume-slider');
         const volumeIcon = document.getElementById('volume-icon');
         const muteBtn = document.getElementById('mute-btn');
         const trackCover = document.getElementById('track-cover');
@@ -284,6 +291,24 @@ button:active {
         const adLink = document.getElementById('partner-link');
 
         audio.volume = volumeSlider.value;
+
+// Función de Play/Pause
+playBtn.addEventListener('click', () => {
+    // Inicializar el contexto de audio si es necesario
+    if (audio.paused) {
+        audio.play().then(() => {
+            playIcon.className = "fa-solid fa-pause text-xl";
+        });
+    } else {
+        audio.pause();
+        playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+    }
+});
+
+// Control de volumen
+volumeSlider.addEventListener('input', (e) => {
+    audio.volume = e.target.value;
+});
 
         // SISTEMA DE TEMAS
         function updateThemeUI(isDark) {
@@ -459,10 +484,8 @@ setInterval(rotatePartners, 5000);
     }
 </script>
 
-<script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
-
 <script>
-    // 1. TU PROGRAMACIÓN (Se mantiene igual)
+    // 1. TU PROGRAMACIÓN
     const miProgramacion = [
         { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
         { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
@@ -478,13 +501,11 @@ setInterval(rotatePartners, 5000);
         { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" }
     ];
 
-    // FUNCIÓN AUXILIAR PARA FORMATO AM/PM
     function formatearHora(hora24) {
         let [h, m] = hora24.split(':');
         h = parseInt(h);
         const ampm = h >= 12 ? 'PM' : 'AM';
-        h = h % 12;
-        h = h ? h : 12; // La hora 0 es 12
+        h = h % 12 || 12;
         return `${h}:${m} ${ampm}`;
     }
 
@@ -492,26 +513,22 @@ setInterval(rotatePartners, 5000);
         const ahora = new Date();
         const diaActual = ahora.getDay();
         const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
-
         const contenedor = document.getElementById('schedule-container');
+        
+        if (!contenedor) return;
         contenedor.innerHTML = ""; 
 
         let programaEncontrado = null;
-        const programasDeHoy = miProgramacion.filter(p => p.dia === diaActual);
-
-        programasDeHoy.forEach(p => {
+        
+        miProgramacion.filter(p => p.dia === diaActual).forEach(p => {
             const [hI, mI] = p.horaInicio.split(':').map(Number);
             const [hF, mF] = p.horaFin.split(':').map(Number);
-            const inicio = hI * 60 + mI;
-            const fin = hF * 60 + mF;
-
-            const estaAlAire = horaMinutos >= inicio && horaMinutos < fin;
+            const estaAlAire = horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF);
+            
             if (estaAlAire) programaEncontrado = p;
 
             const div = document.createElement('div');
             div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
-            
-            // APLICAMOS EL FORMATO AQUÍ
             div.innerHTML = `
                 <img src="${p.img}" alt="${p.nombre}" class="w-12 h-12 rounded-lg object-cover border border-zinc-300 dark:border-zinc-700">
                 <div class="flex-grow">
@@ -523,12 +540,15 @@ setInterval(rotatePartners, 5000);
             contenedor.appendChild(div);
         });
 
+        // Solo actualizar si hay un programa en vivo, de lo contrario dejar que SonicPanel maneje la música
         if (programaEncontrado) {
-            trackTitle.textContent = programaEncontrado.nombre;
-            trackArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
-            trackCover.src = programaEncontrado.img;
-        } else {
-            updateStationData();
+            const elTitle = document.getElementById('sonic_title');
+            const elArtist = document.getElementById('sonic_artist');
+            const elArt = document.getElementById('sonic_art');
+            
+            if (elTitle) elTitle.textContent = programaEncontrado.nombre;
+            if (elArtist) elArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
+            if (elArt) elArt.src = programaEncontrado.img;
         }
     }
 
@@ -623,6 +643,29 @@ setInterval(rotatePartners, 5000);
         }
     });
 </script>
+
+<script>
+    // Intentar reproducir al cargar, pero si falla, esperar al primer click
+    const audio = document.getElementById('audio-player');
+    
+    function startAudio() {
+        audio.play().then(() => {
+            console.log("Reproducción iniciada");
+            document.removeEventListener('click', startAudio);
+        }).catch(err => console.log("Esperando interacción del usuario..."));
+    }
+
+    window.addEventListener('load', startAudio);
+    document.addEventListener('click', startAudio);
+</script>
+
+<script>
+    // Asegúrate de que esto se ejecute después de cargar el widget
+    window.addEventListener('load', () => {
+        // SonicPanel buscará automáticamente elementos con id 'sonic_title', 'sonic_artist', etc.
+    });
+</script>
+<script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
 
 </body>
 </html>
