@@ -593,45 +593,56 @@
         </div>
     </div>
 
-    <script>
+   <script>
         let deferredPrompt;
         const installModal = document.getElementById('install-modal');
         const btnCancel = document.getElementById('cancel-install');
         const btnConfirm = document.getElementById('confirm-install');
 
-        const isInstalled = window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-rejected') === 'true';
+        // 1. Detección robusta: Revisamos si ya está abierta como App o si hay registro previo
+        const isRunningStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        const isRejectedOrInstalled = localStorage.getItem('pwa-rejected') === 'true' || localStorage.getItem('pwa-installed') === 'true';
 
+        // 2. El navegador dispara esto automáticamente en cuanto carga si la PWA es instalable
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
+            e.preventDefault(); // Evitamos el banner nativo pequeño de Chrome
+            deferredPrompt = e; // Guardamos el evento para el botón
 
-            if (!isInstalled) {
-                setTimeout(() => {
-                    installModal.classList.remove('hidden');
-                    installModal.classList.add('flex');
-                }, 3000);
+            // Si no está instalada y no la han rechazado, lo mostramos DE INMEDIATO (sin setTimeout)
+            if (!isRunningStandalone && !isRejectedOrInstalled) {
+                installModal.classList.remove('hidden');
+                installModal.classList.add('flex');
             }
         });
 
+        // 3. Si dicen "No, gracias"
         btnCancel.addEventListener('click', () => {
+            installModal.classList.remove('flex');
             installModal.classList.add('hidden');
-            localStorage.setItem('pwa-rejected', 'true');
+            localStorage.setItem('pwa-rejected', 'true'); // No volver a molestar
         });
 
+        // 4. Si dicen "Instalar Ahora"
         btnConfirm.addEventListener('click', async () => {
             if (deferredPrompt) {
-                deferredPrompt.prompt();
+                deferredPrompt.prompt(); // Muestra el diálogo del sistema operativo
                 const { outcome } = await deferredPrompt.userChoice;
+                
                 if (outcome === 'accepted') {
                     console.log('Usuario aceptó la instalación');
+                    localStorage.setItem('pwa-installed', 'true');
                 }
+                
                 deferredPrompt = null;
+                installModal.classList.remove('flex');
                 installModal.classList.add('hidden');
             }
         });
 
+        // 5. Detectar cuando la instalación finalizó con éxito
         window.addEventListener('appinstalled', () => {
             localStorage.setItem('pwa-installed', 'true');
+            installModal.classList.remove('flex');
             installModal.classList.add('hidden');
         });
     </script>
