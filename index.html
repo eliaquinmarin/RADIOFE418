@@ -55,77 +55,69 @@
         .neon-glow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
         .neon-glow-pink { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
 
-/* Estilos generales y scroll personalizado */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    background: #09090b;
-}
-::-webkit-scrollbar-thumb {
-    background: #06b6d4;
-    border-radius: 10px;
-}
+        /* Estilos generales y scroll personalizado */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 10px;
+        }
 
-/* Efectos de brillo neón para los contenedores */
-.dark .neon-glow {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-}
+        /* Efectos de brillo neón para los contenedores */
+        .dark .neon-glow {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+        }
 
-.dark .neon-glow-pink {
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
-}
+        .dark .neon-glow-pink {
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+        }
 
-/* Ajustes para el reproductor y elementos visuales */
-#visualizer {
-    background: transparent;
-    display: block;
-}
+        /* Ajustes para el reproductor y elementos visuales */
+        #visualizer {
+            background: transparent;
+            display: block;
+        }
 
-/* Asegurar que los botones tengan transiciones suaves */
-button {
-    transition: all 0.3s ease;
-}
+        /* Asegurar que los botones tengan transiciones suaves */
+        button {
+            transition: all 0.3s ease;
+        }
 
-button:active {
-    transform: scale(0.95);
-}
+        button:active {
+            transform: scale(0.95);
+        }
 
-/* Estilo para el contador de oyentes */
-#listener-count {
-    font-variant-numeric: tabular-nums;
-}
+        /* Estilo para el contador de oyentes */
+        #listener-count {
+            font-variant-numeric: tabular-nums;
+        }
 
-/* Ajuste de imagen de carátula para que sea responsiva */
-#track-cover {
-    transition: transform 0.5s ease;
-    object-fit: cover;
-}
-/* Agrega esto a tus etiquetas <style> para mejorar el feedback visual */
-#share-btn {
-    transition: all 0.2s ease;
-}
-#share-btn:hover {
-    color: #06b6d4; /* Color neón de tu marca */
-    transform: scale(1.05);
-}
-/* Asegurar que la imagen del widget respete tu diseño */
-#sonic_art img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 1rem; /* Borde redondeado */
-}
-/* Ocultar elementos si el widget intenta poner textos extraños */
-#sonic_title, #sonic_listeners {
-    display: inline-block;
-}
-/* Asegurar que los contenedores del widget no rompan el diseño */
-#sonic_listeners, #sonic_uniq {
-    display: inline-block;
-}
-</style>
-
+        /* Ajuste de imagen de carátula para que sea responsiva */
+        #track-cover {
+            transition: all 0.5s ease;
+            object-fit: cover;
+        }
+        /* Agrega esto a tus etiquetas <style> para mejorar el feedback visual */
+        #share-btn {
+            transition: all 0.2s ease;
+        }
+        #share-btn:hover {
+            color: #06b6d4; /* Color neón de tu marca */
+            transform: scale(1.05);
+        }
+        /* Ocultar elementos si el widget intenta poner textos extraños */
+        #sonic_title, #sonic_listeners {
+            display: inline-block;
+        }
+        /* Asegurar que los contenedores del widget no rompan el diseño */
+        #sonic_listeners, #sonic_uniq {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
 
@@ -146,7 +138,7 @@ button:active {
                 <a href="https://www.instagram.com/fe4.18/" target="_blank" class="hover:text-brand-neonPink transition-colors duration-200 text-lg"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://www.tiktok.com/@eliaquinmarin" target="_blank" class="hover:text-brand-neon transition-colors duration-200 text-lg"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="https://whatsapp.com/channel/0029VaQ05S3CBtx7jtDfnE0f" target="_blank" class="hover:text-green-500 transition-colors duration-200 text-lg"><i class="fa-brands fa-whatsapp"></i></a>
- <a href="https://www.youtube.com/@EliaquinMarin" target="_blank" class="hover:text-green-500 transition-colors duration-200 text-lg"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.youtube.com/@EliaquinMarin" target="_blank" class="hover:text-green-500 transition-colors duration-200 text-lg"><i class="fa-brands fa-youtube"></i></a>
             </div>
 
             <button id="theme-toggle" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
@@ -165,110 +157,103 @@ button:active {
                 <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
             </div>
 
-<div id="sonic_art" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
-    <img id="sonic_art" 
-         src="img/caratula.png" 
-         alt="Carátula" 
-         class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
-</div>
+            <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
+                <img id="track-cover" 
+                     src="img/caratula.png" 
+                     alt="Carátula" 
+                     class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
+            </div>
 
-<div class="text-center w-full max-w-md mb-3">
-    <!-- En lugar de tus etiquetas h2/p actuales, usa estas -->
-<h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-    Radio FE 4:18
-</h2>
+            <div class="text-center w-full max-w-md mb-3">
+                <h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                    Radio FE 4:18
+                </h2>
+                <p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
+                   Sonando por todo lo alto
+                </p>
+            </div>
 
-<p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
-   Sonando por todo lo alto
-</p>
-</div>
-<div class="flex items-center justify-center space-x-2 my-4 px-4 py-2 bg-zinc-100 dark:bg-zinc-800/50 rounded-full border border-zinc-200 dark:border-zinc-700 w-fit mx-auto">
-    <i class="fa-solid fa-clock text-brand-neon text-[10px]"></i>
-    <span class="text-[10px] font-bold text-zinc-600 dark:text-zinc-300 uppercase tracking-widest">
-       AIRE de Lunes a Domingo • 7:00 AM - 9:00 PM (HLV)
-    </span>
-</div>
-<div class="w-full max-w-md h-10 flex items-center justify-center">
-    <canvas id="visualizer" class="w-full h-full"></canvas>
-</div>
+            <div class="flex items-center justify-center space-x-2 my-4 px-4 py-2 bg-zinc-100 dark:bg-zinc-800/50 rounded-full border border-zinc-200 dark:border-zinc-700 w-fit mx-auto">
+                <i class="fa-solid fa-clock text-brand-neon text-[10px]"></i>
+                <span class="text-[10px] font-bold text-zinc-600 dark:text-zinc-300 uppercase tracking-widest">
+                   AIRE de Lunes a Domingo • 7:00 AM - 9:00 PM (HLV)
+                </span>
+            </div>
 
-        <div class="w-full max-w-md grid grid-cols-12 gap-4">
-    <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
-        <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
-    </button>
+            <div class="w-full max-w-md h-10 flex items-center justify-center">
+                <canvas id="visualizer" class="w-full h-full"></canvas>
+            </div>
 
-    <div class="col-span-5 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4">
-        <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
-               class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon">
-    </div>
-</div>
+            <div class="w-full max-w-md grid grid-cols-12 gap-4">
+                <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
+                    <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
+                </button>
 
-<div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
-    <i class="fa-solid fa-users text-brand-neon mr-2"></i>
-    
-    <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">
-        <span id="sonic_listeners">0</span>
-    </span>
-    
-    <span class="text-[9px] text-zinc-400 ml-2 border-l border-zinc-600 pl-2">
-        Uniq: <span id="sonic_uniq">0</span>
-    </span>
-</div>
+                <div class="col-span-5 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4">
+                    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
+                           class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon">
+                </div>
+            </div>
 
-           <div class="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
-    <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-        <i class="fa-solid fa-share-nodes text-base"></i>
-        <span>Compartir</span>
-    </button>
+            <div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
+                <i class="fa-solid fa-users text-brand-neon mr-2"></i>
+                <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">
+                    <span id="sonic_listeners">0</span>
+                </span>
+                <span class="text-[9px] text-zinc-400 ml-2 border-l border-zinc-600 pl-2">
+                    Uniq: <span id="sonic_uniq">0</span>
+                </span>
+            </div>
 
-    <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
-        <i class="fa-solid fa-heart text-base"></i>
-        <span>Apoyar</span>
-    </button>
+            <div class="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
+                <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                    <i class="fa-solid fa-share-nodes text-base"></i>
+                    <span>Compartir</span>
+                </button>
 
-    <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-        <i class="fa-solid fa-circle-exclamation text-base"></i>
-        <span>Reportar</span>
-    </button>
-</div>
+                <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-heart text-base"></i>
+                    <span>Apoyar</span>
+                </button>
+
+                <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                    <i class="fa-solid fa-circle-exclamation text-base"></i>
+                    <span>Reportar</span>
+                </button>
+            </div>
         </section>
 
         <div class="lg:col-span-5 space-y-6 w-full">
-            
-<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
-    <div class="flex flex-col mb-4">
-        <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
-            <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación de Hoy
-        </h3>
-        <div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">
-            Cargando fecha...
-        </div>
-    </div>
-    
-    <div class="space-y-3" id="schedule-container">
-        </div>
-</section>
+            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
+                <div class="flex flex-col mb-4">
+                    <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+                        <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación de Hoy
+                    </h3>
+                    <div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">
+                        Cargando fecha...
+                    </div>
+                </div>
+                <div class="space-y-3" id="schedule-container"></div>
+            </section>
 
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
-    <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Aliados</p>
-    <a id="partner-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full h-auto rounded-xl bg-transparent border border-zinc-200 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-sm">
-        <img id="partner-banner" src="" alt="Aliado" class="w-full h-auto object-cover block transition-all duration-500 opacity-100">
-        <span class="absolute bottom-2 right-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-zinc-300 tracking-wider">VISITAR SITIO</span>
-    </a>
-</section>
+                <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Aliados</p>
+                <a id="partner-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full h-auto rounded-xl bg-transparent border border-zinc-200 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-sm">
+                    <img id="partner-banner" src="" alt="Aliado" class="w-full h-auto object-cover block transition-all duration-500 opacity-100">
+                    <span class="absolute bottom-2 right-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-zinc-300 tracking-wider">VISITAR SITIO</span>
+                </a>
+            </section>
 
-<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
-    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-500 dark:text-zinc-400 mb-3 flex items-center">
-        <i class="fa-solid fa-history mr-2 text-zinc-400"></i> Sonado Recientemente
-    </h4>
-    
-    <div id="history-custom-container" class="space-y-3">
-        <p class="text-xs text-zinc-400 italic">Cargando historial...</p>
-    </div>
-
-    <div id="sonic_history" style="display:none;"></div>
-</section>
-</div>
+            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
+                <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-500 dark:text-zinc-400 mb-3 flex items-center">
+                    <i class="fa-solid fa-history mr-2 text-zinc-400"></i> Sonado Recientemente
+                </h4>
+                <div id="history-custom-container" class="space-y-3">
+                    <p class="text-xs text-zinc-400 italic">Cargando historial...</p>
+                </div>
+                <div id="sonic_history" style="display:none;"></div>
+            </section>
+        </div>
     </main>
 
     <footer class="w-full bg-zinc-200/50 dark:bg-brand-card/30 border-t border-zinc-300 dark:border-zinc-900 mt-12 py-8 px-6 text-center text-zinc-500 text-xs transition-colors duration-300">
@@ -280,60 +265,59 @@ button:active {
             
             <div class="bg-zinc-200 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-850 px-4 py-2 rounded-2xl flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
                 <span class="inline-block w-2 h-2 rounded-full bg-brand-neon compressed animate-pulse"></span>
-                <span class="text-[11px]">Desarrollado para RADIO FE 4:18 <i class="fa-solid fa-music text-brand-neonPink text-[10px]"></i> por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%20diseñador%20del%20sitio%20web." 
-   target="_blank" 
-   rel="noopener noreferrer" class="font-bold text-zinc-800 dark:text-white hover:text-brand-neon transition-colors">@EliaquinMarin</a></span>
+                <span class="text-[11px]">Desarrollado para RADIO FE 4:18 <i class="fa-solid fa-music text-brand-neonPink text-[10px]"></i> por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-800 dark:text-white hover:text-brand-neon transition-colors">@EliaquinMarin</a></span>
             </div>
 
             <div class="flex items-center space-x-4 text-[11px] text-zinc-500 dark:text-zinc-600">
-                <span  class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Sonando por todo lo alto</a>
+                <span class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Sonando por todo lo alto</span>
                 <span> • </span>
-                <span class="text-zinc-400 dark:text-zinc-700 font-mono">Barinas - VeneZuela.</span>
+                <span class="text-zinc-400 dark:text-zinc-700 font-mono">Barinas - Venezuela.</span>
             </div>
         </div>
     </footer>
 
-    <!-- Cambia la línea actual por esta -->
-<audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" autoplay preload="auto" crossorigin="anonymous"></audio>
+    <audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" autoplay preload="auto" crossorigin="anonymous"></audio>
 
     <script>
-        // DOM Elements
-const audio = document.getElementById('audio-player');
-const playBtn = document.getElementById('play-btn');
-const playIcon = document.getElementById('play-icon');
-const volumeSlider = document.getElementById('volume-slider');
-        const volumeIcon = document.getElementById('volume-icon');
-        const muteBtn = document.getElementById('mute-btn');
+        const audio = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const volumeSlider = document.getElementById('volume-slider');
         const trackCover = document.getElementById('track-cover');
-        const trackTitle = document.getElementById('track-title');
-        const trackArtist = document.getElementById('track-artist');
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const metaThemeColor = document.getElementById('meta-theme-color');
-        const adBanner = document.getElementById('partner-banner');
-        const adLink = document.getElementById('partner-link');
 
+        // Inicialización de volumen seguro
         audio.volume = volumeSlider.value;
 
-// Función de Play/Pause
-playBtn.addEventListener('click', () => {
-    // Inicializar el contexto de audio si es necesario
-    if (audio.paused) {
-        audio.play().then(() => {
-            playIcon.className = "fa-solid fa-pause text-xl";
+        // Control manual Play/Pause
+        playBtn.addEventListener('click', () => {
+            togglePlayback();
         });
-    } else {
-        audio.pause();
-        playIcon.className = "fa-solid fa-play text-xl ml-0.5";
-    }
-});
 
-// Control de volumen
-volumeSlider.addEventListener('input', (e) => {
-    audio.volume = e.target.value;
-});
+        function togglePlayback() {
+            initAudioAnalyzer();
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 
-        // SISTEMA DE TEMAS
+            if (audio.paused) {
+                // Forzar recarga del stream para evitar retraso acumulado
+                const currentSrc = audio.src.split('?')[0];
+                audio.src = currentSrc + '?cache=' + Date.now();
+                audio.play().then(() => { 
+                    playIcon.className = "fa-solid fa-pause text-xl"; 
+                }).catch(err => console.error("Error al reproducir:", err));
+            } else {
+                audio.pause();
+                playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+            }
+        }
+
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // Tema UI
         function updateThemeUI(isDark) {
             if (isDark) {
                 document.documentElement.classList.add('dark');
@@ -350,35 +334,34 @@ volumeSlider.addEventListener('input', (e) => {
         updateThemeUI(document.documentElement.classList.contains('dark'));
         themeToggleBtn.addEventListener('click', () => updateThemeUI(!document.documentElement.classList.contains('dark')));
 
-       // SLIDER AUTOMÁTICO DE ALIADOS (Nombres neutrales para evitar filtros)
-const partnersDatabase = [
-    { img: "img/partners/contexto.png", url: "https://www.contextomediagroup.com/" },
-    { img: "img/partners/unisalud.png", url: "https://directoriounisalud.com/" },
-    { img: "img/partners/roraima.png", url: "https://www.instagram.com/serviautosroraima/" },
-    { img: "img/partners/iglesia.png", url: "https://ib-fe418.vercel.app/" }
-];
-let currentPartnerIndex = 0;
+        // Slider Aliados
+        const partnersDatabase = [
+            { img: "img/partners/contexto.png", url: "https://www.contextomediagroup.com/" },
+            { img: "img/partners/unisalud.png", url: "https://directoriounisalud.com/" },
+            { img: "img/partners/roraima.png", url: "https://www.instagram.com/serviautosroraima/" },
+            { img: "img/partners/iglesia.png", url: "https://ib-fe418.vercel.app/" }
+        ];
+        let currentPartnerIndex = 0;
 
-function rotatePartners() {
-    const activePartner = partnersDatabase[currentPartnerIndex];
-    // Asegúrate de que estos IDs coincidan con tu HTML actualizado
-    const partnerBanner = document.getElementById('partner-banner'); 
-    const partnerLink = document.getElementById('partner-link');
+        function rotatePartners() {
+            const activePartner = partnersDatabase[currentPartnerIndex];
+            const partnerBanner = document.getElementById('partner-banner'); 
+            const partnerLink = document.getElementById('partner-link');
 
-    if (partnerBanner && partnerLink) {
-        partnerBanner.style.opacity = 0;
-        setTimeout(() => {
-            partnerBanner.src = activePartner.img;
-            partnerLink.href = activePartner.url;
-            partnerBanner.style.opacity = 1;
-            currentPartnerIndex = (currentPartnerIndex + 1) % partnersDatabase.length;
-        }, 400);
-    }
-}
-rotatePartners();
-setInterval(rotatePartners, 5000);
+            if (partnerBanner && partnerLink && partnersDatabase.length > 0) {
+                partnerBanner.style.opacity = 0;
+                setTimeout(() => {
+                    partnerBanner.src = activePartner.img;
+                    partnerLink.href = activePartner.url;
+                    partnerBanner.style.opacity = 1;
+                    currentPartnerIndex = (currentPartnerIndex + 1) % partnersDatabase.length;
+                }, 400);
+            }
+        }
+        rotatePartners();
+        setInterval(rotatePartners, 5000);
 
-        // ONDAS DE SONIDO EN CANVAS
+        // Analizador de espectro Canvas
         const canvas = document.getElementById('visualizer');
         const ctx = canvas.getContext('2d');
         let audioCtx, analyser, bufferLength, dataArray, source;
@@ -428,438 +411,367 @@ setInterval(rotatePartners, 5000);
         }
         drawVisualizer();
 
-        // REPRODUCCIÓN Y CONTROLADORES
-        const mockMetadata = [
-            { title: "Blinding Highs (Neon Remix)", artist: "The Cyberpunks", album: "Cyber Radio Vol. 1", src: "img/caratula.png?w=500&h=500&fit=crop" },
-            { title: "Synthwave Sunset", artist: "Future Cop 1986", album: "Neon Dreams", src: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&h=500&fit=crop" }
-        ];
-        let currentTrackIndex = 0;
-
-        function updateMetadata(track) {
-            trackTitle.textContent = track.title;
-            trackArtist.textContent = track.artist;
-            trackCover.src = track.src;
-        }
-        updateMetadata(mockMetadata[currentTrackIndex]);
-
-        playBtn.addEventListener('click', togglePlayback);
-
-        function togglePlayback() {
-            initAudioAnalyzer();
-            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-
-            if (audio.paused) {
-                const currentSrc = audio.src;
-                audio.src = currentSrc;
-                audio.play().then(() => { playIcon.className = "fa-solid fa-pause text-xl"; }).catch(err => console.error(err));
-            } else {
-                audio.pause();
-                playIcon.className = "fa-solid fa-play text-xl ml-0.5";
-            }
-        }
-
-        volumeSlider.addEventListener('input', (e) => {
-            const vol = e.target.value;
-            audio.volume = vol;
-            if (vol == 0) volumeIcon.className = "fa-solid fa-volume-xmark text-xl";
-            else if (vol < 0.5) volumeIcon.className = "fa-solid fa-volume-low text-xl";
-            else volumeIcon.className = "fa-solid fa-volume-high text-xl";
-        });
-
-        muteBtn.addEventListener('click', () => {
-            if (audio.volume > 0) {
-                audio.volume = 0;
-                volumeSlider.value = 0;
-                volumeIcon.className = "fa-solid fa-volume-xmark text-xl";
-            } else {
-                audio.volume = 0.8;
-                volumeSlider.value = 0.8;
-                volumeIcon.className = "fa-solid fa-volume-high text-xl";
-            }
-        });
-
-        setInterval(() => {
-            document.getElementById('current-time').textContent = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-        }, 1000);
+        // Reloj pie de página
+        const fYear = document.getElementById('footer-year');
+        if(fYear) fYear.textContent = new Date().getFullYear();
     </script>
 
-<script>
-    // Referencia al reproductor ya definido arriba
-    const audioPlayer = document.getElementById('audio-player');
-    
-    // Función de reproducción segura
-    function togglePlayback() {
-        initAudioAnalyzer();
-        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    <script>
+        // Guardamos las últimas búsquedas exitosas para no re-consultar la API innecesariamente
+        const cacheCaratulas = {};
+        const caratulaPorDefecto = "img/caratula.png";
 
-        if (audioPlayer.paused) {
-            // Aseguramos que cargue el stream correcto
-            audioPlayer.play().then(() => { 
-                playIcon.className = "fa-solid fa-pause text-xl"; 
-            }).catch(err => {
-                console.error("Error al reproducir:", err);
-                alert("No se pudo conectar con el servidor de radio.");
+        async function buscarCaratula(titulo, artista) {
+            // Filtrar strings e identificaciones locales para no romper la búsqueda
+            const terminosIgnorar = ["RADIO FE 4:18", "SONANDO POR TODO LO ALTO", "AD1", "AD2", "AD3", "AD4", "IDE1", "IDE2", "IDE3", "IDE4", "TRANSMISIÓN", "MÚSICA EN VIVO", "IDENTIFICACIÓN RADIAL"];
+            
+            let tClean = titulo.trim().toUpperCase();
+            let aClean = artista.trim().toUpperCase();
+
+            if (terminosIgnorar.some(term => tClean.includes(term) || aClean.includes(term)) || tClean === "" || tClean.includes("RADIO FE")) {
+                document.getElementById('track-cover').src = caratulaPorDefecto;
+                return;
+            }
+
+            // Limpieza fina del string (remover "EN VIVO:", parentesis o guiones extraños)
+            let queryTarget = `${titulo} ${artista}`
+                .replace(/EN VIVO:/gi, '')
+                .replace(/¡EN DIRECTO!/gi, '')
+                .replace(/\.(mp3|wav|aac|ogg)/gi, '')
+                .trim();
+
+            if(cacheCaratulas[queryTarget]) {
+                document.getElementById('track-cover').src = cacheCaratulas[queryTarget];
+                return;
+            }
+
+            const urlAPI = `https://itunes.apple.com/search?term=${encodeURIComponent(queryTarget)}&media=music&limit=1`;
+
+            try {
+                const response = await fetch(urlAPI);
+                const data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    // Cambiar las dimensiones por defecto (100x100) a alta resolución (600x600)
+                    let urlCaratulaHD = data.results[0].artworkUrl100.replace("100x100bb.jpg", "600x600bb.jpg");
+                    document.getElementById('track-cover').src = urlCaratulaHD;
+                    cacheCaratulas[queryTarget] = urlCaratulaHD;
+                } else {
+                    // Si no encuentra coincidencia exacta de los dos, intentar solo con el Título
+                    const urlSoloTitulo = `https://itunes.apple.com/search?term=${encodeURIComponent(titulo)}&media=music&limit=1`;
+                    const resTitulo = await fetch(urlSoloTitulo);
+                    const dataTitulo = await resTitulo.json();
+
+                    if(dataTitulo.results && dataTitulo.results.length > 0) {
+                        let urlCaratulaHD = dataTitulo.results[0].artworkUrl100.replace("100x100bb.jpg", "600x600bb.jpg");
+                        document.getElementById('track-cover').src = urlCaratulaHD;
+                        cacheCaratulas[queryTarget] = urlCaratulaHD;
+                    } else {
+                        document.getElementById('track-cover').src = caratulaPorDefecto;
+                    }
+                }
+            } catch (error) {
+                console.error("Error consultando la API de iTunes: ", error);
+                document.getElementById('track-cover').src = caratulaPorDefecto;
+            }
+        }
+
+        // Monitorear cambios en el Widget de SonicPanel para títulos y artistas al aire
+        const obTitle = document.getElementById('sonic_title');
+        const obArtist = document.getElementById('sonic_artist');
+
+        if (obTitle && obArtist) {
+            const trackObserver = new MutationObserver(() => {
+                const actualTitle = obTitle.innerText;
+                const actualArtist = obArtist.innerText;
+                
+                buscarCaratula(actualTitle, actualArtist);
             });
-        } else {
-            audioPlayer.pause();
-            playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+
+            trackObserver.observe(obTitle, { childList: true, characterData: true, subtree: true });
+            trackObserver.observe(obArtist, { childList: true, characterData: true, subtree: true });
         }
-    }
-</script>
+    </script>
 
-<script>
-    // 1. TU PROGRAMACIÓN
-    const miProgramacion = [
-        { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
-        { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
-        { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
-        { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
-        { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
-        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" }
-    ];
+    <script>
+        const miProgramacion = [
+            { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
+            { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
+            { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
+            { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
+            { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
+            { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+            { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+            { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+            { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+            { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+            { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+            { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" }
+        ];
 
-    function formatearHora(hora24) {
-        let [h, m] = hora24.split(':');
-        h = parseInt(h);
-        const ampm = h >= 12 ? 'PM' : 'AM';
-        h = h % 12 || 12;
-        return `${h}:${m} ${ampm}`;
-    }
+        function formatearHora(hora24) {
+            let [h, m] = hora24.split(':');
+            h = parseInt(h);
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            return `${h}:${m} ${ampm}`;
+        }
 
-    function actualizarProgramacion() {
-        const ahora = new Date();
-        const diaActual = ahora.getDay();
-        const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
-        const contenedor = document.getElementById('schedule-container');
-        
-        if (!contenedor) return;
-        contenedor.innerHTML = ""; 
-
-        let programaEncontrado = null;
-        
-        miProgramacion.filter(p => p.dia === diaActual).forEach(p => {
-            const [hI, mI] = p.horaInicio.split(':').map(Number);
-            const [hF, mF] = p.horaFin.split(':').map(Number);
-            const estaAlAire = horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF);
+        function actualizarProgramacion() {
+            const ahora = new Date();
+            const diaActual = ahora.getDay();
+            const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+            const contenedor = document.getElementById('schedule-container');
             
-            if (estaAlAire) programaEncontrado = p;
+            if (!contenedor) return;
+            contenedor.innerHTML = ""; 
 
-            const div = document.createElement('div');
-            div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
-            div.innerHTML = `
-                <img src="${p.img}" alt="${p.nombre}" class="w-12 h-12 rounded-lg object-cover border border-zinc-300 dark:border-zinc-700">
-                <div class="flex-grow">
-                    <p class="font-bold text-sm text-zinc-900 dark:text-white">${p.nombre}</p>
-                    <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
+            let programaEncontrado = null;
+            
+            miProgramacion.filter(p => p.dia === diaActual).forEach(p => {
+                const [hI, mI] = p.horaInicio.split(':').map(Number);
+                const [hF, mF] = p.horaFin.split(':').map(Number);
+                const estaAlAire = horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF);
+                
+                if (estaAlAire) programaEncontrado = p;
+
+                const div = document.createElement('div');
+                div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
+                div.innerHTML = `
+                    <img src="${p.img}" alt="${p.nombre}" class="w-12 h-12 rounded-lg object-cover border border-zinc-300 dark:border-zinc-700">
+                    <div class="flex-grow">
+                        <p class="font-bold text-sm text-zinc-900 dark:text-white">${p.nombre}</p>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
+                    </div>
+                    ${estaAlAire ? '<span class="text-[10px] font-bold bg-brand-neonPink text-white px-2 py-1 rounded-full uppercase animate-pulse">En Vivo</span>' : ''}
+                `;
+                contenedor.appendChild(div);
+            });
+
+            if (programaEncontrado) {
+                const elTitle = document.getElementById('sonic_title');
+                const elArtist = document.getElementById('sonic_artist');
+                const elArt = document.getElementById('track-cover');
+                
+                if (elTitle) elTitle.textContent = programaEncontrado.nombre;
+                if (elArtist) elArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
+                if (elArt) elArt.src = programaEncontrado.img;
+            }
+        }
+
+        actualizarProgramacion();
+        setInterval(actualizarProgramacion, 30000);
+    </script>
+
+    <div id="install-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all scale-95" id="modal-content">
+            <div class="flex flex-col items-center text-center">
+                <img src="img/icon.png" alt="Logo" class="w-20 h-20 mb-4 rounded-2xl shadow-lg">
+                <h3 class="text-xl font-bold text-zinc-900 dark:text-white mb-2">¡Lleva Radio FE 4:18 contigo!</h3>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Instala nuestra app oficial. Es totalmente gratis, no ocupa espacio en tu dispositivo y tendrás acceso rápido a la señal en vivo.</p>
+                
+                <div class="flex w-full gap-3">
+                    <button id="cancel-install" class="flex-1 py-3 text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-all">No, gracias</button>
+                    <button id="confirm-install" class="flex-1 py-3 text-sm font-bold text-white bg-brand-neonPink rounded-xl shadow-lg hover:scale-[1.02] transition-all">Instalar Ahora</button>
                 </div>
-                ${estaAlAire ? '<span class="text-[10px] font-bold bg-brand-neonPink text-white px-2 py-1 rounded-full uppercase animate-pulse">En Vivo</span>' : ''}
-            `;
-            contenedor.appendChild(div);
-        });
-
-        // Solo actualizar si hay un programa en vivo, de lo contrario dejar que SonicPanel maneje la música
-        if (programaEncontrado) {
-            const elTitle = document.getElementById('sonic_title');
-            const elArtist = document.getElementById('sonic_artist');
-            const elArt = document.getElementById('sonic_art');
-            
-            if (elTitle) elTitle.textContent = programaEncontrado.nombre;
-            if (elArtist) elArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
-            if (elArt) elArt.src = programaEncontrado.img;
-        }
-    }
-
-    actualizarProgramacion();
-    setInterval(actualizarProgramacion, 30000);
-</script>
-
-<div id="install-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
-    <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all scale-95" id="modal-content">
-        <div class="flex flex-col items-center text-center">
-            <img src="img/icon.png" alt="Logo" class="w-20 h-20 mb-4 rounded-2xl shadow-lg">
-            <h3 class="text-xl font-bold text-zinc-900 dark:text-white mb-2">¡Lleva Radio FE 4:18 contigo!</h3>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Instala nuestra app oficial. Es totalmente gratis, no ocupa espacio en tu dispositivo y tendrás acceso rápido a la señal en vivo.</p>
-            
-            <div class="flex w-full gap-3">
-                <button id="cancel-install" class="flex-1 py-3 text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-all">No, gracias</button>
-                <button id="confirm-install" class="flex-1 py-3 text-sm font-bold text-white bg-brand-neonPink rounded-xl shadow-lg hover:scale-[1.02] transition-all">Instalar Ahora</button>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    let deferredPrompt;
-    const installModal = document.getElementById('install-modal');
-    const btnCancel = document.getElementById('cancel-install');
-    const btnConfirm = document.getElementById('confirm-install');
+    <script>
+        let deferredPrompt;
+        const installModal = document.getElementById('install-modal');
+        const btnCancel = document.getElementById('cancel-install');
+        const btnConfirm = document.getElementById('confirm-install');
 
-    // 1. Verificar si ya se instaló (standalone) o si ya rechazó antes
-    const isInstalled = window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-rejected') === 'true';
+        const isInstalled = window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-rejected') === 'true';
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault(); // Evita que aparezca el banner automático del navegador
-        deferredPrompt = e;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
 
-        if (!isInstalled) {
-            // Mostrar modal después de 3 segundos de carga
-            setTimeout(() => {
-                installModal.classList.remove('hidden');
-                installModal.classList.add('flex');
-            }, 3000);
-        }
-    });
-
-    // 2. Acciones del modal
-    btnCancel.addEventListener('click', () => {
-        installModal.classList.add('hidden');
-        localStorage.setItem('pwa-rejected', 'true'); // Guardar que rechazó
-    });
-
-    btnConfirm.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                console.log('Usuario aceptó la instalación');
+            if (!isInstalled) {
+                setTimeout(() => {
+                    installModal.classList.remove('hidden');
+                    installModal.classList.add('flex');
+                }, 3000);
             }
-            deferredPrompt = null;
+        });
+
+        btnCancel.addEventListener('click', () => {
             installModal.classList.add('hidden');
+            localStorage.setItem('pwa-rejected', 'true');
+        });
+
+        btnConfirm.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('Usuario aceptó la instalación');
+                }
+                deferredPrompt = null;
+                installModal.classList.add('hidden');
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            localStorage.setItem('pwa-installed', 'true');
+            installModal.classList.add('hidden');
+        });
+    </script>
+
+    <script>
+        const shareBtn = document.getElementById('share-btn');
+        shareBtn.addEventListener('click', async () => {
+            const shareData = {
+                title: 'RADIO FE 4:18',
+                text: 'Escucha RADIO FE 4:18 en vivo, sonando por todo lo alto.',
+                url: window.location.href
+            };
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    await navigator.clipboard.writeText(window.location.href);
+                    alert('¡Enlace copiado al portapapeles!');
+                }
+            } catch (err) {
+                console.error('Error al compartir:', err);
+            }
+        });
+    </script>
+
+    <script>
+        function startAudio() {
+            audio.play().then(() => {
+                document.getElementById('play-icon').className = "fa-solid fa-pause text-xl";
+                document.removeEventListener('click', startAudio);
+            }).catch(err => console.log("Esperando interacción..."));
         }
-    });
+        window.addEventListener('load', startAudio);
+        document.addEventListener('click', startAudio);
+    </script>
 
-    // Detectar si ya se instaló correctamente
-    window.addEventListener('appinstalled', () => {
-        localStorage.setItem('pwa-installed', 'true');
-        installModal.classList.add('hidden');
-    });
-</script>
+    <script>
+        document.getElementById('report-btn').addEventListener('click', () => {
+            const telefono = "584125183677";
+            const mensaje = "Hola, reporto una falla en la señal de la radio Radio FE 4:18.";
+            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        });
+    </script>
 
-<script>
-    const shareBtn = document.getElementById('share-btn');
-    
-    shareBtn.addEventListener('click', async () => {
-        const shareData = {
-            title: 'RADIO FE 4:18',
-            text: 'Escucha RADIO FE 4:18 en vivo, sonando por todo lo alto.',
-            url: window.location.href // Comparte la URL actual de tu web
+    <script>
+        const targetNode = document.getElementById('sonic_history');
+        const container = document.getElementById('history-custom-container');
+
+        const mapaNombres = {
+            "AD1": "CONTEXTO MEDIA GROUP",
+            "AD2": "DIRECTORIO UNISALUD",
+            "AD3": "TOP 10 MUSICAL",
+            "AD4": "AUTO SERVICIO RORAIMA",
+            "IDE1": "IDENTIFICACIÓN RADIAL",
+            "IDE2": "IDENTIFICACIÓN RADIAL",
+            "IDE3": "IDENTIFICACIÓN RADIAL",
+            "IDE4": "IDENTIFICACIÓN RADIAL",
+            "6AM": "ORAR POR LOS PASTORES Y LIDERES",
+            "3PM": "ORAR POR VENEZUELA",
+            "9PM": "ORAR POR LAS FAMILIAS"
         };
 
-        try {
-            // Verifica si el navegador soporta Web Share API
-            if (navigator.share) {
-                await navigator.share(shareData);
-                console.log('Contenido compartido con éxito');
-            } else {
-                // Fallback: Si no soporta share, copia el enlace al portapapeles
-                await navigator.clipboard.writeText(window.location.href);
-                alert('¡Enlace copiado al portapapeles!');
+        const historyObserver = new MutationObserver(() => {
+            const rawText = targetNode.innerText;
+            if (!rawText || rawText.trim() === "") return;
+
+            container.innerHTML = ""; 
+            const lines = rawText.split('\n').filter(line => line.trim() !== "");
+            
+            lines.forEach((line) => {
+                const cleanLine = line.replace(/^\d+\.\)/, '').trim().toUpperCase();
+                let tituloMostrar = mapaNombres[cleanLine] || line.replace(/^\d+\.\)/, '').trim();
+                let subTitulo = (mapaNombres[cleanLine]) ? "Transmisión" : "Música en vivo";
+                let icono = "img/logo.png";
+
+                const div = document.createElement('div');
+                div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-800/20 transition-colors";
+                div.innerHTML = `
+                    <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden border border-zinc-700">
+                        <img src="${icono}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs font-bold text-zinc-800 dark:text-zinc-100 truncate">${tituloMostrar}</p>
+                        <p class="text-[10px] text-zinc-400">${subTitulo}</p>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        });
+
+        if(targetNode) {
+            historyObserver.observe(targetNode, { childList: true, subtree: true, characterData: true });
+        }
+    </script>
+
+    <script>
+        function actualizarFechaYHora() {
+            const ahora = new Date();
+            const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const fechaFormateada = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            const horaFormateada = ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            const contenedor = document.getElementById('full-date-time');
+            if (contenedor) {
+                contenedor.innerHTML = `
+                    <span class="capitalize">${fechaFormateada}</span> 
+                    <span class="mx-1.5 opacity-50">|</span> 
+                    <span class="font-bold text-brand-neonPink">${horaFormateada}</span>
+                `;
             }
-        } catch (err) {
-            console.error('Error al compartir:', err);
         }
-    });
-</script>
+        actualizarFechaYHora();
+        setInterval(actualizarFechaYHora, 1000);
+    </script>
 
-<script>
-    // Intentar reproducir al cargar, pero si falla, esperar al primer click
-    const audio = document.getElementById('audio-player');
-    
-    function startAudio() {
-        audio.play().then(() => {
-            console.log("Reproducción iniciada");
-            document.removeEventListener('click', startAudio);
-        }).catch(err => console.log("Esperando interacción del usuario..."));
-    }
+    <script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
 
-    window.addEventListener('load', startAudio);
-    document.addEventListener('click', startAudio);
-</script>
-
-<script>
-    document.getElementById('report-btn').addEventListener('click', () => {
-        const telefono = "584125183677";
-        const mensaje = "Hola, reporto una falla en la señal de la radio Radio FE 4:18.";
-        // Codificamos el mensaje para que sea una URL válida
-        const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-        
-        window.open(url, '_blank');
-    });
-</script>
-
-<script>
-    const targetNode = document.getElementById('sonic_history');
-    const container = document.getElementById('history-custom-container');
-
-    const observer = new MutationObserver(() => {
-        const rawText = targetNode.innerText;
-        if (!rawText || rawText.trim() === "") return;
-
-        container.innerHTML = ""; // Limpiamos el diseño viejo
-
-        // Separamos por líneas y limpiamos
-        const lines = rawText.split('\n').filter(line => line.trim() !== "");
-        
-        lines.forEach((line, index) => {
-            const div = document.createElement('div');
-            // Diseño vertical: una canción debajo de otra
-            div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors";
+    <div id="donate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative">
+            <button id="close-donate" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-white"><i class="fa-solid fa-times"></i></button>
             
-            div.innerHTML = `
-                <div class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-music text-brand-neon text-sm"></i>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-brand-neonPink/20 text-brand-neonPink rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-hand-holding-heart text-2xl"></i>
                 </div>
-                <div class="min-w-0 flex-1">
-                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-100 truncate">${line.replace(/^\d+\.\)/, '')}</p>
-                    <p class="text-[10px] text-zinc-500">Hace unos momentos</p>
+                <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-2">Tu apoyo mantiene la señal al aire</h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6">Gracias por colaborar con Radio FE 4:18 para seguir llevando el mensaje.</p>
+                
+                <div class="bg-zinc-100 dark:bg-zinc-900 p-4 rounded-xl text-left border border-zinc-200 dark:border-zinc-800 space-y-2">
+                    <p class="text-[10px] uppercase text-zinc-500 font-bold">Pago Móvil</p>
+                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Tel: 0412-5183677</p>
+                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Banco: Bancaribe (0114)</p>
+                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">C.I: 15.691.313</p>
                 </div>
-            `;
-            container.appendChild(div);
-        });
-    });
-
-    // Iniciar observación del widget oculto
-    observer.observe(targetNode, { childList: true, subtree: true, characterData: true });
-</script>
-<script>
-    function actualizarFechaYHora() {
-        const ahora = new Date();
-        
-        // Configuración de formato
-        const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-        const fechaFormateada = ahora.toLocaleDateString('es-ES', opcionesFecha);
-        
-        // Formato hora AM/PM
-        const horaFormateada = ahora.toLocaleTimeString('es-ES', { 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            hour12: true 
-        });
-
-        // Inyectar en el HTML
-        const contenedor = document.getElementById('full-date-time');
-        if (contenedor) {
-            contenedor.innerHTML = `
-                <span class="capitalize">${fechaFormateada}</span> 
-                <span class="mx-1.5 opacity-50">|</span> 
-                <span class="font-bold text-brand-neonPink">${horaFormateada}</span>
-            `;
-        }
-    }
-
-    // Ejecutar al cargar y actualizar cada segundo
-    actualizarFechaYHora();
-    setInterval(actualizarFechaYHora, 1000);
-</script>
-
-<script>
-    // Asegúrate de que esto se ejecute después de cargar el widget
-    window.addEventListener('load', () => {
-        // SonicPanel buscará automáticamente elementos con id 'sonic_title', 'sonic_artist', etc.
-    });
-</script>
-<script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
-
-<div id="donate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-    <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative">
-        <button id="close-donate" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-white"><i class="fa-solid fa-times"></i></button>
-        
-        <div class="text-center">
-            <div class="w-16 h-16 bg-brand-neonPink/20 text-brand-neonPink rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <i class="fa-solid fa-hand-holding-heart text-2xl"></i>
-            </div>
-            <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-2">Tu apoyo mantiene la señal al aire</h3>
-            <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6">Gracias por colaborar con Radio FE 4:18 para seguir llevando el mensaje.</p>
-            
-            <div class="bg-zinc-100 dark:bg-zinc-900 p-4 rounded-xl text-left border border-zinc-200 dark:border-zinc-800 space-y-2">
-                <p class="text-[10px] uppercase text-zinc-500 font-bold">Pago Móvil</p>
-                <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Tel: 0412-5183677</p>
-                <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Banco: Bancaribe (0114)</p>
-                <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">C.I: 15.691.313</p>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    const donateBtn = document.getElementById('donate-btn');
-    const donateModal = document.getElementById('donate-modal');
-    const closeDonate = document.getElementById('close-donate');
+    <script>
+        const donateBtn = document.getElementById('donate-btn');
+        const donateModal = document.getElementById('donate-modal');
+        const closeDonate = document.getElementById('close-donate');
 
-    donateBtn.addEventListener('click', () => {
-        donateModal.classList.remove('hidden');
-        donateModal.classList.add('flex');
-    });
-
-    closeDonate.addEventListener('click', () => {
-        donateModal.classList.add('hidden');
-    });
-
-    // Cerrar si hacen click fuera del recuadro
-    window.addEventListener('click', (e) => {
-        if (e.target === donateModal) donateModal.classList.add('hidden');
-    });
-</script>
-
-<script>
-    const targetNode = document.getElementById('sonic_history');
-    const container = document.getElementById('history-custom-container');
-
-    // Diccionario de traducciones exactas
-    const mapaNombres = {
-        "AD1": "CONTEXTO MEDIA GROUP",
-        "AD2": "DIRECTORIO UNISALUD",
-        "AD3": "TOP 10 MUSICAL",
-        "AD4": "AUTO SERVICIO RORAIMA",
-        "IDE1": "IDENTIFICACIÓN RADIAL",
-        "IDE2": "IDENTIFICACIÓN RADIAL",
-        "IDE3": "IDENTIFICACIÓN RADIAL",
-        "IDE4": "IDENTIFICACIÓN RADIAL",
-        "6AM": "ORAR POR LOS PASTORES Y LIDERES",
-        "3PM": "ORAR POR VENEZUELA",
-        "9PM": "ORAR POR LAS FAMILIAS"
-    };
-
-    const observer = new MutationObserver(() => {
-        const rawText = targetNode.innerText;
-        if (!rawText || rawText.trim() === "") return;
-
-        container.innerHTML = ""; 
-
-        const lines = rawText.split('\n').filter(line => line.trim() !== "");
-        
-        lines.forEach((line) => {
-            const cleanLine = line.replace(/^\d+\.\)/, '').trim().toUpperCase();
-            
-            // Buscamos si el archivo coincide con nuestro mapa
-            let tituloMostrar = mapaNombres[cleanLine] || "Radio FE 4:18";
-            let subTitulo = (mapaNombres[cleanLine]) ? "Transmisión" : "Música en vivo";
-            let icono = "img/logo.png";
-
-            const div = document.createElement('div');
-            div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-800/20 transition-colors";
-            
-            div.innerHTML = `
-                <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden border border-zinc-700">
-                    <img src="${icono}" class="w-full h-full object-cover">
-                </div>
-                <div class="min-w-0 flex-1">
-                    <p class="text-xs font-bold text-zinc-100 truncate">${tituloMostrar}</p>
-                    <p class="text-[10px] text-zinc-400">${subTitulo}</p>
-                </div>
-            `;
-            container.appendChild(div);
+        donateBtn.addEventListener('click', () => {
+            donateModal.classList.remove('hidden');
+            donateModal.classList.add('flex');
         });
-    });
 
-    observer.observe(targetNode, { childList: true, subtree: true, characterData: true });
-</script>
+        closeDonate.addEventListener('click', () => {
+            donateModal.classList.add('hidden');
+        });
 
+        window.addEventListener('click', (e) => {
+            if (e.target === donateModal) donateModal.classList.add('hidden');
+        });
+    </script>
 </body>
 </html>
