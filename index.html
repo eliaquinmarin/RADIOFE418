@@ -1,18 +1,11 @@
-<!-- 
-    Propiedad de Radio FE 4:18 (Eliaquin Marín).
-    Contacta: +58 412 518 36 77. 
-    Prohibida la copia no autorizada del código o contenido.
-    Todos los derechos reservados.
--->
-
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio FE 4:18 | Radio Cristiana en Vivo - Barinas, Venezuela</title>
+    <title>Radio FE 4:18 | Radio Cristiana en Vivo - Barinas, Venezuela</title>
     <link rel="icon" type="image/png" href="img/icon.png">
-<link rel="author" href="humans.txt">
+    <link rel="author" href="humans.txt">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -20,29 +13,22 @@
     <link class="apple-touch-icon" href="https://i.ibb.co/Z6GGLcv8/caratula.png">
     <meta name="theme-color" content="#09090b" id="meta-theme-color">
     
-<!-- SEO Básico -->
+    <meta name="description" content="Escucha Radio FE 4:18 en vivo, la radio cristiana que transmite alta fidelidad 24/7. Mensajes de fe, música, oración y programación especial desde Barinas, Venezuela.">
+    <meta name="keywords" content="Radio FE 4:18, radio cristiana, radio en vivo Barinas, música cristiana, radio online Venezuela, escuchar radio cristiana, mensajes de fe">
+    <link rel="canonical" href="https://radiofe418.vercel.app/">
 
-<meta name="description" content="Escucha Radio FE 4:18 en vivo, la radio cristiana que transmite alta fidelidad 24/7. Mensajes de fe, música, oración y programación especial desde Barinas, Venezuela.">
-<meta name="keywords" content="Radio FE 4:18, radio cristiana, radio en vivo Barinas, música cristiana, radio online Venezuela, escuchar radio cristiana, mensajes de fe">
-<link rel="canonical" href="https://radiofe418.vercel.app/">
+    <meta property="og:title" content="Radio FE 4:18 | Radio Cristiana en Vivo">
+    <meta property="og:description" content="Sintoniza Radio FE 4:18. Transmitiendo mensajes de fe y música las 24 horas. ¡Escúchanos en vivo!">
+    <meta property="og:image" content="https://i.ibb.co/Z6GGLcv8/caratula.png">
+    <meta property="og:url" content="https://radiofe418.vercel.app/">
+    <meta property="og:type" content="website">
 
-<!-- Open Graph (Para que se vea bien al compartir en Facebook/WhatsApp) -->
-<meta property="og:title" content="Radio FE 4:18 | Radio Cristiana en Vivo">
-<meta property="og:description" content="Sintoniza Radio FE 4:18. Transmitiendo mensajes de fe y música las 24 horas. ¡Escúchanos en vivo!">
-<meta property="og:image" content="https://i.ibb.co/Z6GGLcv8/caratula.png">
-<meta property="og:url" content="https://radiofe418.vercel.app/">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Radio FE 4:18 | Radio Cristiana en Vivo">
-<meta name="twitter:description" content="Sintoniza Radio FE 4:18. Transmitiendo mensajes de fe y música las 24 horas.">
-<meta name="twitter:image" content="https://i.ibb.co/Z6GGLcv8/caratula.png">
-
-<meta name="keywords" content="Radio FE 4:18, radio cristiana, radio cristiana en vivo, música cristiana, radio online, radio Barinas, Venezuela, mensajes de fe, peticiones de oración, radio 24 horas">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Radio FE 4:18 | Radio Cristiana en Vivo">
+    <meta name="twitter:description" content="Sintoniza Radio FE 4:18. Transmitiendo mensajes de fe y música las 24 horas.">
+    <meta name="twitter:image" content="https://i.ibb.co/Z6GGLcv8/caratula.png">
 
     <link rel="manifest" href="manifest.json">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -57,8 +43,8 @@
                             card: '#18181b',
                             lightBg: '#f4f4f5',
                             lightCard: '#ffffff',
-                            neon: '#06b6d4',      /* Cian Vibrante */
-                            neonPink: '#ec4899'  /* Rosa Neón */
+                            neon: '#06b6d4',
+                            neonPink: '#ec4899'
                         }
                     }
                 }
@@ -84,77 +70,21 @@
         .neon-glow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
         .neon-glow-pink { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
 
-        /* Estilos generales y scroll personalizado */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #09090b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #06b6d4;
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
 
-        /* Efectos de brillo neón para los contenedores */
-        .dark .neon-glow {
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-        }
-
-        .dark .neon-glow-pink {
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
-        }
-
-        /* Ajustes para el reproductor y elementos visuales */
-        #visualizer {
-            background: transparent;
-            display: block;
-        }
-
-        /* Asegurar que los botones tengan transiciones suaves */
-        button {
-            transition: all 0.3s ease;
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        /* Estilo para el contador de oyentes */
-        #listener-count {
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* Ajuste de imagen de carátula para que sea responsiva */
-        #track-cover {
-            transition: all 0.5s ease;
-            object-fit: cover;
-        }
-        /* Agrega esto a tus etiquetas <style> para mejorar el feedback visual */
-        #share-btn {
-            transition: all 0.2s ease;
-        }
-        #share-btn:hover {
-            color: #06b6d4; /* Color neón de tu marca */
-            transform: scale(1.05);
-        }
-        /* Ocultar elementos si el widget intenta poner textos extraños */
-        #sonic_title, #sonic_listeners {
-            display: inline-block;
-        }
-        /* Asegurar que los contenedores del widget no rompan el diseño */
-        #sonic_listeners, #sonic_uniq {
-            display: inline-block;
-        }
+        #visualizer { background: transparent; display: block; }
+        button { transition: all 0.3s ease; }
+        button:active { transform: scale(0.95); }
+        #listener-count { font-variant-numeric: tabular-nums; }
+        #track-cover { transition: all 0.5s ease; object-fit: cover; }
+        #share-btn { transition: all 0.2s ease; }
+        #share-btn:hover { color: #06b6d4; transform: scale(1.05); }
+        
+        #sonic_title, #sonic_artist, #sonic_listeners, #sonic_uniq { display: inline-block; }
+        #sonic_title, #sonic_artist { display: block !important; opacity: 1 !important; visibility: visible !important; }
     </style>
-<style>
-    /* Forzar que los elementos del widget NO se oculten */
-    #sonic_title, #sonic_artist {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-</style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
 
@@ -170,31 +100,17 @@
         </div>
 
         <div class="flex items-center space-x-4 sm:space-x-5">
-            <div class="flex items-center space-x-3 sm:space-x-4 text-zinc-500 dark:text-zinc-400">
-                
-               <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" target="_blank" 
-   class="flex items-center gap-3 w-full max-w-xs p-3 transition-all duration-200 group rounded-lg border shadow-sm
-          bg-white border-gray-200 hover:shadow-md hover:border-green-300
-          dark:bg-gray-900 dark:border-gray-800 dark:hover:border-green-500/50 dark:hover:shadow-green-500/5">
-    
-    <!-- Ícono con fondo adaptable -->
-    <div class="flex items-center justify-center w-9 h-9 text-xl rounded-full transition-colors duration-200 text-green-500
-                bg-green-50 group-hover:bg-green-500 group-hover:text-white
-                dark:bg-green-500/10 dark:group-hover:bg-green-500 dark:group-hover:text-white">
-        <i class="fa-brands fa-whatsapp"></i>
-    </div>
-    
-    <!-- Texto con color adaptativo -->
-    <div class="text-left">
-        <span class="block font-medium text-sm transition-colors duration-200
-                     text-gray-800 group-hover:text-green-600
-                     dark:text-gray-200 dark:group-hover:text-green-400">
-            Canal de WhatsApp
-        </span>
-    </div>
-</a>
-                
-            </div>
+            <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" target="_blank" 
+               class="flex items-center gap-3 w-full max-w-xs p-3 transition-all duration-200 group rounded-lg border shadow-sm bg-white border-gray-200 hover:shadow-md hover:border-green-300 dark:bg-gray-900 dark:border-gray-800 dark:hover:border-green-500/50 dark:hover:shadow-green-500/5">
+                <div class="flex items-center justify-center w-9 h-9 text-xl rounded-full transition-colors duration-200 text-green-500 bg-green-50 group-hover:bg-green-500 group-hover:text-white dark:bg-green-500/10 dark:group-hover:bg-green-500 dark:group-hover:text-white">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div class="text-left">
+                    <span class="block font-medium text-sm transition-colors duration-200 text-gray-800 group-hover:text-green-600 dark:text-gray-200 dark:group-hover:text-green-400">
+                        Canal de WhatsApp
+                    </span>
+                </div>
+            </a>
 
             <button id="theme-toggle" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
                 <i id="theme-icon" class="fa-solid fa-moon"></i>
@@ -228,29 +144,23 @@
                 </p>
             </div>
 
-<!-- Contenedor de mensajes interactivos -->
-<div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
-    <a id="dynamic-link" href="#" class="block">
-        <div id="dynamic-message" 
-             class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm">
-            <!-- El mensaje y enlace cambiarán aquí -->
-        </div>
-    </a>
-</div>
+            <div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
+                <a id="dynamic-link" href="#" class="block">
+                    <div id="dynamic-message" class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm"></div>
+                </a>
+            </div>
 
-<div class="w-full max-w-md h-10 flex items-center justify-center my-6">
-    <canvas id="visualizer" class="w-full h-full"></canvas>
-</div>
+            <div class="w-full max-w-md h-10 flex items-center justify-center my-6">
+                <canvas id="visualizer" class="w-full h-full"></canvas>
+            </div>
 
             <div class="w-full max-w-md grid grid-cols-12 gap-4">
                 <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
                     <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
                 </button>
-
-<div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
-    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
-           class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
-</div>
+                <div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
+                    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
+                </div>
             </div>
 
             <div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
@@ -258,19 +168,17 @@
                 <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">
                     <span id="sonic_listeners">0</span>
                 </span>
-                  </div>
+            </div>
 
             <div class="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
                 <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                     <i class="fa-solid fa-share-nodes text-base"></i>
                     <span>Compartir</span>
                 </button>
-
                 <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
                     <i class="fa-solid fa-heart text-base"></i>
                     <span>Apoyar</span>
                 </button>
-
                 <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                     <i class="fa-solid fa-circle-exclamation text-base"></i>
                     <span>Reportar</span>
@@ -278,24 +186,15 @@
             </div>
         </section>
 
-      <div class="lg:col-span-5 space-y-6 w-full">
-
-           <!-- Reemplaza tu sección de programación actual por esta -->
-<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
-    <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
-        <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación
-    </h3>
-    
-    <!-- Pestañas -->
-    <div id="tabs-container" class="flex gap-1 mb-4 overflow-x-auto pb-2 scrollbar-hide">
-        <!-- Los botones se generarán con JS -->
-    </div>
-<div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">
-                        Cargando fecha...
-                    </div>
-                   <!-- Lista -->
-    <div class="space-y-3" id="schedule-container"></div>
-</section>
+        <div class="lg:col-span-5 space-y-6 w-full">
+            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
+                <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
+                    <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación
+                </h3>
+                <div id="tabs-container" class="flex gap-1 mb-4 overflow-x-auto pb-2 scrollbar-hide"></div>
+                <div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">Cargando fecha...</div>
+                <div class="space-y-3 mt-3" id="schedule-container"></div>
+            </section>
 
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
                 <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Aliados</p>
@@ -305,44 +204,35 @@
                 </a>
             </section>
 
-<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
-    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
-        <i class="fa-solid fa-comment-dots mr-2 text-brand-neon"></i> Comunícate con nosotros
-    </h4>
-    
-    <div class="grid grid-cols-1 gap-3">
-        <!-- Botón Petición de Oración -->
-        <a href="https://wa.me/584125183677?text=Hola,%20quisiera%20pedir%20oración%20por:%20" target="_blank" class="w-full p-3 bg-brand-neonPink/10 border border-brand-neonPink text-brand-neonPink hover:bg-brand-neonPink hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
-            <i class="fa-solid fa-hands-praying mr-2"></i> Pedir Oración
-        </a>
-
-        <!-- Botón Saludo -->
-        <a href="https://wa.me/584125183677?text=Hola,%20envío%20un%20saludo%20a%20Radio%20FE%204:18!" target="_blank" class="w-full p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
-            <i class="fa-solid fa-microphone mr-2"></i> Enviar Saludo
-        </a>
-
-        <!-- Botón Canción -->
-        <a href="https://wa.me/584125183677?text=Hola,%20me%20gustaría%20pedir%20la%20canción:%20" target="_blank" class="w-full p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
-            <i class="fa-solid fa-music mr-2"></i> Pedir Canción
-        </a>
-    </div>
-</section>
+            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
+                <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
+                    <i class="fa-solid fa-comment-dots mr-2 text-brand-neon"></i> Comunícate con nosotros
+                </h4>
+                <div class="grid grid-cols-1 gap-3">
+                    <a href="https://wa.me/584125183677?text=Hola,%20quisiera%20pedir%20oración%20por:%20" target="_blank" class="w-full p-3 bg-brand-neonPink/10 border border-brand-neonPink text-brand-neonPink hover:bg-brand-neonPink hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
+                        <i class="fa-solid fa-hands-praying mr-2"></i> Pedir Oración
+                    </a>
+                    <a href="https://wa.me/584125183677?text=Hola,%20envío%20un%20saludo%20a%20Radio%20FE%204:18!" target="_blank" class="w-full p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
+                        <i class="fa-solid fa-microphone mr-2"></i> Enviar Saludo
+                    </a>
+                    <a href="https://wa.me/584125183677?text=Hola,%20me%20gustaría%20pedir%20la%20canción:%20" target="_blank" class="w-full p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
+                        <i class="fa-solid fa-music mr-2"></i> Pedir Canción
+                    </a>
+                </div>
+            </section>
         </div>
     </main>
 
-
     <footer class="w-full bg-zinc-200/50 dark:bg-brand-card/30 border-t border-zinc-300 dark:border-zinc-900 mt-12 py-8 px-6 text-center text-zinc-500 text-xs transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-left md:text-left text-center">
+            <div class="text-left text-center md:text-left">
                 <p class="font-semibold text-zinc-700 dark:text-zinc-400">© <span id="footer-year"></span> Radio FE 4:18. Todos los derechos reservados.</p>
                 <p class="text-[11px] text-zinc-500 dark:text-zinc-600 mt-0.5">Transmitiendo alta fidelidad las 24 horas del día.</p>
             </div>
-            
             <div class="bg-zinc-200 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-850 px-4 py-2 rounded-2xl flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
                 <span class="inline-block w-2 h-2 rounded-full bg-brand-neon compressed animate-pulse"></span>
                 <span class="text-[11px]">Desarrollado para RADIO FE 4:18 <i class="fa-solid fa-music text-brand-neonPink text-[10px]"></i> por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-800 dark:text-white hover:text-brand-neon transition-colors">@EliaquinMarin</a></span>
             </div>
-
             <div class="flex items-center space-x-4 text-[11px] text-zinc-500 dark:text-zinc-600">
                 <span class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Sonando por todo lo alto</span>
                 <span> • </span>
@@ -353,46 +243,356 @@
 
     <audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" autoplay preload="auto" crossorigin="anonymous"></audio>
 
+    <div id="install-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all scale-95" id="modal-content">
+            <div class="flex flex-col items-center text-center">
+                <img src="img/icon.png" alt="Logo" class="w-20 h-20 mb-4 rounded-2xl shadow-lg">
+                <h3 class="text-xl font-bold text-zinc-900 dark:text-white mb-2">¡Lleva Radio FE 4:18 contigo!</h3>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Instala nuestra app oficial. Es totalmente gratis, no ocupa espacio en tu dispositivo.</p>
+                <div class="flex w-full gap-3">
+                    <button id="cancel-install" class="flex-1 py-3 text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-all">No, gracias</button>
+                    <button id="confirm-install" class="flex-1 py-3 text-sm font-bold text-white bg-brand-neonPink rounded-xl shadow-lg hover:scale-[1.02] transition-all">Instalar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="donate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative">
+            <button id="close-donate" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-white"><i class="fa-solid fa-times"></i></button>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-brand-neonPink/20 text-brand-neonPink rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-hand-holding-heart text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-2">Tu apoyo mantiene la señal al aire</h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6">Gracias por colaborar con Radio FE 4:18.</p>
+                <div class="bg-zinc-100 dark:bg-zinc-900 p-4 rounded-xl text-left border border-zinc-200 dark:border-zinc-800 space-y-2">
+                    <p class="text-[10px] uppercase text-zinc-500 font-bold">Pago Móvil</p>
+                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Tel: 0412-5183677</p>
+                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Banco: Bancaribe (0114)</p>
+                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">C.I: 15.691.313</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // VARIABLES GLOBALES DE CONFIGURACIÓN Y CONTROL
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('play-btn');
         const playIcon = document.getElementById('play-icon');
         const volumeSlider = document.getElementById('volume-slider');
-        const trackCover = document.getElementById('track-cover');
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const metaThemeColor = document.getElementById('meta-theme-color');
+        
+        const cacheCaratulas = {};
+        const caratulaPorDefecto = "img/caratula.png";
+        const LASTFM_API_KEY = "b25b959554ed76058ac220b7b2e0a026"; 
 
-        // Inicialización de volumen seguro
+        let programaEnVivoActivo = false;
+        let programaActualData = null;
+
+        // Base de Datos de Programación Estática
+        const miProgramacion = [
+            { dia: 0, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 0, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 0, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 2, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 2, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 2, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 3, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 3, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 3, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 4, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 4, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 4, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 5, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 5, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 5, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 6, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 6, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 6, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
+            { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
+            { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
+            { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
+            { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
+            { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" }
+        ];
+
+        // Inicialización básica del reproductor
         audio.volume = volumeSlider.value;
-
-        // Control manual Play/Pause
-        playBtn.addEventListener('click', () => {
-            togglePlayback();
-        });
+        playBtn.addEventListener('click', () => togglePlayback());
+        volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value);
 
         function togglePlayback() {
             initAudioAnalyzer();
             if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-
             if (audio.paused) {
-                // Forzar recarga del stream para evitar retraso acumulado
                 const currentSrc = audio.src.split('?')[0];
                 audio.src = currentSrc + '?cache=' + Date.now();
-                audio.play().then(() => { 
-                    playIcon.className = "fa-solid fa-pause text-xl"; 
-                }).catch(err => console.error("Error al reproducir:", err));
+                audio.play().then(() => { playIcon.className = "fa-solid fa-pause text-xl"; })
+                .catch(err => console.error("Error al reproducir:", err));
             } else {
                 audio.pause();
                 playIcon.className = "fa-solid fa-play text-xl ml-0.5";
             }
         }
 
-        volumeSlider.addEventListener('input', (e) => {
-            audio.volume = e.target.value;
+        // CONTROL DE CARÁTULAS INTELIGENTES (iTunes + Last.fm)
+       async function buscarCaratula(titulo, artista) {
+    const terminosIgnorar = ["RADIO FE", "IDENTIFICACIÓN", "PUBLICIDAD", "PROGRAMA", "SONANDO"];
+    
+    // 1. BASE DE DATOS DE AUDIOS PERSONALIZADOS (Para interceptar pautas antes de buscar en internet)
+    const mapaAudios = {
+        "AD1": { nombre: "CONTEXTO MEDIA GROUP", img: "img/publicidad/contexto.png" },
+        "AD2": { nombre: "DIRECTORIO UNISALUD", img: "img/publicidad/unisalud.png" },
+        "AD3": { nombre: "TOP 10 MUSICAL", img: "img/publicidad/top5.gif" },
+        "AD4": { nombre: "AUTO SERVICIO RORAIMA", img: "img/publicidad/roraima.png" },
+        "IDE1": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+        "6AM": { nombre: "ORAR POR LOS PASTORES Y LIDERES", img: "img/oracion/oracion.png" },
+        "3PM": { nombre: "ORAR POR VENEZUELA", img: "img/oracion/oracion.png" },
+        "9PM": { nombre: "ORAR POR LAS FAMILIAS", img: "img/oracion/oracion.png" }
+    };
+
+    let tClean = titulo.trim().toUpperCase();
+    const trackCover = document.getElementById('track-cover');
+
+    // 2. ESCUDO: Verificamos si el título actual es uno de tus audios personalizados
+    let coincidenciaAudio = null;
+    for (const clave in mapaAudios) {
+        const item = mapaAudios[clave];
+        if (tClean.includes(clave) || tClean.includes(item.nombre.toUpperCase())) {
+            coincidenciaAudio = item;
+            break;
+        }
+    }
+
+    // Si coincide con una publicidad u oración, ponemos SU carátula y CONGELAMOS la función aquí mismo
+    if (coincidenciaAudio) {
+        if (trackCover) trackCover.src = coincidenciaAudio.img;
+        console.log("Escudo Activo: Mostrando carátula personalizada para " + coincidenciaAudio.nombre);
+        return; // Detiene por completo la ejecución, impidiendo que iTunes o Last.fm actúen
+    }
+
+    // 3. FILTRO EXTRA: Si es texto basura de radio pero no un audio personalizado
+    if (terminosIgnorar.some(term => tClean.includes(term)) || tClean === "") {
+        if (trackCover) trackCover.src = caratulaPorDefecto;
+        return;
+    }
+
+    // LÓGICA NORMAL DE BÚSQUEDA (Música real)
+    let titleCleaned = titulo.replace(/EN VIVO:/gi, '').replace(/¡EN DIRECTO!/gi, '').replace(/\.(mp3|wav|aac|ogg)/gi, '').trim();
+    let artistCleaned = artista.trim();
+    let queryTarget = `${titleCleaned} ${artistCleaned}`.trim();
+
+    if (cacheCaratulas[queryTarget]) {
+        if (trackCover) trackCover.src = cacheCaratulas[queryTarget];
+        return;
+    }
+
+    // Intento 1: API de iTunes Completa
+    try {
+        const urlAPI = `https://itunes.apple.com/search?term=${encodeURIComponent(queryTarget)}&media=music&limit=1`;
+        const response = await fetch(urlAPI);
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+            let imgRaw = data.results[0].artworkUrl100;
+            let urlCaratulaHD = imgRaw ? imgRaw.replace("100x100bb.jpg", "600x600bb.jpg") : caratulaPorDefecto;
+            aplicarImagen(urlCaratulaHD, queryTarget);
+            return;
+        }
+    } catch (error) {
+        console.error("Error en iTunes (Completo):", error);
+    }
+
+    // Intento 2: API de iTunes Solo Título
+    try {
+        const urlSoloTitulo = `https://itunes.apple.com/search?term=${encodeURIComponent(titleCleaned)}&media=music&limit=1`;
+        const resTitulo = await fetch(urlSoloTitulo);
+        const dataTitulo = await resTitulo.json();
+
+        if (dataTitulo.results && dataTitulo.results.length > 0) {
+            let urlCaratulaHD = dataTitulo.results[0].artworkUrl100.replace("100x100bb.jpg", "600x600bb.jpg");
+            aplicarImagen(urlCaratulaHD, queryTarget);
+            return;
+        }
+    } catch (error) {
+        console.error("Error en iTunes (Solo Título):", error);
+    }
+
+    // Intento 3: Respaldo en Last.fm
+    try {
+        const urlLastFM = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${LASTFM_API_KEY}&artist=${encodeURIComponent(artistCleaned)}&track=${encodeURIComponent(titleCleaned)}&format=json`;
+        const resLast = await fetch(urlLastFM);
+        const dataLast = await resLast.json();
+
+        if (dataLast.track && dataLast.track.album && dataLast.track.album.image) {
+            const imagenes = dataLast.track.album.image;
+            const imgObj = imagenes.find(img => img.size === 'extralarge') || imagenes.find(img => img.size === 'large') || imagenes.at(-1);
+            
+            if (imgObj && imgObj['#text']) {
+                aplicarImagen(imgObj['#text'], queryTarget);
+                return;
+            }
+        }
+    } catch (error) {
+        console.error("Error en Last.fm:", error);
+    }
+
+    // Si no fue audio personalizado, ni se encontró en internet, va la de por defecto
+    if (trackCover) trackCover.src = caratulaPorDefecto;
+}
+
+        function aplicarImagen(url, query) {
+            document.getElementById('track-cover').src = url;
+            cacheCaratulas[query] = url;
+        }
+
+        // SISTEMA DE MONITOREO Y OBSERVACIÓN DEL COMPONENT SONICPANEL
+        const obTitle = document.getElementById('sonic_title');
+        const obArtist = document.getElementById('sonic_artist');
+
+        function verificarCambio() {
+            if (programaEnVivoActivo) return; // Si la parrilla local tiene bloqueado el live, no procesamos la API externa
+            
+            setTimeout(() => {
+                const actualTitle = obTitle ? obTitle.innerText : "";
+                const actualArtist = obArtist ? obArtist.innerText : "";
+                buscarCaratula(actualTitle, actualArtist);
+            }, 800);
+        }
+
+        if (obTitle && obArtist) {
+            const trackObserver = new MutationObserver(verificarCambio);
+            trackObserver.observe(obTitle, { childList: true, characterData: true, subtree: true });
+            trackObserver.observe(obArtist, { childList: true, characterData: true, subtree: true });
+            verificarCambio();
+        }
+
+        // GESTIÓN DE PROGRAMACIÓN EN PANTALLA Y EN VIVO ACTIVO
+        function formatearHora(hora24) {
+            let [h, m] = hora24.split(':');
+            h = parseInt(h);
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            return `${h}:${m} ${ampm}`;
+        }
+
+        function actualizarProgramacion() {
+            const ahora = new Date();
+            const diaActual = ahora.getDay();
+            const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+            
+            let programaEncontrado = null;
+            
+            miProgramacion.filter(p => p.dia === diaActual).forEach(p => {
+                const [hI, mI] = p.horaInicio.split(':').map(Number);
+                const [hF, mF] = p.horaFin.split(':').map(Number);
+                const estaAlAire = horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF);
+                if (estaAlAire) programaEncontrado = p;
+            });
+
+            const elTitle = document.getElementById('sonic_title');
+            const elArtist = document.getElementById('sonic_artist');
+            const elArt = document.getElementById('track-cover');
+
+            if (programaEncontrado) {
+                programaEnVivoActivo = true;
+                programaActualData = programaEncontrado;
+                if (elTitle) elTitle.textContent = programaEncontrado.nombre;
+                if (elArtist) elArtist.textContent = formatearHora(programaEncontrado.horaInicio) + " - " + formatearHora(programaEncontrado.horaFin);
+                if (elArt) elArt.src = programaEncontrado.img;
+            } else {
+                programaEnVivoActivo = false;
+                programaActualData = null;
+            }
+        }
+
+        // Forzar persistencia de texto si widgets.js intenta borrar el programa en vivo de la parrilla
+        const protectionObserver = new MutationObserver(() => {
+            if (programaEnVivoActivo && programaActualData) {
+                const elTitle = document.getElementById('sonic_title');
+                const elArtist = document.getElementById('sonic_artist');
+                if (elTitle && elTitle.textContent !== programaActualData.nombre) {
+                    elTitle.textContent = programaActualData.nombre;
+                }
+                let textoHora = formatearHora(programaActualData.horaInicio) + " - " + formatearHora(programaActualData.horaFin);
+                if (elArtist && elArtist.textContent !== textoHora) {
+                    elArtist.textContent = textoHora;
+                }
+            }
+        });
+        if (obTitle) protectionObserver.observe(obTitle, { childList: true, subtree: true });
+
+        // SISTEMA DE PESTAÑAS (TABS) DE PROGRAMACIÓN INTERACTIVA
+        const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+        const tabsContainer = document.getElementById('tabs-container');
+        const scheduleContainer = document.getElementById('schedule-container');
+
+        function renderizarProgramacion(diaIndex) {
+            if (!scheduleContainer) return;
+            scheduleContainer.innerHTML = "";
+            const filtrados = miProgramacion.filter(p => p.dia === diaIndex);
+            
+            // Ordenar de menor a mayor hora
+            filtrados.sort((a,b) => a.horaInicio.localeCompare(b.horaInicio));
+
+            filtrados.forEach(p => {
+                const [hI, mI] = p.horaInicio.split(':').map(Number);
+                const [hF, mF] = p.horaFin.split(':').map(Number);
+                const ahora = new Date();
+                const esHoy = ahora.getDay() === diaIndex;
+                const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+                const estaAlAire = esHoy && (horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF));
+
+                const div = document.createElement('div');
+                div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
+                div.innerHTML = `
+                    <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover">
+                    <div class="flex-grow">
+                        <p class="font-bold text-xs text-zinc-900 dark:text-white">${p.nombre}</p>
+                        <p class="text-[12px] text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
+                    </div>
+                    ${estaAlAire ? '<span class="text-[9px] font-bold bg-brand-neonPink text-white px-2 py-0.5 rounded-full uppercase animate-pulse">Al Aire</span>' : ''}
+                `;
+                scheduleContainer.appendChild(div);
+            });
+        }
+
+        // Inicializar los controladores de las pestañas
+        const hoyIndex = new Date().getDay();
+        diasSemana.forEach((nombre, index) => {
+            const btn = document.createElement('button');
+            btn.className = `px-3 py-1 text-[15px] font-bold rounded-lg transition-all ${index === hoyIndex ? 'bg-brand-neon text-black' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'}`;
+            btn.textContent = nombre;
+            btn.onclick = () => {
+                document.querySelectorAll('#tabs-container button').forEach(b => {
+                    b.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300';
+                });
+                btn.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-brand-neon text-black';
+                renderizarProgramacion(index);
+            };
+            tabsContainer.appendChild(btn);
         });
 
-        // Tema UI
+        // Ejecuciones y Ciclos de refresco iniciales
+        actualizarProgramacion();
+        renderizarProgramacion(hoyIndex);
+        setInterval(actualizarProgramacion, 20000);
+
+        // INTERFAZ DE USUARIO (Temas, Reloj, Aliados, Modales, Compartir)
         function updateThemeUI(isDark) {
             if (isDark) {
                 document.documentElement.classList.add('dark');
@@ -409,7 +609,23 @@
         updateThemeUI(document.documentElement.classList.contains('dark'));
         themeToggleBtn.addEventListener('click', () => updateThemeUI(!document.documentElement.classList.contains('dark')));
 
-        // Slider Aliados
+        function actualizarFechaYHora() {
+            const ahora = new Date();
+            const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const fechaFormateada = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            const horaFormateada = ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const contenedor = document.getElementById('full-date-time');
+            if (contenedor) {
+                contenedor.innerHTML = `<span class="capitalize">${fechaFormateada}</span> <span class="mx-1.5 opacity-50">|</span> <span class="font-bold text-brand-neonPink">${horaFormateada}</span>`;
+            }
+        }
+        actualizarFechaYHora();
+        setInterval(actualizarFechaYHora, 1000);
+
+        const fYear = document.getElementById('footer-year');
+        if(fYear) fYear.textContent = new Date().getFullYear();
+
+        // Rotación de Aliados
         const partnersDatabase = [
             { img: "img/partners/contexto.png", url: "https://www.contextomediagroup.com/" },
             { img: "img/partners/unisalud.png", url: "https://directoriounisalud.com/" },
@@ -419,17 +635,14 @@
             { img: "img/partners/tatihana.png", url: "https://www.tatihanapozopuccini.com/" }
         ];
         let currentPartnerIndex = 0;
-
         function rotatePartners() {
-            const activePartner = partnersDatabase[currentPartnerIndex];
             const partnerBanner = document.getElementById('partner-banner'); 
             const partnerLink = document.getElementById('partner-link');
-
             if (partnerBanner && partnerLink && partnersDatabase.length > 0) {
                 partnerBanner.style.opacity = 0;
                 setTimeout(() => {
-                    partnerBanner.src = activePartner.img;
-                    partnerLink.href = activePartner.url;
+                    partnerBanner.src = partnersDatabase[currentPartnerIndex].img;
+                    partnerLink.href = partnersDatabase[currentPartnerIndex].url;
                     partnerBanner.style.opacity = 1;
                     currentPartnerIndex = (currentPartnerIndex + 1) % partnersDatabase.length;
                 }, 400);
@@ -438,7 +651,68 @@
         rotatePartners();
         setInterval(rotatePartners, 5000);
 
-        // Analizador de espectro Canvas
+        // Mensajes Interactivos de Cabina
+        const interactionData = [
+            { text: "📲 ¡ÚNETE A NUESTRO CANAL DE WHATSAPP!", url: "https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" },
+            { text: "📻 ¡SIGUE DISFRUTANDO LA MEJOR MÚSICA CRISTIANA!", url: "javascript:document.getElementById('share-btn').click();" },
+            { text: "💬 ¡ESCRIBE A LA CABINA: ¡SALUDA A RADIO FE 4:18!", url: "https://wa.me/584125183677?text=¡Hola!%20Estoy%20escuchando%20Radio%20FE%204:18%20y%20quiero%20enviar%20un%20saludo." },
+            { text: "❤️ ¡TU APOYO HACE LA DIFERENCIA! DA CLIC AQUÍ", url: "javascript:document.getElementById('donate-btn').click();" },
+            { text: "🚀 ¡AYÚDANOS COMPARTIENDO LA SEÑAL CON AMIGOS!", url: "javascript:document.getElementById('share-btn').click();" }
+        ];
+        const msgElement = document.getElementById('dynamic-message');
+        const linkElement = document.getElementById('dynamic-link');
+        let currentMsgIndex = 0;
+        function rotateMessages() {
+            if(!msgElement) return;
+            msgElement.classList.add('opacity-0');
+            setTimeout(() => {
+                const data = interactionData[currentMsgIndex];
+                msgElement.textContent = data.text;
+                linkElement.href = data.url;
+                if (data.url.startsWith('javascript:')) {
+                    linkElement.onclick = (e) => { e.preventDefault(); eval(data.url.replace('javascript:', '')); };
+                } else {
+                    linkElement.onclick = null;
+                    linkElement.target = "_blank";
+                }
+                currentMsgIndex = (currentMsgIndex + 1) % interactionData.length;
+                msgElement.classList.remove('opacity-0');
+            }, 700);
+        }
+        setInterval(rotateMessages, 6000);
+        rotateMessages();
+
+        // Control de Modal Donaciones
+        const donateBtn = document.getElementById('donate-btn');
+        const donateModal = document.getElementById('donate-modal');
+        const closeDonate = document.getElementById('close-donate');
+        if(donateBtn && donateModal && closeDonate) {
+            donateBtn.addEventListener('click', () => { donateModal.classList.remove('hidden'); donateModal.classList.add('flex'); });
+            closeDonate.addEventListener('click', () => donateModal.classList.add('hidden'));
+            window.addEventListener('click', (e) => { if (e.target === donateModal) donateModal.classList.add('hidden'); });
+        }
+
+        // Botón Compartir
+        const shareBtn = document.getElementById('share-btn');
+        if(shareBtn) {
+            shareBtn.addEventListener('click', async () => {
+                const shareData = { title: 'RADIO FE 4:18', text: 'Escucha RADIO FE 4:18 en vivo, sonando por todo lo alto.', url: window.location.href };
+                try {
+                    if (navigator.share) { await navigator.share(shareData); } 
+                    else { await navigator.clipboard.writeText(window.location.href); alert('¡Enlace copiado al portapapeles!'); }
+                } catch (err) { console.error('Error al compartir:', err); }
+            });
+        }
+
+        // Botón Reportar Señal
+        const reportBtn = document.getElementById('report-btn');
+        if(reportBtn) {
+            reportBtn.addEventListener('click', () => {
+                window.open(`https://wa.me/584125183677?text=${encodeURIComponent("Hola, reporto una falla en la señal de la radio Radio FE 4:18.")}`, '_blank');
+            });
+        }
+
+        // ANALIZADOR DE ESPECTRO (CANVAS)
         const canvas = document.getElementById('visualizer');
         const ctx = canvas.getContext('2d');
         let audioCtx, analyser, bufferLength, dataArray, source;
@@ -456,662 +730,219 @@
                 bufferLength = analyser.frequencyBinCount;
                 dataArray = new Uint8Array(bufferLength);
                 isAudioContextInitialized = true;
-            } catch (err) {
-                console.warn("Análisis de audio no soportado.", err);
-            }
+            } catch (err) { console.warn("Análisis de audio no soportado.", err); }
         }
 
-function drawVisualizer() {
-    requestAnimationFrame(drawVisualizer);
-    
-    const width = canvas.width = canvas.clientWidth;
-    const height = canvas.height = canvas.clientHeight;
-    ctx.clearRect(0, 0, width, height);
+        function drawVisualizer() {
+            requestAnimationFrame(drawVisualizer);
+            if(!canvas) return;
+            const width = canvas.width = canvas.clientWidth;
+            const height = canvas.height = canvas.clientHeight;
+            ctx.clearRect(0, 0, width, height);
 
-    if (isAudioContextInitialized && !audio.paused) {
-        analyser.getByteFrequencyData(dataArray);
-    }
+            if (isAudioContextInitialized && !audio.paused) { analyser.getByteFrequencyData(dataArray); }
 
-    const barCount = 20; // Número de columnas
-    const segmentHeight = 4; // Altura de cada rayita
-    const gap = 2; // Espacio entre rayitas
-    const barWidth = (width / barCount) * 0.6;
-    let x = 0;
+            const barCount = 20;
+            const segmentHeight = 4;
+            const gap = 2;
+            const barWidth = (width / barCount) * 0.6;
+            let x = 0;
+            ctx.fillStyle = document.documentElement.classList.contains('dark') ? '#06b6d4' : '#ec4899';
 
-    const isDark = document.documentElement.classList.contains('dark');
-    const color = isDark ? '#06b6d4' : '#ec4899'; 
-    ctx.fillStyle = color;
+            for (let i = 0; i < barCount; i++) {
+                const val = isAudioContextInitialized && !audio.paused ? dataArray[i] : 10;
+                let totalSegments = Math.floor((val / 255) * (height / (segmentHeight + gap)));
+                if(totalSegments < 1) totalSegments = 1;
 
-    for (let i = 0; i < barCount; i++) {
-        // Valor de la frecuencia
-        const val = isAudioContextInitialized && !audio.paused ? dataArray[i] : 10;
-        
-        // Calculamos cuántos segmentos caben según la intensidad del sonido
-        let totalSegments = Math.floor((val / 255) * (height / (segmentHeight + gap)));
-        if(totalSegments < 1) totalSegments = 1;
-
-        // Dibujar segmentos de abajo hacia arriba desde el centro
-        for (let j = 0; j < totalSegments; j++) {
-            let y = (height / 2) - (j * (segmentHeight + gap)); // Mitad superior
-            let y2 = (height / 2) + (j * (segmentHeight + gap)); // Mitad inferior
-            
-            // Dibujar ambas partes para que crezca desde el centro
-            ctx.fillRect(x, y, barWidth, segmentHeight);
-            ctx.fillRect(x, y2, barWidth, segmentHeight);
-        }
-        
-        x += barWidth + (width / barCount * 0.4);
-    }
-}
-drawVisualizer();
-
-        // Reloj pie de página
-        const fYear = document.getElementById('footer-year');
-        if(fYear) fYear.textContent = new Date().getFullYear();
-    </script>
-
-    <script>
-        // Guardamos las últimas búsquedas exitosas para no re-consultar la API innecesariamente
-        const cacheCaratulas = {};
-        const caratulaPorDefecto = "img/caratula.png";
-
-async function buscarCaratula(titulo, artista) {
-    const terminosIgnorar = ["RADIO FE", "IDENTIFICACIÓN", "PUBLICIDAD", "PROGRAMA", "SONANDO"];
-    
-    let tClean = titulo.trim().toUpperCase();
-    
-    // Si detectamos que no es una canción real, ponemos el logo por defecto inmediatamente
-    if (terminosIgnorar.some(term => tClean.includes(term)) || tClean === "") {
-        document.getElementById('track-cover').src = "img/caratula.png";
-        return;
-            }
-
-            // Limpieza fina del string (remover "EN VIVO:", parentesis o guiones extraños)
-            let queryTarget = `${titulo} ${artista}`
-                .replace(/EN VIVO:/gi, '')
-                .replace(/¡EN DIRECTO!/gi, '')
-                .replace(/\.(mp3|wav|aac|ogg)/gi, '')
-                .trim();
-
-            if(cacheCaratulas[queryTarget]) {
-                document.getElementById('track-cover').src = cacheCaratulas[queryTarget];
-                return;
-            }
-
-            const urlAPI = `https://itunes.apple.com/search?term=${encodeURIComponent(queryTarget)}&media=music&limit=1`;
-
-            try {
-                const response = await fetch(urlAPI);
-                const data = await response.json();
-
-// Dentro de tu función buscarCaratula, mejora el manejo de la imagen
-if (data.results && data.results.length > 0) {
-    let imgRaw = data.results[0].artworkUrl100;
-    // Si la imagen existe, cambia el tamaño; si no, usa la por defecto
-    let urlCaratulaHD = imgRaw ? imgRaw.replace("100x100bb.jpg", "600x600bb.jpg") : caratulaPorDefecto;
-    document.getElementById('track-cover').src = urlCaratulaHD;
-    cacheCaratulas[queryTarget] = urlCaratulaHD;
-}
-else {
-                    // Si no encuentra coincidencia exacta de los dos, intentar solo con el Título
-                    const urlSoloTitulo = `https://itunes.apple.com/search?term=${encodeURIComponent(titulo)}&media=music&limit=1`;
-                    const resTitulo = await fetch(urlSoloTitulo);
-                    const dataTitulo = await resTitulo.json();
-
-                    if(dataTitulo.results && dataTitulo.results.length > 0) {
-                        let urlCaratulaHD = dataTitulo.results[0].artworkUrl100.replace("100x100bb.jpg", "600x600bb.jpg");
-                        document.getElementById('track-cover').src = urlCaratulaHD;
-                        cacheCaratulas[queryTarget] = urlCaratulaHD;
-                    } else {
-                        document.getElementById('track-cover').src = caratulaPorDefecto;
-                    }
+                for (let j = 0; j < totalSegments; j++) {
+                    let y = (height / 2) - (j * (segmentHeight + gap));
+                    let y2 = (height / 2) + (j * (segmentHeight + gap));
+                    ctx.fillRect(x, y, barWidth, segmentHeight);
+                    ctx.fillRect(x, y2, barWidth, segmentHeight);
                 }
-            } catch (error) {
-                console.error("Error consultando la API de iTunes: ", error);
-                document.getElementById('track-cover').src = caratulaPorDefecto;
+                x += barWidth + (width / barCount * 0.4);
             }
         }
-// Monitorear cambios en el Widget de SonicPanel
-const obTitle = document.getElementById('sonic_title');
-const obArtist = document.getElementById('sonic_artist');
+        drawVisualizer();
 
-// Función que ejecuta la búsqueda con un pequeño margen de tiempo
-// Monitorear cambios en el Widget de SonicPanel
-const obTitle = document.getElementById('sonic_title');
-const obArtist = document.getElementById('sonic_artist');
-
-// Función que ejecuta la búsqueda con un pequeño margen de tiempo
-function verificarCambio() {
-    
-    // --- ESTA ES LA MODIFICACIÓN ---
-    // Si un programa está al aire, bloqueamos la búsqueda de carátulas externa
-    if (typeof programaEnVivoActivo !== 'undefined' && programaEnVivoActivo) {
-        console.log("Programa en vivo activo: Búsqueda pausada.");
-        return; // Salimos de la función sin hacer nada
-    }
-    // --------------------------------
-
-    // Pequeña espera para asegurar que el contenido se haya renderizado
-    setTimeout(() => {
-        const actualTitle = obTitle.innerText;
-        const actualArtist = obArtist.innerText;
-        buscarCaratula(actualTitle, actualArtist);
-    }, 800);
-}
-
-if (obTitle && obArtist) {
-    const trackObserver = new MutationObserver(verificarCambio);
-
-    // Observamos cambios tanto en el texto como en el sub-árbol del elemento
-    trackObserver.observe(obTitle, { childList: true, characterData: true, subtree: true });
-    trackObserver.observe(obArtist, { childList: true, characterData: true, subtree: true });
-    
-    // Ejecución inicial para cargar la carátula al abrir la página
-    verificarCambio();
-}
-    </script>
-
-<script>
-    // 1. Variable para bloquear actualizaciones externas
-    let programaEnVivoActivo = false;
-let programaActualData = null;
-
-    const miProgramacion = [
-    // --- NUEVOS SEGMENTOS DE ORACIÓN (TODOS LOS DÍAS: 0-6) ---
-    { dia: 0, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 0, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 0, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    
-    { dia: 1, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 1, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 1, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    
-    { dia: 2, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 2, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 2, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    
-    { dia: 3, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 3, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 3, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    
-    { dia: 4, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 4, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 4, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    
-    { dia: 5, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 5, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 5, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    
-    { dia: 6, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 6, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-    { dia: 6, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-
-    // --- PROGRAMACIÓN EXISTENTE ---
-    { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
-    { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
-    { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
-    { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
-    { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
-    { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-    { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-    { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-    { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-    { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-    { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-    { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" }
-];
-
-    function formatearHora(hora24) {
-        let [h, m] = hora24.split(':');
-        h = parseInt(h);
-        const ampm = h >= 12 ? 'PM' : 'AM';
-        h = h % 12 || 12;
-        return `${h}:${m} ${ampm}`;
-    }
-
-
-
-    function actualizarProgramacion() {
-        const ahora = new Date();
-        const diaActual = ahora.getDay();
-        const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
-        const contenedor = document.getElementById('schedule-container');
-        
-        if (!contenedor) return;
-        contenedor.innerHTML = ""; 
-
-        let programaEncontrado = null;
-        
-        // Ordenamos por hora para que siempre se vea bien
-        miProgramacion.filter(p => p.dia === diaActual).forEach(p => {
-            const [hI, mI] = p.horaInicio.split(':').map(Number);
-            const [hF, mF] = p.horaFin.split(':').map(Number);
-            const estaAlAire = horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF);
-            
-            if (estaAlAire) programaEncontrado = p;
-
-            const div = document.createElement('div');
-            div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
-            div.innerHTML = `
-                <img src="${p.img}" alt="${p.nombre}" class="w-12 h-12 rounded-lg object-cover border border-zinc-300 dark:border-zinc-700">
-                <div class="flex-grow">
-                    <p class="font-bold text-sm text-zinc-900 dark:text-white">${p.nombre}</p>
-                    <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
-                </div>
-                ${estaAlAire ? '<span class="text-[10px] font-bold bg-brand-neonPink text-white px-2 py-1 rounded-full uppercase animate-pulse">En Vivo</span>' : ''}
-            `;
-            contenedor.appendChild(div);
-        });
-
-        // 2. Control del Reproductor Principal
-        const elTitle = document.getElementById('sonic_title');
-        const elArtist = document.getElementById('sonic_artist');
-        const elArt = document.getElementById('track-cover');
-
-       if (programaEncontrado) {
-    programaEnVivoActivo = true;
-    programaActualData = programaEncontrado;
-if (elTitle) {
-        elTitle.textContent = programaEncontrado.nombre;
-        elTitle.style.display = "block"; // Asegura que esté visible
-        elTitle.style.opacity = "1";
-    }          if (elArtist) {
-        elArtist.textContent = formatearHora(programaEncontrado.horaInicio) + " - " + formatearHora(programaEncontrado.horaFin);
-        elArtist.style.display = "block"; // Asegura que esté visible
-    }
-            if (elArt) elArt.src = programaEncontrado.img;
-        } else {
-            programaEnVivoActivo = false; // Liberamos para que la radio muestre lo que quiera
-        }
-    }
-
-    // 3. Bloqueador para otros scripts (como widgets.js)
-   const observer = new MutationObserver((mutations) => {
-    if (programaEnVivoActivo && programaActualData) {
-        // Verificamos si el texto está vacío
-        const elTitle = document.getElementById('sonic_title');
-        const elArtist = document.getElementById('sonic_artist');
-
-        if (elTitle.textContent.trim() === "" || elTitle.textContent !== programaActualData.nombre) {
-            elTitle.textContent = programaActualData.nombre;
-        }
-        
-        if (elArtist.textContent.trim() === "") {
-            elArtist.textContent = formatearHora(programaActualData.horaInicio) + " - " + formatearHora(programaActualData.horaFin);
-        }
-    }
-});
-
-    // Observar cambios en el DOM si es necesario
-    const target = document.getElementById('sonic_title');
-    if (target) observer.observe(target, { childList: true, subtree: true });
-
-    actualizarProgramacion();
-    setInterval(actualizarProgramacion, 30000);
-</script>
-
-    <div id="install-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
-        <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all scale-95" id="modal-content">
-            <div class="flex flex-col items-center text-center">
-                <img src="img/icon.png" alt="Logo" class="w-20 h-20 mb-4 rounded-2xl shadow-lg">
-                <h3 class="text-xl font-bold text-zinc-900 dark:text-white mb-2">¡Lleva Radio FE 4:18 contigo!</h3>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Instala nuestra app oficial. Es totalmente gratis, no ocupa espacio en tu dispositivo y tendrás acceso rápido a la señal en vivo.</p>
-                
-                <div class="flex w-full gap-3">
-                    <button id="cancel-install" class="flex-1 py-3 text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-all">No, gracias</button>
-                    <button id="confirm-install" class="flex-1 py-3 text-sm font-bold text-white bg-brand-neonPink rounded-xl shadow-lg hover:scale-[1.02] transition-all">Instalar Ahora</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-  <script>
-    let deferredPrompt;
-    
-    // Función de inicialización para asegurar que los elementos existan
-    const initPWAInstall = () => {
-        const installModal = document.getElementById('install-modal');
-        const btnCancel = document.getElementById('cancel-install');
-        const btnConfirm = document.getElementById('confirm-install');
-
-        // Si no existen los elementos en el DOM, abortamos para evitar errores
-        if (!installModal || !btnCancel || !btnConfirm) return;
-
-        const isRunningStandalone = window.matchMedia('(display-mode: standalone)').matches;
-        const isRejected = localStorage.getItem('pwa-rejected') === 'true';
-
-        // Si ya está instalado o es standalone, no hacemos nada
-        if (isRunningStandalone || localStorage.getItem('pwa-installed') === 'true') return;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-
-            // UX: Esperar unos segundos antes de mostrar, para no interrumpir la carga inicial
-            if (!isRejected) {
-                setTimeout(() => {
-                    installModal.classList.remove('hidden');
-                    installModal.classList.add('flex');
-                }, 3000); 
-            }
-        });
-
-        btnCancel.addEventListener('click', () => {
-            installModal.classList.add('hidden');
-            installModal.classList.remove('flex');
-            localStorage.setItem('pwa-rejected', 'true');
-        });
-
-        btnConfirm.addEventListener('click', async () => {
-            if (!deferredPrompt) return;
-
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            console.log(`Resultado de instalación: ${outcome}`);
-            
-            if (outcome === 'accepted') {
-                localStorage.setItem('pwa-installed', 'true');
-            }
-            
-            deferredPrompt = null;
-            installModal.classList.add('hidden');
-            installModal.classList.remove('flex');
-        });
-    };
-
-    // Escuchar el evento appinstalled globalmente
-    window.addEventListener('appinstalled', () => {
-        localStorage.setItem('pwa-installed', 'true');
-        console.log('PWA instalada con éxito');
-    });
-
-    // Ejecutar cuando el DOM esté listo
-    document.addEventListener('DOMContentLoaded', initPWAInstall);
-</script>
-
-    <script>
-        const shareBtn = document.getElementById('share-btn');
-        shareBtn.addEventListener('click', async () => {
-            const shareData = {
-                title: 'RADIO FE 4:18',
-                text: 'Escucha RADIO FE 4:18 en vivo, sonando por todo lo alto.',
-                url: window.location.href
-            };
-            try {
-                if (navigator.share) {
-                    await navigator.share(shareData);
-                } else {
-                    await navigator.clipboard.writeText(window.location.href);
-                    alert('¡Enlace copiado al portapapeles!');
-                }
-            } catch (err) {
-                console.error('Error al compartir:', err);
-            }
-        });
-    </script>
-
-    <script>
+        // Autoplay interactivo inicial
         function startAudio() {
             audio.play().then(() => {
                 document.getElementById('play-icon').className = "fa-solid fa-pause text-xl";
                 document.removeEventListener('click', startAudio);
-            }).catch(err => console.log("Esperando interacción..."));
+            }).catch(e => console.log("Esperando interacción humana..."));
         }
         window.addEventListener('load', startAudio);
         document.addEventListener('click', startAudio);
     </script>
 
     <script>
-        document.getElementById('report-btn').addEventListener('click', () => {
-            const telefono = "584125183677";
-            const mensaje = "Hola, reporto una falla en la señal de la radio Radio FE 4:18.";
-            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
-        });
-    </script>
-
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const targetNode = document.getElementById('sonic_history');
-    const container = document.getElementById('history-custom-container');
-
-    if (!targetNode || !container) return; // Validación de seguridad
-
-    const mapaContenido = {
-        "AD1": { nombre: "CONTEXTO MEDIA GROUP", img: "img/publicidad/contexto.png" },
-        "AD2": { nombre: "DIRECTORIO UNISALUD", img: "img/publicidad/unisalud.png" },
-        "AD3": { nombre: "TOP 10 MUSICAL", img: "img/publicidad/top5.gif" },
-        "AD4": { nombre: "AUTO SERVICIO RORAIMA", img: "img/publicidad/roraima.png" },
-        "IDE1": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
-        "6AM": { nombre: "ORAR POR LOS PASTORES Y LIDERES", img: "img/oracion/oracion.png" },
-        "3PM": { nombre: "ORAR POR VENEZUELA", img: "img/oracion/oracion.png" },
-        "9PM": { nombre: "ORAR POR LAS FAMILIAS", img: "img/oracion/oracion.png" }
-    };
-
-    const historyObserver = new MutationObserver(() => {
-        const rawText = targetNode.innerText;
-        if (!rawText || rawText.trim() === "") return;
-
-        container.innerHTML = ""; 
-        const lines = rawText.split('\n').filter(line => line.trim() !== "");
+    document.addEventListener('DOMContentLoaded', () => {
+        const targetNode = document.getElementById('sonic_history');
+        const container = document.getElementById('history-custom-container');
         
-        lines.forEach((line) => {
-            const cleanText = line.replace(/^\d+\.\)/, '').trim().toUpperCase();
+        // Base de datos de identificadores compartida
+        const mapaContenido = {
+            "AD1": { nombre: "CONTEXTO MEDIA GROUP", img: "img/publicidad/contexto.png" },
+            "AD2": { nombre: "DIRECTORIO UNISALUD", img: "img/publicidad/unisalud.png" },
+            "AD3": { nombre: "TOP 10 MUSICAL", img: "img/publicidad/top5.gif" },
+            "AD4": { nombre: "AUTO SERVICIO RORAIMA", img: "img/publicidad/roraima.png" },
+            "IDE1": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+            "6AM": { nombre: "ORAR POR LOS PASTORES Y LIDERES", img: "img/oracion/oracion.png" },
+            "3PM": { nombre: "ORAR POR VENEZUELA", img: "img/oracion/oracion.png" },
+            "9PM": { nombre: "ORAR POR LAS FAMILIAS", img: "img/oracion/oracion.png" }
+        };
+
+        // --- FUNCIÓN MEJORADA: EVALÚA EL AUDIO ACTUAL Y ENMASCARA EL BUSCADOR EXTERNO ---
+        function evaluarAudioActual() {
+            // Si hay un programa en vivo de la parrilla horaria, no hacemos nada (mantiene prioridad)
+            if (typeof programaEnVivoActivo !== 'undefined' && programaEnVivoActivo) return;
+
+            const obTitle = document.getElementById('sonic_title');
+            const trackCover = document.getElementById('track-cover');
+            if (!obTitle || !trackCover) return;
+
+            const currentTitleRaw = obTitle.innerText.trim().toUpperCase();
+            let coincidencia = null;
             
-            const info = Object.values(mapaContenido).find(item => 
-                cleanText.includes(item.nombre.toUpperCase()) || 
-                item.nombre.toUpperCase().includes(cleanText)
-            );
+            // Buscamos si el título actual coincide con el mapa
+            for (const clave in mapaContenido) {
+                const item = mapaContenido[clave];
+                if (currentTitleRaw.includes(clave) || currentTitleRaw.includes(item.nombre.toUpperCase())) {
+                    coincidencia = item;
+                    break;
+                }
+            }
 
-            const tituloMostrar = info ? info.nombre : line.replace(/^\d+\.\)/, '').trim();
-            const icono = info ? info.img : "img/logo.png";
-            const subTitulo = info ? "Transmisión" : "Música en vivo";
-
-            const div = document.createElement('div');
-            div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-800/20 transition-colors";
-            div.innerHTML = `
-                <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden border border-zinc-700">
-                    <img src="${icono}" class="w-full h-full object-cover" onerror="this.src='img/logo.png'">
-                </div>
-                <div class="min-w-0 flex-1">
-                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-100 truncate">${tituloMostrar}</p>
-                    <p class="text-[10px] text-zinc-400">${subTitulo}</p>
-                </div>
-            `;
-            container.appendChild(div);
-        }); 
-    });
-
-    // Iniciar observación
-    historyObserver.observe(targetNode, { childList: true, subtree: true, characterData: true });
-});
-</script>
-    <script>
-        function actualizarFechaYHora() {
-            const ahora = new Date();
-            const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-            const fechaFormateada = ahora.toLocaleDateString('es-ES', opcionesFecha);
-            const horaFormateada = ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-            const contenedor = document.getElementById('full-date-time');
-            if (contenedor) {
-                contenedor.innerHTML = `
-                    <span class="capitalize">${fechaFormateada}</span> 
-                    <span class="mx-1.5 opacity-50">|</span> 
-                    <span class="font-bold text-brand-neonPink">${horaFormateada}</span>
-                `;
+            if (coincidencia) {
+                // Forzamos la carátula personalizada e indicamos de manera global que está activa
+                trackCover.src = coincidencia.img;
+                window.audioPersonalizadoActivo = true; 
+            } else {
+                // Si ya terminó el audio personalizado, liberamos el candado
+                if (window.audioPersonalizadoActivo) {
+                    window.audioPersonalizadoActivo = false;
+                    // Forzamos al buscador principal a restaurar la carátula de la canción real
+                    if (typeof verificarCambio === 'function') {
+                        verificarCambio();
+                    }
+                }
             }
         }
-        actualizarFechaYHora();
-        setInterval(actualizarFechaYHora, 1000);
+
+        // Modificamos dinámicamente la función "verificarCambio" original para respetar este candado
+        if (typeof window.verificarCambio === 'function' || typeof verificarCambio === 'function') {
+            const originalVerificarCambio = window.verificarCambio || verificarCambio;
+            const nuevaVerificar = function() {
+                // Si está sonando un audio personalizado, bloqueamos la consulta a iTunes/Last.fm
+                if (window.audioPersonalizadoActivo) {
+                    console.log("Audio personalizado detectado: Bloqueando sobreescritura de carátula.");
+                    return;
+                }
+                originalVerificarCambio();
+            };
+            
+            // Reasignamos en los ámbitos disponibles
+            window.verificarCambio = nuevaVerificar;
+            if (typeof verificarCambio !== 'undefined') verificarCambio = nuevaVerificar;
+        }
+
+        // Observador en tiempo real para el título en reproducción
+        const currentTitleNode = document.getElementById('sonic_title');
+        if (currentTitleNode) {
+            const titleObserver = new MutationObserver(() => {
+                // Ejecutamos rápido antes de que actúe el setTimeout del buscador general
+                evaluarAudioActual();
+            });
+            titleObserver.observe(currentTitleNode, { childList: true, characterData: true, subtree: true });
+        }
+
+        // --- PROCESADOR Y RENDERIZADOR DEL HISTORIAL (Mantiene tu misma estructura visual) ---
+        if (targetNode && container) {
+            const historyObserver = new MutationObserver(() => {
+                const rawText = targetNode.innerText;
+                if (!rawText || rawText.trim() === "") return;
+                container.innerHTML = ""; 
+                const lines = rawText.split('\n').filter(line => line.trim() !== "");
+                
+                lines.forEach((line) => {
+                    const cleanText = line.replace(/^\d+\.\)/, '').trim().toUpperCase();
+                    const info = Object.values(mapaContenido).find(item => cleanText.includes(item.nombre.toUpperCase()) || item.nombre.toUpperCase().includes(cleanText));
+                    const tituloMostrar = info ? info.nombre : line.replace(/^\d+\.\)/, '').trim();
+                    const icono = info ? info.img : "img/logo.png";
+                    const subTitulo = info ? "Transmisión" : "Música en vivo";
+
+                    const div = document.createElement('div');
+                    div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-800/20 transition-colors";
+                    div.innerHTML = `
+                        <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden border border-zinc-700">
+                            <img src="${icono}" class="w-full h-full object-cover" onerror="this.src='img/logo.png'">
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-xs font-bold text-zinc-800 dark:text-zinc-100 truncate">${tituloMostrar}</p>
+                            <p class="text-[10px] text-zinc-400">${subTitulo}</p>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                }); 
+            });
+            historyObserver.observe(targetNode, { childList: true, subtree: true, characterData: true });
+        }
+
+        // Ejecución de seguridad inicial
+        setTimeout(evaluarAudioActual, 1000);
+    });
+</script>
+
+    <script>
+        let deferredPrompt;
+        document.addEventListener('DOMContentLoaded', () => {
+            const installModal = document.getElementById('install-modal');
+            const btnCancel = document.getElementById('cancel-install');
+            const btnConfirm = document.getElementById('confirm-install');
+            if (!installModal || !btnCancel || !btnConfirm) return;
+
+            if (window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-installed') === 'true') return;
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                if (localStorage.getItem('pwa-rejected') !== 'true') {
+                    setTimeout(() => { installModal.classList.remove('hidden'); installModal.classList.add('flex'); }, 3000); 
+                }
+            });
+
+            btnCancel.addEventListener('click', () => {
+                installModal.classList.add('hidden');
+                localStorage.setItem('pwa-rejected', 'true');
+            });
+
+            btnConfirm.addEventListener('click', async () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') localStorage.setItem('pwa-installed', 'true');
+                deferredPrompt = null;
+                installModal.classList.add('hidden');
+            });
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(err => console.error(err)); });
+        }
+    </script>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false;
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        }
     </script>
 
     <script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
-
-    <div id="donate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-        <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative">
-            <button id="close-donate" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-white"><i class="fa-solid fa-times"></i></button>
-            
-            <div class="text-center">
-                <div class="w-16 h-16 bg-brand-neonPink/20 text-brand-neonPink rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <i class="fa-solid fa-hand-holding-heart text-2xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-2">Tu apoyo mantiene la señal al aire</h3>
-                <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6">Gracias por colaborar con Radio FE 4:18 para seguir llevando el mensaje.</p>
-                
-                <div class="bg-zinc-100 dark:bg-zinc-900 p-4 rounded-xl text-left border border-zinc-200 dark:border-zinc-800 space-y-2">
-                    <p class="text-[10px] uppercase text-zinc-500 font-bold">Pago Móvil</p>
-                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Tel: 0412-5183677</p>
-                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">Banco: Bancaribe (0114)</p>
-                    <p class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100">C.I: 15.691.313</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const donateBtn = document.getElementById('donate-btn');
-        const donateModal = document.getElementById('donate-modal');
-        const closeDonate = document.getElementById('close-donate');
-
-        donateBtn.addEventListener('click', () => {
-            donateModal.classList.remove('hidden');
-            donateModal.classList.add('flex');
-        });
-
-        closeDonate.addEventListener('click', () => {
-            donateModal.classList.add('hidden');
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === donateModal) donateModal.classList.add('hidden');
-        });
-    </script>
-<script>
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(reg => console.log('Service Worker registrado:', reg.scope))
-            .catch(err => console.error('Error al registrar Service Worker:', err));
-    });
-}
-    </script>
-
-<script>
-    const interactionData = [
-        { 
-            text: "📲 ¡ÚNETE A NUESTRO CANAL DE WHATSAPP!", 
-            url: "https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" 
-        },
-        { 
-            text: "📻 ¡SIGUE DISFRUTANDO LA MEJOR MÚSICA CRISTIANA!", 
-            url: "javascript:document.getElementById('share-btn').click();" 
-        },
-        { 
-            text: "💬 ¡ESCRIBE A LA CABINA: ¡SALUDA A RADIO FE 4:18!", 
-            url: "https://wa.me/584125183677?text=¡Hola!%20Estoy%20escuchando%20Radio%20FE%204:18%20y%20quiero%20enviar%20un%20saludo." 
-        },
-        { 
-            text: "❤️ ¡TU APOYO HACE LA DIFERENCIA! DA CLIC AQUÍ", 
-            url: "javascript:document.getElementById('donate-btn').click();" 
-        },
-        { 
-            text: "🚀 ¡AYÚDANOS COMPARTIENDO LA SEÑAL CON AMIGOS!", 
-            url: "javascript:document.getElementById('share-btn').click();" 
-        }
-    ];
-
-    const msgElement = document.getElementById('dynamic-message');
-    const linkElement = document.getElementById('dynamic-link');
-    let currentIndex = 0;
-
-    function rotateMessages() {
-        msgElement.classList.add('opacity-0');
-
-        setTimeout(() => {
-            const data = interactionData[currentIndex];
-            msgElement.textContent = data.text;
-            linkElement.href = data.url;
-            
-            if (data.url.startsWith('javascript:')) {
-                linkElement.onclick = (e) => { e.preventDefault(); eval(data.url.replace('javascript:', '')); };
-            } else {
-                linkElement.onclick = null;
-                linkElement.target = "_blank";
-            }
-
-            currentIndex = (currentIndex + 1) % interactionData.length;
-            msgElement.classList.remove('opacity-0');
-        }, 700);
-    }
-
-    setInterval(rotateMessages, 6000);
-    rotateMessages();
-</script>
-<script>
-    const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-    const tabsContainer = document.getElementById('tabs-container');
-    const scheduleContainer = document.getElementById('schedule-container');
-
-    function renderizarProgramacion(diaIndex) {
-        scheduleContainer.innerHTML = "";
-        const hoy = new Date().getDay();
-        const filtrados = miProgramacion.filter(p => p.dia === diaIndex);
-        
-        filtrados.forEach(p => {
-            const [hI, mI] = p.horaInicio.split(':').map(Number);
-            const [hF, mF] = p.horaFin.split(':').map(Number);
-            // Resaltar si es el programa actual (solo si es el día de hoy)
-            const ahora = new Date();
-            const esHoy = ahora.getDay() === diaIndex;
-            const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
-            const estaAlAire = esHoy && (horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF));
-
-            const div = document.createElement('div');
-            div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
-            div.innerHTML = `
-                <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover">
-                <div class="flex-grow">
-                    <p class="font-bold text-xs text-zinc-900 dark:text-white">${p.nombre}</p>
-                    <p class="text-[12px] text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
-                </div>
-            `;
-            scheduleContainer.appendChild(div);
-        });
-    }
-
-    // Inicializar Tabs
-    const hoy = new Date().getDay();
-    diasSemana.forEach((nombre, index) => {
-        const btn = document.createElement('button');
-        btn.className = `px-3 py-1 text-[15px] font-bold rounded-lg transition-all ${index === hoy ? 'bg-brand-neon text-black' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'}`;
-        btn.textContent = nombre;
-        btn.onclick = () => {
-            document.querySelectorAll('#tabs-container button').forEach(b => {
-                b.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300';
-            });
-            btn.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-brand-neon text-black';
-            renderizarProgramacion(index);
-        };
-        tabsContainer.appendChild(btn);
-    });
-
-    renderizarProgramacion(hoy);
-</script>
-
-<script>
-    // Deshabilitar clic derecho
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-    // Deshabilitar atajos de teclado (F12, Ctrl+U, Ctrl+Shift+I, etc.)
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false; // F12
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
-    }
-</script>
-
 </body>
 </html>
