@@ -139,6 +139,14 @@
             display: inline-block;
         }
     </style>
+<style>
+    /* Forzar que los elementos del widget NO se oculten */
+    #sonic_title, #sonic_artist {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+</style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
 
@@ -600,13 +608,13 @@ let programaActualData = null;
         { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
         { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
         { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
-        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" }
+        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" }
     ];
 
     function formatearHora(hora24) {
@@ -616,6 +624,8 @@ let programaActualData = null;
         h = h % 12 || 12;
         return `${h}:${m} ${ampm}`;
     }
+
+
 
     function actualizarProgramacion() {
         const ahora = new Date();
@@ -654,10 +664,17 @@ let programaActualData = null;
         const elArtist = document.getElementById('sonic_artist');
         const elArt = document.getElementById('track-cover');
 
-        if (programaEncontrado) {
-            programaEnVivoActivo = true; // Bloqueamos actualizaciones externas
-            if (elTitle) elTitle.textContent = programaEncontrado.nombre;
-            if (elArtist) elArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
+       if (programaEncontrado) {
+    programaEnVivoActivo = true;
+    programaActualData = programaEncontrado;
+if (elTitle) {
+        elTitle.textContent = programaEncontrado.nombre;
+        elTitle.style.display = "block"; // Asegura que esté visible
+        elTitle.style.opacity = "1";
+    }          if (elArtist) {
+        elArtist.textContent = formatearHora(programaEncontrado.horaInicio) + " - " + formatearHora(programaEncontrado.horaFin);
+        elArtist.style.display = "block"; // Asegura que esté visible
+    }
             if (elArt) elArt.src = programaEncontrado.img;
         } else {
             programaEnVivoActivo = false; // Liberamos para que la radio muestre lo que quiera
@@ -665,12 +682,21 @@ let programaActualData = null;
     }
 
     // 3. Bloqueador para otros scripts (como widgets.js)
-    const observer = new MutationObserver((mutations) => {
-        if (programaEnVivoActivo) {
-            // Si el programa está activo, revertimos cambios no deseados
-            // Aquí podrías forzar que el título se mantenga en el nombre del programa
+   const observer = new MutationObserver((mutations) => {
+    if (programaEnVivoActivo && programaActualData) {
+        // Verificamos si el texto está vacío
+        const elTitle = document.getElementById('sonic_title');
+        const elArtist = document.getElementById('sonic_artist');
+
+        if (elTitle.textContent.trim() === "" || elTitle.textContent !== programaActualData.nombre) {
+            elTitle.textContent = programaActualData.nombre;
         }
-    });
+        
+        if (elArtist.textContent.trim() === "") {
+            elArtist.textContent = formatearHora(programaActualData.horaInicio) + " - " + formatearHora(programaActualData.horaFin);
+        }
+    }
+});
 
     // Observar cambios en el DOM si es necesario
     const target = document.getElementById('sonic_title');
