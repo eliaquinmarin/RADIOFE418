@@ -436,16 +436,15 @@
         const cacheCaratulas = {};
         const caratulaPorDefecto = "img/caratula.png";
 
-        async function buscarCaratula(titulo, artista) {
-            // Filtrar strings e identificaciones locales para no romper la búsqueda
-            const terminosIgnorar = ["RADIO FE 4:18", "SONANDO POR TODO LO ALTO", "AD1", "AD2", "AD3", "AD4", "IDE1", "IDE2", "IDE3", "IDE4", "TRANSMISIÓN", "MÚSICA EN VIVO", "IDENTIFICACIÓN RADIAL"];
-            
-            let tClean = titulo.trim().toUpperCase();
-            let aClean = artista.trim().toUpperCase();
-
-            if (terminosIgnorar.some(term => tClean.includes(term) || aClean.includes(term)) || tClean === "" || tClean.includes("RADIO FE")) {
-                document.getElementById('track-cover').src = caratulaPorDefecto;
-                return;
+async function buscarCaratula(titulo, artista) {
+    const terminosIgnorar = ["RADIO FE", "IDENTIFICACIÓN", "PUBLICIDAD", "PROGRAMA", "SONANDO"];
+    
+    let tClean = titulo.trim().toUpperCase();
+    
+    // Si detectamos que no es una canción real, ponemos el logo por defecto inmediatamente
+    if (terminosIgnorar.some(term => tClean.includes(term)) || tClean === "") {
+        document.getElementById('track-cover').src = "img/caratula.png";
+        return;
             }
 
             // Limpieza fina del string (remover "EN VIVO:", parentesis o guiones extraños)
@@ -466,12 +465,15 @@
                 const response = await fetch(urlAPI);
                 const data = await response.json();
 
-                if (data.results && data.results.length > 0) {
-                    // Cambiar las dimensiones por defecto (100x100) a alta resolución (600x600)
-                    let urlCaratulaHD = data.results[0].artworkUrl100.replace("100x100bb.jpg", "600x600bb.jpg");
-                    document.getElementById('track-cover').src = urlCaratulaHD;
-                    cacheCaratulas[queryTarget] = urlCaratulaHD;
-                } else {
+// Dentro de tu función buscarCaratula, mejora el manejo de la imagen
+if (data.results && data.results.length > 0) {
+    let imgRaw = data.results[0].artworkUrl100;
+    // Si la imagen existe, cambia el tamaño; si no, usa la por defecto
+    let urlCaratulaHD = imgRaw ? imgRaw.replace("100x100bb.jpg", "600x600bb.jpg") : caratulaPorDefecto;
+    document.getElementById('track-cover').src = urlCaratulaHD;
+    cacheCaratulas[queryTarget] = urlCaratulaHD;
+}
+else {
                     // Si no encuentra coincidencia exacta de los dos, intentar solo con el Título
                     const urlSoloTitulo = `https://itunes.apple.com/search?term=${encodeURIComponent(titulo)}&media=music&limit=1`;
                     const resTitulo = await fetch(urlSoloTitulo);
@@ -490,22 +492,30 @@
                 document.getElementById('track-cover').src = caratulaPorDefecto;
             }
         }
+// Monitorear cambios en el Widget de SonicPanel
+const obTitle = document.getElementById('sonic_title');
+const obArtist = document.getElementById('sonic_artist');
 
-        // Monitorear cambios en el Widget de SonicPanel para títulos y artistas al aire
-        const obTitle = document.getElementById('sonic_title');
-        const obArtist = document.getElementById('sonic_artist');
+// Función que ejecuta la búsqueda con un pequeño margen de tiempo
+function verificarCambio() {
+    // Pequeña espera para asegurar que el contenido se haya renderizado
+    setTimeout(() => {
+        const actualTitle = obTitle.innerText;
+        const actualArtist = obArtist.innerText;
+        buscarCaratula(actualTitle, actualArtist);
+    }, 800);
+}
 
-        if (obTitle && obArtist) {
-            const trackObserver = new MutationObserver(() => {
-                const actualTitle = obTitle.innerText;
-                const actualArtist = obArtist.innerText;
-                
-                buscarCaratula(actualTitle, actualArtist);
-            });
+if (obTitle && obArtist) {
+    const trackObserver = new MutationObserver(verificarCambio);
 
-            trackObserver.observe(obTitle, { childList: true, characterData: true, subtree: true });
-            trackObserver.observe(obArtist, { childList: true, characterData: true, subtree: true });
-        }
+    // Observamos cambios tanto en el texto como en el sub-árbol del elemento
+    trackObserver.observe(obTitle, { childList: true, characterData: true, subtree: true });
+    trackObserver.observe(obArtist, { childList: true, characterData: true, subtree: true });
+    
+    // Ejecución inicial para cargar la carátula al abrir la página
+    verificarCambio();
+}
     </script>
 
     <script>
