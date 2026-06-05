@@ -455,10 +455,30 @@
     if (trackCover) trackCover.src = caratulaPorDefecto;
 }
 
-        function aplicarImagen(url, query) {
-            document.getElementById('track-cover').src = url;
-            cacheCaratulas[query] = url;
-        }
+       function aplicarImagen(url, query) {
+    document.getElementById('track-cover').src = url;
+    cacheCaratulas[query] = url;
+
+    // ACTUALIZACIÓN DE NOTIFICACIONES EN SISTEMA OPERATIVO
+    if ('mediaSession' in navigator) {
+        const elTitle = document.getElementById('sonic_title');
+        const elArtist = document.getElementById('sonic_artist');
+        
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: elTitle ? elTitle.innerText : "Radio FE 4:18",
+            artist: elArtist ? elArtist.innerText : "Sonando por todo lo alto",
+            album: "Radio FE 4:18 | En Vivo",
+            artwork: [
+                { src: url, sizes: '96x96',   type: 'image/png' },
+                { src: url, sizes: '128x128', type: 'image/png' },
+                { src: url, sizes: '192x192', type: 'image/png' },
+                { src: url, sizes: '256x256', type: 'image/png' },
+                { src: url, sizes: '384x384', type: 'image/png' },
+                { src: url, sizes: '512x512', type: 'image/png' },
+            ]
+        });
+    }
+}
 
         // SISTEMA DE MONITOREO Y OBSERVACIÓN DEL COMPONENT SONICPANEL
         const obTitle = document.getElementById('sonic_title');
