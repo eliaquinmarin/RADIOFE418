@@ -148,8 +148,8 @@
                 <img src="img/logo.png" alt="Logo Radio" class="h-10 w-auto object-contain">
             </div>
             <div>
-                <h1 class="text-xl font-black tracking-wider uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink bg-clip-text text-transparent">RADIO FE 4:18</h1>
-                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-widest uppercase">AL AIRE 24/7</p>
+                <h1 class="text-xl font-black tracking-wider uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink bg-clip-text text-transparent">FE 4:18</h1>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-widest uppercase">RADIO</p>
             </div>
         </div>
 
@@ -212,12 +212,15 @@
                 </p>
             </div>
 
-            <div class="flex items-center justify-center space-x-2 my-4 px-4 py-2 bg-zinc-100 dark:bg-zinc-800/50 rounded-full border border-zinc-200 dark:border-zinc-700 w-fit mx-auto">
-                <i class="fa-solid fa-clock text-brand-neon text-[10px]"></i>
-                <span class="text-[10px] font-bold text-zinc-600 dark:text-zinc-300 uppercase tracking-widest">
-                   NOS AYUDAS COMPARTIENDO NUESTRA RADIO
-                </span>
-            </div>
+<!-- Contenedor de mensajes interactivos -->
+<div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
+    <a id="dynamic-link" href="#" class="block">
+        <div id="dynamic-message" 
+             class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm">
+            <!-- El mensaje y enlace cambiarán aquí -->
+        </div>
+    </a>
+</div>
 
             <div class="w-full max-w-md h-10 flex items-center justify-center">
                 <canvas id="visualizer" class="w-full h-full"></canvas>
@@ -903,5 +906,57 @@ if ('serviceWorker' in navigator) {
     });
 }
     </script>
+
+<script>
+    const interactionData = [
+        { 
+            text: "📲 ¡ÚNETE A NUESTRO CANAL DE WHATSAPP!", 
+            url: "https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" 
+        },
+        { 
+            text: "📻 ¡SIGUE DISFRUTANDO LA MEJOR MÚSICA CRISTIANA!", 
+            url: "javascript:document.getElementById('share-btn').click();" 
+        },
+        { 
+            text: "💬 ¡ESCRIBE A LA CABINA: ¡SALUDA A RADIO FE 4:18!", 
+            url: "https://wa.me/584125183677?text=¡Hola!%20Estoy%20escuchando%20Radio%20FE%204:18%20y%20quiero%20enviar%20un%20saludo." 
+        },
+        { 
+            text: "❤️ ¡TU APOYO HACE LA DIFERENCIA! DA CLIC AQUÍ", 
+            url: "javascript:document.getElementById('donate-btn').click();" 
+        },
+        { 
+            text: "🚀 ¡AYÚDANOS COMPARTIENDO LA SEÑAL CON AMIGOS!", 
+            url: "javascript:document.getElementById('share-btn').click();" 
+        }
+    ];
+
+    const msgElement = document.getElementById('dynamic-message');
+    const linkElement = document.getElementById('dynamic-link');
+    let currentIndex = 0;
+
+    function rotateMessages() {
+        msgElement.classList.add('opacity-0');
+
+        setTimeout(() => {
+            const data = interactionData[currentIndex];
+            msgElement.textContent = data.text;
+            linkElement.href = data.url;
+            
+            if (data.url.startsWith('javascript:')) {
+                linkElement.onclick = (e) => { e.preventDefault(); eval(data.url.replace('javascript:', '')); };
+            } else {
+                linkElement.onclick = null;
+                linkElement.target = "_blank";
+            }
+
+            currentIndex = (currentIndex + 1) % interactionData.length;
+            msgElement.classList.remove('opacity-0');
+        }, 700);
+    }
+
+    setInterval(rotateMessages, 6000);
+    rotateMessages();
+</script>
 </body>
 </html>
