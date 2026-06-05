@@ -268,15 +268,6 @@ button:active {
 
     <div id="sonic_history" style="display:none;"></div>
 </section>
-<section id="news-section" class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
-    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-500 dark:text-zinc-400 mb-4 flex items-center">
-        <i class="fa-solid fa-newspaper mr-2 text-brand-neon"></i> Lanzamiento Destacado
-    </h4>
-    <div id="latest-news-card">
-        <p class="text-xs text-zinc-400">Cargando noticia...</p>
-    </div>
-</section>
-
 </div>
     </main>
 
@@ -868,38 +859,6 @@ setInterval(rotatePartners, 5000);
     });
 
     observer.observe(targetNode, { childList: true, subtree: true, characterData: true });
-</script>
-
-<script>
-    async function cargarNoticiaActual() {
-        const feedUrl = "https://api.rss2json.com/v1/api.json?rss_url=https://www.contextomediagroup.com/feed/";
-        const container = document.getElementById('latest-news-card');
-
-        try {
-            const res = await fetch(feedUrl);
-            const data = await res.json();
-            
-            // Tomamos solo la primera noticia
-            const item = data.items[0]; 
-
-            if (item) {
-                container.innerHTML = `
-                    <a href="${item.link}" target="_blank" class="block group">
-                        <div class="overflow-hidden rounded-2xl mb-3">
-                            <img src="${item.enclosure.link}" alt="Noticia" class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <h3 class="text-sm font-bold text-zinc-800 dark:text-zinc-100 mb-1 leading-tight group-hover:text-brand-neon transition-colors">
-                            ${item.title}
-                        </h3>
-                        <p class="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Leer más →</p>
-                    </a>
-                `;
-            }
-        } catch (e) {
-            container.innerHTML = '<p class="text-xs text-zinc-500">No se pudo cargar la noticia destacada.</p>';
-        }
-    }
-    cargarNoticiaActual();
 </script>
 
 </body>
