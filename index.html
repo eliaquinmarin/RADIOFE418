@@ -124,6 +124,29 @@ button:active {
 #sonic_listeners, #sonic_uniq {
     display: inline-block;
 }
+</style>
+<style>
+    /* Estilos para que el contenido inyectado por SonicPanel se vea como tu diseño */
+    #sonic_history .song-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+    }
+    #sonic_history img {
+        width: 36px !important;
+        height: 36px !important;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+    #sonic_history .song-title {
+        font-size: 0.75rem; /* text-xs */
+        font-weight: 600;
+        color: #3f3f46; /* text-zinc-800 */
+    }
+    .dark #sonic_history .song-title {
+        color: #d4d4d8; /* text-zinc-300 */
+    }
     </style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -247,11 +270,12 @@ button:active {
     <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-500 dark:text-zinc-400 mb-3 flex items-center">
         <i class="fa-solid fa-history mr-2 text-zinc-400"></i> Sonado Recientemente
     </h4>
-    
-    <div id="history-container" class="space-y-3.5">
+    <div id="history-custom-container" class="space-y-3.5">
         <p class="text-xs text-zinc-400">Cargando historial...</p>
     </div>
-</section>            
+</section>
+
+<div id="sonic_history" style="display:none;"></div>
 
         </div>
     </main>
@@ -712,6 +736,41 @@ setInterval(rotatePartners, 5000);
     // Actualizar cada 60 segundos
     actualizarHistorial();
     setInterval(actualizarHistorial, 60000);
+</script>
+
+<script>
+    // Observador que detecta cuando SonicPanel actualiza el historial
+    const targetNode = document.getElementById('sonic_history');
+    const container = document.getElementById('history-custom-container');
+
+    const observer = new MutationObserver(() => {
+        // Obtenemos el texto del widget oculto
+        const rawText = targetNode.innerText;
+        if (!rawText) return;
+
+        // Limpiamos el contenedor custom
+        container.innerHTML = "";
+
+        // Procesamos línea por línea (ajusta según el formato que te devuelva SonicPanel)
+        const lines = rawText.split('\n').filter(line => line.trim() !== "");
+        
+        lines.forEach(line => {
+            const div = document.createElement('div');
+            div.className = "flex items-center space-x-3";
+            div.innerHTML = `
+                <div class="w-9 h-9 bg-zinc-200 dark:bg-zinc-700 rounded-md flex items-center justify-center text-zinc-400">
+                    <i class="fa-solid fa-music text-xs"></i>
+                </div>
+                <div class="flex-grow min-w-0">
+                    <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-300 truncate">${line}</p>
+                    <p class="text-[10px] text-zinc-400">Hace unos momentos</p>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+    });
+
+    observer.observe(targetNode, { childList: true, subtree: true, characterData: true });
 </script>
 
 <script>
