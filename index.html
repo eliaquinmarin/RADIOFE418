@@ -177,11 +177,17 @@ button:active {
 <h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
     Radio FE 4:18
 </h2>
+
 <p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
    Sonando por todo lo alto
 </p>
 </div>
-
+<div class="flex items-center justify-center space-x-2 my-4 px-4 py-2 bg-zinc-100 dark:bg-zinc-800/50 rounded-full border border-zinc-200 dark:border-zinc-700 w-fit mx-auto">
+    <i class="fa-solid fa-clock text-brand-neon text-[10px]"></i>
+    <span class="text-[10px] font-bold text-zinc-600 dark:text-zinc-300 uppercase tracking-widest">
+       AIRE de Lunes a Domingo • 7:00 AM - 9:00 PM (HLV)
+    </span>
+</div>
 <div class="w-full max-w-md h-10 flex items-center justify-center">
     <canvas id="visualizer" class="w-full h-full"></canvas>
 </div>
@@ -262,6 +268,15 @@ button:active {
 
     <div id="sonic_history" style="display:none;"></div>
 </section>
+<section id="news-section" class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
+    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-500 dark:text-zinc-400 mb-4 flex items-center">
+        <i class="fa-solid fa-newspaper mr-2 text-brand-neon"></i> Lanzamiento Destacado
+    </h4>
+    <div id="latest-news-card">
+        <p class="text-xs text-zinc-400">Cargando noticia...</p>
+    </div>
+</section>
+
 </div>
     </main>
 
@@ -799,6 +814,92 @@ setInterval(rotatePartners, 5000);
     window.addEventListener('click', (e) => {
         if (e.target === donateModal) donateModal.classList.add('hidden');
     });
+</script>
+
+<script>
+    const targetNode = document.getElementById('sonic_history');
+    const container = document.getElementById('history-custom-container');
+
+    // Diccionario de traducciones exactas
+    const mapaNombres = {
+        "AD1": "CONTEXTO MEDIA GROUP",
+        "AD2": "DIRECTORIO UNISALUD",
+        "AD3": "TOP 10 MUSICAL",
+        "AD4": "AUTO SERVICIO RORAIMA",
+        "IDE1": "IDENTIFICACIÓN RADIAL",
+        "IDE2": "IDENTIFICACIÓN RADIAL",
+        "IDE3": "IDENTIFICACIÓN RADIAL",
+        "IDE4": "IDENTIFICACIÓN RADIAL",
+        "6AM": "ORAR POR LOS PASTORES Y LIDERES",
+        "3PM": "ORAR POR VENEZUELA",
+        "9PM": "ORAR POR LAS FAMILIAS"
+    };
+
+    const observer = new MutationObserver(() => {
+        const rawText = targetNode.innerText;
+        if (!rawText || rawText.trim() === "") return;
+
+        container.innerHTML = ""; 
+
+        const lines = rawText.split('\n').filter(line => line.trim() !== "");
+        
+        lines.forEach((line) => {
+            const cleanLine = line.replace(/^\d+\.\)/, '').trim().toUpperCase();
+            
+            // Buscamos si el archivo coincide con nuestro mapa
+            let tituloMostrar = mapaNombres[cleanLine] || "Radio FE 4:18";
+            let subTitulo = (mapaNombres[cleanLine]) ? "Transmisión" : "Música en vivo";
+            let icono = "img/logo.png";
+
+            const div = document.createElement('div');
+            div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-800/20 transition-colors";
+            
+            div.innerHTML = `
+                <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden border border-zinc-700">
+                    <img src="${icono}" class="w-full h-full object-cover">
+                </div>
+                <div class="min-w-0 flex-1">
+                    <p class="text-xs font-bold text-zinc-100 truncate">${tituloMostrar}</p>
+                    <p class="text-[10px] text-zinc-400">${subTitulo}</p>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+    });
+
+    observer.observe(targetNode, { childList: true, subtree: true, characterData: true });
+</script>
+
+<script>
+    async function cargarNoticiaActual() {
+        const feedUrl = "https://api.rss2json.com/v1/api.json?rss_url=https://www.contextomediagroup.com/feed/";
+        const container = document.getElementById('latest-news-card');
+
+        try {
+            const res = await fetch(feedUrl);
+            const data = await res.json();
+            
+            // Tomamos solo la primera noticia
+            const item = data.items[0]; 
+
+            if (item) {
+                container.innerHTML = `
+                    <a href="${item.link}" target="_blank" class="block group">
+                        <div class="overflow-hidden rounded-2xl mb-3">
+                            <img src="${item.enclosure.link}" alt="Noticia" class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <h3 class="text-sm font-bold text-zinc-800 dark:text-zinc-100 mb-1 leading-tight group-hover:text-brand-neon transition-colors">
+                            ${item.title}
+                        </h3>
+                        <p class="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Leer más →</p>
+                    </a>
+                `;
+            }
+        } catch (e) {
+            container.innerHTML = '<p class="text-xs text-zinc-500">No se pudo cargar la noticia destacada.</p>';
+        }
+    }
+    cargarNoticiaActual();
 </script>
 
 </body>
