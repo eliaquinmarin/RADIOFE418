@@ -1,0 +1,19 @@
+/* EL EQUIPO DETRÁS DE RADIO FE 4:18 */
+
+/* PROYECTO */
+Nombre: Radio FE 4:18
+Web: https://radiofe418.vercel.app/
+Descripción: Radio Cristiana en Vivo - Barinas, Venezuela. 24/7 de música y mensajes de fe.
+
+/* DESARROLLADOR */
+Nombre: Eliaquin Marín
+Rol: Desarrollador y Programador
+Contacto: +58 412 518 3677
+
+/* TECNOLOGÍAS UTILIZADAS */
+Software: HTML5, CSS3, JavaScript (Tailwind CSS, Vercel)
+Servicios: SonicPanel, Vercel Hosting
+
+/* DERECHOS DE AUTOR */
+Copyright © 2026 Radio FE 4:18. Todos los derechos reservados.
+Queda estrictamente prohibida la copia, clonación o uso no autorizado del código fuente o diseño de esta web.

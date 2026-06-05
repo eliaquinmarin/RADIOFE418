@@ -1,3 +1,10 @@
+<!-- 
+    Propiedad de Radio FE 4:18 (Eliaquin Marín).
+    Contacta: +58 412 518 36 77. 
+    Prohibida la copia no autorizada del código o contenido.
+    Todos los derechos reservados.
+-->
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -5,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radio FE 4:18 | Radio Cristiana en Vivo - Barinas, Venezuela</title>
     <link rel="icon" type="image/png" href="img/icon.png">
+<link rel="author" href="humans.txt">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -270,7 +278,8 @@
             </div>
         </section>
 
-        <div class="lg:col-span-5 space-y-6 w-full">
+      <div class="lg:col-span-5 space-y-6 w-full">
+
            <!-- Reemplaza tu sección de programación actual por esta -->
 <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
     <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
@@ -861,57 +870,62 @@ if (elTitle) {
         });
     </script>
 
-    <script>
-        const targetNode = document.getElementById('sonic_history');
-        const container = document.getElementById('history-custom-container');
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const targetNode = document.getElementById('sonic_history');
+    const container = document.getElementById('history-custom-container');
 
-        const mapaNombres = {
-            "AD1": "CONTEXTO MEDIA GROUP",
-            "AD2": "DIRECTORIO UNISALUD",
-            "AD3": "TOP 10 MUSICAL",
-            "AD4": "AUTO SERVICIO RORAIMA",
-            "IDE1": "IDENTIFICACIÓN RADIAL",
-            "IDE2": "IDENTIFICACIÓN RADIAL",
-            "IDE3": "IDENTIFICACIÓN RADIAL",
-            "IDE4": "IDENTIFICACIÓN RADIAL",
-            "6AM": "ORAR POR LOS PASTORES Y LIDERES",
-            "3PM": "ORAR POR VENEZUELA",
-            "9PM": "ORAR POR LAS FAMILIAS"
-        };
+    if (!targetNode || !container) return; // Validación de seguridad
 
-        const historyObserver = new MutationObserver(() => {
-            const rawText = targetNode.innerText;
-            if (!rawText || rawText.trim() === "") return;
+    const mapaContenido = {
+        "AD1": { nombre: "CONTEXTO MEDIA GROUP", img: "img/publicidad/contexto.png" },
+        "AD2": { nombre: "DIRECTORIO UNISALUD", img: "img/publicidad/unisalud.png" },
+        "AD3": { nombre: "TOP 10 MUSICAL", img: "img/publicidad/top5.gif" },
+        "AD4": { nombre: "AUTO SERVICIO RORAIMA", img: "img/publicidad/roraima.png" },
+        "IDE1": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+        "6AM": { nombre: "ORAR POR LOS PASTORES Y LIDERES", img: "img/oracion/oracion.png" },
+        "3PM": { nombre: "ORAR POR VENEZUELA", img: "img/oracion/oracion.png" },
+        "9PM": { nombre: "ORAR POR LAS FAMILIAS", img: "img/oracion/oracion.png" }
+    };
 
-            container.innerHTML = ""; 
-            const lines = rawText.split('\n').filter(line => line.trim() !== "");
+    const historyObserver = new MutationObserver(() => {
+        const rawText = targetNode.innerText;
+        if (!rawText || rawText.trim() === "") return;
+
+        container.innerHTML = ""; 
+        const lines = rawText.split('\n').filter(line => line.trim() !== "");
+        
+        lines.forEach((line) => {
+            const cleanText = line.replace(/^\d+\.\)/, '').trim().toUpperCase();
             
-            lines.forEach((line) => {
-                const cleanLine = line.replace(/^\d+\.\)/, '').trim().toUpperCase();
-                let tituloMostrar = mapaNombres[cleanLine] || line.replace(/^\d+\.\)/, '').trim();
-                let subTitulo = (mapaNombres[cleanLine]) ? "Transmisión" : "Música en vivo";
-                let icono = "img/logo.png";
+            const info = Object.values(mapaContenido).find(item => 
+                cleanText.includes(item.nombre.toUpperCase()) || 
+                item.nombre.toUpperCase().includes(cleanText)
+            );
 
-                const div = document.createElement('div');
-                div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-800/20 transition-colors";
-                div.innerHTML = `
-                    <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden border border-zinc-700">
-                        <img src="${icono}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="min-w-0 flex-1">
-                        <p class="text-xs font-bold text-zinc-800 dark:text-zinc-100 truncate">${tituloMostrar}</p>
-                        <p class="text-[10px] text-zinc-400">${subTitulo}</p>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        });
+            const tituloMostrar = info ? info.nombre : line.replace(/^\d+\.\)/, '').trim();
+            const icono = info ? info.img : "img/logo.png";
+            const subTitulo = info ? "Transmisión" : "Música en vivo";
 
-        if(targetNode) {
-            historyObserver.observe(targetNode, { childList: true, subtree: true, characterData: true });
-        }
-    </script>
+            const div = document.createElement('div');
+            div.className = "flex items-center space-x-3 p-2 rounded-xl hover:bg-zinc-800/20 transition-colors";
+            div.innerHTML = `
+                <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden border border-zinc-700">
+                    <img src="${icono}" class="w-full h-full object-cover" onerror="this.src='img/logo.png'">
+                </div>
+                <div class="min-w-0 flex-1">
+                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-100 truncate">${tituloMostrar}</p>
+                    <p class="text-[10px] text-zinc-400">${subTitulo}</p>
+                </div>
+            `;
+            container.appendChild(div);
+        }); 
+    });
 
+    // Iniciar observación
+    historyObserver.observe(targetNode, { childList: true, subtree: true, characterData: true });
+});
+</script>
     <script>
         function actualizarFechaYHora() {
             const ahora = new Date();
@@ -1084,5 +1098,20 @@ if ('serviceWorker' in navigator) {
 
     renderizarProgramacion(hoy);
 </script>
+
+<script>
+    // Deshabilitar clic derecho
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Deshabilitar atajos de teclado (F12, Ctrl+U, Ctrl+Shift+I, etc.)
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false; // F12
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+    }
+</script>
+
 </body>
 </html>
