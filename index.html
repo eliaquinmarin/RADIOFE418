@@ -228,10 +228,10 @@
                     <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
                 </button>
 
-                <div class="col-span-5 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4">
-                    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
-                           class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon">
-                </div>
+<div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
+    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" 
+           class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
+</div>
             </div>
 
             <div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
@@ -436,32 +436,49 @@
             }
         }
 
-        function drawVisualizer() {
-            requestAnimationFrame(drawVisualizer);
-            const width = canvas.width = canvas.clientWidth;
-            const height = canvas.height = canvas.clientHeight;
-            ctx.clearRect(0, 0, width, height);
+function drawVisualizer() {
+    requestAnimationFrame(drawVisualizer);
+    
+    const width = canvas.width = canvas.clientWidth;
+    const height = canvas.height = canvas.clientHeight;
+    ctx.clearRect(0, 0, width, height);
 
-            if (isAudioContextInitialized && !audio.paused) {
-                analyser.getByteFrequencyData(dataArray);
-            }
+    if (isAudioContextInitialized && !audio.paused) {
+        analyser.getByteFrequencyData(dataArray);
+    }
 
-            const barWidth = (width / bufferLength) * 1.4;
-            let barHeight;
-            let x = 0;
+    const barCount = 20; // Número de columnas
+    const segmentHeight = 4; // Altura de cada rayita
+    const gap = 2; // Espacio entre rayitas
+    const barWidth = (width / barCount) * 0.6;
+    let x = 0;
 
-            const isDark = document.documentElement.classList.contains('dark');
-            const waveColor = isDark ? '#06b6d4' : '#ec4899';
+    const isDark = document.documentElement.classList.contains('dark');
+    const color = isDark ? '#06b6d4' : '#ec4899'; 
+    ctx.fillStyle = color;
 
-            for (let i = 0; i < bufferLength; i++) {
-                barHeight = (isAudioContextInitialized && !audio.paused) ? (dataArray[i] / 2) : 4;
-                if(barHeight < 4) barHeight = 4;
-                ctx.fillStyle = waveColor;
-                ctx.fillRect(x, (height - barHeight) / 2, barWidth - 3, barHeight);
-                x += barWidth;
-            }
+    for (let i = 0; i < barCount; i++) {
+        // Valor de la frecuencia
+        const val = isAudioContextInitialized && !audio.paused ? dataArray[i] : 10;
+        
+        // Calculamos cuántos segmentos caben según la intensidad del sonido
+        let totalSegments = Math.floor((val / 255) * (height / (segmentHeight + gap)));
+        if(totalSegments < 1) totalSegments = 1;
+
+        // Dibujar segmentos de abajo hacia arriba desde el centro
+        for (let j = 0; j < totalSegments; j++) {
+            let y = (height / 2) - (j * (segmentHeight + gap)); // Mitad superior
+            let y2 = (height / 2) + (j * (segmentHeight + gap)); // Mitad inferior
+            
+            // Dibujar ambas partes para que crezca desde el centro
+            ctx.fillRect(x, y, barWidth, segmentHeight);
+            ctx.fillRect(x, y2, barWidth, segmentHeight);
         }
-        drawVisualizer();
+        
+        x += barWidth + (width / barCount * 0.4);
+    }
+}
+drawVisualizer();
 
         // Reloj pie de página
         const fYear = document.getElementById('footer-year');
