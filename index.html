@@ -208,10 +208,17 @@ button:active {
     </span>
 </div>
 
-            <div class="w-full max-w-md flex justify-between items-center mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500 dark:text-zinc-400">
-                <button id="share-btn" class="flex items-center space-x-1.5 hover:text-brand-neon transition-colors"><i class="fa-solid fa-share-node"></i> <span>Compartir</span></button>
-                <button id="report-btn" class="flex items-center space-x-1.5 hover:text-brand-neonPink transition-colors"><i class="fa-solid fa-circle-exclamation"></i> <span>Reportar Falla</span></button>
-            </div>
+           <div class="w-full max-w-md grid grid-cols-2 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
+    <button id="share-btn" class="flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+        <i class="fa-solid fa-share-nodes"></i>
+        <span>Compartir</span>
+    </button>
+
+    <button id="report-btn" class="flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>Reportar</span>
+    </button>
+</div>
         </section>
 
         <div class="lg:col-span-5 space-y-6 w-full">
