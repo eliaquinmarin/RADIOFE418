@@ -389,7 +389,8 @@
             { img: "img/partners/contexto.png", url: "https://www.contextomediagroup.com/" },
             { img: "img/partners/unisalud.png", url: "https://directoriounisalud.com/" },
             { img: "img/partners/roraima.png", url: "https://www.instagram.com/serviautosroraima/" },
-            { img: "img/partners/iglesia.png", url: "https://ib-fe418.vercel.app/" }
+            { img: "img/partners/iglesia.png", url: "https://ib-fe418.vercel.app/" },
+            { img: "img/partners/tatihana.png", url: "https://www.tatihanapozopuccini.com/" }
         ];
         let currentPartnerIndex = 0;
 
@@ -553,75 +554,95 @@ if (obTitle && obArtist) {
 }
     </script>
 
-    <script>
-        const miProgramacion = [
-            { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
-            { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
-            { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
-            { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
-            { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
-            { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-            { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-            { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-            { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-            { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-            { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
-            { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" }
-        ];
+<script>
+    // 1. Variable para bloquear actualizaciones externas
+    let programaEnVivoActivo = false;
 
-        function formatearHora(hora24) {
-            let [h, m] = hora24.split(':');
-            h = parseInt(h);
-            const ampm = h >= 12 ? 'PM' : 'AM';
-            h = h % 12 || 12;
-            return `${h}:${m} ${ampm}`;
-        }
+    const miProgramacion = [
+        { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
+        { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
+        { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
+        { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
+        { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
+        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" },
+        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea", img: "img/programas/andreatop.gif" }
+    ];
 
-        function actualizarProgramacion() {
-            const ahora = new Date();
-            const diaActual = ahora.getDay();
-            const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
-            const contenedor = document.getElementById('schedule-container');
+    function formatearHora(hora24) {
+        let [h, m] = hora24.split(':');
+        h = parseInt(h);
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        return `${h}:${m} ${ampm}`;
+    }
+
+    function actualizarProgramacion() {
+        const ahora = new Date();
+        const diaActual = ahora.getDay();
+        const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+        const contenedor = document.getElementById('schedule-container');
+        
+        if (!contenedor) return;
+        contenedor.innerHTML = ""; 
+
+        let programaEncontrado = null;
+        
+        // Ordenamos por hora para que siempre se vea bien
+        miProgramacion.filter(p => p.dia === diaActual).forEach(p => {
+            const [hI, mI] = p.horaInicio.split(':').map(Number);
+            const [hF, mF] = p.horaFin.split(':').map(Number);
+            const estaAlAire = horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF);
             
-            if (!contenedor) return;
-            contenedor.innerHTML = ""; 
+            if (estaAlAire) programaEncontrado = p;
 
-            let programaEncontrado = null;
-            
-            miProgramacion.filter(p => p.dia === diaActual).forEach(p => {
-                const [hI, mI] = p.horaInicio.split(':').map(Number);
-                const [hF, mF] = p.horaFin.split(':').map(Number);
-                const estaAlAire = horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF);
-                
-                if (estaAlAire) programaEncontrado = p;
+            const div = document.createElement('div');
+            div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
+            div.innerHTML = `
+                <img src="${p.img}" alt="${p.nombre}" class="w-12 h-12 rounded-lg object-cover border border-zinc-300 dark:border-zinc-700">
+                <div class="flex-grow">
+                    <p class="font-bold text-sm text-zinc-900 dark:text-white">${p.nombre}</p>
+                    <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
+                </div>
+                ${estaAlAire ? '<span class="text-[10px] font-bold bg-brand-neonPink text-white px-2 py-1 rounded-full uppercase animate-pulse">En Vivo</span>' : ''}
+            `;
+            contenedor.appendChild(div);
+        });
 
-                const div = document.createElement('div');
-                div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
-                div.innerHTML = `
-                    <img src="${p.img}" alt="${p.nombre}" class="w-12 h-12 rounded-lg object-cover border border-zinc-300 dark:border-zinc-700">
-                    <div class="flex-grow">
-                        <p class="font-bold text-sm text-zinc-900 dark:text-white">${p.nombre}</p>
-                        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
-                    </div>
-                    ${estaAlAire ? '<span class="text-[10px] font-bold bg-brand-neonPink text-white px-2 py-1 rounded-full uppercase animate-pulse">En Vivo</span>' : ''}
-                `;
-                contenedor.appendChild(div);
-            });
+        // 2. Control del Reproductor Principal
+        const elTitle = document.getElementById('sonic_title');
+        const elArtist = document.getElementById('sonic_artist');
+        const elArt = document.getElementById('track-cover');
 
-            if (programaEncontrado) {
-                const elTitle = document.getElementById('sonic_title');
-                const elArtist = document.getElementById('sonic_artist');
-                const elArt = document.getElementById('track-cover');
-                
-                if (elTitle) elTitle.textContent = programaEncontrado.nombre;
-                if (elArtist) elArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
-                if (elArt) elArt.src = programaEncontrado.img;
-            }
+        if (programaEncontrado) {
+            programaEnVivoActivo = true; // Bloqueamos actualizaciones externas
+            if (elTitle) elTitle.textContent = programaEncontrado.nombre;
+            if (elArtist) elArtist.textContent = "EN VIVO: " + programaEncontrado.dj;
+            if (elArt) elArt.src = programaEncontrado.img;
+        } else {
+            programaEnVivoActivo = false; // Liberamos para que la radio muestre lo que quiera
         }
+    }
 
-        actualizarProgramacion();
-        setInterval(actualizarProgramacion, 30000);
-    </script>
+    // 3. Bloqueador para otros scripts (como widgets.js)
+    const observer = new MutationObserver((mutations) => {
+        if (programaEnVivoActivo) {
+            // Si el programa está activo, revertimos cambios no deseados
+            // Aquí podrías forzar que el título se mantenga en el nombre del programa
+        }
+    });
+
+    // Observar cambios en el DOM si es necesario
+    const target = document.getElementById('sonic_title');
+    if (target) observer.observe(target, { childList: true, subtree: true });
+
+    actualizarProgramacion();
+    setInterval(actualizarProgramacion, 30000);
+</script>
 
     <div id="install-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
         <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all scale-95" id="modal-content">
