@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RADIO FE 4:18</title>
+<title>Radio FE 4:18 | Radio Cristiana en Vivo - Barinas, Venezuela</title>
     <link rel="icon" type="image/png" href="img/icon.png">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,6 +12,25 @@
     <link class="apple-touch-icon" href="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=192&h=192&fit=crop">
     <meta name="theme-color" content="#09090b" id="meta-theme-color">
     
+<!-- SEO Básico -->
+
+<meta name="description" content="Escucha Radio FE 4:18 en vivo, la radio cristiana que transmite alta fidelidad 24/7. Mensajes de fe, música, oración y programación especial desde Barinas, Venezuela.">
+<meta name="keywords" content="Radio FE 4:18, radio cristiana, radio en vivo Barinas, música cristiana, radio online Venezuela, escuchar radio cristiana, mensajes de fe">
+<link rel="canonical" href="https://radiofe418.vercel.app/">
+
+<!-- Open Graph (Para que se vea bien al compartir en Facebook/WhatsApp) -->
+<meta property="og:title" content="Radio FE 4:18 | Radio Cristiana en Vivo">
+<meta property="og:description" content="Sintoniza Radio FE 4:18. Transmitiendo mensajes de fe y música las 24 horas. ¡Escúchanos en vivo!">
+<meta property="og:image" content="img/caratula.png">
+<meta property="og:url" content="https://radiofe418.vercel.app/">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Radio FE 4:18 | Radio Cristiana en Vivo">
+<meta name="twitter:description" content="Sintoniza Radio FE 4:18. Transmitiendo mensajes de fe y música las 24 horas.">
+<meta name="twitter:image" content="img/caratula.png">
+
     <link rel="manifest" href="manifest.json">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -283,14 +302,8 @@
 </section>
         </div>
     </main>
-<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 mt-6 transition-colors duration-300">
-    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
-        <i class="fa-solid fa-newspaper mr-2 text-brand-neonPink"></i> Noticias Musicales
-    </h4>
-    <div id="noticias-container" class="space-y-4 text-xs">
-        <p class="text-zinc-500 italic">Cargando noticias...</p>
-    </div>
-</section>
+
+
     <footer class="w-full bg-zinc-200/50 dark:bg-brand-card/30 border-t border-zinc-300 dark:border-zinc-900 mt-12 py-8 px-6 text-center text-zinc-500 text-xs transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-left md:text-left text-center">
@@ -849,36 +862,5 @@ if ('serviceWorker' in navigator) {
     });
 }
     </script>
-<script>
-    async function cargarNoticias() {
-        const container = document.getElementById('noticias-container');
-        // URL de noticias cristianas convertida a JSON
-        const rssUrl = "https://api.rss2json.com/v1/api.json?rss_url=https://feeds.feedburner.com/noticiascristianas";
-        
-        try {
-            const response = await fetch(rssUrl);
-            const data = await response.json();
-            
-            if (data.status === 'ok') {
-                container.innerHTML = ""; // Limpiar carga
-                // Solo tomamos las 3 primeras noticias
-                data.items.slice(0, 3).forEach(item => {
-                    const noticia = document.createElement('div');
-                    noticia.className = "group cursor-pointer border-b border-zinc-200 dark:border-zinc-800 pb-3 last:border-0";
-                    noticia.innerHTML = `
-                        <a href="${item.link}" target="_blank" class="block">
-                            <p class="font-bold text-zinc-800 dark:text-zinc-100 group-hover:text-brand-neon transition-colors">${item.title}</p>
-                            <p class="text-zinc-500 mt-1 line-clamp-2">${item.pubDate.split(' ')[0]}</p>
-                        </a>
-                    `;
-                    container.appendChild(noticia);
-                });
-            }
-        } catch (error) {
-            container.innerHTML = "<p class='text-zinc-500'>No se pudieron cargar las noticias.</p>";
-        }
-    }
-    cargarNoticias();
-</script>
 </body>
 </html>
