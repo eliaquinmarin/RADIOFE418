@@ -271,17 +271,22 @@
         </section>
 
         <div class="lg:col-span-5 space-y-6 w-full">
-            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
-                <div class="flex flex-col mb-4">
-                    <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
-                        <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación de Hoy
-                    </h3>
-                    <div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">
+           <!-- Reemplaza tu sección de programación actual por esta -->
+<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
+    <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
+        <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación
+    </h3>
+    
+    <!-- Pestañas -->
+    <div id="tabs-container" class="flex gap-1 mb-4 overflow-x-auto pb-2 scrollbar-hide">
+        <!-- Los botones se generarán con JS -->
+    </div>
+<div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">
                         Cargando fecha...
                     </div>
-                </div>
-                <div class="space-y-3" id="schedule-container"></div>
-            </section>
+                   <!-- Lista -->
+    <div class="space-y-3" id="schedule-container"></div>
+</section>
 
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
                 <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Aliados</p>
@@ -603,19 +608,49 @@ if (obTitle && obArtist) {
 let programaActualData = null;
 
     const miProgramacion = [
-        { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
-        { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
-        { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
-        { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
-        { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
-        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
-        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" }
-    ];
+    // --- NUEVOS SEGMENTOS DE ORACIÓN (TODOS LOS DÍAS: 0-6) ---
+    { dia: 0, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 0, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 0, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    
+    { dia: 1, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 1, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 1, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    
+    { dia: 2, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 2, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 2, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    
+    { dia: 3, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 3, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 3, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    
+    { dia: 4, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 4, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 4, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    
+    { dia: 5, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 5, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 5, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    
+    { dia: 6, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 6, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+    { dia: 6, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+
+    // --- PROGRAMACIÓN EXISTENTE ---
+    { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
+    { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
+    { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
+    { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
+    { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
+    { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+    { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+    { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+    { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+    { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+    { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+    { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" }
+];
 
     function formatearHora(hora24) {
         let [h, m] = hora24.split(':');
@@ -999,6 +1034,55 @@ if ('serviceWorker' in navigator) {
     setInterval(rotateMessages, 6000);
     rotateMessages();
 </script>
+<script>
+    const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+    const tabsContainer = document.getElementById('tabs-container');
+    const scheduleContainer = document.getElementById('schedule-container');
 
+    function renderizarProgramacion(diaIndex) {
+        scheduleContainer.innerHTML = "";
+        const hoy = new Date().getDay();
+        const filtrados = miProgramacion.filter(p => p.dia === diaIndex);
+        
+        filtrados.forEach(p => {
+            const [hI, mI] = p.horaInicio.split(':').map(Number);
+            const [hF, mF] = p.horaFin.split(':').map(Number);
+            // Resaltar si es el programa actual (solo si es el día de hoy)
+            const ahora = new Date();
+            const esHoy = ahora.getDay() === diaIndex;
+            const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+            const estaAlAire = esHoy && (horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF));
+
+            const div = document.createElement('div');
+            div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
+            div.innerHTML = `
+                <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover">
+                <div class="flex-grow">
+                    <p class="font-bold text-xs text-zinc-900 dark:text-white">${p.nombre}</p>
+                    <p class="text-[12px] text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
+                </div>
+            `;
+            scheduleContainer.appendChild(div);
+        });
+    }
+
+    // Inicializar Tabs
+    const hoy = new Date().getDay();
+    diasSemana.forEach((nombre, index) => {
+        const btn = document.createElement('button');
+        btn.className = `px-3 py-1 text-[15px] font-bold rounded-lg transition-all ${index === hoy ? 'bg-brand-neon text-black' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'}`;
+        btn.textContent = nombre;
+        btn.onclick = () => {
+            document.querySelectorAll('#tabs-container button').forEach(b => {
+                b.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300';
+            });
+            btn.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-brand-neon text-black';
+            renderizarProgramacion(index);
+        };
+        tabsContainer.appendChild(btn);
+    });
+
+    renderizarProgramacion(hoy);
+</script>
 </body>
 </html>
