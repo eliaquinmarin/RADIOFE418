@@ -554,7 +554,21 @@ const obTitle = document.getElementById('sonic_title');
 const obArtist = document.getElementById('sonic_artist');
 
 // Función que ejecuta la búsqueda con un pequeño margen de tiempo
+// Monitorear cambios en el Widget de SonicPanel
+const obTitle = document.getElementById('sonic_title');
+const obArtist = document.getElementById('sonic_artist');
+
+// Función que ejecuta la búsqueda con un pequeño margen de tiempo
 function verificarCambio() {
+    
+    // --- ESTA ES LA MODIFICACIÓN ---
+    // Si un programa está al aire, bloqueamos la búsqueda de carátulas externa
+    if (typeof programaEnVivoActivo !== 'undefined' && programaEnVivoActivo) {
+        console.log("Programa en vivo activo: Búsqueda pausada.");
+        return; // Salimos de la función sin hacer nada
+    }
+    // --------------------------------
+
     // Pequeña espera para asegurar que el contenido se haya renderizado
     setTimeout(() => {
         const actualTitle = obTitle.innerText;
@@ -578,6 +592,7 @@ if (obTitle && obArtist) {
 <script>
     // 1. Variable para bloquear actualizaciones externas
     let programaEnVivoActivo = false;
+let programaActualData = null;
 
     const miProgramacion = [
         { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
@@ -958,5 +973,6 @@ if ('serviceWorker' in navigator) {
     setInterval(rotateMessages, 6000);
     rotateMessages();
 </script>
+
 </body>
 </html>
