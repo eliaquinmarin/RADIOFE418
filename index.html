@@ -626,13 +626,13 @@ const ambientBg = document.getElementById('ambient-background');
         const hoyIndex = new Date().getDay();
         diasSemana.forEach((nombre, index) => {
             const btn = document.createElement('button');
-            btn.className = `px-3 py-1 text-[15px] font-bold rounded-lg transition-all ${index === hoyIndex ? 'bg-brand-neon text-black' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'}`;
+            btn.className = `px-3 py-1 text-[13px] font-bold rounded-lg transition-all ${index === hoyIndex ? 'bg-brand-neon text-black' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'}`;
             btn.textContent = nombre;
             btn.onclick = () => {
                 document.querySelectorAll('#tabs-container button').forEach(b => {
-                    b.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300';
+                    b.className = 'px-3 py-1 text-[13px] font-bold rounded-lg transition-all bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300';
                 });
-                btn.className = 'px-3 py-1 text-[15px] font-bold rounded-lg transition-all bg-brand-neon text-black';
+                btn.className = 'px-3 py-1 text-[13px] font-bold rounded-lg transition-all bg-brand-neon text-black';
                 renderizarProgramacion(index);
             };
             tabsContainer.appendChild(btn);
