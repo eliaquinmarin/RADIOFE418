@@ -194,7 +194,7 @@
     </button>
 
     <!-- Instalar -->
-    <button id="confirm-install" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+    <button id="trigger-install-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
         <i class="fa-solid fa-download text-base"></i>
         <span>Instalar</span>
     </button>
@@ -948,10 +948,11 @@ const ambientBg = document.getElementById('ambient-background');
     <script>
         let deferredPrompt;
         document.addEventListener('DOMContentLoaded', () => {
-            const installModal = document.getElementById('install-modal');
-            const btnCancel = document.getElementById('cancel-install');
-            const btnConfirm = document.getElementById('confirm-install');
-            if (!installModal || !btnCancel || !btnConfirm) return;
+    const installModal = document.getElementById('install-modal');
+    const btnCancel = document.getElementById('cancel-install');
+    const btnConfirm = document.getElementById('confirm-install'); // Ahora busca el botón correcto del modal
+
+    if (!installModal || !btnCancel || !btnConfirm) return;
 
             if (window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-installed') === 'true') return;
 
