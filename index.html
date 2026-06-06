@@ -946,43 +946,86 @@ const ambientBg = document.getElementById('ambient-background');
 </script>
 
     <script>
-        let deferredPrompt;
-        document.addEventListener('DOMContentLoaded', () => {
-    const installModal = document.getElementById('install-modal');
-    const btnCancel = document.getElementById('cancel-install');
-    const btnConfirm = document.getElementById('confirm-install'); // Ahora busca el botón correcto del modal
+    let deferredPrompt;
+    document.addEventListener('DOMContentLoaded', () => {
+        const installModal = document.getElementById('install-modal');
+        const btnCancel = document.getElementById('cancel-install');
+        const btnConfirm = document.getElementById('confirm-install');
+        const triggerInstallBtn = document.getElementById('trigger-install-btn'); // Capturamos el botón de la interfaz
 
-    if (!installModal || !btnCancel || !btnConfirm) return;
+        if (!installModal || !btnCancel || !btnConfirm) return;
 
-            if (window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-installed') === 'true') return;
+        // Si la app ya está instalada, ocultamos el botón de la interfaz y cancelamos el proceso
+        if (window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-installed') === 'true') {
+            if (triggerInstallBtn) triggerInstallBtn.style.display = 'none';
+            return;
+        }
 
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                if (localStorage.getItem('pwa-rejected') !== 'true') {
-                    setTimeout(() => { installModal.classList.remove('hidden'); installModal.classList.add('flex'); }, 3000); 
-                }
-            });
-
-            btnCancel.addEventListener('click', () => {
-                installModal.classList.add('hidden');
-                localStorage.setItem('pwa-rejected', 'true');
-            });
-
-            btnConfirm.addEventListener('click', async () => {
-                if (!deferredPrompt) return;
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') localStorage.setItem('pwa-installed', 'true');
-                deferredPrompt = null;
-                installModal.classList.add('hidden');
-            });
+        // Capturamos el evento de instalación de Chrome/Android
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e; // Guardamos el evento para dispararlo luego
+            
+            // Mostrar modal automáticamente después de 3 segundos si el usuario no lo ha rechazado antes
+            if (localStorage.getItem('pwa-rejected') !== 'true') {
+                setTimeout(() => { 
+                    installModal.classList.remove('hidden'); 
+                    installModal.classList.add('flex'); 
+                }, 3000); 
+            }
         });
 
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(err => console.error(err)); });
+        // 1. FUNCIONALIDAD DEL BOTÓN "INSTALAR" DE LA INTERFAZ
+        if (triggerInstallBtn) {
+            triggerInstallBtn.addEventListener('click', () => {
+                if (deferredPrompt) {
+                    // Si el navegador permite la instalación, mostramos tu modal personalizado
+                    installModal.classList.remove('hidden'); 
+                    installModal.classList.add('flex');
+                } else {
+                    // Mensaje de fallback si el navegador no lo soporta o ya está instalada
+                    alert("La instalación de la aplicación no está disponible en este momento o ya está instalada en tu dispositivo.");
+                }
+            });
         }
-    </script>
+
+        // 2. FUNCIONALIDAD DEL BOTÓN "NO, GRACIAS" (MODAL)
+        btnCancel.addEventListener('click', () => {
+            installModal.classList.remove('flex');
+            installModal.classList.add('hidden');
+            localStorage.setItem('pwa-rejected', 'true');
+        });
+
+        // 3. FUNCIONALIDAD DEL BOTÓN "INSTALAR" (MODAL)
+        btnConfirm.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            // Mostramos el aviso nativo del sistema operativo
+            deferredPrompt.prompt();
+            
+            // Esperamos la respuesta del usuario
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('App instalada con éxito');
+                localStorage.setItem('pwa-installed', 'true');
+                if (triggerInstallBtn) triggerInstallBtn.style.display = 'none'; // Ocultamos el botón para que no vuelva a salir
+            }
+            
+            // Limpiamos la variable y cerramos el modal
+            deferredPrompt = null;
+            installModal.classList.remove('flex');
+            installModal.classList.add('hidden');
+        });
+    });
+
+    // Registro del Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => { 
+            navigator.serviceWorker.register('/sw.js').catch(err => console.error('Error SW:', err)); 
+        });
+    }
+</script>
 
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
