@@ -173,20 +173,33 @@
                 </span>
             </div>
 
-            <div class="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
-                <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                    <i class="fa-solid fa-share-nodes text-base"></i>
-                    <span>Compartir</span>
-                </button>
-                <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
-                    <i class="fa-solid fa-heart text-base"></i>
-                    <span>Apoyar</span>
-                </button>
-                <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                    <i class="fa-solid fa-circle-exclamation text-base"></i>
-                    <span>Reportar</span>
-                </button>
-            </div>
+       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
+    
+    <!-- Compartir -->
+    <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+        <i class="fa-solid fa-share-nodes text-base"></i>
+        <span>Compartir</span>
+    </button>
+
+    <!-- Apoyar (Destacado) -->
+    <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
+        <i class="fa-solid fa-heart text-base"></i>
+        <span>Apoyar</span>
+    </button>
+
+    <!-- Reportar -->
+    <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+        <i class="fa-solid fa-circle-exclamation text-base"></i>
+        <span>Reportar</span>
+    </button>
+
+    <!-- Instalar -->
+    <button id="confirm-install" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+        <i class="fa-solid fa-download text-base"></i>
+        <span>Instalar</span>
+    </button>
+
+</div>
         </section>
 
         <div class="lg:col-span-5 space-y-6 w-full">
@@ -980,7 +993,33 @@ const ambientBg = document.getElementById('ambient-background');
             if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
         }
     </script>
+   <script>
+function setupMediaSession() {
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: 'Radio FE 4:18',
+            artist: 'Sonando por todo lo alto',
+            album: 'Radio Online Barinas',
+            artwork: [
+                { src: 'img/icon.png', sizes: '512x512', type: 'image/png' }
+            ]
+        });
 
+        navigator.mediaSession.setActionHandler('play', () => {
+            audio.play();
+            playIcon.className = "fa-solid fa-pause text-xl";
+        });
+
+        navigator.mediaSession.setActionHandler('pause', () => {
+            audio.pause();
+            playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+        });
+    }
+}
+
+// Llamar a esta función al cargar la página
+window.addEventListener('load', setupMediaSession);
+   </script>
     <script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
 </body>
 </html>
