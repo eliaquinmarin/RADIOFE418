@@ -563,10 +563,10 @@
             { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" }
         ];
 
-        // Inicialización básica del reproductor
-        audio.volume = volumeSlider.value;
-        playBtn.addEventListener('click', () => togglePlayback());
-        volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value);
+       // Inicialización básica del reproductor
+audio.volume = volumeSlider.value;
+playBtn.addEventListener('click', () => togglePlayback());
+volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value);
 
 if ('mediaSession' in navigator) {
     navigator.mediaSession.setActionHandler('play', () => {
@@ -577,19 +577,86 @@ if ('mediaSession' in navigator) {
     });
 }
 
-        function togglePlayback() {
-            initAudioAnalyzer();
-            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            if (audio.paused) {
-                const currentSrc = audio.src.split('?')[0];
-                audio.src = currentSrc + '?cache=' + Date.now();
-                audio.play().then(() => { playIcon.className = "fa-solid fa-pause text-xl"; })
-                .catch(err => console.error("Error al reproducir:", err));
-            } else {
-                audio.pause();
-                playIcon.className = "fa-solid fa-play text-xl ml-0.5";
-            }
-        }
+// Variable de control para evitar que ambas funciones choquen entre sí
+let isInitialPlayTriggered = false;
+
+// ========================================================
+// CONTROL DE REPRODUCCIÓN COMPLETO (BOTÓN PLAY)
+// ========================================================
+function togglePlayback() {
+    initAudioAnalyzer();
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    
+    // Encendemos el escudo: el botón ya se encarga, desactivamos el clic global
+    isInitialPlayTriggered = true;
+    removeGlobalListeners();
+    
+    if (audio.paused) {
+        const currentSrc = audio.src.split('?')[0];
+        audio.src = currentSrc + '?cache=' + Date.now();
+        audio.play().then(() => { 
+            playIcon.className = "fa-solid fa-pause text-xl"; 
+        })
+        .catch(err => {
+            console.error("Error al reproducir desde botón:", err);
+            isInitialPlayTriggered = false; // Resetear si falla
+        });
+    } else {
+        audio.pause();
+        playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+        // Si pausan, permitimos que pueda volver a interactuar globalmente si es necesario
+        isInitialPlayTriggered = false; 
+    }
+}
+
+// ========================================================
+// AUTOPLAY INTERACTIVO (AL TOCAR CUALQUIER PARTE DE LA WEB)
+// ========================================================
+function handleGlobalClick(e) {
+    // FILTRO ESENCIAL: Si el usuario tocó el control de volumen o el botón play,
+    // dejamos que sus propios listeners se encarguen y salimos de aquí.
+    if (e.target === volumeSlider || volumeSlider.contains(e.target) || 
+        e.target === playBtn || playBtn.contains(e.target)) {
+        return;
+    }
+    
+    // Si pasa el filtro, ejecutamos el arranque
+    startAudio();
+}
+
+function startAudio() {
+    // Si el botón de Play ya fue pulsado, salimos de aquí para no romper la carga del streaming
+    if (isInitialPlayTriggered) return;
+
+    initAudioAnalyzer();
+    if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    
+    if (audio.paused) {
+        isInitialPlayTriggered = true;
+        const currentSrc = audio.src.split('?')[0];
+        audio.src = currentSrc + '?cache=' + Date.now();
+        
+        audio.play().then(() => {
+            if (playIcon) playIcon.className = "fa-solid fa-pause text-xl";
+            removeGlobalListeners();
+        }).catch(e => {
+            console.log("Navegador bloqueó el toque de fondo. Esperando interacción válida...");
+            isInitialPlayTriggered = false;
+        });
+    }
+}
+
+// Función limpia para eliminar los escuchadores globales una vez activado el audio
+function removeGlobalListeners() {
+    window.removeEventListener('load', startAudio);
+    document.removeEventListener('click', handleGlobalClick);
+}
+
+// Escuchadores globales para capturar el primer toque en la pantalla (usando el manejador con filtro)
+window.addEventListener('load', startAudio);
+document.addEventListener('click', handleGlobalClick);
 
         // CONTROL DE CARÁTULAS INTELIGENTES (iTunes + Last.fm)
        async function buscarCaratula(titulo, artista) {
