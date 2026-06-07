@@ -573,7 +573,58 @@ if ('mediaSession' in navigator) {
         togglePlayback();
     });
 }
+// CONTROL DE CAÍDA DE SEÑAL (TRANSMISIÓN)
+        const signalModal = document.getElementById('signal-error-modal');
+        const btnModalChannel = document.getElementById('btn-modal-channel');
+        const btnModalDirect = document.getElementById('btn-modal-direct');
 
+        // Función para mostrar el aviso gigante en pantalla
+        function mostrarAvisoSinSeñal() {
+            if (signalModal && signalModal.classList.contains('hidden')) {
+                signalModal.classList.remove('hidden');
+                signalModal.classList.add('flex');
+            }
+        }
+
+        // Función para quitar el aviso de la pantalla
+        function ocultarAvisoSinSeñal() {
+            if (signalModal) {
+                signalModal.classList.remove('flex');
+                signalModal.classList.add('hidden');
+            }
+        }
+
+        // Eventos para cerrar el aviso una vez seleccionen una opción
+        if (btnModalChannel && btnModalDirect) {
+            btnModalChannel.addEventListener('click', ocultarAvisoSinSeñal);
+            btnModalDirect.addEventListener('click', ocultarAvisoSinSeñal);
+        }
+
+        // MONITOREO DEL REPRODUCTOR (Detección automática de falta de transmisión)
+        if (audio) {
+            // 1. Si el stream devuelve un error de red o de decodificación
+            audio.addEventListener('error', (e) => {
+                console.log("Transmisión interrumpida o no detectada.");
+                mostrarAvisoSinSeñal();
+            });
+
+            // 2. Si la reproducción se congela porque no llegan más datos (stalled/waiting)
+            audio.addEventListener('waiting', () => {
+                // Damos un margen de 6 segundos por si solo es una fluctuación lenta de internet
+                setTimeout(() => {
+                    if (audio.paused === false && audio.readyState < 3) {
+                        console.log("El búfer está vacío. Transmisión caída.");
+                        mostrarAvisoSinSeñal();
+                    }
+                }, 6000);
+            });
+            
+            // Si la señal vuelve y el reproductor logra sincronizar datos de nuevo, se puede ocultar solo
+            audio.addEventListener('playing', () => {
+                // Descomenta la línea de abajo si quieres que se quite solo si la señal parpadea y regresa
+                // ocultarAvisoSinSeñal();
+            });
+        }
 // Variable de control para evitar que ambas funciones choquen entre sí
 let isInitialPlayTriggered = false;
 
@@ -1346,5 +1397,45 @@ function setupMediaSession() {
 window.addEventListener('load', setupMediaSession);
    </script>
     <script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
+
+<!-- ========================================== -->
+    <!-- MODAL DE ALERTA POR FALTA DE TRANSMISIÓN  -->
+    <!-- ========================================== -->
+    <div id="signal-error-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity duration-300">
+        <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-4xl h-[80vh] md:h-[70vh] rounded-3xl p-6 md:p-10 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all flex flex-col justify-center items-center relative">
+            <div class="flex flex-col items-center text-center max-w-2xl mx-auto space-y-6">
+                <!-- Icono de Alerta Animado -->
+                <div class="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center animate-pulse">
+                    <i class="fa-solid fa-satellite-dish text-5xl"></i>
+                </div>
+                
+                <!-- Mensajes -->
+                <h3 class="text-2xl md:text-4xl font-black text-zinc-900 dark:text-white tracking-tight">
+                    ¡Disculpen las molestias!
+                </h3>
+                <p class="text-base md:text-xl text-zinc-600 dark:text-zinc-300 font-medium leading-relaxed">
+                    Estamos solucionando la falta de señal en este momento. Mientras tanto, puedes unirte a nuestro canal de WhatsApp o escribirnos directamente a cabina. ¡Gracias por tu paciencia!
+                </p>
+
+                <!-- Botones de Acción -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full pt-4">
+                    <!-- Opción 1: Canal de WhatsApp -->
+                    <a id="btn-modal-channel" href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" target="_blank" 
+                       class="flex items-center justify-center gap-3 p-4 bg-green-600 hover:bg-green-500 text-white rounded-2xl text-sm md:text-base font-bold uppercase tracking-wider shadow-lg transition-all active:scale-95">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Canal de WhatsApp</span>
+                    </a>
+                    
+                    <!-- Opción 2: Escribir Directamente -->
+                    <a id="btn-modal-direct" href="https://wa.me/584125183677?text=Hola,%20noté%20que%20la%20señal%20está%20caída.%20" target="_blank" 
+                       class="flex items-center justify-center gap-3 p-4 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:border-brand-neon hover:text-brand-neon rounded-2xl text-sm md:text-base font-bold uppercase tracking-wider shadow-md transition-all active:scale-95">
+                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                        <span>Escribir Directamente</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
