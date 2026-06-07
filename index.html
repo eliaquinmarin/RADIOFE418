@@ -122,86 +122,217 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-<!-- Cambiar bg-brand-lightCard dark:bg-brand-card por versiones con opacidad/blur -->
-<section class="lg:col-span-7 bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
-            
-            <div class="absolute top-6 left-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
-                <span class="w-2.5 h-2.5 bg-red-500 rounded-full mr-2 animate-ping"></span>
-                <span class="w-2.5 h-2.5 bg-red-600 rounded-full mr-2 absolute"></span>
-                <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
-            </div>
+       
+        <!-- ========================================== -->
+        <!-- NUEVA COLUMNA IZQUIERDA (REPRODUCTOR + TOP 5) -->
+        <!-- ========================================== -->
 
-            <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
-                <img id="track-cover" 
-                     src="img/caratula.png" 
-                     alt="Carátula" 
-                     class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
-            </div>
 
-            <div class="text-center w-full max-w-md mb-3">
-                <h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-                    Radio FE 4:18
-                </h2>
-                <p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
-                   Sonando por todo lo alto
-                </p>
-            </div>
 
-            <div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
-                <a id="dynamic-link" href="#" class="block">
-                    <div id="dynamic-message" class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm"></div>
-                </a>
-            </div>
+        <div class="lg:col-span-7 space-y-6 w-full">
 
-            <div class="w-full max-w-md h-10 flex items-center justify-center my-6">
-                <canvas id="visualizer" class="w-full h-full"></canvas>
-            </div>
-
-            <div class="w-full max-w-md grid grid-cols-12 gap-4">
-                <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
-                    <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
-                </button>
-                <div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
-                    <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
+            <!-- REPRODUCTOR PRINCIPAL (Mantiene tu diseño original sin alterar id's) -->
+            <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
+                
+                <div class="absolute top-6 left-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
+                    <span class="w-2.5 h-2.5 bg-red-500 rounded-full mr-2 animate-ping"></span>
+                    <span class="w-2.5 h-2.5 bg-red-600 rounded-full mr-2 absolute"></span>
+                    <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
                 </div>
-            </div>
 
-            <div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
-                <i class="fa-solid fa-users text-brand-neon mr-2"></i>
-                <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">
-                    <span id="sonic_listeners">0</span>
-                </span>
-            </div>
+                <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
+                    <img id="track-cover" 
+                         src="img/caratula.png" 
+                         alt="Carátula" 
+                         class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
+                </div>
 
-       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
-    
-    <!-- Compartir -->
-    <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-        <i class="fa-solid fa-share-nodes text-base"></i>
-        <span>Compartir</span>
-    </button>
+                <div class="text-center w-full max-w-md mb-3">
+                    <h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                        Radio FE 4:18
+                    </h2>
+                    <p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
+                       Sonando por todo lo alto
+                    </p>
+                </div>
 
-    <!-- Apoyar (Destacado) -->
-    <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
-        <i class="fa-solid fa-heart text-base"></i>
-        <span>Apoyar</span>
-    </button>
+                <div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
+                    <a id="dynamic-link" href="#" class="block">
+                        <div id="dynamic-message" class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm"></div>
+                    </a>
+                </div>
 
-    <!-- Reportar -->
-    <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-        <i class="fa-solid fa-circle-exclamation text-base"></i>
-        <span>Reportar</span>
-    </button>
+                <div class="w-full max-w-md h-10 flex items-center justify-center my-6">
+                    <canvas id="visualizer" class="w-full h-full"></canvas>
+                </div>
 
-    <!-- Instalar -->
-    <button id="trigger-install-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-        <i class="fa-solid fa-download text-base"></i>
-        <span>Instalar</span>
-    </button>
+                <div class="w-full max-w-md grid grid-cols-12 gap-4">
+                    <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
+                        <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
+                    </button>
+                    <div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
+                        <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
+                    </div>
+                </div>
 
-</div>
-        </section>
+                <div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
+                    <i class="fa-solid fa-users text-brand-neon mr-2"></i>
+                    <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">
+                        <span id="sonic_listeners">0</span>
+                    </span>
+                </div>
 
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
+                    <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                        <i class="fa-solid fa-share-nodes text-base"></i>
+                        <span>Compartir</span>
+                    </button>
+                    <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-heart text-base"></i>
+                        <span>Apoyar</span>
+                    </button>
+                    <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                        <i class="fa-solid fa-circle-exclamation text-base"></i>
+                        <span>Reportar</span>
+                    </button>
+                    <button id="trigger-install-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                        <i class="fa-solid fa-download text-base"></i>
+                        <span>Instalar</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECCIÓN NUEVA: TOP 5 MUSICAL EXACTAMENTE DONDE MARCA EL DISEÑO -->
+            <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300 neon-glow">
+                <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
+                    <i class="fa-solid fa-ranking-star mr-2 text-brand-neon"></i> Top 5 Musical
+                </h4>
+                
+                <div class="flex flex-col gap-3">
+                    
+                    <!-- PUESTO 1 -->
+                    <div class="flex items-center gap-4 p-3 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-brand-neon"></div>
+                        <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px] border-r border-zinc-200 dark:border-zinc-800/60 pr-2">
+                            <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
+                            <span class="text-xl font-black text-brand-neon">1</span>
+                        </div>
+                        <img src="img/caratula.png" alt="Cantante" class="w-12 h-12 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white truncate">Nombre de la Canción 1</h4>
+                            <p class="text-[10px] sm:text-[11px] font-semibold text-brand-neonPink uppercase truncate mt-0.5">Nombre del Cantante</p>
+                        </div>
+                    </div>
+
+                    <!-- PUESTO 2 -->
+                    <div class="flex items-center gap-4 p-3 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-brand-neonPink"></div>
+                        <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px] border-r border-zinc-200 dark:border-zinc-800/60 pr-2">
+                            <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
+                            <span class="text-xl font-black text-brand-neonPink">2</span>
+                        </div>
+                        <img src="img/caratula.png" alt="Cantante" class="w-12 h-12 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white truncate">Nombre de la Canción 2</h4>
+                            <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5">Nombre del Cantante</p>
+                        </div>
+                    </div>
+
+                    <!-- PUESTO 3 -->
+                    <div class="flex items-center gap-4 p-3 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-zinc-400 dark:bg-zinc-500"></div>
+                        <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px] border-r border-zinc-200 dark:border-zinc-800/60 pr-2">
+                            <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
+                            <span class="text-xl font-black text-zinc-500 dark:text-zinc-400">3</span>
+                        </div>
+                        <img src="img/caratula.png" alt="Cantante" class="w-12 h-12 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white truncate">Nombre de la Canción 3</h4>
+                            <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5">Nombre del Cantante</p>
+                        </div>
+                    </div>
+
+                    <!-- PUESTO 4 -->
+                    <div class="flex items-center gap-4 p-3 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-zinc-400 dark:bg-zinc-500"></div>
+                        <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px] border-r border-zinc-200 dark:border-zinc-800/60 pr-2">
+                            <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
+                            <span class="text-xl font-black text-zinc-500 dark:text-zinc-400">4</span>
+                        </div>
+                        <img src="img/caratula.png" alt="Cantante" class="w-12 h-12 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white truncate">Nombre de la Canción 4</h4>
+                            <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5">Nombre del Cantante</p>
+                        </div>
+                    </div>
+
+                    <!-- PUESTO 5 -->
+                    <div class="flex items-center gap-4 p-3 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-zinc-400 dark:bg-zinc-500"></div>
+                        <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px] border-r border-zinc-200 dark:border-zinc-800/60 pr-2">
+                            <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
+                            <span class="text-xl font-black text-zinc-500 dark:text-zinc-400">5</span>
+                        </div>
+                        <img src="img/caratula.png" alt="Cantante" class="w-12 h-12 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white truncate">Nombre de la Canción 5</h4>
+                            <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5">Nombre del Cantante</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+<!-- ========================================== -->
+            <!-- SECCIÓN DE PLAYLISTS DE YOUTUBE -->
+            <!-- ========================================== -->
+            <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
+                <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
+                    <i class="fa-brands fa-youtube mr-2 text-red-500 text-base"></i> Nuestras Playlists
+                </h4>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    
+                    <!-- PLAYLIST 1 -->
+                    <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
+                        <div class="w-full aspect-video rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/videoseries?si=tgTBvA7jYxtGCwu-&amp;list=PL8-D_cKVzYmKQtD4a05_xoAi1A5NtOa4O" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="px-1 py-1">
+                            <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors">Alabanza & Adoración</h5>
+                            <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">Radio FE 4:18</p>
+                        </div>
+                    </div>
+
+                    <!-- PLAYLIST 2 -->
+                    <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
+                        <div class="w-full aspect-video rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/videoseries?si=Zgee5knZtc6rydhB&amp;list=PL8-D_cKVzYmLYnxB4XKbBD9ND2O5TfILD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="px-1 py-1">
+                            <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors">Mensajes de Fe</h5>
+                            <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">Radio FE 4:18</p>
+                        </div>
+                    </div>
+
+                    <!-- PLAYLIST 3 -->
+                    <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
+                        <div class="w-full aspect-video rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/videoseries?si=mrh76uupgJBMtBSt&amp;list=PL8-D_cKVzYmJBdEJWXhnHN6bNGwlYWZV_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="px-1 py-1">
+                            <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors">Música Especial</h5>
+                            <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">Radio FE 4:18</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div> <!-- /FIN COLUMNA IZQUIERDA -->
+
+        <!-- A PARTIR DE AQUÍ CONTINÚA TU CÓDIGO CON LA COLUMNA DE LA DERECHA (lg:col-span-5) -->
+       
         <div class="lg:col-span-5 space-y-6 w-full">
            <section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
                 <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
@@ -236,6 +367,49 @@
                     </a>
                 </div>
             </section>
+<!-- SECCIÓN DE NOTICIAS (ABAJO DE PEDIR CANCIÓN) -->
+<section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
+    <div class="flex items-center justify-between mb-4">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-newspaper mr-2 text-brand-neonPink"></i> Notas & Entérate
+        </h4>
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-neonPink/10 text-brand-neonPink border border-brand-neonPink/20 uppercase tracking-wider">Destacado</span>
+    </div>
+    
+    <!-- Contenedor de la noticia -->
+    <div class="flex flex-col">
+        <!-- Imagen de la Noticia -->
+        <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group">
+            <!-- NOTA: Reemplaza "img/contextopubli/imagen.png" por la ruta de tu imagen o una URL directa -->
+            <img src="img/contextopubli/imagen.png" alt="Mission Talk - Ricardo Rodríguez" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-[9px] font-bold text-white px-2 py-1 rounded-md tracking-wider">
+                6 ABR 2026
+            </div>
+        </div>
+        
+        <!-- Contenido Resumido -->
+        <div class="space-y-2">
+            <h3 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-snug hover:text-brand-neon transition-colors duration-300">
+                Mission Talk presenta «De Tal Manera Amó Dios» interpretada por Ricardo Rodríguez
+            </h3>
+            
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
+                La organización Mission Talk lanza una campaña que entrelaza fe, justicia y compasión, acompañada por este emotivo tema musical. Una iniciativa inspirada en el Evangelio para despertar y movilizar el amor al prójimo.
+            </p>
+        </div>
+        
+        <!-- Botón para ver la noticia original -->
+        <div class="mt-4 pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+            <a href="https://www.contextomediagroup.com/mission-talk-presenta-de-tal-manera-amo-dios-interpretada-por-ricardo-rodriguez/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="w-full bg-zinc-200/50 dark:bg-zinc-900/40 border border-zinc-300 dark:border-zinc-800 hover:border-brand-neon hover:text-brand-neon rounded-xl flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 transition-all duration-300 active:scale-[0.98] group">
+                <span>Leer noticia completa</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+            </a>
+        </div>
+    </div>
+</section>
         </div>
     </main>
 
@@ -588,7 +762,7 @@ const ambientBg = document.getElementById('ambient-background');
         if (obTitle) protectionObserver.observe(obTitle, { childList: true, subtree: true });
 
         // SISTEMA DE PESTAÑAS (TABS) DE PROGRAMACIÓN INTERACTIVA
-        const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+        const diasSemana = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"];
         const tabsContainer = document.getElementById('tabs-container');
         const scheduleContainer = document.getElementById('schedule-container');
 
@@ -626,13 +800,13 @@ const ambientBg = document.getElementById('ambient-background');
         const hoyIndex = new Date().getDay();
         diasSemana.forEach((nombre, index) => {
             const btn = document.createElement('button');
-            btn.className = `px-3 py-1 text-[13px] font-bold rounded-lg transition-all ${index === hoyIndex ? 'bg-brand-neon text-black' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'}`;
+            btn.className = `px-3 py-1 text-[14px] font-bold rounded-lg transition-all ${index === hoyIndex ? 'bg-brand-neon text-black' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'}`;
             btn.textContent = nombre;
             btn.onclick = () => {
                 document.querySelectorAll('#tabs-container button').forEach(b => {
-                    b.className = 'px-3 py-1 text-[13px] font-bold rounded-lg transition-all bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300';
+                    b.className = 'px-3 py-1 text-[14px] font-bold rounded-lg transition-all bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300';
                 });
-                btn.className = 'px-3 py-1 text-[13px] font-bold rounded-lg transition-all bg-brand-neon text-black';
+                btn.className = 'px-3 py-1 text-[14px] font-bold rounded-lg transition-all bg-brand-neon text-black';
                 renderizarProgramacion(index);
             };
             tabsContainer.appendChild(btn);
