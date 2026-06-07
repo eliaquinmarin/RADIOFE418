@@ -546,10 +546,10 @@
             { dia: 6, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
             { dia: 6, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
             { dia: 6, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
-            { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png" },
+            { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png", youtube: "https://www.youtube.com/@Mujeresconproposito-pv" },
             { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
-            { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png" },
-            { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png" },
+            { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png",  youtube: "https://www.youtube.com/@Ap%C3%B3stolElioFranco" },
+            { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png",  youtube: "https://www.youtube.com/@HombresDevalorpv" },
             { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png" },
             { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
             { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
@@ -712,11 +712,14 @@ document.addEventListener('click', handleGlobalClick);
     
     // 1. BASE DE DATOS DE AUDIOS PERSONALIZADOS (Para interceptar pautas antes de buscar en internet)
     const mapaAudios = {
-        "AD1": { nombre: "CONTEXTO MEDIA GROUP", img: "img/publicidad/contexto.png" },
-        "AD2": { nombre: "DIRECTORIO UNISALUD", img: "img/publicidad/unisalud.png" },
-        "AD3": { nombre: "TOP 10 MUSICAL", img: "img/publicidad/top5.gif" },
-        "AD4": { nombre: "AUTO SERVICIO RORAIMA", img: "img/publicidad/roraima.png" },
-        "IDE1": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+        "ad1": { nombre: "CONTEXTO MEDIA GROUP", img: "img/publicidad/contexto.png" },
+        "ad2": { nombre: "DIRECTORIO UNISALUD", img: "img/publicidad/unisalud.png" },
+        "ad3": { nombre: "TOP 10 MUSICAL", img: "img/publicidad/top5.gif" },
+        "ad4": { nombre: "AUTO SERVICIO RORAIMA", img: "img/publicidad/roraima.png" },
+        "ide1": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+        "ide2": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+        "ide3": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+        "ide4": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
         "6AM": { nombre: "ORAR POR LOS PASTORES Y LIDERES", img: "img/oracion/oracion.png" },
         "3PM": { nombre: "ORAR POR VENEZUELA", img: "img/oracion/oracion.png" },
         "9PM": { nombre: "ORAR POR LAS FAMILIAS", img: "img/oracion/oracion.png" }
@@ -924,7 +927,7 @@ const ambientBg = document.getElementById('ambient-background');
         const tabsContainer = document.getElementById('tabs-container');
         const scheduleContainer = document.getElementById('schedule-container');
 
-        function renderizarProgramacion(diaIndex) {
+      function renderizarProgramacion(diaIndex) {
             if (!scheduleContainer) return;
             scheduleContainer.innerHTML = "";
             const filtrados = miProgramacion.filter(p => p.dia === diaIndex);
@@ -940,6 +943,13 @@ const ambientBg = document.getElementById('ambient-background');
                 const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
                 const estaAlAire = esHoy && (horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF));
 
+                // Detectar si el objeto contiene un enlace de YouTube
+                const botonYoutube = p.youtube 
+                    ? `<a href="${p.youtube}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 flex items-center justify-center rounded-xl bg-red-600/10 text-red-500 hover:bg-red-600 hover:text-white transition-all duration-200 ml-2" title="Ver en YouTube">
+                        <i class="fa-brands fa-youtube text-base"></i>
+                       </a>`
+                    : '';
+
                 const div = document.createElement('div');
                 div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
                 div.innerHTML = `
@@ -948,7 +958,10 @@ const ambientBg = document.getElementById('ambient-background');
                         <p class="font-bold text-xs text-zinc-900 dark:text-white">${p.nombre}</p>
                         <p class="text-[12px] text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p>
                     </div>
-                    ${estaAlAire ? '<span class="text-[9px] font-bold bg-brand-neonPink text-white px-2 py-0.5 rounded-full uppercase animate-pulse">Al Aire</span>' : ''}
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        ${estaAlAire ? '<span class="text-[9px] font-bold bg-brand-neonPink text-white px-2 py-0.5 rounded-full uppercase animate-pulse">Al Aire</span>' : ''}
+                        ${botonYoutube}
+                    </div>
                 `;
                 scheduleContainer.appendChild(div);
             });
