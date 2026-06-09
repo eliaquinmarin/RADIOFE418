@@ -49,3 +49,7 @@ La plataforma está optimizada para ser alojada en plataformas de hosting modern
 ---
 
 ## 📦 Estructura del Proyecto
+
+<p align="center">
+  <img src="img/LOGOMETA.png" alt="Logo Radio FE 4:18" width="300px">
+</p>
