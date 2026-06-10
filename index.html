@@ -121,7 +121,79 @@
         
         #sonic_title, #sonic_artist, #sonic_listeners, #sonic_uniq { display: inline-block; }
         #sonic_title, #sonic_artist { display: block !important; opacity: 1 !important; visibility: visible !important; }
+</style>
+<style>
+    @keyframes pulse-slow {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.03); }
+    }
+    .animate-pulse-slow {
+        animation: pulse-slow 3s infinite ease-in-out;
+    }
+</style>
+<style>
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
     </style>
+<style>
+    @keyframes pulse-slow {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+    }
+    .animate-pulse-slow {
+        animation: pulse-slow 3s infinite ease-in-out;
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+#sonic_listeners, 
+.listeners-badge,
+.listeners-badge p,
+.listeners-badge i {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Efecto Hover Inteligente según el modo */
+.listeners-badge:hover {
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .listeners-badge:hover {
+    background-color: rgba(0, 0, 0, 0.45);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(52, 211, 153, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+/* Brillo neón suave al enfocar los inputs para capturar la atención */
+#whatsapp-contact-form input:focus, 
+#whatsapp-contact-form textarea:focus {
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.2); /* Ajusta al color de tu brand-neon */
+}
+
+/* Animación fluida de entrada para el mensaje de éxito */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Ralentizar el pulso del botón para que no sea molesto visualmente */
+.animate-pulse-slow {
+    animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+</style>
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
     
@@ -139,17 +211,11 @@
         </div>
 
         <div class="flex items-center space-x-4 sm:space-x-5">
-            <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" target="_blank" 
-               class="flex items-center gap-3 w-full max-w-xs p-3 transition-all duration-200 group rounded-lg border shadow-sm bg-white border-gray-200 hover:shadow-md hover:border-green-300 dark:bg-gray-900 dark:border-gray-800 dark:hover:border-green-500/50 dark:hover:shadow-green-500/5">
-                <div class="flex items-center justify-center w-9 h-9 text-xl rounded-full transition-colors duration-200 text-green-500 bg-green-50 group-hover:bg-green-500 group-hover:text-white dark:bg-green-500/10 dark:group-hover:bg-green-500 dark:group-hover:text-white">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </div>
-                <div class="text-left">
-                    <span class="block font-medium text-sm transition-colors duration-200 text-gray-800 group-hover:text-green-600 dark:text-gray-200 dark:group-hover:text-green-400">
-                        Canal de WhatsApp
-                    </span>
-                </div>
-            </a>
+          <!-- Botón de WhatsApp simplificado para el Header -->
+<a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" target="_blank" title="Únete al Canal de WhatsApp"
+   class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-green-500 dark:text-green-400 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 border border-zinc-300 dark:border-zinc-700 shadow-sm hover:bg-green-50 dark:hover:bg-green-500/10">
+    <i class="fa-brands fa-whatsapp text-xl"></i>
+</a>
 
             <button id="theme-toggle" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
                 <i id="theme-icon" class="fa-solid fa-moon"></i>
@@ -157,17 +223,63 @@
         </div>
     </header>
 
+<!-- Barra Informativa: Próximo Programa -->
+<div class="w-full bg-zinc-100/80 dark:bg-zinc-800/40 backdrop-blur-md border-y border-zinc-200 dark:border-zinc-700/50 py-2.5 px-4 transition-colors duration-200">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+        <!-- Izquierda: Indicador y Nombre -->
+        <div class="flex items-center gap-3">
+            <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+            </span>
+            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-medium">
+                <span class="font-black text-amber-500 dark:text-amber-400 uppercase text-[10px] tracking-wider mr-1.5">A continuación:</span>
+                <span id="next-program-title" class="font-bold text-zinc-900 dark:text-white">CARGANDO......</span>
+            </p>
+        </div>
+        
+        <!-- Derecha: Horario -->
+        <div class="flex items-center gap-2 text-xs font-mono bg-zinc-200/70 dark:bg-zinc-700/60 text-zinc-700 dark:text-zinc-300 px-2.5 py-1 rounded-lg border border-zinc-300/30 dark:border-zinc-600/30">
+            <i class="fa-regular fa-clock text-zinc-500 dark:text-zinc-400"></i>
+            <span id="next-program-time" class="font-bold">HORA</span>
+        </div>
+    </div>
+</div>
+
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         <div class="lg:col-span-7 space-y-6 w-full">
 
             <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
                 
-                <div class="absolute top-6 left-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
-                    <span class="w-2.5 h-2.5 bg-red-500 rounded-full mr-2 animate-ping"></span>
-                    <span class="w-2.5 h-2.5 bg-red-600 rounded-full mr-2 absolute"></span>
-                    <span class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">EN VIVO</span>
-                </div>
+                <!-- Contenedor Adaptativo de Oyentes (Glassmorphism Light & Dark) -->
+<div class="listeners-badge flex items-center gap-3 px-4 py-2 rounded-full border transition-all duration-300 hover:scale-105 w-fit mx-auto my-3
+            border-black/10 bg-white/60 backdrop-blur-md shadow-md
+            dark:border-white/20 dark:bg-black/30 dark:shadow-lg">
+  
+  <!-- Pulso de luz verde "En Vivo" (Brilla más en modo oscuro) -->
+  <span class="relative flex h-3 w-3">
+    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 dark:bg-emerald-400"></span>
+  </span>
+  
+  <!-- Texto y Contador -->
+  <p class="text-xs sm:text-sm font-medium tracking-wide flex items-center gap-1.5 m-0
+            text-slate-700 dark:text-white/90">
+    <!-- Ícono dinámico -->
+    <i class="ri-user-shared-line text-emerald-600 dark:text-emerald-400 text-base"></i> 
+    <span>Somos</span> 
+    
+    <!-- El número con fondo interno adaptativo -->
+    <strong id="sonic_listeners" 
+            class="text-base sm:text-lg font-bold px-2.5 py-0.5 rounded-md shadow-inner transition-all duration-300
+                   text-slate-900 bg-black/5
+                   dark:text-white dark:bg-white/10 dark:drop-shadow-[0_0_8px_rgba(52,211,153,0.3)]">
+      0
+    </strong> 
+    <span>conectados ahora</span>
+  </p>
+</div>
 
                 <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
                     <img id="track-cover" 
@@ -203,14 +315,7 @@
                     </div>
                 </div>
 
-                <div class="absolute top-6 right-6 flex items-center bg-zinc-200/80 dark:bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800">
-                    <i class="fa-solid fa-users text-brand-neon mr-2"></i>
-                    <span id="listener-count" class="text-xs font-bold tracking-wider uppercase text-zinc-700 dark:text-zinc-200">
-                        <span id="sonic_listeners">0</span>
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
                     <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                         <i class="fa-solid fa-share-nodes text-base"></i>
                         <span>Compartir</span>
@@ -348,19 +453,9 @@
                 <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
                     <i class="fa-brands fa-youtube mr-2 text-red-500 text-base"></i> PLAYLIST RECOMENDADAS                 </h4>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
-                    <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
-                        <div class="w-full aspect-video rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
-                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/videoseries?si=tgTBvA7jYxtGCwu-&amp;list=PL8-D_cKVzYmKQtD4a05_xoAi1A5NtOa4O" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                        <div class="px-1 py-1">
-                            <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors">LAZOS DE VIDA</h5>
-                            <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">Eliaquin & Damiana</p>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
+                                        <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
                         <div class="w-full aspect-video rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
                             <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/videoseries?si=Zgee5knZtc6rydhB&amp;list=PL8-D_cKVzYmLYnxB4XKbBD9ND2O5TfILD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
@@ -383,6 +478,8 @@
                 </div>
             </section>
 
+
+
         </div> 
        
         <div class="lg:col-span-5 space-y-6 w-full">
@@ -403,23 +500,94 @@
                 </a>
             </section>
 
-           <section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300">
-                <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
-                    <i class="fa-solid fa-comment-dots mr-2 text-brand-neon"></i> Comunícate con nosotros
-                </h4>
-                <div class="grid grid-cols-1 gap-3">
-                    <a href="https://wa.me/584125183677?text=Hola,%20quisiera%20pedir%20oración%20por:%20" target="_blank" class="w-full p-3 bg-brand-neonPink/10 border border-brand-neonPink text-brand-neonPink hover:bg-brand-neonPink hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
-                        <i class="fa-solid fa-hands-praying mr-2"></i> Pedir Oración
-                    </a>
-                    <a href="https://wa.me/584125183677?text=Hola,%20envío%20un%20saludo%20a%20Radio%20FE%204:18!" target="_blank" class="w-full p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
-                        <i class="fa-solid fa-microphone mr-2"></i> Enviar Saludo
-                    </a>
-                    <a href="https://wa.me/584125183677?text=Hola,%20me%20gustaría%20pedir%20la%20canción:%20" target="_blank" class="w-full p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon rounded-xl text-xs font-bold uppercase tracking-wider text-center transition-all duration-300">
-                        <i class="fa-solid fa-music mr-2"></i> Pedir Canción
-                    </a>
-                </div>
-            </section>
+<!-- Formulario de Interacción Principal -->
+<section class="w-full max-w-md mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-all duration-300 shadow-xl hover:shadow-2xl">
+    
+    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center justify-center sm:justify-start">
+        <i class="fa-solid fa-comment-dots mr-2 text-brand-neon text-base animate-bounce"></i> 
+        Comunícate con nosotros
+    </h4>
 
+    <!-- PANEL DE CONTADORES REALES EN TIEMPO REAL -->
+    <div class="mb-5 p-3.5 rounded-2xl border border-black/5 bg-black/[0.02] dark:border-white/10 dark:bg-white/[0.02] bg-gradient-to-b from-transparent via-brand-neon/5 to-transparent">
+        <div class="flex items-center gap-2 justify-center mb-3">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <p class="text-xs font-black tracking-wider uppercase text-zinc-500 dark:text-zinc-400 m-0">
+                Interacciones Reales de Hoy
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-3 gap-2">
+            <!-- Contador: Oraciones -->
+            <div class="flex flex-col items-center p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
+                <i class="fa-solid fa-hands-praying text-brand-neonPink text-xs mb-1"></i>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Oraciones</span>
+                <strong id="count-oracion" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
+            </div>
+
+            <!-- Contador: Saludos -->
+            <div class="flex flex-col items-center p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
+                <i class="fa-solid fa-microphone text-brand-neon text-xs mb-1"></i>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Saludos</span>
+                <strong id="count-saludo" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
+            </div>
+
+            <!-- Contador: Canciones -->
+            <div class="flex flex-col items-center p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
+                <i class="fa-solid fa-music text-brand-neon text-xs mb-1"></i>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Canciones</span>
+                <strong id="count-cancion" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
+            </div>
+        </div>
+    </div>
+    
+    <form id="whatsapp-contact-form" class="space-y-4">
+        <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Selecciona una opción:</label>
+            <div class="grid grid-cols-3 gap-2">
+                <label class="group cursor-pointer">
+                    <input type="radio" name="msg_type" value="oracion" checked class="sr-only peer">
+                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neonPink peer-checked:border-brand-neonPink peer-checked:bg-brand-neonPink/10 peer-checked:text-brand-neonPink shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-hands-praying block text-lg mb-1"></i>
+                        <span class="text-[10px] font-black uppercase">Oración</span>
+                    </div>
+                </label>
+                <label class="group cursor-pointer">
+                    <input type="radio" name="msg_type" value="saludo" class="sr-only peer">
+                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-microphone block text-lg mb-1"></i>
+                        <span class="text-[10px] font-black uppercase">Saludo</span>
+                    </div>
+                </label>
+                <label class="group cursor-pointer">
+                    <input type="radio" name="msg_type" value="cancion" class="sr-only peer">
+                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-music block text-lg mb-1"></i>
+                        <span class="text-[10px] font-black uppercase">Canción</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <input type="text" id="form-name" required placeholder="Tu nombre..." class="w-full p-3 text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all duration-200">
+        </div>
+        <div>
+            <textarea id="form-message" rows="3" required placeholder="Escribe tu mensaje aquí..." class="w-full p-3 text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all duration-200 resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 bg-[#25D366] hover:bg-[#128C7E] text-white font-black uppercase text-xs rounded-xl transition-all duration-300 active:scale-95 tracking-wider flex items-center justify-center shadow-lg shadow-[#25D366]/30">
+            <i class="fa-brands fa-whatsapp mr-2 text-sm"></i> Enviar por WhatsApp
+        </button>
+    </form>
+    
+    <div id="success-message" class="hidden mt-3 p-3 rounded-xl bg-green-500/20 text-green-500 text-center font-bold text-xs uppercase tracking-wider">
+        <i class="fa-solid fa-circle-check mr-1"></i> ¡Abriendo WhatsApp!
+    </div>
+</section>
             <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
                 <div class="flex items-center justify-between mb-4">
                     <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
@@ -577,6 +745,8 @@
             { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
             { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
             { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
+   { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Pastor. Jesus Marin", img: "img/programas/pastormarin.png" },
+
             { dia: 6, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" }
         ];
 
@@ -1050,16 +1220,39 @@
             window.addEventListener('click', (e) => { if (e.target === donateModal) donateModal.classList.add('hidden'); });
         }
 
-        const shareBtn = document.getElementById('share-btn');
-        if(shareBtn) {
-            shareBtn.addEventListener('click', async () => {
-                const shareData = { title: 'RADIO FE 4:18', text: 'Escucha RADIO FE 4:18 en vivo, sonando por todo lo alto.', url: window.location.href };
-                try {
-                    if (navigator.share) { await navigator.share(shareData); } 
-                    else { await navigator.clipboard.writeText(window.location.href); alert('¡Enlace copiado al portapapeles!'); }
-                } catch (err) { console.error('Error al compartir:', err); }
-            });
+const shareBtn = document.getElementById('share-btn');
+if(shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+        // Texto predefinido personalizado listo para enviar
+        const textoPersonalizado = "¡Estoy escuchando Radio FE 4:18 desde Barinas! Música de fe y mensajes de aliento 24/7. ¡Escúchala aquí: " + window.location.href + "!";
+        
+        const shareData = { 
+            title: 'RADIO FE 4:18', 
+            text: textoPersonalizado, 
+            url: window.location.href 
+        };
+        
+        try {
+            // Intenta usar la API nativa del dispositivo (Celulares, Tablets, etc.)
+            if (navigator.share) { 
+                await navigator.share(shareData); 
+            } else { 
+                // Si está en PC o navegador no compatible, copia el texto completo al portapapeles
+                await navigator.clipboard.writeText(textoPersonalizado); 
+                alert('¡Mensaje personalizado copiado al portapapeles listo para enviar a tus amigos!'); 
+            }
+        } catch (err) { 
+            console.error('Error al compartir:', err); 
+            // Respaldo secundario en caso de error con la API nativa
+            try {
+                await navigator.clipboard.writeText(textoPersonalizado);
+                alert('¡Mensaje copiado al portapapeles!');
+            } catch(clipboardErr) {
+                console.error('Error en portapapeles:', clipboardErr);
+            }
         }
+    });
+}
 
         const reportBtn = document.getElementById('report-btn');
         if(reportBtn) {
@@ -1362,5 +1555,371 @@ window.addEventListener('load', setupMediaSession);
         </div>
     </div>
 
+<script>
+document.getElementById('whatsapp-contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const successBox = document.getElementById('success-message');
+    const submitBtn = this.querySelector('button');
+    
+    // Captura de datos
+    const type = document.querySelector('input[name="msg_type"]:checked').value;
+    const name = document.getElementById('form-name').value.trim();
+    const message = document.getElementById('form-message').value.trim();
+    
+    // Diccionario para dar formato estético a la Selección
+    const etiquetas = {
+        'Oración': '🙏 ORACIÓN',
+        'Saludo': '🎙️ SALUDO',
+        'Canción': '🎵 MÚSICA'
+    };
+
+    const seleccion = etiquetas[type] || type.toUpperCase();
+    const nombreOyente = name || 'Anónimo';
+    
+    // Preparación del mensaje personalizado (SELECCIÓN, NOMBRE, TEXTO)
+    let finalMessage = `📻 *RADIO FE 4:18* 📻\n\n` +
+                       `📌 *SELECCIÓN:* ${seleccion}\n` +
+                       `👤 *NOMBRE:* ${nombreOyente}\n\n` +
+                       `💬 *TEXTO:* \n"${message}"`;
+
+    const whatsappUrl = `https://wa.me/584125183677?text=${encodeURIComponent(finalMessage)}`;
+    
+    // Efecto visual de "Enviando..."
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...';
+    
+    // Mostrar mensaje de confirmación
+    successBox.classList.remove('hidden');
+    
+    // Abrir WhatsApp después de 1.5 segundos para que vean el mensaje de éxito
+    setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+        
+        // Resetear el formulario
+        this.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp text-sm"></i> <span>Enviar a WhatsApp</span>';
+        
+        // Ocultar mensaje tras 3 segundos
+        setTimeout(() => successBox.classList.add('hidden'), 3000);
+    }, 1500);
+});
+</script>
+
+
+<!-- Pop-up Flotante del Canal de WhatsApp -->
+<div id="whatsapp-popup" class="fixed bottom-6 right-6 z-[100] max-w-[320px] w-[calc(100%-3rem)] translate-y-[150%] opacity-0 transition-all duration-700 ease-out shadow-2xl rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md overflow-hidden hidden flex-col">
+    <button id="close-wa-popup" class="absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-zinc-400 hover:text-zinc-700 dark:hover:text-white transition-colors bg-zinc-100 dark:bg-zinc-800 rounded-full">
+        <i class="fa-solid fa-times text-sm"></i>
+    </button>
+    <div class="p-5 flex items-start gap-4">
+        <div class="w-12 h-12 bg-green-500/10 text-green-500 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-slow">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+        </div>
+        <div class="flex-1 pt-1">
+            <h4 class="text-sm font-bold text-zinc-900 dark:text-white leading-tight mb-1.5">¿Te gusta lo que escuchas?</h4>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Recibe contenido exclusivo, versículos diarios y alertas de programación.</p>
+            <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" target="_blank" id="join-wa-popup"
+               class="block w-full py-2.5 px-4 text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-black uppercase text-[10px] tracking-wider rounded-xl transition-all duration-300 active:scale-95 shadow-lg shadow-[#25D366]/30 dark:shadow-none">
+                ¡Únete a la familia!
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const waPopup = document.getElementById('whatsapp-popup');
+        const closeWaBtn = document.getElementById('close-wa-popup');
+        const joinWaBtn = document.getElementById('join-wa-popup');
+
+        // Configurado a 120,000 milisegundos (2 minutos completos de escucha)
+        const POPUP_DELAY = 120000; 
+
+        // Solo se ejecuta si el usuario no ha cerrado el mensaje previamente
+        if (waPopup && closeWaBtn && localStorage.getItem('wa_popup_dismissed') !== 'true') {
+            setTimeout(() => {
+                waPopup.classList.remove('hidden');
+                waPopup.classList.add('flex');
+                
+                // Pequeño retraso para permitir que la transición CSS (slide up) haga efecto
+                setTimeout(() => {
+                    waPopup.classList.remove('translate-y-[150%]', 'opacity-0');
+                }, 50);
+            }, POPUP_DELAY);
+
+            const hidePopup = () => {
+                waPopup.classList.add('translate-y-[150%]', 'opacity-0');
+                setTimeout(() => { 
+                    waPopup.classList.add('hidden'); 
+                    waPopup.classList.remove('flex');
+                }, 700);
+                // Guarda la preferencia para no volver a molestar al usuario
+                localStorage.setItem('wa_popup_dismissed', 'true');
+            };
+
+            closeWaBtn.addEventListener('click', hidePopup);
+            joinWaBtn.addEventListener('click', hidePopup); // Ocultar asumiendo que ya se unió
+        }
+    });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    function actualizarBarraProgramacion() {
+        const titleElement = document.getElementById('next-program-title');
+        const timeElement = document.getElementById('next-program-time');
+
+        if (!titleElement || !timeElement) return;
+
+        const ahora = new Date();
+        const diaActual = ahora.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+        
+        // Obtener hora actual en formato de texto "HH:MM" con ceros a la izquierda
+        const horaActualStr = ahora.getHours().toString().padStart(2, '0') + ':' + 
+                              ahora.getMinutes().toString().padStart(2, '0');
+
+        // TU PARRILLA DE PROGRAMACIÓN COMPLETA
+        const parrilla = [
+            { dia: 0, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 0, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 0, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 2, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 2, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 2, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 3, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 3, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 3, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 4, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 4, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 4, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 5, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 5, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 5, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 6, horaInicio: "06:00", horaFin: "06:15", nombre: "ORAMOS POR LOS PASTORES Y LIDERES", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 6, horaInicio: "15:00", horaFin: "15:15", nombre: "ORAMOS POR VENEZUELA", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 6, horaInicio: "21:00", horaFin: "21:15", nombre: "ORAMOS POR LAS FAMILIAS", dj: "Radio FE 4:18", img: "img/oracion/oracion.png" },
+            { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "Radio FE 4:18", img: "img/programas/mujeres.png", youtube: "https://www.youtube.com/@Mujeresconproposito-pv" },
+            { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro", img: "img/programas/alejandro.png" },
+            { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "Apóstol", img: "img/programas/apostol.png", youtube: "https://www.youtube.com/@Ap%C3%B3stolElioFranco" },
+            { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "Radio FE 4:18", img: "img/programas/hombres.png", youtube: "https://www.youtube.com/@HombresDevalorpv" },
+            { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Radio FE 4:18", img: "img/programas/lazosdevida.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKQtD4a05_xoAi1A5NtOa4O&si=zwmgdlZB5mjCTaHl" },
+            { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 10 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif" },
+            { dia: 0, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png" },
+            { dia: 1, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png" },
+            { dia: 2, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png" },
+            { dia: 3, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png" },
+            { dia: 4, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png" },
+            { dia: 5, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png" },
+            { dia: 6, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png" },
+            { dia: 0, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
+            { dia: 1, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
+            { dia: 2, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
+            { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
+            { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
+            { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
+            { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Pastor. Jesus Marin", img: "img/programas/pastormarin.png" },
+            { dia: 6, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" }
+        ];
+
+        // Función auxiliar para convertir "17:00" a un formato legible "05:00 PM"
+        function formatearAMPM(horaStr) {
+            const [horas, minutos] = horaStr.split(':').map(Number);
+            const ampm = horas >= 12 ? 'PM' : 'AM';
+            const horas12 = horas % 12 || 12;
+            return `${horas12.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')} ${ampm}`;
+        }
+
+        // 1. Buscamos los programas de HOY y los ordenamos cronológicamente
+        const programasDeHoy = parrilla
+            .filter(p => p.dia === diaActual)
+            .sort((a, b) => a.horaInicio.localeCompare(b.horaInicio));
+
+        // 2. Intentamos buscar el próximo programa que empiece MÁS TARDE de la hora actual
+        let proximo = programasDeHoy.find(p => p.horaInicio > horaActualStr);
+
+        // 3. Si no hay más programas para hoy, buscamos el primer programa del día de mañana (o siguientes)
+        if (!proximo) {
+            let diasEvaluados = 1;
+            while (diasEvaluados <= 7) {
+                const siguienteDia = (diaActual + diasEvaluados) % 7;
+                const programasSiguienteDia = parrilla
+                    .filter(p => p.dia === siguienteDia)
+                    .sort((a, b) => a.horaInicio.localeCompare(b.horaInicio));
+
+                if (programasSiguienteDia.length > 0) {
+                    proximo = programasSiguienteDia[0];
+                    break;
+                }
+                diasEvaluados++;
+            }
+        }
+
+        // 4. Renderizar la información en la barra si se encontró un programa
+        if (proximo) {
+            const textoEtiqueta = (proximo.dia === diaActual) ? "A continuación:" : "Mañana:";
+            
+            // Actualizamos el contenido adaptando el diseño
+            titleElement.innerHTML = `${proximo.nombre} — <span class="text-zinc-500 dark:text-zinc-400 font-normal text-xs">Con ${proximo.dj}</span>`;
+            timeElement.textContent = formatearAMPM(proximo.horaInicio);
+            
+            // Opcional: Si cambiaste el prefijo estático del HTML, puedes actualizarlo dinámicamente:
+            const labelSpan = titleElement.previousElementSibling;
+            if (labelSpan && labelSpan.tagName === 'SPAN') {
+                labelSpan.textContent = textoEtiqueta;
+            }
+        }
+    }
+
+    // Ejecución inicial al cargar el documento
+    actualizarBarraProgramacion();
+
+    // Comprobar y refrescar el estado automáticamente cada 60 segundos
+    setInterval(actualizarBarraProgramacion, 60000);
+});
+</script>
+<!-- Cargar el cliente oficial de Supabase desde CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. CONFIGURACIÓN Y CONEXIÓN CON SUPABASE
+    const SUPABASE_URL = "https://uwqsmleddwtoxqlbadka.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cXNtbGVkZHd0b3hxbGJhZGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwODY1MjcsImV4cCI6MjA5NjY2MjUyN30.DNHIx60lyoqwW1NNb7XZYSAwrhJQT8pSS2JujkbS6a8";
+    
+    const supabase = SUPABASE_JS.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Mapeo de los contadores visuales en tu interfaz web
+    const counters = {
+        'oracion': document.getElementById('count-oracion'),
+        'saludo': document.getElementById('count-saludo'),
+        'cancion': document.getElementById('count-cancion')
+    };
+    
+    // Traductor inteligente: Vincula tus "values" con acento del HTML con las filas de la base de datos
+    const traducirId = {
+        'Oración': 'oracion',
+        'Saludo': 'saludo',
+        'Canción': 'cancion'
+    };
+
+    // Descargar contadores reales desde Supabase al abrir la landing page
+    async function fetchInitialCounts() {
+        const { data, error } = await supabase
+            .from('contadores_radio')
+            .select('id, cantidad');
+
+        if (!error && data) {
+            data.forEach(row => {
+                if (counters[row.id]) {
+                    counters[row.id].textContent = row.cantidad !== undefined ? row.cantidad : (row.amount || 0); 
+                }
+            });
+        }
+    }
+    fetchInitialCounts();
+
+    // Canal en tiempo real (Realtime) para actualizar los marcadores de toda tu audiencia en vivo
+    supabase
+        .channel('schema-db-changes')
+        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'contadores_radio' }, payload => {
+            const updatedRow = payload.new;
+            const targetVisual = counters[updatedRow.id];
+            
+            if (targetVisual) {
+                targetVisual.classList.add('scale-110', 'text-brand-neon', 'dark:text-brand-neon');
+                targetVisual.textContent = updatedRow.cantidad;
+                
+                setTimeout(() => {
+                    targetVisual.classList.remove('scale-110', 'text-brand-neon', 'dark:text-brand-neon');
+                }, 400);
+            }
+        })
+        .subscribe();
+
+    // 2. ESCUCHA Y PROCESAMIENTO DE TU FORMULARIO
+    const contactForm = document.getElementById('whatsapp-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const successBox = document.getElementById('success-message');
+            const submitBtn = this.querySelector('button');
+            
+            // Captura de datos (Tu lógica exacta)
+            const type = document.querySelector('input[name="msg_type"]:checked').value;
+            const name = document.getElementById('form-name').value.trim();
+            const message = document.getElementById('form-message').value.trim();
+            
+            // --- ACTUALIZACIÓN ASÍNCRONA EN SUPABASE ---
+            const dbId = traducirId[type]; 
+            if (dbId && counters[dbId]) {
+                const currentAmount = parseInt(counters[dbId].textContent) || 0;
+                const newAmount = currentAmount + 1;
+                counters[dbId].textContent = newAmount; // Suma +1 en pantalla inmediatamente (efecto instantáneo)
+
+                // Envía el incremento a la base de datos en segundo plano
+                supabase
+                    .from('contadores_radio')
+                    .update({ cantidad: newAmount, ultima_actualizacion: new Date() })
+                    .eq('id', dbId)
+                    .then(({ error }) => {
+                        if (error) console.error("Error al actualizar Supabase:", error.message);
+                    });
+            }
+            // --------------------------------------------
+
+            // Diccionario para dar formato estético a la Selección
+            const etiquetas = {
+                'Oración': '🙏 ORACIÓN',
+                'Saludo': '🎙️ SALUDO',
+                'Canción': '🎵 MÚSICA'
+            };
+
+            const seleccion = etiquetas[type] || type.toUpperCase();
+            const nombreOyente = name || 'Anónimo';
+            
+            // Preparación de tu mensaje personalizado estructurado
+            let finalMessage = `📻 *RADIO FE 4:18* 📻\n\n` +
+                               `📌 *SELECCIÓN:* ${seleccion}\n` +
+                               `👤 *NOMBRE:* ${nombreOyente}\n\n` +
+                               `💬 *TEXTO:* \n"${message}"`;
+
+            const whatsappUrl = `https://wa.me/584125183677?text=${encodeURIComponent(finalMessage)}`;
+            
+            // Tu efecto visual de "Enviando..."
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...';
+            
+            // Mostrar mensaje de confirmación en la UI
+            if (successBox) successBox.classList.remove('hidden');
+            
+            // Abrir WhatsApp después de 1.5 segundos
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+                
+                // Resetear el formulario manteniendo tus estilos intactos
+                this.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp text-sm"></i> <span>Enviar a WhatsApp</span>';
+                
+                // Ocultar mensaje tras 3 segundos
+                setTimeout(() => {
+                    if (successBox) successBox.classList.add('hidden');
+                }, 3000);
+            }, 1500);
+        });
+    }
+});
+</script>
 </body>
 </html>
