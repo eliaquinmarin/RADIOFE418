@@ -1555,57 +1555,6 @@ window.addEventListener('load', setupMediaSession);
         </div>
     </div>
 
-<script>
-document.getElementById('whatsapp-contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const successBox = document.getElementById('success-message');
-    const submitBtn = this.querySelector('button');
-    
-    // Captura de datos
-    const type = document.querySelector('input[name="msg_type"]:checked').value;
-    const name = document.getElementById('form-name').value.trim();
-    const message = document.getElementById('form-message').value.trim();
-    
-    // Diccionario para dar formato estético a la Selección
-    const etiquetas = {
-        'Oración': '🙏 ORACIÓN',
-        'Saludo': '🎙️ SALUDO',
-        'Canción': '🎵 MÚSICA'
-    };
-
-    const seleccion = etiquetas[type] || type.toUpperCase();
-    const nombreOyente = name || 'Anónimo';
-    
-    // Preparación del mensaje personalizado (SELECCIÓN, NOMBRE, TEXTO)
-    let finalMessage = `📻 *RADIO FE 4:18* 📻\n\n` +
-                       `📌 *SELECCIÓN:* ${seleccion}\n` +
-                       `👤 *NOMBRE:* ${nombreOyente}\n\n` +
-                       `💬 *TEXTO:* \n"${message}"`;
-
-    const whatsappUrl = `https://wa.me/584125183677?text=${encodeURIComponent(finalMessage)}`;
-    
-    // Efecto visual de "Enviando..."
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...';
-    
-    // Mostrar mensaje de confirmación
-    successBox.classList.remove('hidden');
-    
-    // Abrir WhatsApp después de 1.5 segundos para que vean el mensaje de éxito
-    setTimeout(() => {
-        window.open(whatsappUrl, '_blank');
-        
-        // Resetear el formulario
-        this.reset();
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp text-sm"></i> <span>Enviar a WhatsApp</span>';
-        
-        // Ocultar mensaje tras 3 segundos
-        setTimeout(() => successBox.classList.add('hidden'), 3000);
-    }, 1500);
-});
-</script>
 
 
 <!-- Pop-up Flotante del Canal de WhatsApp -->
