@@ -558,9 +558,8 @@
                 </a>
             </section>
 
-<!-- Formulario de Interacción Principal -->
-<!-- Ajustado el max-w para que crezca dinámicamente según la pantalla -->
-<section class="w-full max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 sm:p-6 md:p-8 transition-all duration-300 shadow-xl hover:shadow-2xl">
+<!-- Formulario de Interacción Principal - Ajustado al 100% del ancho de la pantalla -->
+<section class="w-full mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border-x-0 border-y border-zinc-200 dark:border-zinc-800/80 p-3 sm:p-6 md:p-8 transition-all duration-300 shadow-xl">
     
     <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center justify-center sm:justify-start">
         <i class="fa-solid fa-comment-dots mr-2 text-brand-neon text-base animate-bounce"></i> 
@@ -579,27 +578,27 @@
             </p>
         </div>
         
-        <!-- Cambiado a grid-cols-1 en móviles muy pequeños y grid-cols-3 en pantallas sm en adelante -->
-        <div class="grid grid-cols-1 xs:grid-cols-3 gap-2 sm:gap-4">
+        <!-- 3 columnas horizontales optimizadas para pantallas muy estrechas -->
+        <div class="grid grid-cols-3 gap-1.5 sm:gap-4">
             <!-- Contador: Oraciones -->
-            <div class="flex flex-col items-center p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
+            <div class="flex flex-col items-center p-1.5 sm:p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
                 <i class="fa-solid fa-hands-praying text-brand-neonPink text-xs mb-1"></i>
-                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Oraciones</span>
-                <strong id="count-oracion" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Oraciones</span>
+                <strong id="count-oracion" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1 sm:px-2 py-0.5 rounded shadow-inner min-w-[22px] sm:min-w-[28px] transition-all duration-300">...</strong>
             </div>
 
             <!-- Contador: Saludos -->
-            <div class="flex flex-col items-center p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
+            <div class="flex flex-col items-center p-1.5 sm:p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
                 <i class="fa-solid fa-microphone text-brand-neon text-xs mb-1"></i>
-                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Saludos</span>
-                <strong id="count-saludo" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Saludos</span>
+                <strong id="count-saludo" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1 sm:px-2 py-0.5 rounded shadow-inner min-w-[22px] sm:min-w-[28px] transition-all duration-300">...</strong>
             </div>
 
             <!-- Contador: Canciones -->
-            <div class="flex flex-col items-center p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
+            <div class="flex flex-col items-center p-1.5 sm:p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
                 <i class="fa-solid fa-music text-brand-neon text-xs mb-1"></i>
-                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Canciones</span>
-                <strong id="count-cancion" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Canciones</span>
+                <strong id="count-cancion" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1 sm:px-2 py-0.5 rounded shadow-inner min-w-[22px] sm:min-w-[28px] transition-all duration-300">...</strong>
             </div>
         </div>
     </div>
@@ -607,33 +606,33 @@
     <form id="whatsapp-contact-form" class="space-y-4">
         <div>
             <label class="block text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Selecciona una opción:</label>
-            <!-- Las opciones ahora son 1 columna en móviles y 3 a partir de tablets/escritorio -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
-                <label class="group cursor-pointer">
+            <!-- 3 columnas horizontales de opciones estables al 100% de la anchura -->
+            <div class="grid grid-cols-3 gap-1.5 sm:gap-3">
+                <label class="group cursor-pointer min-w-0">
                     <input type="radio" name="msg_type" value="oracion" checked class="sr-only peer">
-                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neonPink peer-checked:border-brand-neonPink peer-checked:bg-brand-neonPink/10 peer-checked:text-brand-neonPink shadow-sm hover:scale-105 active:scale-95">
-                        <i class="fa-solid fa-hands-praying block text-lg mb-1"></i>
-                        <span class="text-[10px] font-black uppercase">Oración</span>
+                    <div class="p-1.5 sm:p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neonPink peer-checked:border-brand-neonPink peer-checked:bg-brand-neonPink/10 peer-checked:text-brand-neonPink shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-hands-praying block text-base sm:text-lg mb-1"></i>
+                        <span class="text-[8px] sm:text-[10px] font-black uppercase block truncate">Oración</span>
                     </div>
                 </label>
-                <label class="group cursor-pointer">
+                <label class="group cursor-pointer min-w-0">
                     <input type="radio" name="msg_type" value="saludo" class="sr-only peer">
-                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
-                        <i class="fa-solid fa-microphone block text-lg mb-1"></i>
-                        <span class="text-[10px] font-black uppercase">Saludo</span>
+                    <div class="p-1.5 sm:p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-microphone block text-base sm:text-lg mb-1"></i>
+                        <span class="text-[8px] sm:text-[10px] font-black uppercase block truncate">Saludo</span>
                     </div>
                 </label>
-                <label class="group cursor-pointer">
+                <label class="group cursor-pointer min-w-0">
                     <input type="radio" name="msg_type" value="cancion" class="sr-only peer">
-                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
-                        <i class="fa-solid fa-music block text-lg mb-1"></i>
-                        <span class="text-[10px] font-black uppercase">Canción</span>
+                    <div class="p-1.5 sm:p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-music block text-base sm:text-lg mb-1"></i>
+                        <span class="text-[8px] sm:text-[10px] font-black uppercase block truncate">Canción</span>
                     </div>
                 </label>
             </div>
         </div>
 
-        <!-- Inputs con padding responsivo opcional para mejor usabilidad -->
+        <!-- Inputs que ocupan todo el ancho de su bloque de forma natural -->
         <div>
             <input type="text" id="form-name" required placeholder="Tu nombre..." class="w-full p-3 text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all duration-200">
         </div>
@@ -650,6 +649,9 @@
         <i class="fa-solid fa-circle-check mr-1"></i> ¡Abriendo WhatsApp!
     </div>
 </section>
+
+<!-- Formulario de Interacción Principal -->
+
 <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
                 <div class="flex items-center justify-between mb-4">
                     <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
