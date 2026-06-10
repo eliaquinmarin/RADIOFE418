@@ -1810,7 +1810,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const SUPABASE_URL = "https://uwqsmleddwtoxqlbadka.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cXNtbGVkZHd0b3hxbGJhZGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwODY1MjcsImV4cCI6MjA5NjY2MjUyN30.DNHIx60lyoqwW1NNb7XZYSAwrhJQT8pSS2JujkbS6a8";
     
-    // CORRECCIÓN: Usamos window.supabase para evitar conflictos en la lectura del CDN
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // Mapeo de los contadores visuales en tu interfaz web
@@ -1820,30 +1819,34 @@ document.addEventListener('DOMContentLoaded', () => {
         'cancion': document.getElementById('count-cancion')
     };
     
-    // Traductor inteligente: Vincula tus "values" con acento del HTML con las filas de la base de datos
+    // Traductor inteligente para el formulario
     const traducirId = {
-        'Oración': 'oracion',
-        'Saludo': 'saludo',
-        'Canción': 'cancion'
+        'oracion': 'oracion',
+        'saludo': 'saludo',
+        'cancion': 'cancion'
     };
 
     // Descargar contadores reales desde Supabase al abrir la landing page
     async function fetchInitialCounts() {
-        const { data, error } = await supabase
-            .from('contadores_radio')
-            .select('id, cantidad');
+        try {
+            const { data, error } = await supabase
+                .from('contadores_radio')
+                .select('id, cantidad');
 
-        if (!error && data) {
-            data.forEach(row => {
-                if (counters[row.id]) {
-                    counters[row.id].textContent = row.cantidad !== undefined ? row.cantidad : (row.amount || 0); 
-                }
-            });
+            if (!error && data) {
+                data.forEach(row => {
+                    if (counters[row.id]) {
+                        counters[row.id].textContent = row.cantidad ?? 0;
+                    }
+                });
+            }
+        } catch (err) {
+            console.error("Error inicial:", err);
         }
     }
     fetchInitialCounts();
 
-    // Canal en tiempo real (Realtime) para actualizar los marcadores de toda tu audiencia en vivo
+    // Canal en tiempo real (Realtime) para actualizar los marcadores globalmente
     supabase
         .channel('schema-db-changes')
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'contadores_radio' }, payload => {
@@ -1861,52 +1864,48 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .subscribe();
 
-    // 2. ESCUCHA Y PROCESAMIENTO DE TU FORMULARIO
+    // 2. ESCUCHA Y PROCESAMIENTO DE TU FORMULARIO DE INTERACCIÓN
     const contactForm = document.getElementById('whatsapp-contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const successBox = document.getElementById('success-message');
             const submitBtn = this.querySelector('button');
             
-            // Captura de datos (Tu lógica exacta)
+            // Captura de datos optimizada según los values reales de tu HTML ("oracion", "saludo", "cancion")
             const checkedInput = document.querySelector('input[name="msg_type"]:checked');
-            if (!checkedInput) return; // Seguridad por si no hay selección previa
+            if (!checkedInput) return;
             
-            const type = checkedInput.value;
+            const type = checkedInput.value; 
             const name = document.getElementById('form-name').value.trim();
             const message = document.getElementById('form-message').value.trim();
+            const dbId = traducirId[type];
+
+            if (!dbId) return;
+
+            // Bloquear interfaz para evitar doble envío (Seguridad Antispam)
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...';
+
+            // --- EJECUCIÓN SEGURA: INCREMENTO ATÓMICO EN BASE DE DATOS ---
+            const { error } = await supabase.rpc('incrementar_contador', { row_id: dbId });
             
-            // --- ACTUALIZACIÓN ASÍNCRONA EN SUPABASE ---
-            const dbId = traducirId[type]; 
-            if (dbId && counters[dbId]) {
-                const currentAmount = parseInt(counters[dbId].textContent) || 0;
-                const newAmount = currentAmount + 1;
-                counters[dbId].textContent = newAmount; // Suma +1 en pantalla inmediatamente (efecto instantáneo)
-
-                // Envía el incremento a la base de datos en segundo plano
-                supabase
-                    .from('contadores_radio')
-                    .update({ cantidad: newAmount, ultima_actualizacion: new Date() })
-                    .eq('id', dbId)
-                    .then(({ error }) => {
-                        if (error) console.error("Error al actualizar Supabase:", error.message);
-                    });
+            if (error) {
+                console.error("Error crítico al actualizar contador:", error.message);
+                // Si falla la base de datos, igual permitimos que el usuario envíe su mensaje por resiliencia
             }
-            // --------------------------------------------
 
-            // Diccionario para dar formato estético a la Selección
+            // Diccionario estético para construir tu mensaje personalizado
             const etiquetas = {
-                'Oración': '🙏 ORACIÓN',
-                'Saludo': '🎙️ SALUDO',
-                'Canción': '🎵 MÚSICA'
+                'oracion': '🙏 ORACIÓN',
+                'saludo': '🎙️ SALUDO',
+                'cancion': '🎵 MÚSICA'
             };
 
             const seleccion = etiquetas[type] || type.toUpperCase();
             const nombreOyente = name || 'Anónimo';
             
-            // Preparación de tu mensaje personalizado estructurado
             let finalMessage = `📻 *RADIO FE 4:18* 📻\n\n` +
                                `📌 *SELECCIÓN:* ${seleccion}\n` +
                                `👤 *NOMBRE:* ${nombreOyente}\n\n` +
@@ -1914,27 +1913,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const whatsappUrl = `https://wa.me/584125183677?text=${encodeURIComponent(finalMessage)}`;
             
-            // Tu efecto visual de "Enviando..."
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...';
-            
-            // Mostrar mensaje de confirmación en la UI
             if (successBox) successBox.classList.remove('hidden');
             
-            // Abrir WhatsApp después de 1.5 segundos
+            // Redirección limpia e instantánea después del procesamiento
             setTimeout(() => {
                 window.open(whatsappUrl, '_blank');
                 
-                // Resetear el formulario manteniendo tus estilos intactos
                 this.reset();
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp text-sm"></i> <span>Enviar a WhatsApp</span>';
                 
-                // Ocultar mensaje tras 3 segundos
                 setTimeout(() => {
                     if (successBox) successBox.classList.add('hidden');
                 }, 3000);
-            }, 1500);
+            }, 1000);
         });
     }
 });
