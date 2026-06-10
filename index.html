@@ -1997,7 +1997,7 @@ function cambiarPestañaMuro(destino) {
         btnVer.classList.add(...claseActiva); btnVer.classList.remove(...claseInactiva);
         btnEscribir.classList.remove(...claseActiva); btnEscribir.classList.add(...claseInactiva);
         vistaVer.classList.remove('hidden'); vistaEscribir.classList.add('hidden');
-        obtenerComentariosReales();
+        // Quitamos la llamada automática de aquí para controlarla de forma manual y limpia
     } else {
         btnEscribir.classList.add(...claseActiva); btnEscribir.classList.remove(...claseInactiva);
         btnVer.classList.remove(...claseActiva); btnVer.classList.add(...claseInactiva);
@@ -2069,12 +2069,11 @@ async function enviarMensajeMuro(event) {
         fotoTipo: tipoFoto
     };
 
-try {
-        // Envío asíncrono transparente a Google
+    try {
+        // Envío asíncrono seguro usando text/plain para CORS
         await fetch(URL_GOOGLE_SCRIPT, {
             method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "text/plain" }, 
             body: JSON.stringify(payload)
         });
 
@@ -2087,7 +2086,7 @@ try {
         // 1. Regresamos visualmente a la pestaña de lectura 'Ver'
         cambiarPestañaMuro('ver');
         
-        // 2. Forzamos una recarga inmediata para jalar el nuevo tope de 4
+        // 2. Forzamos la recarga de datos una única vez de manera limpia
         await obtenerComentariosReales();
         
     } catch (error) {
@@ -2102,6 +2101,16 @@ try {
 // Carga Inicial
 document.addEventListener("DOMContentLoaded", () => {
     obtenerComentariosReales();
+    
+    // Vinculamos la acción de actualización también al cambiar manualmente a la pestaña "ver"
+    document.getElementById('tab-ver')?.addEventListener('click', () => {
+        cambiarPestañaMuro('ver');
+        obtenerComentariosReales();
+    });
+    
+    document.getElementById('tab-escribir')?.addEventListener('click', () => {
+        cambiarPestañaMuro('escribir');
+    });
 });
 </script>
 </body>
