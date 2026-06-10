@@ -478,8 +478,66 @@
                 </div>
             </section>
 
+<!-- SECCIÓN MURO DE FE INTEGRADO CON GOOGLE (FOTO PROPIA) -->
+<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
+    <div class="flex items-center justify-between mb-4 border-b border-zinc-200/50 dark:border-zinc-800/60 pb-2">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-heart-pulse mr-2 text-brand-neon animate-pulse"></i> Muro de Fe
+        </h4>
+        <div class="flex gap-1 bg-zinc-200/60 dark:bg-zinc-800/80 p-0.5 rounded-xl text-[10px] font-bold uppercase tracking-wider">
+            <button id="tab-ver" onclick="cambiarPestañaMuro('ver')" class="px-2.5 py-1 rounded-lg bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm transition-all duration-200">Ver</button>
+            <button id="tab-escribir" onclick="cambiarPestañaMuro('escribir')" class="px-2.5 py-1 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-200">Escribir</button>
+        </div>
+    </div>
 
+    <!-- VISTA 1: COMENTARIOS CON FOTO REAL -->
+<!-- VISTA 1: COMENTARIOS CON FOTO REAL (LIMITADO ESTRICTAMENTE A 4) -->
+<div id="muro-vista-ver" class="space-y-3">
+    <div id="muro-loading" class="flex flex-col items-center justify-center py-8 text-zinc-400 dark:text-zinc-500">
+        <i class="fa-solid fa-circle-notch animate-spin text-xl mb-2 text-brand-neon"></i>
+        <span class="text-xs uppercase font-bold tracking-wider">Abriendo el Muro de Fe...</span>
+    </div>
+</div>
 
+    <!-- VISTA 2: FORMULARIO CON SUBIDA DE FOTO -->
+    <div id="muro-vista-escribir" class="hidden animate-fade-in">
+        <form id="form-muro-fe" onsubmit="enviarMensajeMuro(event)" class="space-y-3">
+            <div>
+                <label class="block text-[10px] uppercase font-black text-zinc-500 dark:text-zinc-400 mb-1 tracking-wide">Tu Nombre o Familia</label>
+                <input type="text" id="muro-nombre" required placeholder="Ej. Pedro Pérez o Familia Marín" class="w-full text-xs px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 text-zinc-900 dark:text-white focus:outline-none focus:border-brand-neon transition-all">
+            </div>
+
+            <div>
+                <label class="block text-[10px] uppercase font-black text-zinc-500 dark:text-zinc-400 mb-1 tracking-wide">Sube tu Foto de Perfil</label>
+                <div class="flex items-center gap-3 bg-zinc-100 dark:bg-zinc-800/40 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <!-- Vista previa de la foto elegida -->
+                    <div class="relative w-11 h-11 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center overflow-hidden border border-zinc-300 dark:border-zinc-600 flex-shrink-0">
+                        <img id="muro-preview-img" src="" class="w-full h-full object-cover hidden">
+                        <i id="muro-preview-icon" class="fa-solid fa-user text-zinc-400 dark:text-zinc-500 text-sm"></i>
+                    </div>
+                    <!-- Botón nativo oculto pero enlazado de forma estética -->
+                    <div class="flex-grow min-w-0">
+                        <label for="muro-foto" class="inline-block px-3 py-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-brand-neon hover:text-zinc-950 rounded-lg text-[11px] font-bold uppercase tracking-wider cursor-pointer transition-all truncate max-w-full">
+                            <i class="fa-solid fa-camera mr-1"></i> Seleccionar foto
+                        </label>
+                        <input type="file" id="muro-foto" accept="image/*" onchange="previsualizarFotoMuro(this)" class="hidden">
+                        <span id="muro-foto-status" class="block text-[9px] text-zinc-400 mt-1 truncate">Ninguna foto seleccionada</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[10px] uppercase font-black text-zinc-500 dark:text-zinc-400 mb-1 tracking-wide">Tu Testimonio o Petición</label>
+                <textarea id="muro-mensaje" required rows="3" maxlength="250" placeholder="Escribe aquí tu mensaje para la comunidad..." class="w-full text-xs px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 text-zinc-900 dark:text-white focus:outline-none focus:border-brand-neon resize-none transition-all"></textarea>
+                <span class="text-[9px] text-zinc-400 block text-right mt-0.5">Máximo 250 caracteres</span>
+            </div>
+
+            <button type="submit" id="btn-enviar-muro" class="w-full py-2 bg-brand-neon hover:bg-brand-neon/90 text-zinc-950 font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Compartir Bendición
+            </button>
+        </form>
+    </div>
+</section>
         </div> 
        
         <div class="lg:col-span-5 space-y-6 w-full">
@@ -588,7 +646,7 @@
         <i class="fa-solid fa-circle-check mr-1"></i> ¡Abriendo WhatsApp!
     </div>
 </section>
-            <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
+<section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
                 <div class="flex items-center justify-between mb-4">
                     <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
                         <i class="fa-solid fa-newspaper mr-2 text-brand-neonPink"></i> Notas & Entérate
@@ -598,24 +656,24 @@
                 
                 <div class="flex flex-col">
                     <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group">
-                        <img src="img/contextopubli/imagen.png" alt="Mission Talk - Ricardo Rodríguez" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://www.contextomediagroup.com/wp-content/uploads/2026/06/Los-Maldonado.png" alt="La Familia Maldonado - Pentecostés en Fuego Coritos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-[9px] font-bold text-white px-2 py-1 rounded-md tracking-wider">
-                            6 ABR 2026
+                            10 JUN 2026
                         </div>
                     </div>
                     
                     <div class="space-y-2">
                         <h3 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-snug hover:text-brand-neon transition-colors duration-300">
-                            Mission Talk presenta «De Tal Manera Amó Dios» interpretada por Ricardo Rodríguez
+                            La Familia Maldonado estrena «Pentecostés en Fuego Coritos»
                         </h3>
                         
                         <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
-                            La organización Mission Talk lanza una campaña que entrelaza fe, justicia y compasión, acompañada por este emotivo tema musical. Una iniciativa inspirada en el Evangelio para despertar y movilizar el amor al prójimo.
+                            Bajo el sello Blessing Recording Productions y la dirección del productor Luis Avilés, la familia Maldonado une sus voces para rendir homenaje a los coritos que marcaron generaciones y continúan transformando vidas con un mensaje de restauración familiar.
                         </p>
                     </div>
                     
                     <div class="mt-4 pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
-                        <a href="https://www.contextomediagroup.com/mission-talk-presenta-de-tal-manera-amo-dios-interpretada-por-ricardo-rodriguez/" 
+                        <a href="https://www.contextomediagroup.com/la-familia-maldonado-estrena-pentecostes-en-fuego-coritos/" 
                            target="_blank" 
                            rel="noopener noreferrer" 
                            class="w-full bg-zinc-200/50 dark:bg-zinc-900/40 border border-zinc-300 dark:border-zinc-800 hover:border-brand-neon hover:text-brand-neon rounded-xl flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 transition-all duration-300 active:scale-[0.98] group">
@@ -1873,6 +1931,179 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1500);
         });
     }
+});
+</script>
+<script>
+// REEMPLAZA ESTA URL CON TU ENLACE DE GOOGLE APPS SCRIPT ACTUALIZADO
+const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbz8j_oxl2uTS30oAPeVIiwETyjyHNpkrupQ_K0gguRR6rS00UMZeNNre237XpavR5cYCA/exec";
+
+// Variables globales para la foto activa
+let datosFotoBase64 = "";
+let nombreFoto = "";
+let tipoFoto = "";
+
+// Función para manejar la previsualización local de la imagen seleccionada por el usuario
+function previsualizarFotoMuro(input) {
+    const previewImg = document.getElementById('muro-preview-img');
+    const previewIcon = document.getElementById('muro-preview-icon');
+    const statusTxt = document.getElementById('muro-foto-status');
+    
+    if (input.files && input.files[0]) {
+        const archivo = input.files[0];
+        
+        // Validación básica de peso (máximo 4MB para evitar saturar el canal de subida)
+        if (archivo.size > 4 * 1024 * 1024) {
+            alert("La foto es demasiado pesada. Elige una menor a 4MB.");
+            input.value = "";
+            return;
+        }
+
+        nombreFoto = archivo.name;
+        tipoFoto = archivo.type;
+        statusTxt.innerText = archivo.name;
+
+        const lector = new FileReader();
+        lector.onload = function(e) {
+            // Mostrar imagen en miniatura
+            previewImg.src = e.target.result;
+            previewImg.classList.remove('hidden');
+            previewIcon.classList.add('hidden');
+            
+            // Extraer solo la cadena pura de Base64 para mandarla a Google
+            datosFotoBase64 = e.target.result.split(',')[1];
+        };
+        lector.readAsDataURL(archivo);
+    } else {
+        resetearSelectorFoto();
+    }
+}
+
+function resetearSelectorFoto() {
+    document.getElementById('muro-preview-img').classList.add('hidden');
+    document.getElementById('muro-preview-icon').classList.remove('hidden');
+    document.getElementById('muro-foto-status').innerText = "Ninguna foto seleccionada";
+    datosFotoBase64 = ""; nombreFoto = ""; tipoFoto = "";
+}
+
+// Control de pestañas dinámico
+function cambiarPestañaMuro(destino) {
+    const btnVer = document.getElementById('tab-ver');
+    const btnEscribir = document.getElementById('tab-escribir');
+    const vistaVer = document.getElementById('muro-vista-ver');
+    const vistaEscribir = document.getElementById('muro-vista-escribir');
+
+    const claseActiva = ["bg-white", "dark:bg-zinc-700", "text-zinc-900", "dark:text-white", "shadow-sm"];
+    const claseInactiva = ["text-zinc-500", "dark:text-zinc-400", "hover:text-zinc-900", "dark:hover:text-white"];
+
+    if (destino === 'ver') {
+        btnVer.classList.add(...claseActiva); btnVer.classList.remove(...claseInactiva);
+        btnEscribir.classList.remove(...claseActiva); btnEscribir.classList.add(...claseInactiva);
+        vistaVer.classList.remove('hidden'); vistaEscribir.classList.add('hidden');
+        obtenerComentariosReales();
+    } else {
+        btnEscribir.classList.add(...claseActiva); btnEscribir.classList.remove(...claseInactiva);
+        btnVer.classList.remove(...claseActiva); btnVer.classList.add(...claseInactiva);
+        vistaEscribir.classList.remove('hidden'); vistaVer.classList.add('hidden');
+    }
+}
+
+// Renderizar el feed dinámico
+async function obtenerComentariosReales() {
+    const contenedor = document.getElementById('muro-vista-ver');
+    if (!contenedor) return;
+
+    try {
+        const res = await fetch(URL_GOOGLE_SCRIPT);
+        const comentarios = await res.json();
+
+        if (comentarios.length === 0) {
+            contenedor.innerHTML = `
+                <div class="text-center py-8 text-zinc-400 dark:text-zinc-500 text-xs font-semibold">
+                    <i class="fa-solid fa-feather block text-lg mb-1 text-zinc-300 dark:text-zinc-700"></i>
+                    Muro vacío.<br>Sé el primero en dejar un testimonio o petición.
+                </div>`;
+            return;
+        }
+
+        contenedor.innerHTML = "";
+
+        comentarios.forEach(item => {
+            const card = document.createElement('div');
+            card.className = "p-3 bg-zinc-100/60 dark:bg-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800 rounded-2xl flex items-start gap-3 hover:border-brand-neon/20 transition-all animate-fade-in";
+            card.innerHTML = `
+                <img src="${item.avatar}" alt="Oyente" class="w-9 h-9 rounded-full object-cover border border-zinc-300 dark:border-zinc-700 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80'">
+                <div class="flex-grow min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                        <span class="text-xs font-black text-zinc-900 dark:text-white truncate">${item.nombre}</span>
+                        <span class="text-[9px] font-medium text-zinc-400 dark:text-zinc-500">Oyente</span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed italic">
+                        "${item.mensaje}"
+                    </p>
+                </div>
+            `;
+            contenedor.appendChild(card);
+        });
+    } catch (err) {
+        console.error("Error al leer muro:", err);
+        contenedor.innerHTML = `<p class="text-[11px] text-center text-zinc-500 py-4"><i class="fa-solid fa-triangle-exclamation text-brand-neonPink mr-1"></i> Error al sincronizar testimonios.</p>`;
+    }
+}
+
+// Envío unificado (Texto + Binario de Imagen convertido)
+async function enviarMensajeMuro(event) {
+    event.preventDefault();
+    
+    const btn = document.getElementById('btn-enviar-muro');
+    const txtNombre = document.getElementById('muro-nombre');
+    const txtMensaje = document.getElementById('muro-mensaje');
+    const inputFoto = document.getElementById('muro-foto');
+
+    const originalTexto = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Subiendo testimonio...`;
+
+    const payload = {
+        nombre: txtNombre.value.trim(),
+        mensaje: txtMensaje.value.trim(),
+        fotoBase64: datosFotoBase64,
+        fotoNombre: nombreFoto,
+        fotoTipo: tipoFoto
+    };
+
+try {
+        // Envío asíncrono transparente a Google
+        await fetch(URL_GOOGLE_SCRIPT, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        // Limpieza de inputs del formulario
+        txtNombre.value = "";
+        txtMensaje.value = "";
+        inputFoto.value = "";
+        resetearSelectorFoto();
+        
+        // 1. Regresamos visualmente a la pestaña de lectura 'Ver'
+        cambiarPestañaMuro('ver');
+        
+        // 2. Forzamos una recarga inmediata para jalar el nuevo tope de 4
+        await obtenerComentariosReales();
+        
+    } catch (error) {
+        console.error("Error al procesar envío:", error);
+        alert("Ocurrió un percance al enviar los datos.");
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalTexto;
+    }
+}
+
+// Carga Inicial
+document.addEventListener("DOMContentLoaded", () => {
+    obtenerComentariosReales();
 });
 </script>
 </body>
