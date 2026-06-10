@@ -558,8 +558,8 @@
                 </a>
             </section>
 
-<!-- Formulario de Interacción Principal Totalmente Adaptativo -->
-<section class="w-full lg:max-w-full mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 sm:p-6 transition-all duration-300 shadow-xl hover:shadow-2xl">
+<!-- Formulario de Interacción Principal -->
+<section class="w-full max-w-md mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-all duration-300 shadow-xl hover:shadow-2xl">
     
     <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center justify-center sm:justify-start">
         <i class="fa-solid fa-comment-dots mr-2 text-brand-neon text-base animate-bounce"></i> 
@@ -578,27 +578,26 @@
             </p>
         </div>
         
-        <!-- grid adaptativo: 3 columnas -->
-        <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+        <div class="grid grid-cols-3 gap-2">
             <!-- Contador: Oraciones -->
-            <div class="flex flex-col items-center p-1.5 sm:p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
+            <div class="flex flex-col items-center p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
                 <i class="fa-solid fa-hands-praying text-brand-neonPink text-xs mb-1"></i>
-                <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Oraciones</span>
-                <strong id="count-oracion" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1.5 sm:px-2 py-0.5 rounded shadow-inner min-w-[24px] sm:min-w-[28px] transition-all duration-300">...</strong>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Oraciones</span>
+                <strong id="count-oracion" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
             </div>
 
             <!-- Contador: Saludos -->
-            <div class="flex flex-col items-center p-1.5 sm:p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
+            <div class="flex flex-col items-center p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
                 <i class="fa-solid fa-microphone text-brand-neon text-xs mb-1"></i>
-                <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Saludos</span>
-                <strong id="count-saludo" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1.5 sm:px-2 py-0.5 rounded shadow-inner min-w-[24px] sm:min-w-[28px] transition-all duration-300">...</strong>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Saludos</span>
+                <strong id="count-saludo" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
             </div>
 
             <!-- Contador: Canciones -->
-            <div class="flex flex-col items-center p-1.5 sm:p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
+            <div class="flex flex-col items-center p-2 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center">
                 <i class="fa-solid fa-music text-brand-neon text-xs mb-1"></i>
-                <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Canciones</span>
-                <strong id="count-cancion" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1.5 sm:px-2 py-0.5 rounded shadow-inner min-w-[24px] sm:min-w-[28px] transition-all duration-300">...</strong>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">Canciones</span>
+                <strong id="count-cancion" class="font-mono font-black text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-2 py-0.5 rounded shadow-inner min-w-[28px] transition-all duration-300">...</strong>
             </div>
         </div>
     </div>
@@ -606,27 +605,26 @@
     <form id="whatsapp-contact-form" class="space-y-4">
         <div>
             <label class="block text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Selecciona una opción:</label>
-            <!-- Rejilla de selección adaptativa -->
-            <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+            <div class="grid grid-cols-3 gap-2">
                 <label class="group cursor-pointer">
                     <input type="radio" name="msg_type" value="oracion" checked class="sr-only peer">
-                    <div class="p-2 sm:p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neonPink peer-checked:border-brand-neonPink peer-checked:bg-brand-neonPink/10 peer-checked:text-brand-neonPink shadow-sm hover:scale-105 active:scale-95">
-                        <i class="fa-solid fa-hands-praying block text-base sm:text-lg mb-1"></i>
-                        <span class="text-[9px] sm:text-[10px] font-black uppercase block truncate">Oración</span>
+                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neonPink peer-checked:border-brand-neonPink peer-checked:bg-brand-neonPink/10 peer-checked:text-brand-neonPink shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-hands-praying block text-lg mb-1"></i>
+                        <span class="text-[10px] font-black uppercase">Oración</span>
                     </div>
                 </label>
                 <label class="group cursor-pointer">
                     <input type="radio" name="msg_type" value="saludo" class="sr-only peer">
-                    <div class="p-2 sm:p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
-                        <i class="fa-solid fa-microphone block text-base sm:text-lg mb-1"></i>
-                        <span class="text-[9px] sm:text-[10px] font-black uppercase block truncate">Saludo</span>
+                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-microphone block text-lg mb-1"></i>
+                        <span class="text-[10px] font-black uppercase">Saludo</span>
                     </div>
                 </label>
                 <label class="group cursor-pointer">
                     <input type="radio" name="msg_type" value="cancion" class="sr-only peer">
-                    <div class="p-2 sm:p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
-                        <i class="fa-solid fa-music block text-base sm:text-lg mb-1"></i>
-                        <span class="text-[9px] sm:text-[10px] font-black uppercase block truncate">Canción</span>
+                    <div class="p-3 text-center rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-all duration-300 group-hover:border-brand-neon peer-checked:border-brand-neon peer-checked:bg-brand-neon/10 peer-checked:text-brand-neon shadow-sm hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-music block text-lg mb-1"></i>
+                        <span class="text-[10px] font-black uppercase">Canción</span>
                     </div>
                 </label>
             </div>
@@ -639,8 +637,8 @@
             <textarea id="form-message" rows="3" required placeholder="Escribe tu mensaje aquí..." class="w-full p-3 text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all duration-200 resize-none"></textarea>
         </div>
 
-        <button type="submit" class="w-full py-3.5 bg-[#25D366] hover:bg-[#128C7E] text-white font-black uppercase text-xs rounded-xl transition-all duration-300 active:scale-95 tracking-wider flex items-center justify-center shadow-lg shadow-[#25D366]/30 px-2">
-            <i class="fa-brands fa-whatsapp mr-2 text-sm"></i> <span class="truncate">Enviar por WhatsApp</span>
+        <button type="submit" class="w-full py-3.5 bg-[#25D366] hover:bg-[#128C7E] text-white font-black uppercase text-xs rounded-xl transition-all duration-300 active:scale-95 tracking-wider flex items-center justify-center shadow-lg shadow-[#25D366]/30">
+            <i class="fa-brands fa-whatsapp mr-2 text-sm"></i> Enviar por WhatsApp
         </button>
     </form>
     
@@ -1795,59 +1793,69 @@ document.addEventListener('DOMContentLoaded', () => {
     // Comprobar y refrescar el estado automáticamente cada 60 segundos
     setInterval(actualizarBarraProgramacion, 60000);
 });
-<!-- Cargar los módulos oficiales de Firebase desde CDN (Versión Moderna y Estable) -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+</script>
 
-    // 1. CONFIGURACIÓN Y CONEXIÓN CON FIREBASE
-    const firebaseConfig = {
-        apiKey: "AIzaSyADapcs61XjevyuI4z2T4OSKFTjKuUWp94",
-        authDomain: "contadoresradiowhat.firebaseapp.com",
-        databaseURL: "https://contadoresradiowhat-default-rtdb.firebaseio.com",
-        projectId: "contadoresradiowhat",
-        storageBucket: "contadoresradiowhat.firebasestorage.app",
-        messagingSenderId: "621227041513",
-        appId: "1:621227041513:web:66f9812618795c0a5bc678"
-    };
+<!-- Cargar el cliente oficial de Supabase desde CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. CONFIGURACIÓN Y CONEXIÓN CON SUPABASE
+    const SUPABASE_URL = "https://uwqsmleddwtoxqlbadka.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cXNtbGVkZHd0b3hxbGJhZGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwODY1MjcsImV4cCI6MjA5NjY2MjUyN30.DNHIx60lyoqwW1NNb7XZYSAwrhJQT8pSS2JujkbS6a8";
+    
+    // CORRECCIÓN: Usamos window.supabase para evitar conflictos en la lectura del CDN
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    // Mapeo de los contadores visuales en tu interfaz web
     const counters = {
         'oracion': document.getElementById('count-oracion'),
         'saludo': document.getElementById('count-saludo'),
         'cancion': document.getElementById('count-cancion')
     };
     
-    const tiposMensaje = {
-        'oracion': { id: 'oracion', etiqueta: '🙏 ORACIÓN' },
-        'saludo': { id: 'saludo', etiqueta: '🎙️ SALUDO' },
-        'cancion': { id: 'cancion', etiqueta: '🎵 MÚSICA' }
+    // Traductor inteligente: Vincula tus "values" con acento del HTML con las filas de la base de datos
+    const traducirId = {
+        'Oración': 'oracion',
+        'Saludo': 'saludo',
+        'Canción': 'cancion'
     };
 
-    // 2. SINCRONIZACIÓN EN TIEMPO REAL
-    const contadoresRef = ref(db, 'contadores_radio');
-    onValue(contadoresRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            Object.keys(data).forEach(id => {
-                const targetVisual = counters[id];
-                if (targetVisual) {
-                    if (targetVisual.textContent !== String(data[id])) {
-                        targetVisual.classList.add('scale-110', 'text-brand-neon', 'dark:text-brand-neon');
-                        targetVisual.textContent = data[id];
-                        
-                        setTimeout(() => {
-                            targetVisual.classList.remove('scale-110', 'text-brand-neon', 'dark:text-brand-neon');
-                        }, 400);
-                    }
+    // Descargar contadores reales desde Supabase al abrir la landing page
+    async function fetchInitialCounts() {
+        const { data, error } = await supabase
+            .from('contadores_radio')
+            .select('id, cantidad');
+
+        if (!error && data) {
+            data.forEach(row => {
+                if (counters[row.id]) {
+                    counters[row.id].textContent = row.cantidad !== undefined ? row.cantidad : (row.amount || 0); 
                 }
             });
         }
-    });
+    }
+    fetchInitialCounts();
 
-    // 3. ESCUCHA Y PROCESAMIENTO SIN BLOQUEO DE POPUPS
+    // Canal en tiempo real (Realtime) para actualizar los marcadores de toda tu audiencia en vivo
+    supabase
+        .channel('schema-db-changes')
+        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'contadores_radio' }, payload => {
+            const updatedRow = payload.new;
+            const targetVisual = counters[updatedRow.id];
+            
+            if (targetVisual) {
+                targetVisual.classList.add('scale-110', 'text-brand-neon', 'dark:text-brand-neon');
+                targetVisual.textContent = updatedRow.cantidad;
+                
+                setTimeout(() => {
+                    targetVisual.classList.remove('scale-110', 'text-brand-neon', 'dark:text-brand-neon');
+                }, 400);
+            }
+        })
+        .subscribe();
+
+    // 2. ESCUCHA Y PROCESAMIENTO DE TU FORMULARIO
     const contactForm = document.getElementById('whatsapp-contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -1856,61 +1864,74 @@ document.addEventListener('DOMContentLoaded', () => {
             const successBox = document.getElementById('success-message');
             const submitBtn = this.querySelector('button');
             
+            // Captura de datos (Tu lógica exacta)
             const checkedInput = document.querySelector('input[name="msg_type"]:checked');
-            if (!checkedInput) return; 
+            if (!checkedInput) return; // Seguridad por si no hay selección previa
             
-            const typeValue = checkedInput.value; 
+            const type = checkedInput.value;
             const name = document.getElementById('form-name').value.trim();
             const message = document.getElementById('form-message').value.trim();
             
-            const configMensaje = tiposMensaje[typeValue];
-            if (!configMensaje) return;
-
-            const dbId = configMensaje.id;
-
-            // A. Efecto UI optimista inmediato local e incremento en Firebase
-            if (counters[dbId]) {
+            // --- ACTUALIZACIÓN ASÍNCRONA EN SUPABASE ---
+            const dbId = traducirId[type]; 
+            if (dbId && counters[dbId]) {
                 const currentAmount = parseInt(counters[dbId].textContent) || 0;
-                counters[dbId].textContent = currentAmount + 1; 
+                const newAmount = currentAmount + 1;
+                counters[dbId].textContent = newAmount; // Suma +1 en pantalla inmediatamente (efecto instantáneo)
 
-                const clickRef = ref(db, `contadores_radio/${dbId}`);
-                runTransaction(clickRef, (currentValue) => {
-                    return (currentValue || 0) + 1;
-                }).catch((error) => {
-                    console.error("Error en Firebase:", error);
-                });
+                // Envía el incremento a la base de datos en segundo plano
+                supabase
+                    .from('contadores_radio')
+                    .update({ cantidad: newAmount, ultima_actualizacion: new Date() })
+                    .eq('id', dbId)
+                    .then(({ error }) => {
+                        if (error) console.error("Error al actualizar Supabase:", error.message);
+                    });
             }
+            // --------------------------------------------
 
-            const seleccion = configMensaje.etiqueta;
+            // Diccionario para dar formato estético a la Selección
+            const etiquetas = {
+                'Oración': '🙏 ORACIÓN',
+                'Saludo': '🎙️ SALUDO',
+                'Canción': '🎵 MÚSICA'
+            };
+
+            const seleccion = etiquetas[type] || type.toUpperCase();
             const nombreOyente = name || 'Anónimo';
             
-            // Construcción del mensaje para la API de WhatsApp
+            // Preparación de tu mensaje personalizado estructurado
             let finalMessage = `📻 *RADIO FE 4:18* 📻\n\n` +
                                `📌 *SELECCIÓN:* ${seleccion}\n` +
                                `👤 *NOMBRE:* ${nombreOyente}\n\n` +
                                `💬 *TEXTO:* \n"${message}"`;
 
-            // Cambiamos a la API universal 'api.whatsapp.com' que tiene mejor compatibilidad en móviles y PC
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=584125183677&text=${encodeURIComponent(finalMessage)}`;
+            const whatsappUrl = `https://wa.me/584125183677?text=${encodeURIComponent(finalMessage)}`;
             
-            // Cambios estéticos instantáneos antes de redirigir
+            // Tu efecto visual de "Enviando..."
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Redirigiendo...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...';
+            
+            // Mostrar mensaje de confirmación en la UI
             if (successBox) successBox.classList.remove('hidden');
             
-            // SOLUClÓN AL POPUP: Ejecutamos el envío de forma inmediata sin temporizadores
-            // En móviles abrirá la app nativa directamente; en PC usará la pestaña del navegador
-            window.open(whatsappUrl, '_blank');
-
-            // Dejamos el mantenimiento de la página (limpiar campos) corriendo en segundo plano
+            // Abrir WhatsApp después de 1.5 segundos
             setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+                
+                // Resetear el formulario manteniendo tus estilos intactos
                 this.reset();
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp text-sm"></i> <span>Enviar por WhatsApp</span>';
-                if (successBox) successBox.classList.add('hidden');
-            }, 2000);
+                submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp text-sm"></i> <span>Enviar a WhatsApp</span>';
+                
+                // Ocultar mensaje tras 3 segundos
+                setTimeout(() => {
+                    if (successBox) successBox.classList.add('hidden');
+                }, 3000);
+            }, 1500);
         });
     }
+});
 </script>
 <script>
 // REEMPLAZA ESTA URL CON TU ENLACE DE GOOGLE APPS SCRIPT ACTUALIZADO
