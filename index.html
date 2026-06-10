@@ -1787,6 +1787,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(actualizarBarraProgramacion, 60000);
 });
 </script>
+
 <!-- Cargar el cliente oficial de Supabase desde CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1794,9 +1795,10 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. CONFIGURACIÓN Y CONEXIÓN CON SUPABASE
     const SUPABASE_URL = "https://uwqsmleddwtoxqlbadka.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_OMs_F-jZdVcVbxaE-6PSEQ_lJAZPI9Q";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cXNtbGVkZHd0b3hxbGJhZGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwODY1MjcsImV4cCI6MjA5NjY2MjUyN30.DNHIx60lyoqwW1NNb7XZYSAwrhJQT8pSS2JujkbS6a8";
     
-    const supabase = SUPABASE_JS.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // CORRECCIÓN: Usamos window.supabase para evitar conflictos en la lectura del CDN
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // Mapeo de los contadores visuales en tu interfaz web
     const counters = {
@@ -1856,7 +1858,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = this.querySelector('button');
             
             // Captura de datos (Tu lógica exacta)
-            const type = document.querySelector('input[name="msg_type"]:checked').value;
+            const checkedInput = document.querySelector('input[name="msg_type"]:checked');
+            if (!checkedInput) return; // Seguridad por si no hay selección previa
+            
+            const type = checkedInput.value;
             const name = document.getElementById('form-name').value.trim();
             const message = document.getElementById('form-message').value.trim();
             
