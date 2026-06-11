@@ -1450,57 +1450,104 @@ if(shareBtn) {
             });
         }
 
-        const canvas = document.getElementById('visualizer');
-        const ctx = canvas.getContext('2d');
-        let audioCtx, analyser, bufferLength, dataArray, source;
-        let isAudioContextInitialized = false;
+       const canvas = document.getElementById('visualizer');
+const ctx = canvas.getContext('2d');
+let audioCtx, analyser, bufferLength, dataArray, source;
+let isAudioContextInitialized = false;
 
-        function initAudioAnalyzer() {
-            if (isAudioContextInitialized) return;
-            try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioCtx.createAnalyser();
-                analyser.fftSize = 64;
-                source = audioCtx.createMediaElementSource(audio);
-                source.connect(analyser);
-                analyser.connect(audioCtx.destination);
-                bufferLength = analyser.frequencyBinCount;
-                dataArray = new Uint8Array(bufferLength);
-                isAudioContextInitialized = true;
-            } catch (err) { console.warn("Análisis de audio no soportado.", err); }
+// 1. SOLUCIÓN AL CORS: Habilitar origen cruzado en el elemento de audio principal
+// Haz esto justo donde declaras o configuras tu objeto 'audio' original
+if (audio) {
+    audio.crossOrigin = "anonymous";
+}
+
+function initAudioAnalyzer() {
+    if (isAudioContextInitialized) return;
+    try {
+        // Los navegadores exigen que esto ocurra tras un clic del usuario (al dar Play)
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        
+        // Subimos a 128 para tener 64 canales de frecuencia y capturar mejor los medios/agudos
+        analyser.fftSize = 128; 
+        analyser.smoothingTimeConstant = 0.75; // Suaviza el rebote de las barras
+
+        source = audioCtx.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+
+        bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+        isAudioContextInitialized = true;
+    } catch (err) { 
+        console.warn("Análisis de audio no soportado o bloqueado por el navegador.", err); 
+    }
+}
+
+// Escuchar el evento play del audio para activar el contexto de forma segura
+if (audio) {
+    audio.addEventListener('play', () => {
+        initAudioAnalyzer();
+        // Si el contexto se inició pero quedó en pausa por el navegador, lo reactivamos
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    });
+}
+
+function drawVisualizer() {
+    requestAnimationFrame(drawVisualizer);
+    if (!canvas) return;
+
+    const width = canvas.width = canvas.clientWidth;
+    const height = canvas.height = canvas.clientHeight;
+    ctx.clearRect(0, 0, width, height);
+
+    if (isAudioContextInitialized && !audio.paused) { 
+        analyser.getByteFrequencyData(dataArray); 
+    }
+
+    const barCount = 20;
+    const segmentHeight = 4;
+    const gap = 2;
+    
+    // Cálculo exacto del ancho de cada barra respetando los espacios
+    const totalGapsSpace = (barCount - 1) * gap;
+    const barWidth = (width - totalGapsSpace) / barCount;
+
+    // Selector de color según el tema activo (Tailwind dark mode)
+    ctx.fillStyle = document.documentElement.classList.contains('dark') ? '#06b6d4' : '#ec4899';
+
+    for (let i = 0; i < barCount; i++) {
+        let val = 10; // Valor por defecto cuando está en pausa
+
+        if (isAudioContextInitialized && !audio.paused) {
+            // Mapeo inteligente: tomamos una muestra más distribuida del espectro de frecuencias
+            const sampleIndex = Math.floor((i / barCount) * bufferLength);
+            val = dataArray[sampleIndex];
         }
 
-        function drawVisualizer() {
-            requestAnimationFrame(drawVisualizer);
-            if(!canvas) return;
-            const width = canvas.width = canvas.clientWidth;
-            const height = canvas.height = canvas.clientHeight;
-            ctx.clearRect(0, 0, width, height);
+        // Calculamos cuántos segmentos caben en la mitad de la pantalla (efecto espejo)
+        const halfHeight = height / 2;
+        let totalSegments = Math.floor((val / 255) * (halfHeight / (segmentHeight + gap)));
+        if (totalSegments < 1) totalSegments = 1; // Mantiene un bloque mínimo estético
 
-            if (isAudioContextInitialized && !audio.paused) { analyser.getByteFrequencyData(dataArray); }
+        // Posición X exacta para evitar desbordamientos
+        let x = i * (barWidth + gap);
 
-            const barCount = 20;
-            const segmentHeight = 4;
-            const gap = 2;
-            const barWidth = (width / barCount) * 0.6;
-            let x = 0;
-            ctx.fillStyle = document.documentElement.classList.contains('dark') ? '#06b6d4' : '#ec4899';
+        for (let j = 0; j < totalSegments; j++) {
+            // Dibujo simétrico desde el centro hacia afuera
+            let yTop = halfHeight - (j * (segmentHeight + gap)) - segmentHeight;
+            let yBottom = halfHeight + (j * (segmentHeight + gap));
 
-            for (let i = 0; i < barCount; i++) {
-                const val = isAudioContextInitialized && !audio.paused ? dataArray[i] : 10;
-                let totalSegments = Math.floor((val / 255) * (height / (segmentHeight + gap)));
-                if(totalSegments < 1) totalSegments = 1;
-
-                for (let j = 0; j < totalSegments; j++) {
-                    let y = (height / 2) - (j * (segmentHeight + gap));
-                    let y2 = (height / 2) + (j * (segmentHeight + gap));
-                    ctx.fillRect(x, y, barWidth, segmentHeight);
-                    ctx.fillRect(x, y2, barWidth, segmentHeight);
-                }
-                x += barWidth + (width / barCount * 0.4);
-            }
+            ctx.fillRect(x, yTop, barWidth, segmentHeight);
+            ctx.fillRect(x, yBottom, barWidth, segmentHeight);
         }
-        drawVisualizer();
+    }
+}
+
+// Iniciar el bucle de renderizado
+drawVisualizer();
     </script>
 
     <script>
@@ -2170,5 +2217,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })();
 </script>
+
+<!-- INTEGRACIÓN INTELIGENTE Y SEGURA CON SONICPANEL (AUTO-DJ METADATOS) -->
+<script>
+(function() {
+    // URL de la API pública proporcionada por ti
+    const SONIC_API_URL = 'https://app0102.sonicpanelradio.com/cp/get_info.php?p=8246';
+    let ultimaCancionDetectada = '';
+    let sonicIntervalId = null;
+
+    async function consultarMetadatosSonicPanel() {
+        try {
+            const respuesta = await fetch(SONIC_API_URL);
+            if (!respuesta.ok) return;
+
+            const data = await respuesta.json();
+            
+            // Estructura estándar que devuelve la API JSON de SonicPanel
+            if (data && data.title) {
+                const cancionActual = data.title.trim(); // Ej: "Marcos Witt - Gracias" ó "Publicidad Ad1"
+
+                // Si la canción sigue siendo la misma, no hacemos nada para no saturar el DOM
+                if (cancionActual === ultimaCancionDetectada) return;
+                ultimaCancionDetectada = cancionActual;
+
+                // Separamos inteligentemente Artista y Título si viene con el guion " - "
+                let artista = "Radio FE 4:18"; // Valores por defecto por seguridad
+                let titulo = "Tu Conexión con el Cielo";
+
+                if (cancionActual.includes(" - ")) {
+                    const partes = cancionActual.split(" - ");
+                    artista = partes[0].trim();
+                    // Volvemos a unir el resto por si el título contiene guiones intermedios
+                    titulo = partes.slice(1).join(" - ").trim(); 
+                } else {
+                    titulo = cancionActual;
+                }
+
+                // Identificamos tus elementos del DOM existentes de forma segura
+                const elArtista = document.getElementById('sonic_artist');
+                const elTitulo = document.getElementById('sonic_title');
+
+                // Inyectamos el contenido modificando solo el texto plano
+                if (elArtista) elArtista.textContent = artista;
+                if (elTitulo) elTitulo.textContent = titulo;
+
+                // DISPARADOR AUTOMÁTICO: Forzamos la actualización de la carátula o publicidad
+                // llamando a tu función existente si está declarada en el entorno global
+                if (typeof window.buscarCaratula === 'function') {
+                    window.buscarCaratula(artista, titulo);
+                } else if (typeof buscarCaratula === 'function') {
+                    buscarCaratula(artista, titulo);
+                }
+            }
+        } catch (error) {
+            // Manejo silencioso de errores para que nunca salte un aviso molesto al usuario en la web
+            console.log('Esperando actualización de metadatos de transmisión...');
+        }
+    }
+
+    // Inicializador del monitoreo independiente
+    function iniciarMonitoreoSonic() {
+        // Primera ejecución inmediata al cargar la página
+        consultarMetadatosSonicPanel();
+        
+        // Bucle de consulta seguro cada 20 segundos
+        sonicIntervalId = setInterval(consultarMetadatosSonicPanel, 20000);
+    }
+
+    // Arrancamos el script respetando los tiempos de carga de tu interfaz
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', iniciarMonitoreoSonic);
+    } else {
+        iniciarMonitoreoSonic();
+    }
+})();
+</script>
+
 </body>
 </html>
