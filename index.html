@@ -843,31 +843,29 @@
                     </div>
                 </div>
             </section>
-        </div>
-    </main>
 
 <!-- SECCIÓN: STAFF DIRECTIVO Y PRODUCCIÓN PROFESIONAL -->
-<section class="w-full mx-auto mt-6 bg-brand-lightCard/60 dark:bg-brand-card/50 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 p-6 sm:p-8 rounded-3xl transition-all duration-300 shadow-xl neon-glow">
+<section class="w-full max-w-4xl mx-auto mt-6 bg-brand-lightCard/60 dark:bg-brand-card/50 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 p-5 sm:p-8 rounded-3xl transition-all duration-300 shadow-xl neon-glow">
     
     <!-- Encabezado de la Sección -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mb-8 pb-4 border-b border-zinc-200/50 dark:border-zinc-800/50">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6 pb-4 border-b border-zinc-200/50 dark:border-zinc-800/50">
         <h4 class="font-black tracking-wider uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center justify-center sm:justify-start">
             <i class="fa-solid fa-circle-nodes mr-2 text-brand-neon text-xs animate-pulse"></i> 
-            Equipo Profesional & Directiva
+            Equipo Directiva
         </h4>
         <span class="text-[9px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-widest bg-zinc-200/50 dark:bg-zinc-800/50 px-2.5 py-1 rounded-md">
-            Sonando por todo lo alto
+            Dios la direccion perfecta
         </span>
     </div>
 
-    <!-- Malla Adaptativa de Integrantes -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Contenedor Vertical Adaptativo (Una tarjeta debajo de otra) -->
+    <div class="flex flex-col gap-4 max-w-2xl mx-auto">
         
         <!-- Director: Eliaquin Marín -->
-        <div class="group relative p-5 bg-gradient-to-b from-zinc-100/40 to-zinc-100/80 dark:from-zinc-800/20 dark:to-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800/60 rounded-2xl flex items-center gap-4 transition-all duration-300 hover:border-brand-neon hover:shadow-lg hover:shadow-brand-neon/5">
+        <div class="group relative p-4 sm:p-5 bg-gradient-to-b from-zinc-100/40 to-zinc-100/80 dark:from-zinc-800/20 dark:to-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800/60 rounded-2xl flex items-center gap-4 transition-all duration-300 hover:border-brand-neon hover:shadow-lg hover:shadow-brand-neon/5 w-full">
             <!-- Contenedor de Imagen -->
-            <div class="relative w-16 h-16 rounded-full p-0.5 border-2 border-brand-neon bg-zinc-200 dark:bg-zinc-800 shrink-0 overflow-hidden shadow-md">
-                <img src="ruta/a/tu/imagen/eliaquin-marin.jpg" 
+            <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full p-0.5 border-2 border-brand-neon bg-zinc-200 dark:bg-zinc-800 shrink-0 overflow-hidden shadow-md">
+                <img src="img/directiva/director.webp" 
                      alt="Eliaquin Marín" 
                      class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-300 transform group-hover:scale-105"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -875,18 +873,28 @@
                 <div class="hidden absolute inset-0 items-center justify-center bg-zinc-800 text-white font-black text-sm">EM</div>
             </div>
             <!-- Información -->
-            <div class="min-w-0">
+            <div class="min-w-0 flex-1">
                 <span class="text-[9px] font-bold text-brand-neon uppercase tracking-widest block mb-0.5">Dirección General</span>
-                <h5 class="text-sm font-black text-zinc-900 dark:text-zinc-100 tracking-tight truncate">Eliaquin Marín</h5>
-                <p class="text-[11px] font-medium text-zinc-500 dark:text-zinc-400 mt-0.5">Ingeniería de Audio y Sistemas</p>
+                <h5 class="text-sm sm:text-base font-black text-zinc-900 dark:text-zinc-100 tracking-tight truncate">Eliaquin Marín</h5>
+                <p class="text-[11px] sm:text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-0.5">Ingeniería de Audio y Sistemas</p>
+            </div>
+            <!-- Botón WhatsApp -->
+            <div class="shrink-0">
+                <a href="https://wa.me/584125183677?text=Hola%20Eliaquin,%20me%20gustar%C3%ADa%20comunicarme%20con%20el%20%C3%81rea%20de%20Direcci%C3%B3n%20y%20Sistemas." 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-center w-10 h-10 rounded-xl bg-zinc-200/50 dark:bg-zinc-800/80 border border-zinc-300 dark:border-zinc-700/80 text-emerald-500 dark:text-emerald-400 transition-all duration-300 hover:scale-110 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-white hover:border-emerald-500 shadow-sm"
+                   title="Contactar a Dirección">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </a>
             </div>
         </div>
 
         <!-- Administradora: Damiana Meza -->
-        <div class="group relative p-5 bg-gradient-to-b from-zinc-100/40 to-zinc-100/80 dark:from-zinc-800/20 dark:to-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800/60 rounded-2xl flex items-center gap-4 transition-all duration-300 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/5 sm:col-span-2 lg:col-span-1">
+        <div class="group relative p-4 sm:p-5 bg-gradient-to-b from-zinc-100/40 to-zinc-100/80 dark:from-zinc-800/20 dark:to-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800/60 rounded-2xl flex items-center gap-4 transition-all duration-300 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/5 w-full">
             <!-- Contenedor de Imagen -->
-            <div class="relative w-16 h-16 rounded-full p-0.5 border-2 border-purple-500 bg-zinc-200 dark:bg-zinc-800 shrink-0 overflow-hidden shadow-md">
-                <img src="ruta/a/tu/imagen/damiana-meza.jpg" 
+            <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full p-0.5 border-2 border-purple-500 bg-zinc-200 dark:bg-zinc-800 shrink-0 overflow-hidden shadow-md">
+                <img src="img/directiva/administradora.webp"
                      alt="Damiana Meza" 
                      class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-300 transform group-hover:scale-105"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -894,18 +902,28 @@
                 <div class="hidden absolute inset-0 items-center justify-center bg-zinc-800 text-white font-black text-sm">DM</div>
             </div>
             <!-- Información -->
-            <div class="min-w-0">
+            <div class="min-w-0 flex-1">
                 <span class="text-[9px] font-bold text-purple-500 uppercase tracking-widest block mb-0.5">Gestión Corporativa</span>
-                <h5 class="text-sm font-black text-zinc-900 dark:text-zinc-100 tracking-tight truncate">Damiana Meza</h5>
-                <p class="text-[11px] font-medium text-zinc-500 dark:text-zinc-400 mt-0.5">Administrasion y Gerencia</p>
+                <h5 class="text-sm sm:text-base font-black text-zinc-900 dark:text-zinc-100 tracking-tight truncate">Damiana Meza</h5>
+                <p class="text-[11px] sm:text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-0.5">Administración y Gerencia</p>
+            </div>
+            <!-- Botón WhatsApp -->
+            <div class="shrink-0">
+                <a href="https://wa.me/584125183677?text=Hola%20Damiana,%20me%20comunico%20para%20realizar%20una%20consulta%20con%20el%20departamento%20de%20Administraci%C3%B3n." 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-center w-10 h-10 rounded-xl bg-zinc-200/50 dark:bg-zinc-800/80 border border-zinc-300 dark:border-zinc-700/80 text-emerald-500 dark:text-emerald-400 transition-all duration-300 hover:scale-110 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-white hover:border-emerald-500 shadow-sm"
+                   title="Contactar a Administración">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </a>
             </div>
         </div>
 
         <!-- Voz Over: Andrea Moreno -->
-        <div class="group relative p-5 bg-gradient-to-b from-zinc-100/40 to-zinc-100/80 dark:from-zinc-800/20 dark:to-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800/60 rounded-2xl flex items-center gap-4 transition-all duration-300 hover:border-brand-neonPink hover:shadow-lg hover:shadow-brand-neonPink/5">
+        <div class="group relative p-4 sm:p-5 bg-gradient-to-b from-zinc-100/40 to-zinc-100/80 dark:from-zinc-800/20 dark:to-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800/60 rounded-2xl flex items-center gap-4 transition-all duration-300 hover:border-brand-neonPink hover:shadow-lg hover:shadow-brand-neonPink/5 w-full">
             <!-- Contenedor de Imagen -->
-            <div class="relative w-16 h-16 rounded-full p-0.5 border-2 border-brand-neonPink bg-zinc-200 dark:bg-zinc-800 shrink-0 overflow-hidden shadow-md">
-                <img src="ruta/a/tu/imagen/andrea-moreno.jpg" 
+            <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full p-0.5 border-2 border-brand-neonPink bg-zinc-200 dark:bg-zinc-800 shrink-0 overflow-hidden shadow-md">
+                <img src="img/directiva/vozoficial.webp" 
                      alt="Andrea Moreno" 
                      class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-300 transform group-hover:scale-105"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -913,14 +931,28 @@
                 <div class="hidden absolute inset-0 items-center justify-center bg-zinc-800 text-white font-black text-sm">AM</div>
             </div>
             <!-- Información -->
-            <div class="min-w-0">
+            <div class="min-w-0 flex-1">
                 <span class="text-[9px] font-bold text-brand-neonPink uppercase tracking-widest block mb-0.5">Identidad Radial</span>
-                <h5 class="text-sm font-black text-zinc-900 dark:text-zinc-100 tracking-tight truncate">Andrea Moreno</h5>
-                <p class="text-[11px] font-medium text-zinc-500 dark:text-zinc-400 mt-0.5">Voz Over e Institucional</p>
+                <h5 class="text-sm sm:text-base font-black text-zinc-900 dark:text-zinc-100 tracking-tight truncate">Andrea Moreno</h5>
+                <p class="text-[11px] sm:text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-0.5">Voz Over e Institucional</p>
+            </div>
+            <!-- Botón WhatsApp -->
+            <div class="shrink-0">
+                <a href="https://wa.me/584125183677?text=Hola%20Andrea,%20me%20gustar%C3%ADa%20solicitar%20un%20presupuesto%20o%20informaci%C3%B3n%20sobre%20Identidad%20Radial%20/%20Voz%20Over." 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-center w-10 h-10 rounded-xl bg-zinc-200/50 dark:bg-zinc-800/80 border border-zinc-300 dark:border-zinc-700/80 text-emerald-500 dark:text-emerald-400 transition-all duration-300 hover:scale-110 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-white hover:border-emerald-500 shadow-sm"
+                   title="Contactar a Identidad Radial">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </a>
             </div>
         </div>
     </div>
 </section>
+
+        </div>
+    </main>
+
 
 <!-- SECCIÓN: ENLACE PRE-FOOTER DE CONTACTO RÁPIDO -->
 <section class="w-full max-w-7xl mx-auto mt-8 px-4">
