@@ -549,7 +549,7 @@
         </form>
     </div>
 
-    <!-- Contenedor Estricto de 4 Mensajes uno abajo del otro -->
+    <!-- Contenedor Estricto de 5 Mensajes uno abajo del otro -->
     <div id="messages-display-container" class="space-y-3">
         <!-- Estado de carga inicial -->
         <div class="text-center py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 animate-pulse">
@@ -602,7 +602,7 @@
 
     btnCancelarMuro.addEventListener('click', cerrarFormularioAnimado);
 
-    // Función para obtener y renderizar los mensajes actualizados (Siempre máximo 4)
+    // Función para obtener y renderizar los mensajes actualizados (Siempre máximo 5)
     async function fetchMuroMensajes() {
         try {
             const response = await fetch(GOOGLE_WEB_APP_URL);
@@ -619,9 +619,9 @@
                 return;
             }
 
-            mensajes.forEach(item => {
+            // MODIFICADO: .slice(0, 5) extrae estrictamente los primeros 5 elementos del array devuelto
+            mensajes.slice(0, 5).forEach(item => {
                 const messageCard = document.createElement('div');
-                // CAMBIADO: Clases adaptativas dinámicas corregidas para modo claro y oscuro
                 messageCard.className = "p-3.5 bg-white/60 dark:bg-zinc-900/30 border border-zinc-200/70 dark:border-zinc-800 rounded-2xl shadow-sm transition-all duration-300 hover:border-brand-neon/40 animate-fade-in";
                 
                 messageCard.innerHTML = `
@@ -960,46 +960,45 @@
 
 <!-- SECCIÓN: ENLACE PRE-FOOTER DE CONTACTO RÁPIDO -->
 <section class="w-full max-w-7xl mx-auto mt-8 px-4">
-    <div class="w-full bg-zinc-100/90 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 transition-colors duration-300">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center md:text-left items-center">
+    <div class="w-full bg-zinc-100/90 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-3xl p-4 sm:p-5 transition-colors duration-300 shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-2 items-center">
             
             <!-- Ubicación Física -->
-            <div class="flex flex-col md:flex-row items-center gap-3 px-4 py-2 border-b md:border-b-0 md:border-r border-zinc-200 dark:border-zinc-800/80">
-                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400">
+            <div class="flex flex-row items-center gap-3.5 px-3 py-2.5 border-b md:border-b-0 md:border-r border-zinc-200 dark:border-zinc-800/80">
+                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0">
                     <i class="fa-solid fa-location-dot text-sm text-brand-neonPink"></i>
                 </div>
-                <div class="min-w-0">
-                    <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0">Nuestra Estación</p>
-                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-300 mt-0.5 truncate">Barinas, Estado Barinas — Venezuela</p>
+                <div class="min-w-0 flex-grow">
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none">Nuestra Estación</p>
+                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-300 mt-1 truncate">Barinas, Edo. Barinas — Venezuela</p>
                 </div>
             </div>
 
             <!-- Correo Electrónico -->
-            <div class="flex flex-col md:flex-row items-center gap-3 px-4 py-2 border-b md:border-b-0 md:border-r border-zinc-200 dark:border-zinc-800/80">
-                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400">
+            <div class="flex flex-row items-center gap-3.5 px-3 py-2.5 border-b md:border-b-0 md:border-r border-zinc-200 dark:border-zinc-800/80">
+                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0">
                     <i class="fa-solid fa-envelope text-sm text-brand-neon"></i>
                 </div>
-                <div class="min-w-0">
-                    <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0">Canal Escrito</p>
-                    <a href="mailto:radiofe418@gmail.com" class="text-xs font-bold text-zinc-800 dark:text-zinc-300 hover:text-brand-neon transition-colors mt-0.5 block truncate">eliaquinmarin@gmail.com</a>
+                <div class="min-w-0 flex-grow">
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none">Canal Escrito</p>
+                    <a href="mailto:radiofe418@gmail.com" class="text-xs font-bold text-zinc-800 dark:text-zinc-300 hover:text-brand-neon transition-colors mt-1 block truncate">eliaquinmarin@gmail.com</a>
                 </div>
             </div>
 
             <!-- Teléfono Directo -->
-            <div class="flex flex-col md:flex-row items-center gap-3 px-4 py-2">
-                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400">
+            <div class="flex flex-row items-center gap-3.5 px-3 py-2.5">
+                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0">
                     <i class="fa-solid fa-phone text-sm text-emerald-500"></i>
                 </div>
-                <div class="min-w-0">
-                    <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0">Línea de Cabina</p>
-                    <a href="tel:+584125183677" class="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-300 hover:text-emerald-500 transition-colors mt-0.5 block">+58 (412) 518-3677</a>
+                <div class="min-w-0 flex-grow">
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none">Línea de Cabina</p>
+                    <a href="tel:+584125183677" class="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-300 hover:text-emerald-500 transition-colors mt-1 block truncate">+58 (412) 518-3677</a>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-
 
 
     <footer class="w-full bg-zinc-200/50 dark:bg-brand-card/30 border-t border-zinc-300 dark:border-zinc-900 mt-12 py-8 px-6 text-center text-zinc-500 text-xs transition-colors duration-300">
