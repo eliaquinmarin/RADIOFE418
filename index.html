@@ -2056,5 +2056,119 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+
+<!-- Modal de Contingencia de Señal -->
+<div id="signal-error-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-opacity duration-300">
+    <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative animate-fade-in">
+        <div class="text-center">
+            <div class="w-16 h-16 bg-amber-500/20 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-2xl animate-bounce"></i>
+            </div>
+            <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-2">Señal en mantenimiento</h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed">
+                Estamos optimizando nuestra señal de streaming. Por favor, intenta de nuevo en unos instantes o acompáñanos en nuestro canal.
+            </p>
+            <div class="flex flex-col gap-2 w-full">
+                <button id="btn-modal-direct" class="w-full py-3 text-xs font-black uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink text-white rounded-xl shadow-lg transition-all active:scale-95">
+                    Entendido
+                </button>
+                <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" id="btn-modal-channel" target="_blank" class="w-full py-3 text-xs font-bold uppercase border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 bg-white/50 dark:bg-zinc-900/30 rounded-xl transition-all text-center block">
+                    Ver Canal de WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ==========================================================================
+// SISTEMA DE MONITOREO Y CONTINGENCIA DE STREAMING (SEGURO - NO INVASIVO)
+// ==========================================================================
+(function() {
+    // 1. Validar que las variables esenciales existan en el entorno global
+    if (typeof audio === 'undefined' || typeof playIcon === 'undefined') {
+        console.warn("Módulo de contingencia: No se detectó la instancia global 'audio' o 'playIcon'.");
+        return;
+    }
+
+    const modalError = document.getElementById('signal-error-modal');
+    const btnDirect = document.getElementById('btn-modal-direct');
+    const btnChannel = document.getElementById('btn-modal-channel');
+    let temporizadorEspera = null;
+
+    // 2. Funciones de control de interfaz gráfica
+    function activarAlertaMantenimiento() {
+        if (modalError && modalError.classList.contains('hidden')) {
+            modalError.classList.remove('hidden');
+            modalError.classList.add('flex');
+        }
+        
+        // Forzar al icono de Play a regresar a su estado de pausa visual
+        if (playIcon) {
+            playIcon.className = "fa-solid fa-play text-xl ml-0.5";
+        }
+
+        // Modificar el texto del artista de forma segura si no hay programa en vivo activo
+        const txtArtista = document.getElementById('sonic_artist');
+        if (txtArtista && (typeof programaEnVivoActivo === 'undefined' || !programaEnVivoActivo)) {
+            txtArtista.textContent = "Señal en mantenimiento";
+        }
+    }
+
+    function desactivarAlertaMantenimiento() {
+        if (modalError) {
+            modalError.classList.remove('flex');
+            modalError.classList.add('hidden');
+        }
+    }
+
+    // Eventos de los botones del modal para cerrarlo
+    if (btnDirect) btnDirect.addEventListener('click', desactivarAlertaMantenimiento);
+    if (btnChannel) btnChannel.addEventListener('click', desactivarAlertaMantenimiento);
+
+    // 3. Verificación asíncrona mediante Fetch (Evita congelamiento del navegador)
+    async function comprobarEstadoServidor(urlStream) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // Límite estricto de 5 segundos
+
+        try {
+            // Realiza una petición rápida al puerto del streaming para verificar si responde
+            await fetch(urlStream, { method: 'GET', signal: controller.signal, mode: 'no-cors' });
+            clearTimeout(timeoutId);
+            desactivarAlertaMantenimiento();
+        } catch (err) {
+            clearTimeout(timeoutId);
+            console.error("Contingencia: Servidor fuera de línea o tiempo de respuesta excedido.");
+            activarAlertaMantenimiento();
+        }
+    }
+
+    // 4. Oyentes de Eventos Nativos del Elemento HTML5 Audio
+    // Captura fallas críticas inmediatas (ej: DNS caído, error de red directo)
+    audio.addEventListener('error', () => {
+        console.log("Contingencia: Error detectado en la reproducción del archivo o flujo de audio.");
+        activarAlertaMantenimiento();
+    });
+
+    // Detecta si el reproductor se queda en estado 'búfer infinito' (esperando datos)
+    audio.addEventListener('waiting', () => {
+        if (temporizadorEspera) clearTimeout(temporizadorEspera);
+
+        // Damos una ventana de tolerancia de 5 segundos cargando datos reales antes de alarmar
+        temporizadorEspera = setTimeout(() => {
+            if (audio.paused === false && audio.readyState < 3) {
+                console.log("Contingencia: El búfer está congelado. Comprobando canal de datos...");
+                comprobarEstadoServidor(audio.src);
+            }
+        }, 5000);
+    });
+
+    // Si el flujo de datos vuelve a la normalidad de forma autónoma
+    audio.addEventListener('playing', () => {
+        if (temporizadorEspera) clearTimeout(temporizadorEspera);
+        desactivarAlertaMantenimiento();
+    });
+})();
+</script>
 </body>
 </html>
