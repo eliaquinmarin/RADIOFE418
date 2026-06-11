@@ -2129,7 +2129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Verificación asíncrona mediante Fetch (Evita congelamiento del navegador)
     async function comprobarEstadoServidor(urlStream) {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // Límite estricto de 5 segundos
+        const timeoutId = setTimeout(() => controller.abort(), 12000); // Límite estricto de 5 segundos
 
         try {
             // Realiza una petición rápida al puerto del streaming para verificar si responde
@@ -2160,7 +2160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("Contingencia: El búfer está congelado. Comprobando canal de datos...");
                 comprobarEstadoServidor(audio.src);
             }
-        }, 5000);
+        }, 12000);
     });
 
     // Si el flujo de datos vuelve a la normalidad de forma autónoma
