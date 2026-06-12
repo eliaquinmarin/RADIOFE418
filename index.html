@@ -566,6 +566,44 @@
         </div>
     </div>
 </section>
+<!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
+<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
+    <div class="flex items-center justify-between mb-3">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-book-open mr-2 text-brand-neon animate-pulse"></i> Pan de Vida
+        </h4>
+        <!-- Indicador de Versión Bíblica -->
+        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400">
+            RVR1960
+        </span>
+    </div>
+    
+    <div class="p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 text-center relative overflow-hidden group">
+        <!-- Esqueleto de Carga (Spinner) -->
+        <div id="verse-loader" class="py-4 flex flex-col items-center justify-center space-y-2">
+            <i class="fa-solid fa-circle-notch animate-spin text-brand-neon text-lg"></i>
+            <span class="text-xs text-zinc-400">Alimentando el espíritu...</span>
+        </div>
+
+        <!-- Contenido del Versículo (Oculto al inicio) -->
+        <div id="verse-content" class="hidden opacity-0 transition-opacity duration-500">
+            <p id="verse-text" class="text-xs sm:text-sm italic text-zinc-800 dark:text-gray-200 font-medium leading-relaxed">
+                <!-- Se inyecta dinámicamente -->
+            </p>
+            <span id="verse-ref" class="block text-[11px] uppercase font-black text-brand-neon mt-2 tracking-widest">
+                <!-- Se inyecta dinámicamente -->
+            </span>
+        </div>
+    </div>
+
+    <!-- Botón de Compartir Personalizado -->
+    <div class="mt-3">
+        <button id="btn-share-verse" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-brand-neon hover:text-black hover:border-brand-neon dark:hover:bg-brand-neon dark:hover:text-black transition-all duration-300 shadow-sm cursor-pointer">
+            <i class="fa-solid fa-share-nodes"></i>
+            Compartir Bendición
+        </button>
+    </div>
+</section>
 
 <!-- LÓGICA DE INTERACCIÓN CON GOOGLE SHEETS SIN SALIR DE LA PÁGINA -->
 <script>
@@ -965,6 +1003,7 @@
 
         </div>
     </main>
+
 
 
 <!-- SECCIÓN: ENLACE PRE-FOOTER DE CONTACTO RÁPIDO -->
@@ -2623,6 +2662,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })();
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const verseLoader = document.getElementById("verse-loader");
+    const verseContent = document.getElementById("verse-content");
+    const verseText = document.getElementById("verse-text");
+    const verseRef = document.getElementById("verse-ref");
+    const btnShare = document.getElementById("btn-share-verse");
 
+    let currentVerse = "";
+    let currentRef = "";
+    const radioLink = window.location.origin; 
+
+    async function fetchDailyVerse() {
+        try {
+            // Usamos el feed oficial en español de Bible Gateway (RVR1960) convertido a JSON limpio
+            const url = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.biblegateway.com%2Fvotd%2Fget%2F%3Fformat%3Datom%26version%3DRVR1960";
+            const response = await fetch(url);
+            
+            if (!response.ok) throw new Error("Error de conexión");
+            
+            const data = await response.json();
+            
+            if (data.items && data.items.length > 0) {
+                const item = data.items[0];
+                
+                // Limpiamos las etiquetas HTML que a veces añade el feed
+                let cleanText = item.content.replace(/<[^>]*>/g, '').trim();
+                // Removemos la referencia del final si viene duplicada en el texto
+                cleanText = cleanText.replace(item.title, '').trim();
+                
+                currentVerse = cleanText;
+                currentRef = `${item.title} (RVR1960)`;
+
+                verseText.innerHTML = `«${currentVerse}»`;
+                verseRef.innerText = currentRef;
+
+                verseLoader.classList.add("hidden");
+                verseContent.classList.remove("hidden");
+                setTimeout(() => verseContent.classList.add("opacity-100"), 50);
+            } else {
+                throw new Error("Datos vacíos");
+            }
+
+        } catch (error) {
+            console.error("Error al cargar el versículo:", error);
+            // Respaldo inmediato en español si la red falla
+            currentVerse = "Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.";
+            currentRef = "2 Timoteo 1:7 (RVR1960)";
+
+            verseText.innerHTML = `«${currentVerse}»`;
+            verseRef.innerText = currentRef;
+
+            verseLoader.classList.add("hidden");
+            verseContent.classList.remove("hidden");
+            verseContent.classList.add("opacity-100");
+        }
+    }
+
+    function shareVerse() {
+        if (!currentVerse) return;
+
+        const messageText = 
+`📻 *RADIO FE 4:18* | _Una palabra de fe para ti hoy_ ✨
+
+📖 *Pan de Vida:*
+"${currentVerse}"
+👉 _${currentRef}_
+
+🎧 Sintoniza nuestra señal en vivo, llena tu hogar de bendición y comparte esperanza con los tuyos.
+🌐 Escúchanos aquí: ${radioLink}
+
+#PalabraDeFe #RadioFe #VersiculoDelDia #Evangelio`;
+
+        if (navigator.share) {
+            navigator.share({
+                title: 'Versículo del Día - Radio FE 4:18',
+                text: messageText
+            })
+            .then(() => console.log('Compartido con éxito'))
+            .catch((error) => console.log('Error al compartir:', error));
+        } else {
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    }
+
+    btnShare.addEventListener("click", shareVerse);
+    fetchDailyVerse();
+});
+</script>
 </body>
 </html>
