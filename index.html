@@ -249,91 +249,144 @@
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         <div class="lg:col-span-7 space-y-6 w-full">
+<!-- CDN del cliente oficial de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-            <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
+<section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
                 
-                <!-- Contenedor Adaptativo de Oyentes (Glassmorphism Light & Dark) -->
-<div class="listeners-badge flex items-center gap-3 px-4 py-2 rounded-full border transition-all duration-300 hover:scale-105 w-fit mx-auto my-3
-            border-black/10 bg-white/60 backdrop-blur-md shadow-md
-            dark:border-white/20 dark:bg-black/30 dark:shadow-lg">
-  
-  <!-- Pulso de luz verde "En Vivo" (Brilla más en modo oscuro) -->
-  <span class="relative flex h-3 w-3">
-    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 dark:bg-emerald-400"></span>
-  </span>
-  
-  <!-- Texto y Contador -->
-  <p class="text-xs sm:text-sm font-medium tracking-wide flex items-center gap-1.5 m-0
-            text-slate-700 dark:text-white/90">
-    <!-- Ícono dinámico -->
-    <i class="ri-user-shared-line text-emerald-600 dark:text-emerald-400 text-base"></i> 
-    <span>Somos</span> 
+    <!-- Contenedor Adaptativo de Oyentes (Glassmorphism Light & Dark con Base de Datos) -->
+    <div class="listeners-badge flex items-center gap-3 px-4 py-2 rounded-full border transition-all duration-300 hover:scale-105 w-fit mx-auto my-3
+                border-black/10 bg-white/60 backdrop-blur-md shadow-md
+                dark:border-white/20 dark:bg-black/30 dark:shadow-lg">
+      
+        <!-- Pulso de luz verde "En Vivo" -->
+        <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 dark:bg-emerald-400"></span>
+        </span>
+      
+<!-- Texto y Contador adaptado a Supabase -->
+<p class="text-xs sm:text-sm font-medium tracking-wide flex items-center gap-1.5 m-0 text-slate-700 dark:text-white/90">
+    <!-- Ícono de Audífonos unificado con Font Awesome -->
+<i class="fa-solid fa-users text-emerald-600 dark:text-emerald-400 text-base animate-pulse"></i>
+    <span>Son </span> 
     
-    <!-- El número con fondo interno adaptativo -->
-    <strong id="sonic_listeners" 
+    <!-- El número ahora responde al ID 'db_total_listeners' -->
+    <strong id="db_total_listeners" 
             class="text-base sm:text-lg font-bold px-2.5 py-0.5 rounded-md shadow-inner transition-all duration-300
                    text-slate-900 bg-black/5
                    dark:text-white dark:bg-white/10 dark:drop-shadow-[0_0_8px_rgba(52,211,153,0.3)]">
-      0
+        ...
     </strong> 
-    <span>conectados ahora</span>
-  </p>
-</div>
+    <span>que se han conectado</span>
+</p>
+    </div>
 
-                <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
-                    <img id="track-cover" 
-                         src="img/caratula.png" 
-                         alt="Carátula" 
-                         class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
-                </div>
+    <!-- Contenedor de Carátula -->
+    <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
+        <img id="track-cover" 
+             src="img/caratula.png" 
+             alt="Carátula" 
+             class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
+    </div>
 
-                <div class="text-center w-full max-w-md mb-3">
-                    <h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-                        Radio FE 4:18
-                    </h2>
-                    <p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
-                       Sonando por todo lo alto
-                    </p>
-                </div>
+    <!-- Títulos de la Emisora -->
+    <div class="text-center w-full max-w-md mb-3">
+        <h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            Radio FE 4:18
+        </h2>
+        <p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
+            Sonando por todo lo alto
+        </p>
+    </div>
 
-                <div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
-                    <a id="dynamic-link" href="#" class="block">
-                        <div id="dynamic-message" class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm"></div>
-                    </a>
-                </div>
+    <!-- Mensajes Rotativos -->
+    <div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
+        <a id="dynamic-link" href="#" class="block">
+            <div id="dynamic-message" class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm"></div>
+        </a>
+    </div>
 
-                <div class="w-full flex justify-center mb-4 px-4 relative z-10">
-                    <canvas id="visualizer" class="w-full max-w-[300px] h-16 opacity-80 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] dark:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)] transition-all duration-300"></canvas>
-                </div>
-                <div class="w-full max-w-md grid grid-cols-12 gap-4">
-                    <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
-                        <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
-                    </button>
-                    <div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
-                        <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
-                    </div>
-                </div>
+    <!-- Visualizador de Audio (Canvas) -->
+    <div class="w-full flex justify-center mb-4 px-4 relative z-10">
+        <canvas id="visualizer" class="w-full max-w-[300px] h-16 opacity-80 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] dark:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)] transition-all duration-300"></canvas>
+    </div>
 
-                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
-                    <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                        <i class="fa-solid fa-share-nodes text-base"></i>
-                        <span>Compartir</span>
-                    </button>
-                    <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
-                        <i class="fa-solid fa-heart text-base"></i>
-                        <span>Apoyar</span>
-                    </button>
-                    <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                        <i class="fa-solid fa-circle-exclamation text-base"></i>
-                        <span>Reportar</span>
-                    </button>
-                    <button id="trigger-install-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                        <i class="fa-solid fa-download text-base"></i>
-                        <span>Instalar</span>
-                    </button>
-                </div>
-            </section>
+    <!-- Controles de Reproducción -->
+    <div class="w-full max-w-md grid grid-cols-12 gap-4">
+        <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
+            <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
+        </button>
+        <div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
+            <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
+        </div>
+    </div>
+
+    <!-- Botonera de Acciones Inferiores -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
+        <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+            <i class="fa-solid fa-share-nodes text-base"></i>
+            <span>Compartir</span>
+        </button>
+        <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-heart text-base"></i>
+            <span>Apoyar</span>
+        </button>
+        <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+            <i class="fa-solid fa-circle-exclamation text-base"></i>
+            <span>Reportar</span>
+        </button>
+        <button id="trigger-install-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+            <i class="fa-solid fa-download text-base"></i>
+            <span>Instalar</span>
+        </button>
+    </div>
+</section>
+
+<!-- Script Lógico de Supabase (Colócalo aquí o al final de tu archivo de scripts) -->
+<script>
+    const SUPABASE_URL = 'https://uiaknnpknjlzchuxyouu.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpYWtubnBrbmpsemNodXh5b3V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyODE1MDcsImV4cCI6MjA5Njg1NzUwN30.WtQ6gdOK7e13k0d6s6Lw5HR3wTNY9uEY3BFRSiNmae8';
+    
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    function getOrCreateSessionId() {
+        let sessionId = localStorage.getItem('radio_session_token');
+        if (!sessionId) {
+            sessionId = 'session_' + Math.random().toString(36).substring(2, 9) + Date.now().toString(36);
+            localStorage.setItem('radio_session_token', sessionId);
+        }
+        return sessionId;
+    }
+
+    async function registerAndFetchConnections() {
+        const currentSession = getOrCreateSessionId();
+
+        try {
+            await supabaseClient
+                .from('radio_connections')
+                .upsert([{ visitor_session_id: currentSession }], { onConflict: 'visitor_session_id' });
+                
+            const { count, error } = await supabaseClient
+                .from('radio_connections')
+                .select('*', { count: 'exact', head: true });
+
+            if (error) throw error;
+
+            document.getElementById('db_total_listeners').innerText = Number(count).toLocaleString();
+
+        } catch (err) {
+            console.error('Error con el contador de Base de Datos:', err);
+            document.getElementById('db_total_listeners').innerText = '1';
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", registerAndFetchConnections);
+    } else {
+        registerAndFetchConnections();
+    }
+</script>
 
 <!-- SECCIÓN: ALIANZAS COMERCIALES (TEXTO COMERCIAL DE ALTA CONVERSIÓN) -->
 <section class="w-full max-w-4xl mx-auto mt-6 bg-zinc-50/60 dark:bg-zinc-900/30 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:border-brand-neon/40 hover:bg-white dark:hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-brand-neon/5">
@@ -1121,7 +1174,7 @@
             { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
             { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
             { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
-   { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Pastor. Jesus Marin", img: "img/programas/pastormarin.png" },
+   { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Pastor. Jesus Marin", img: "img/programas/pastormarin.webp" },
 
             { dia: 6, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" }
         ];
@@ -2102,7 +2155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
             { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
             { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" },
-            { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Pastor. Jesus Marin", img: "img/programas/pastormarin.png" },
+             { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Pastor. Jesus Marin", img: "img/programas/marin.webp" },
             { dia: 6, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png" }
         ];
 
