@@ -2663,93 +2663,86 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const verseLoader = document.getElementById("verse-loader");
-    const verseContent = document.getElementById("verse-content");
-    const verseText = document.getElementById("verse-text");
-    const verseRef = document.getElementById("verse-ref");
-    const btnShare = document.getElementById("btn-share-verse");
+// LÓGICA DE AUTOMATIZACIÓN DEL VERSÍCULO DEL DÍA (31 VERSÍCULOS EN ESPAÑOL - RVR1960)
+document.addEventListener('DOMContentLoaded', () => {
+    const verseLoader = document.getElementById('verse-loader');
+    const verseContent = document.getElementById('verse-content');
+    const verseText = document.getElementById('verse-text');
+    const verseRef = document.getElementById('verse-ref');
+    const btnShareVerse = document.getElementById('btn-share-verse');
 
-    let currentVerse = "";
-    let currentRef = "";
-    const radioLink = window.location.origin; 
+    // Banco de datos: 31 versículos (uno para cada día posible del mes)
+    const panDeVidaMensual = {
+        1: { texto: "Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.", ref: "Jeremías 29:11" },
+        2: { texto: "Todo lo puedo en Cristo que me fortalece.", ref: "Filipenses 4:13" },
+        3: { texto: "Jehová es mi pastor; nada me faltará.", ref: "Salmos 23:1" },
+        4: { texto: "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas.", ref: "Josué 1:9" },
+        5: { texto: "Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su propósito son llamados.", ref: "Romanos 8:28" },
+        6: { texto: "Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia. Reconócelo en todos tus caminos, y él enderezará tus veredas.", ref: "Proverbios 3:5-6" },
+        7: { texto: "El que habita al amparo del Altísimo morará a la sombra del Omnipotente.", ref: "Salmos 91:1" },
+        8: { texto: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.", ref: "Isaías 41:10" },
+        9: { texto: "El hacer tu voluntad, Dios mío, me ha agradado, y tu ley está en medio de mi corazón.", ref: "Salmos 40:8" },
+        10: { texto: "Bástate mi gracia; porque mi poder se perfecciona en la debilidad. Por tanto, de buena gana me gloriaré más bien en mis debilidades, para que repose sobre mí el poder de Cristo.", ref: "2 Corintios 12:9" },
+        11: { texto: "Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.", ref: "Jeremías 33:3" },
+        12: { texto: "Deléitate asimismo en Jehová, y él te concederá las peticiones de tu corazón. Encomienda a Jehová tu camino, y confía en él; y él hará.", ref: "Salmos 37:4-5" },
+        13: { texto: "Torre fuerte es el nombre de Jehová; a él correrá el justo, y será levantado.", ref: "Proverbios 18:10" },
+        14: { texto: "El amor es sufrido, es benigno; el amor no tiene envidia, el amor no es jactancioso, no se envanece; no hace nada indebido, no busca lo suyo, no se irrita, no guarda rencor.", ref: "1 Corintios 13:4-5" },
+        15: { texto: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.", ref: "Juan 3:16" },
+        16: { texto: "La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.", ref: "Juan 14:27" },
+        17: { texto: "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias.", ref: "Filipenses 4:6" },
+        18: { texto: "Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.", ref: "Filipenses 4:7" },
+        19: { texto: "Hubiera yo desmayado, si no creyese que veré la bondad de Jehová en la tierra de los vivientes. Aguarda a Jehová; esfuérzate, y aliéntese tu corazón; sí, espera a Jehová.", ref: "Salmos 27:13-14" },
+        20: { texto: "Justificados, pues, por la fe, tenemos paz para con Dios por medio de nuestro Señor Jesucristo.", ref: "Romanos 5:1" },
+        21: { texto: "Bienaventurado el varón que soporta la tentación; porque cuando haya resistido la prueba, recibirá la corona de vida, que Dios ha prometido a los que le aman.", ref: "Santiago 1:12" },
+        22: { texto: "Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.", ref: "1 Pedro 5:7" },
+        23: { texto: "Tu palabra es una lámpara a mis pies y una luz en mi camino.", ref: "Salmos 119:105" },
+        24: { texto: "El SEÑOR es mi luz y mi salvación; ¿de quién temeré? El SEÑOR es la fortaleza de mi vida; ¿de quién tendré temor?", ref: "Salmos 27:1" },
+        25: { texto: "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.", ref: "Mateo 11:28" },
+        26: { texto: "Mas el fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza; contra tales cosas no hay ley.", ref: "Gálatas 5:22-23" },
+        27: { texto: "Acerquémonos, pues, confiadamente al trono de la gracia, para alcanzar misericordia y hallar gracia para el oportuno socorro.", ref: "Hebreos 4:16" },
+        28: { texto: "Si confesamos nuestros pecados, él es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad.", ref: "1 Juan 1:9" },
+        29: { texto: "Las misericordias de Jehová son nuevas cada mañana; grande es tu fidelidad.", ref: "Lamentaciones 3:22-23" },
+        30: { texto: "Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.", ref: "Juan 14:6" },
+        31: { texto: "Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.", ref: "2 Timoteo 1:7" }
+    };
 
-    async function fetchDailyVerse() {
+    function cargarVersiculoDelDia() {
         try {
-            // Usamos el feed oficial en español de Bible Gateway (RVR1960) convertido a JSON limpio
-            const url = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.biblegateway.com%2Fvotd%2Fget%2F%3Fformat%3Datom%26version%3DRVR1960";
-            const response = await fetch(url);
-            
-            if (!response.ok) throw new Error("Error de conexión");
-            
-            const data = await response.json();
-            
-            if (data.items && data.items.length > 0) {
-                const item = data.items[0];
-                
-                // Limpiamos las etiquetas HTML que a veces añade el feed
-                let cleanText = item.content.replace(/<[^>]*>/g, '').trim();
-                // Removemos la referencia del final si viene duplicada en el texto
-                cleanText = cleanText.replace(item.title, '').trim();
-                
-                currentVerse = cleanText;
-                currentRef = `${item.title} (RVR1960)`;
+            // Obtenemos el número del día actual (1 al 31)
+            const hoy = new Date();
+            const diaDelMes = hoy.getDate(); 
 
-                verseText.innerHTML = `«${currentVerse}»`;
-                verseRef.innerText = currentRef;
+            // Seleccionamos el versículo correspondiente al día de hoy
+            const seleccion = panDeVidaMensual[diaDelMes];
 
-                verseLoader.classList.add("hidden");
-                verseContent.classList.remove("hidden");
-                setTimeout(() => verseContent.classList.add("opacity-100"), 50);
-            } else {
-                throw new Error("Datos vacíos");
-            }
+            // Inyectamos los textos en el HTML
+            verseText.textContent = `“${seleccion.texto}”`;
+            verseRef.textContent = seleccion.ref;
+
+            // Quitamos el loader y mostramos el cuadro del versículo con animación
+            verseLoader.classList.add('hidden');
+            verseContent.classList.remove('hidden');
+            verseContent.classList.add('animate-fade-in', 'opacity-100');
+
+            // Configuramos el botón para compartir en WhatsApp
+            btnShareVerse.onclick = () => {
+                const mensajeCompartir = `📖 *Pan de Vida (Radio FE 4:18)* 📖\n\n"${seleccion.texto}" — *${seleccion.ref}*\n\nSintonízanos en vivo aquí: https://radiofe418.vercel.app/`;
+                const urlWhatsapp = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensajeCompartir)}`;
+                window.open(urlWhatsapp, '_blank');
+            };
 
         } catch (error) {
-            console.error("Error al cargar el versículo:", error);
-            // Respaldo inmediato en español si la red falla
-            currentVerse = "Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.";
-            currentRef = "2 Timoteo 1:7 (RVR1960)";
-
-            verseText.innerHTML = `«${currentVerse}»`;
-            verseRef.innerText = currentRef;
-
-            verseLoader.classList.add("hidden");
-            verseContent.classList.remove("hidden");
-            verseContent.classList.add("opacity-100");
+            console.error("Error al procesar el versículo diario:", error);
+            // Respaldo de seguridad por si acaso
+            verseText.textContent = "“Jehová es mi pastor; nada me faltará.”";
+            verseRef.textContent = "Salmos 23:1";
+            verseLoader.classList.add('hidden');
+            verseContent.classList.remove('hidden');
         }
     }
 
-    function shareVerse() {
-        if (!currentVerse) return;
-
-        const messageText = 
-`📻 *RADIO FE 4:18* | _Una palabra de fe para ti hoy_ ✨
-
-📖 *Pan de Vida:*
-"${currentVerse}"
-👉 _${currentRef}_
-
-🎧 Sintoniza nuestra señal en vivo, llena tu hogar de bendición y comparte esperanza con los tuyos.
-🌐 Escúchanos aquí: ${radioLink}
-
-#PalabraDeFe #RadioFe #VersiculoDelDia #Evangelio`;
-
-        if (navigator.share) {
-            navigator.share({
-                title: 'Versículo del Día - Radio FE 4:18',
-                text: messageText
-            })
-            .then(() => console.log('Compartido con éxito'))
-            .catch((error) => console.log('Error al compartir:', error));
-        } else {
-            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-    }
-
-    btnShare.addEventListener("click", shareVerse);
-    fetchDailyVerse();
+    // Inicializar la carga del versículo al abrir la página
+    cargarVersiculoDelDia();
 });
 </script>
 </body>
