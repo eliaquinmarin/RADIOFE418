@@ -2342,493 +2342,254 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
- <!-- ==========================================================================
-
-     CONTENEDOR DE CONTINGENCIA (SISTEMA HÍBRIDO: MODAL / TARJETA FLOTANTE)
-
+<!-- ==========================================================================
+     CONTENEDOR DE CONTINGENCIA (SISTEMA HÍBRIDO PERFECCIONADO)
      ========================================================================== -->
-
-<div id="signal-error-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-all duration-500 hidden">
-
+<div id="signal-error-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-500 hidden">
     
-
-    <!-- Cuadro de Alerta Principal -->
-
-    <div id="signal-card-body" class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative transition-all duration-500 transform scale-100">
-
+    <!-- Cuadro de Alerta Principal / Tarjeta Flotante Adaptativa -->
+    <div id="signal-card-body" class="bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative transition-all duration-500 transform scale-100 text-center">
         
-
-        <!-- Botón Esquina para Minimizar/Cerrar la capa de bloqueo -->
-
-        <button id="btn-modal-close-x" class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-zinc-200/50 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors" title="Minimizar aviso">
-
+        <!-- Botón Esquina para Cerrar/Ocultar por Completo -->
+        <button id="btn-modal-close-x" class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-zinc-200/50 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:bg-red-500 hover:text-white transition-colors" title="Cerrar aviso temporalmente">
             <i class="fa-solid fa-xmark text-xs"></i>
-
         </button>
 
-
-
-        <div class="text-center">
-
+        <div id="signal-content-wrapper" class="flex flex-col items-center">
             <!-- Icono de Advertencia Dinámico -->
-
-            <div id="signal-icon-box" class="w-16 h-16 bg-amber-500/20 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
-
+            <div id="signal-icon-box" class="w-16 h-16 bg-amber-500/20 text-amber-500 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300">
                 <i id="signal-main-icon" class="fa-solid fa-triangle-exclamation text-2xl animate-bounce"></i>
-
             </div>
-
             
-
             <!-- Título Dinámico -->
-
-            <h3 id="signal-modal-title" class="text-lg font-bold text-zinc-900 dark:text-white mb-2 transition-all duration-300">
-
+            <h3 id="signal-modal-title" class="text-lg font-black text-zinc-900 dark:text-white mb-2 transition-all duration-300">
                 Señal en mantenimiento
-
             </h3>
-
             
-
-            <!-- Descripción que se ocultará en modo tarjeta pequeña -->
-
-            <p id="signal-modal-desc" class="text-xs text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed block transition-all duration-300">
-
-                Estamos optimizando nuestra señal de streaming. Por favor, intenta de nuevo en unos instantes o acompáñanos en nuestro canal oficial.
-
+            <!-- Descripción Adaptativa -->
+            <p id="signal-modal-desc" class="text-xs text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed block transition-all duration-300 font-medium">
+                Estamos optimizando nuestra señal de streaming. Por favor, intenta refrescar la página o espera unos instantes a que se restablezca automáticamente.
             </p>
-
             
-
             <!-- Bloque de Botones Adaptativos -->
-
             <div id="signal-buttons-container" class="flex flex-col gap-2 w-full">
-
-                <button id="btn-modal-direct" class="w-full py-3 text-xs font-black uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink text-white rounded-xl shadow-lg transition-all active:scale-95">
-
-                    Entendido
-
+                <!-- BOTÓN REFRESCAR PÁGINA -->
+                <button id="btn-modal-refresh" class="w-full py-3 text-xs font-black uppercase bg-gradient-to-r from-brand-neon to-cyan-500 text-white rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-arrows-rotate animate-spin-slow"></i> Refrescar Página
                 </button>
 
-                <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" id="btn-modal-channel" target="_blank" class="w-full py-3 text-xs font-bold uppercase border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 bg-white/50 dark:bg-zinc-900/30 rounded-xl transition-all text-center block">
+                <!-- BOTÓN MINIMIZAR (Dejar flotante discreto) -->
+                <button id="btn-modal-minimize" class="w-full py-3 text-xs font-bold uppercase border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 bg-white/50 dark:bg-zinc-900/30 rounded-xl transition-all text-center block hover:bg-zinc-100 dark:hover:bg-zinc-800">
+                    Minimizar Aviso
+                </button>
 
-                    Canal de WhatsApp
-
+                <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" id="btn-modal-channel" target="_blank" class="w-full py-2.5 text-[11px] font-bold uppercase text-zinc-400 hover:text-brand-neon transition-all text-center block">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Canal de WhatsApp
                 </a>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
-
-
 
 <!-- Alerta Flotante Temporal (Éxito de señal reactivada) -->
-
 <div id="signal-success-toast" class="fixed bottom-6 right-6 z-[110] hidden items-center gap-3 bg-emerald-600 text-white px-5 py-3.5 rounded-2xl shadow-xl shadow-emerald-900/20 border border-emerald-500/30 animate-slide-in-right">
-
     <div class="w-7 h-7 bg-white/20 rounded-lg flex items-center justify-center shrink-0">
-
         <i class="fa-solid fa-circle-check text-sm text-white"></i>
-
     </div>
-
     <div>
-
         <p class="text-xs font-black uppercase tracking-wider m-0">Transmisión Online</p>
-
         <p class="text-[11px] font-medium opacity-90 m-0">Señal restablecida con éxito.</p>
-
     </div>
-
 </div>
 
-
-
-<!-- Clases de animación CSS personalizadas si no están en tu hoja de estilos principal -->
-
+<!-- Estilos de Animación específicos para este componente -->
 <style>
-
 @keyframes slideInRight {
-
     from { transform: translateX(120%); opacity: 0; }
-
     to { transform: translateX(0); opacity: 1; }
-
 }
-
 .animate-slide-in-right {
-
     animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-
 }
-
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
 </style>
 
-
-
 <script>
-
-// ==========================================================================
-
-// SISTEMA DE MONITOREO HÍBRIDO E INTELIGENTE DE SEÑAL (OPTIMIZADO)
-
-// ==========================================================================
-
 (function() {
-
-    // Validar entorno global del reproductor
-
-    if (typeof audio === 'undefined' || typeof playIcon === 'undefined') {
-
-        console.warn("Módulo de contingencia: No se detectó la instancia global 'audio' o 'playIcon'.");
-
-        return;
-
-    }
-
-
-
+    // 1. Elementos del DOM
     const modalContainer = document.getElementById('signal-error-modal');
-
     const cardBody = document.getElementById('signal-card-body');
-
+    const contentWrapper = document.getElementById('signal-content-wrapper');
     const iconBox = document.getElementById('signal-icon-box');
-
     const mainIcon = document.getElementById('signal-main-icon');
-
     const modalTitle = document.getElementById('signal-modal-title');
-
     const modalDesc = document.getElementById('signal-modal-desc');
-
     const buttonsContainer = document.getElementById('signal-buttons-container');
-
     const toastSuccess = document.getElementById('signal-success-toast');
 
-
-
-    const btnDirect = document.getElementById('btn-modal-direct');
-
+    const btnRefresh = document.getElementById('btn-modal-refresh');
+    const btnMinimize = document.getElementById('btn-modal-minimize');
     const btnCloseX = document.getElementById('btn-modal-close-x');
-
     const btnChannel = document.getElementById('btn-modal-channel');
-
-    
+    const audioEl = document.getElementById('audio-player'); // Vinculado a tu ID real del reproductor
 
     let temporizadorEspera = null;
-
     let esModoMinimizado = false;
 
-
-
-    // A. ACTIVAR ALERTA (Fase Inicial: Modal Bloqueante Completo)
-
+    // A. ACTIVAR ALERTA (Modal Bloqueante Original)
     function activarAlertaMantenimiento() {
-
         if (!modalContainer) return;
-
-        
-
-        // Evitar reiniciar el estado si ya está visible en modo tarjeta flotante
-
         if (esModoMinimizado) return;
 
+        // Resetear onclick del cuerpo por si venía de estar minimizado
+        if (cardBody) cardBody.onclick = null;
 
-
-        // Mostrar como Modal centrado con fondo oscuro
-
+        // Mostrar como Modal centrado clásico
         modalContainer.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-500";
-
         cardBody.className = "bg-brand-lightCard dark:bg-brand-card w-full max-w-sm rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative transition-all duration-500 transform scale-100 text-center";
-
         
-
-        // Estructura interna estándar de error
-
-        iconBox.className = "w-16 h-16 bg-amber-500/20 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300";
-
+        contentWrapper.className = "flex flex-col items-center";
+        iconBox.className = "w-16 h-16 bg-amber-500/20 text-amber-500 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300";
         mainIcon.className = "fa-solid fa-triangle-exclamation text-2xl animate-bounce";
-
         
-
-        modalTitle.className = "text-xl font-black text-zinc-900 dark:text-white mb-2 transition-all duration-300";
-
+        modalTitle.className = "text-lg font-black text-zinc-900 dark:text-white mb-2 transition-all duration-300";
         modalTitle.textContent = "Señal en mantenimiento";
-
         
-
-        // Mensaje personalizado pidiendo esperar y actualizar
-
-        modalDesc.className = "text-sm text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed block transition-all duration-300 font-medium";
-
-        modalDesc.innerHTML = "Por favor, <span class='text-amber-500 font-bold'>espera 5 minutos y actualiza la página</span> para verificar si el problema ya se solucionó.";
-
-        
-
+        modalDesc.className = "text-xs text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed block transition-all duration-300 font-medium";
         buttonsContainer.className = "flex flex-col gap-2 w-full";
-
         
-
-        // BOTÓN DE CERRAR GRANDE (Habilitado y destacado)
-
-        if (btnCloseX) {
-
-            btnCloseX.className = "absolute -top-3 -right-3 w-10 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 shadow-lg transition-all transform hover:scale-110 active:scale-95 z-50 cursor-pointer";
-
-            // Asegurar que la X interna se vea grande (FontAwesome)
-
-            const iconX = btnCloseX.querySelector('i') || btnCloseX;
-
-            iconX.className = "fa-solid fa-xmark text-lg font-bold";
-
-        }
-
-
-
-        if (playIcon) {
-
-            playIcon.className = "fa-solid fa-play text-xl ml-0.5";
-
-        }
-
-
-
+        if (btnCloseX) btnCloseX.className = "absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-zinc-200/50 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:bg-red-500 hover:text-white transition-colors cursor-pointer";
+        
         const txtArtista = document.getElementById('sonic_artist');
-
-        if (txtArtista && (typeof programaEnVivoActivo === 'undefined' || !programaEnVivoActivo)) {
-
-            txtArtista.textContent = "Señal en mantenimiento";
-
-        }
-
+        if (txtArtista) txtArtista.textContent = "Señal en mantenimiento";
     }
 
-
-
-    // B. MINIMIZAR CUADRO (Lo dejamos lo más pequeño posible en una esquina)
-
-    function minimizarAlerta() {
-
+    // B. MINIMIZAR CUADRO (Modo Píldora Flotante Ultra Discreto y Elegante)
+    function minimizarAlerta(e) {
+        if (e) e.stopPropagation();
         if (!modalContainer) return;
-
         esModoMinimizado = true;
 
-
-
-        // Quitar fondo oscuro por completo y anclar a la esquina inferior derecha
-
-        modalContainer.className = "fixed bottom-4 right-4 left-auto top-auto z-[100] p-0 bg-transparent backdrop-blur-0 pointer-events-none transition-all duration-500";
-
+        // Liberar el fondo oscuro de la pantalla y mover a la esquina inferior derecha
+        modalContainer.className = "fixed bottom-6 right-6 left-auto top-auto z-[100] p-0 bg-transparent backdrop-blur-0 pointer-events-none transition-all duration-500";
         
-
-        // Cuerpo ultra-compacto (Ancho mínimo, padding mínimo, estilo discreto tipo píldora)
-
-        cardBody.className = "bg-amber-500 text-white dark:bg-amber-600 w-auto max-w-[180px] rounded-full px-3 py-1.5 border border-amber-400/20 shadow-md relative pointer-events-auto transition-all duration-500 transform scale-100 flex items-center gap-2 cursor-pointer hover:bg-amber-600 dark:hover:bg-amber-700 active:scale-95";
-
+        // Píldora mini que se adapta perfectamente a tu interfaz (diseño compacto, color ámbar/alerta sutil)
+        cardBody.className = "bg-amber-500 text-white dark:bg-amber-600 w-auto max-w-[210px] rounded-full px-4 py-2 border border-amber-400/20 shadow-lg relative pointer-events-auto transition-all duration-500 transform scale-100 flex items-center gap-2.5 cursor-pointer hover:bg-amber-600 dark:hover:bg-amber-700 active:scale-95";
         
-
-        // Icono minúsculo al lado del texto
-
+        // Convertir el Layout en línea (Horizontal)
+        contentWrapper.className = "flex flex-row items-center gap-2 w-full";
         iconBox.className = "w-4 h-4 bg-transparent text-white flex items-center justify-center m-0 transition-all duration-300 shrink-0";
-
-        mainIcon.className = "fa-solid fa-circle-exclamation text-xs animate-pulse";
-
+        mainIcon.className = "fa-solid fa-circle-notch text-xs animate-spin";
         
+        // Texto minúsculo informativo
+        modalTitle.className = "text-[10px] font-black uppercase tracking-wider text-white m-0 transition-all duration-300 whitespace-nowrap";
+        modalTitle.textContent = "Reconectando señal...";
 
-        // Texto súper pequeño y en una sola línea
-
-        modalTitle.className = "text-[10px] font-bold uppercase tracking-wider text-white m-0 transition-all duration-300 whitespace-nowrap";
-
-        modalTitle.textContent = "Reintentar señal";
-
-        
-
-        // Ocultar absolutamente todo lo demás
-
+        // Ocultar elementos masivos
         modalDesc.className = "hidden";
+        buttonsContainer.className = "hidden";
+        if (btnCloseX) btnCloseX.className = "hidden";
 
-        if (btnChannel) btnChannel.className = "hidden";
-
-        if (btnCloseX) btnCloseX.className = "hidden"; // Ocultar el botón grande al estar minimizado
-
-        if (buttonsContainer) buttonsContainer.className = "hidden";
-
-
-
-        // Convertimos TODA la mini-tarjeta en el botón de reintento directo
-
-        cardBody.onclick = function(e) {
-
-            e.preventDefault();
-
-            modalTitle.textContent = "Conectando...";
-
-            audio.load();
-
-            audio.play().then(() => {
-
-                senalRestablecidaCorrectamente();
-
-            }).catch(err => {
-
-                console.log("Reintento fallido, permanece minimizado.");
-
-                modalTitle.textContent = "Reintentar señal";
-
-            });
-
-        };
-
-    }
-
-
-
-    // C. DESACTIVAR TODO Y MOSTRAR EMISIÓN EXITOSA
-
-    function senalRestablecidaCorrectamente() {
-
-        if (modalContainer) {
-
-            modalContainer.className = "hidden";
-
-        }
-
-        
-
-        if (esModoMinimizado || (modalContainer && !modalContainer.classList.contains('hidden'))) {
-
-            if (toastSuccess) {
-
-                toastSuccess.classList.remove('hidden');
-
-                toastSuccess.classList.add('flex');
-
-                
-
-                setTimeout(() => {
-
-                    toastSuccess.classList.add('opacity-0');
-
-                    setTimeout(() => {
-
-                        toastSuccess.classList.remove('flex', 'opacity-0');
-
-                        toastSuccess.classList.add('hidden');
-
-                    }, 500);
-
-                }, 4000);
-
+        // Al hacer click sobre la píldora flotante, intentará forzar la reconexión manual
+        cardBody.onclick = function() {
+            if (audioEl) {
+                modalTitle.textContent = "Conectando...";
+                audioEl.load();
+                audioEl.play().catch(() => {
+                    modalTitle.textContent = "Señal Offline • Reintentar";
+                });
             }
-
-        }
-
-        
-
-        // Restaurar variables de control y limpiar el click dinámico de la tarjeta
-
-        esModoMinimizado = false;
-
-        if(cardBody) cardBody.onclick = null;
-
+        };
     }
 
+    // C. CERRAR COMPLEMENTAMENTE EL CUADRO DE DIÁLOGO
+    function cerrarAlertaPorCompleto(e) {
+        if (e) e.stopPropagation();
+        if (modalContainer) modalContainer.className = "hidden";
+        esModoMinimizado = false;
+    }
 
+    // D. REFRESCAR PÁGINA TRADICIONAL
+    if (btnRefresh) {
+        btnRefresh.addEventListener('click', () => {
+            window.location.reload();
+        });
+    }
 
-    // Asignación de acciones de cerrado/minimizado a los componentes del DOM
+    // E. SEÑAL RESTABLECIDA: DESAPARECER POR COMPLETO AL DETECTAR CONEXIÓN
+    function senalRestablecidaCorrectamente() {
+        if (!modalContainer || modalContainer.classList.contains('hidden') && !esModoMinimizado) return;
 
-    if (btnDirect) btnDirect.addEventListener('click', minimizarAlerta);
+        // Ocultar el contenedor por completo
+        modalContainer.className = "hidden";
 
-    if (btnCloseX) btnCloseX.addEventListener('click', minimizarAlerta);
+        // Mostrar Toast de Éxito temporal si venía de un estado de error previo
+        if (toastSuccess) {
+            toastSuccess.classList.remove('hidden');
+            toastSuccess.classList.add('flex');
+            
+            setTimeout(() => {
+                toastSuccess.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                setTimeout(() => {
+                    toastSuccess.classList.remove('flex', 'opacity-0');
+                    toastSuccess.classList.add('hidden');
+                }, 500);
+            }, 4000);
+        }
+        
+        esModoMinimizado = false;
+        if (cardBody) cardBody.onclick = null;
+    }
 
-    if (btnChannel) btnChannel.addEventListener('click', minimizarAlerta);
+    // Asignación de acciones a botones
+    if (btnMinimize) btnMinimize.addEventListener('click', minimizarAlerta);
+    if (btnCloseX) btnCloseX.addEventListener('click', cerrarAlertaPorCompleto);
 
-
-
-    // D. SISTEMA ASÍNCRONO DE COMPROBACIÓN (FETCH)
-
+    // F. MONITOREO AUTOMÁTICO ASÍNCRONO DEL FLUJO (FETCH)
     async function comprobarEstadoServidor(urlStream) {
-
         const controller = new AbortController();
-
-        const timeoutId = setTimeout(() => controller.abort(), 12000);
-
-
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
 
         try {
-
+            // No-cors es necesario para servidores Icecast/SonicPanel directo
             await fetch(urlStream, { method: 'GET', signal: controller.signal, mode: 'no-cors' });
-
             clearTimeout(timeoutId);
-
-            if (!audio.paused) {
-
+            
+            // Si el servidor responde y el reproductor no está explícitamente en pausa, limpiamos la pantalla
+            if (audioEl && !audioEl.paused) {
                 senalRestablecidaCorrectamente();
-
             }
-
         } catch (err) {
-
             clearTimeout(timeoutId);
-
-            console.error("Contingencia: El servidor de streaming sigue sin enviar paquetes estables.");
-
+            console.warn("El servidor de streaming sigue sin responder.");
             activarAlertaMantenimiento();
-
         }
-
     }
 
+    // G. ESCUCHADORES DEL OBJETO AUDIO EN TIEMPO REAL
+    if (audioEl) {
+        audioEl.addEventListener('error', () => {
+            activarAlertaMantenimiento();
+        });
 
+        audioEl.addEventListener('waiting', () => {
+            if (temporizadorEspera) clearTimeout(temporizadorEspera);
+            temporizadorEspera = setTimeout(() => {
+                if (audioEl.paused === false && audioEl.readyState < 3) {
+                    comprobarEstadoServidor(audioEl.src);
+                }
+            }, 10000); // 10 segundos de congelamiento gatillan la validación
+        });
 
-    // E. DISPARADORES Y OYENTES DEL ELEMENTO AUDIO HTML5
-
-    audio.addEventListener('error', () => {
-
-        console.log("Contingencia: Error crítico en la reproducción del flujo de audio.");
-
-        activarAlertaMantenimiento();
-
-    });
-
-
-
-    audio.addEventListener('waiting', () => {
-
-        if (temporizadorEspera) clearTimeout(temporizadorEspera);
-
-
-
-        temporizadorEspera = setTimeout(() => {
-
-            if (audio.paused === false && audio.readyState < 3) {
-
-                console.log("Contingencia: Búfer de red congelado. Verificando estado técnico...");
-
-                comprobarEstadoServidor(audio.src);
-
-            }
-
-        }, 12000);
-
-    });
-
-
-
-    audio.addEventListener('playing', () => {
-
-        if (temporizadorEspera) clearTimeout(temporizadorEspera);
-
-        senalRestablecidaCorrectamente();
-
-    });
-
+        audioEl.addEventListener('playing', () => {
+            if (temporizadorEspera) clearTimeout(temporizadorEspera);
+            senalRestablecidaCorrectamente();
+        });
+    }
 })();
-
-</script> 
+</script>
 
 <!-- INTEGRACIÓN INTELIGENTE Y SEGURA CON SONICPANEL (AUTO-DJ METADATOS) -->
 <script>
