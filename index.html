@@ -2688,5 +2688,47 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<!-- REGISTRO DEL SERVICE WORKER PARA PWA -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker registrado con éxito', reg))
+                .catch(err => console.warn('Error al registrar el Service Worker', err));
+        });
+    }
+
+    // Lógica para capturar el evento de instalación (Botón Instalar de la interfaz)
+    let deferredPrompt;
+    const installBtn = document.getElementById('trigger-install-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Previene la barra por defecto en algunos navegadores móviles
+        e.preventDefault();
+        deferredPrompt = e;
+        // Muestra el botón de instalar si está oculto o cámbiale el estilo
+        if (installBtn) {
+            installBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+    });
+
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('El usuario aceptó la instalación de la PWA');
+                }
+                deferredPrompt = null;
+            } else {
+                alert('La aplicación ya está instalada o tu navegador no soporta la instalación directa.');
+            }
+        });
+    }
+</script>
+
+</body>
+
 </body>
 </html>
