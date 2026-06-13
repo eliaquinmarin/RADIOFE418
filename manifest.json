@@ -10,8 +10,7 @@
     {
       "src": "img/caratula.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     },
     {
       "src": "img/caratula.png",
