@@ -9,14 +9,14 @@
   "theme_color": "#09090b",
   "icons": [
     {
-      "src": "img/ivon-192-192.png",
+      "src": "img/icon-192-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "img/icon-512-512.png",
-      "sizes": "512x512",
+      "sizes": "5120x512",
       "type": "image/png",
       "purpose": "any"
     }
