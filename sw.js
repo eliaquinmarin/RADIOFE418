@@ -6,44 +6,38 @@ const ASSETS = [
   'https://cdn.tailwindcss.com'
 ];
 
-// Instalación: Guardamos los archivos esenciales en la caché local
+// Instalación de la PWA
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS);
-    }).then(() => self.skipWaiting()) // Fuerza al service worker a activarse de inmediato
+    }).then(() => self.skipWaiting())
   );
 });
 
-// Activación: Limpiamos versiones viejas de caché para evitar conflictos de diseño
+// Activación y limpieza
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+          if (key !== CACHE_NAME) return caches.delete(key);
         })
       );
-    }).then(() => self.clients.claim()) // Toma el control de la app inmediatamente
+    }).then(() => self.clients.claim())
   );
 });
 
-// Estrategia de carga: Cache First para diseño, Red Directa para el streaming de audio
+// Intercepción de peticiones de red
 self.addEventListener('fetch', (e) => {
-  // EXCLUSIÓN CRÍTICA: Si la petición es el flujo de audio de la radio, directo a la red sin tocar la caché
+  // Ignoramos por completo el flujo de audio para que no rompa el reproductor en vivo
   if (e.request.url.includes('sonicpanelradio.com') || e.request.url.includes(':8246')) {
     return e.respondWith(fetch(e.request));
   }
 
-  // Para el resto de los elementos (HTML, CSS, Fuentes) usamos la caché local
   e.respondWith(
-    caches.match(e.request).then((cachedResponse) => {
-      return cachedResponse || fetch(e.request).catch(() => {
-        // En caso de que falle internet por completo, se asegura de servir la página guardada
-        return caches.match('./index.html');
-      });
+    caches.match(e.request).then((res) => {
+      return res || fetch(e.request).catch(() => caches.match('./index.html'));
     })
   );
 });

@@ -2719,5 +2719,110 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<!-- Modal de Instalación Personalizado PWA -->
+<div id="install-modal" class="hidden fixed inset-0 z-[100] items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-[#18181b] border border-zinc-800 p-6 rounded-3xl max-w-sm w-full text-center shadow-2xl">
+        <div class="w-16 h-16 mx-auto bg-gradient-to-tr from-cyan-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+            <img src="img/logo.png" alt="Logo" class="h-12 w-auto object-contain">
+        </div>
+        <h3 class="text-lg font-bold text-white uppercase tracking-wide">Instala nuestra App</h3>
+        <p class="text-xs text-zinc-450 text-zinc-400 mt-2 leading-relaxed">
+            Escucha la señal en vivo de **Radio FE 4:18** sin interrupciones y con acceso directo desde tu pantalla de inicio como una aplicación nativa.
+        </p>
+        <div class="flex gap-3 mt-6">
+            <button id="cancel-install" class="w-1/3 py-2.5 bg-zinc-800 text-zinc-300 font-bold text-xs rounded-xl uppercase tracking-wider hover:bg-zinc-700 transition-all">Luego</button>
+            <button id="confirm-install" class="w-2/3 py-2.5 bg-gradient-to-r from-cyan-500 to-pink-500 text-white font-black text-xs rounded-xl uppercase tracking-wider shadow-lg hover:opacity-90 transition-all">Instalar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deferredPrompt = null;
+
+    // CAPTURA INMEDIATA (Nivel Global): Captura el evento antes de que el navegador lo descarte
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('¡Evento beforeinstallprompt detectado y capturado con éxito!');
+        // Evitamos que el navegador muestre su barra clásica o banner por defecto abajo
+        e.preventDefault();
+        // Guardamos el evento para usarlo cuando presionen "Instalar"
+        deferredPrompt = e; 
+
+        // Mostramos el modal personalizado automáticamente después de 2 segundos de entrar a la web
+        const installModal = document.getElementById('install-modal');
+        if (installModal && localStorage.getItem('pwa-rejected') !== 'true') {
+            setTimeout(() => {
+                // Quitamos la clase 'hidden' y añadimos 'flex' para centrarlo
+                installModal.classList.remove('hidden');
+                installModal.classList.add('flex');
+            }, 2000);
+        }
+    });
+
+    // Detectar si el usuario instaló la aplicación desde otra vía (como el menú de tres puntos de Chrome)
+    window.addEventListener('appinstalled', () => {
+        console.log('La aplicación ha sido instalada.');
+        localStorage.setItem('pwa-installed', 'true');
+        deferredPrompt = null;
+        ocultarModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnCancel = document.getElementById('cancel-install');
+        const btnConfirm = document.getElementById('confirm-install');
+
+        if (!btnCancel || !btnConfirm) return;
+
+        // Si ya está abierta como aplicación instalada, no hacemos nada
+        if (window.matchMedia('(display-mode: standalone)').matches || localStorage.getItem('pwa-installed') === 'true') {
+            return;
+        }
+
+        // Botón "Luego": Oculta el cuadro y guarda la decisión para no molestar en la sesión actual
+        btnCancel.addEventListener('click', () => {
+            ocultarModal();
+            localStorage.setItem('pwa-rejected', 'true');
+        });
+
+        // Botón "Instalar": Despierta el proceso real del sistema operativo
+        btnConfirm.addEventListener('click', async () => {
+            if (!deferredPrompt) {
+                alert("La instalación no está lista o la app ya se encuentra instalada.");
+                return;
+            }
+            
+            // Lanzamos la ventana nativa de instalación del sistema (Android / Windows / iOS)
+            deferredPrompt.prompt();
+            
+            // Esperamos a ver qué responde el oyente
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`Respuesta del usuario a la instalación: ${outcome}`);
+            
+            if (outcome === 'accepted') {
+                localStorage.setItem('pwa-installed', 'true');
+            }
+            
+            deferredPrompt = null;
+            ocultarModal();
+        });
+    });
+
+    function ocultarModal() {
+        const installModal = document.getElementById('install-modal');
+        if (installModal) {
+            installModal.classList.remove('flex');
+            installModal.classList.add('hidden');
+        }
+    }
+
+    // REGISTRO DEL SERVICE WORKER
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registrado correctamente en el entorno:', reg.scope))
+                .catch(err => console.error('Error al registrar el Service Worker:', err));
+        });
+    }
+</script>
+
 </body>
 </html>
