@@ -205,6 +205,18 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
 .animate-pulse-slow {
     animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+    @keyframes ticker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+.animate-ticker {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: ticker 25s linear infinite;
+}
+.animate-ticker:hover {
+    animation-play-state: paused; /* Se pausa cuando el usuario pone el mouse encima */
+}
 </style>
 
  <script type="text/javascript">
@@ -267,41 +279,26 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         </div>
     </header>
 
-<!-- Barra Informativa Ultramoderna y Uniforme -->
-<div class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/50 py-2 px-4 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto flex items-center justify-center sm:justify-start flex-wrap gap-y-1 gap-x-3 text-xs sm:text-sm">
+<!-- Cintillo de Noticias Contexto Media Group -->
+<div class="w-full bg-brand-neonPink/10 dark:bg-zinc-900/90 border-b border-zinc-200 dark:border-brand-neonPink/30 py-2.5 overflow-hidden relative z-40 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto flex items-center relative px-4">
         
-        <!-- Indicador de En Vivo y Etiqueta -->
-        <div class="flex items-center gap-2 shrink-0">
-            <span class="flex h-2 w-2 relative">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
-            </span>
-            <span class="font-black text-brand-neon uppercase text-[10px] tracking-widest">A continuación:</span>
+        <!-- Etiqueta Fija Izquierda -->
+        <div class="absolute left-0 top-0 bottom-0 bg-brand-neonPink text-white text-[10px] font-black tracking-widest uppercase flex items-center px-3 z-10 shadow-md rounded-r-lg">
+            <i class="fa-solid fa-newspaper mr-1.5 animate-pulse"></i> NOTICIAS
         </div>
 
-        <!-- Separador Visual (Oculto en móviles extremos si se apila) -->
-        <span class="hidden xs:inline text-zinc-300 dark:text-zinc-700 font-light">|</span>
-
-        <!-- Título del Programa (Elemento Principal) -->
-        <div class="min-w-0 max-w-full sm:max-w-md md:max-w-lg truncate">
-            <span id="next-program-title" class="font-extrabold text-zinc-800 dark:text-zinc-200 uppercase tracking-wide text-center sm:text-left block truncate">
-                CARGANDO......
-            </span>
+        <!-- Contenedor con Máscara de Desvanecido y Movimiento -->
+        <div class="w-full overflow-hidden pl-24 select-none relative [mask-image:linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]">
+            <div id="ticker-content" class="animate-ticker flex gap-12 text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                <!-- Se duplica el contenido en JS para asegurar el bucle infinito suave -->
+                <span class="flex items-center gap-2"><i class="fa-solid fa-circle text-[6px] text-brand-neonPink"></i> Conectando con Contexto Media Group...</span>
+            </div>
         </div>
-
-        <!-- Separador Visual -->
-        <span class="hidden sm:inline text-zinc-300 dark:text-zinc-700 font-light">|</span>
-
-        <!-- Horario Compacto e Integrado -->
-        <div class="flex items-center gap-1.5 font-mono text-[11px] font-bold text-zinc-500 dark:text-zinc-400 shrink-0 sm:ml-auto">
-            <i class="fa-regular fa-clock text-brand-neonPink text-xs"></i>
-            <span id="next-program-time" class="uppercase tracking-wider">HORA</span>
-        </div>
-
+        
     </div>
 </div>
-
+       
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         <div class="lg:col-span-7 space-y-6 w-full">
@@ -1134,35 +1131,38 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         </div>
     </main>
 
-<footer class="w-full bg-zinc-200/50 dark:bg-brand-card/30 border-t border-zinc-300 dark:border-zinc-900 mt-12 py-8 px-6 text-center text-zinc-500 text-xs transition-colors duration-300">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer class="w-full bg-zinc-100/80 dark:bg-brand-card/50 border-t border-zinc-200 dark:border-zinc-800/80 mt-12 py-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
+        <!-- Contenedor maestro con distribución exacta en 3 columnas en escritorio -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-6 text-center md:text-left">
             
-            <!-- Derechos Reservados -->
-            <div class="text-center md:text-left">
-                <p class="font-semibold text-zinc-700 dark:text-zinc-400">© <span id="footer-year"></span> Radio FE 4:18. Todos los derechos reservados.</p>
-                <p class="text-[11px] text-zinc-500 dark:text-zinc-600 mt-0.5">Transmitiendo alta fidelidad las 24 horas del día.</p>
+            <!-- Bloque 1: Derechos Reservados -->
+            <div class="space-y-0.5">
+                <p class="text-xs font-bold text-zinc-800 dark:text-zinc-300">
+                    © <span id="footer-year"></span> Radio FE 4:18. <span class="font-medium text-zinc-500 dark:text-zinc-500">Todos los derechos reservados.</span>
+                </p>
+                <p class="text-[11px] text-zinc-400 dark:text-zinc-500 font-medium">
+                    Sonando por todo lo alto.
+                </p>
             </div>
             
-            <!-- Insignia de Protección DMCA -->
-            <div class="flex items-center justify-center transition-all duration-300 hover:opacity-80">
-                <a href="//www.dmca.com/Protection/Status.aspx?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" title="DMCA.com Protection Status" class="dmca-badge inline-block bg-zinc-300/30 dark:bg-zinc-900/50 p-1.5 rounded-xl border border-zinc-300 dark:border-zinc-800"> 
-                    <img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" alt="DMCA.com Protection Status" class="h-6 w-auto block" />
+            <!-- Bloque 2: Insignia de Protección DMCA (Centrado Absoluto) -->
+            <div class="flex items-center justify-center transition-all duration-300 hover:opacity-75">
+                <a href="//www.dmca.com/Protection/Status.aspx?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" title="DMCA.com Protection Status" class="dmca-badge inline-block bg-zinc-200/40 dark:bg-zinc-900/45 p-1 rounded-xl border border-zinc-300/60 dark:border-zinc-800/60"> 
+                    <img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" alt="DMCA.com Protection Status" class="h-5 w-auto block grayscale dark:contrast-125 dark:brightness-90 hover:grayscale-0 transition-all duration-300" />
                 </a> 
-                <!-- El script oficial de DMCA se mantiene integrado de forma invisible -->
+                <!-- Script oficial invisible DMCA -->
                 <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
             </div>
 
-            <!-- Créditos de Desarrollo -->
-            <div class="bg-zinc-200 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-850 px-4 py-2 rounded-2xl flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
-                <span class="inline-block w-2 h-2 rounded-full bg-brand-neon compressed animate-pulse"></span>
-                <span class="text-[11px]">Desarrollado para RADIO FE 4:18 <i class="fa-solid fa-music text-brand-neonPink text-[10px]"></i> por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-800 dark:text-white hover:text-brand-neon transition-colors">@EliaquinMarin</a></span>
-            </div>
-
-            <!-- Ubicación -->
-            <div class="flex items-center space-x-4 text-[11px] text-zinc-500 dark:text-zinc-600">
-                <span class="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">Sonando por todo lo alto</span>
-                <span> • </span>
-                <span class="text-zinc-400 dark:text-zinc-700 font-mono">Barinas - Venezuela.</span>
+            <!-- Bloque 3: Créditos de Desarrollo (Alineado a la derecha en escritorio) -->
+            <div class="md:text-right flex flex-col md:items-end justify-center gap-1">
+                <p class="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 flex items-center justify-center md:justify-end gap-1.5">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-neon animate-pulse"></span>
+                    Desarrollado para RADIO FE 4:18
+                </p>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+                    Por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-700 dark:text-white hover:text-brand-neon dark:hover:text-brand-neonPink transition-colors">@EliaquinMarin</a>
+                </p>
             </div>
             
         </div>
@@ -2930,5 +2930,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    fetchNewsTicker();
+});
+
+async function fetchNewsTicker() {
+    const tickerContainer = document.getElementById('ticker-content');
+    // Feed RSS de Contexto Media Group pasado por un proxy CORS libre
+    const feedUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.contextomediagroup.com/feed/');
+
+    try {
+        const response = await fetch(feedUrl);
+        if (!response.ok) throw new Error('Error en la red');
+        
+        const data = await response.json();
+        const parser = new DOMParser();
+        // Parseamos el string XML devuelto por el proxy
+        const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+        const items = xmlDoc.querySelectorAll("item");
+
+        if (items.length === 0) throw new Error('No se encontraron noticias');
+
+        let newsHTML = '';
+        
+        // Tomamos las últimas 6 noticias del feed
+        items.forEach((item, index) => {
+            if(index < 6) {
+                const title = item.querySelector("title").textContent;
+                const link = item.querySelector("link").textContent;
+                
+                newsHTML += `
+                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-brand-neon transition-colors duration-200 group">
+                        <i class="fa-solid fa-bolt text-brand-neon animate-pulse text-[10px]"></i>
+                        <span>${title}</span>
+                    </a>
+                `;
+            }
+        });
+
+        // Duplicamos el contenido exactamente igual para lograr el bucle infinito visual sin saltos bruscos
+        tickerContainer.innerHTML = newsHTML + newsHTML;
+
+    } catch (error) {
+        console.error("Error cargando el cintillo:", error);
+        // Fallback en caso de que falle la API/Proxy, muestra el titular que ya tienes estático abajo
+        const fallbackHTML = `
+            <a href="https://www.contextomediagroup.com/la-familia-maldonado-estrena-pentecostes-en-fuego-coritos/" target="_blank" class="flex items-center gap-2 hover:text-brand-neon">
+                <i class="fa-solid fa-star text-brand-neonPink text-[10px]"></i>
+                <span>La Familia Maldonado estrena «Pentecostés en Fuego Coritos»</span>
+            </a>
+        `;
+        tickerContainer.innerHTML = fallbackHTML + fallbackHTML + fallbackHTML;
+    }
+}
+</script>
+    
 </body>
 </html>
