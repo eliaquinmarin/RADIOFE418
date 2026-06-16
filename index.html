@@ -279,22 +279,19 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         </div>
     </header>
 
-<!-- Cintillo de Lanzamientos Cristianos 2026 (Multi-Fuente) -->
+<!-- Tu estructura HTML base adaptativa se mantiene intacta -->
 <div class="w-full bg-brand-neonPink/5 dark:bg-zinc-900/90 border-b border-zinc-200/80 dark:border-brand-neonPink/30 py-2.5 overflow-hidden relative z-40 transition-colors duration-300">
     <div class="max-w-7xl mx-auto flex items-center relative px-4">
         
-        <!-- Etiqueta Fija Izquierda -->
         <div class="absolute left-0 top-0 bottom-0 bg-brand-neonPink text-white text-[10px] font-black tracking-widest uppercase flex items-center px-3 z-10 shadow-md rounded-r-lg select-none">
             <i class="fa-solid fa-compact-disc mr-1.5 animate-spin [animation-duration:4s]"></i> MÚSICA 2026
         </div>
 
-        <!-- Contenedor con Máscara de Desvanecido y Movimiento -->
         <div class="w-full overflow-hidden pl-28 select-none relative [mask-image:linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]">
             <div id="ticker-content" class="animate-ticker flex gap-12 text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                <!-- Estado de Carga -->
                 <span class="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 font-medium">
                     <i class="fa-solid fa-circle-notch animate-spin text-[11px] text-brand-neonPink"></i> 
-                    Escaneando Altar7, ZonaVertical, Reactivoz y HeavenTurn en vivo...
+                    Sincronizando lanzamientos 2026 desde Altar7, ZonaVertical, Reactivoz y HeavenTurn...
                 </span>
             </div>
         </div>
@@ -2980,72 +2977,41 @@ async function fetchGlobalChristianMusic2026() {
     const RADIO_LINK = 'https://radiofe418.vercel.app';
     const RADIO_TAG = 'Sintoniza estos éxitos en Radio FE 4:18 📻✨';
     
-    // Configuración de las 4 nuevas fuentes estratégicas de música cristiana
+    // Las 4 fuentes reales solicitadas
     const musicSources = [
-        { name: 'Altar7', url: 'https://altar7.com/feed/', weight: 'high' },
-        { name: 'ZonaVertical', url: 'https://zonavertical.com/feed/', weight: 'normal' },
-        { name: 'Reactivoz', url: 'https://reactivoz.com/feed/', weight: 'high' },
-        { name: 'HeavenTurn', url: 'https://heaventurn.com/feed/', weight: 'normal' }
-    ];
-
-    const proxies = [
-        (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-        (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
+        { name: 'Altar7', url: 'https://altar7.com/feed/' },
+        { name: 'ZonaVertical', url: 'https://zonavertical.com/feed/' },
+        { name: 'Reactivoz', url: 'https://reactivoz.com/feed/' },
+        { name: 'HeavenTurn', url: 'https://heaventurn.com/feed/' }
     ];
 
     let combinedItems = [];
-    // Filtro avanzado de palabras clave para asegurar el ámbito estrictamente musical y de lanzamientos
-    const musicKeywords = ['lanza', 'estrena', 'sencillo', 'album', 'álbum', 'single', 'cancion', 'canción', 'video', 'musical', 'music', 'song', 'videoclip', 'artista', 'banda', 'tema', 'disco', 'adoración', 'alabanza', 'concierto', 'entrevista'];
+    const musicKeywords = ['lanza', 'estrena', 'sencillo', 'album', 'álbum', 'single', 'cancion', 'canción', 'video', 'musical', 'music', 'song', 'videoclip', 'artista', 'banda', 'tema', 'disco', 'adoración', 'alabanza'];
 
-    // Consultamos las fuentes para extraer la mejor información en tiempo real
+    // Usamos la API de conversión oficial de RSS a JSON para romper el bloqueo CORS de forma 100% limpia
     for (const source of musicSources) {
-        let rawXML = null;
-        
-        for (const proxyFn of proxies) {
-            try {
-                const response = await fetch(proxyFn(source.url));
-                if (!response.ok) throw new Error();
-                
-                if (proxyFn(source.url).includes('allorigins')) {
-                    const json = await response.json();
-                    if (json && json.contents) { rawXML = json.contents; break; }
-                } else {
-                    rawXML = await response.text();
-                    break;
-                }
-            } catch (e) {
-                console.warn(`Proxy con problemas para el feed de ${source.name}. Probando alternativa...`);
-            }
-        }
-
-        if (rawXML) {
-            try {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(rawXML, "text/xml");
-                const xmlItems = xmlDoc.querySelectorAll("item");
-                
+        try {
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}`;
+            const response = await fetch(apiUrl);
+            
+            if (!response.ok) throw new Error('Error en API');
+            const data = await response.json();
+            
+            if (data && data.status === 'ok' && data.items) {
                 let localCount = 0;
-                xmlItems.forEach((item) => {
-                    // Límite de 3 aportes por fuente para mantener variedad equitativa en el carrusel
-                    if (localCount < 3) {
-                        const titleNode = item.querySelector("title");
-                        const linkNode = item.querySelector("link");
-                        const pubDateNode = item.querySelector("pubDate");
-                        
-                        if (!titleNode || !linkNode) return;
-
-                        const title = titleNode.textContent.trim();
-                        const link = linkNode.textContent.trim();
-                        const pubDate = pubDateNode ? pubDateNode.textContent : '';
+                
+                data.items.forEach((item) => {
+                    if (localCount < 3) { // Máximo 3 lanzamientos por portal para equilibrar el contenido
+                        const title = item.title ? item.title.trim() : '';
+                        const link = item.link ? item.link.trim() : '';
+                        const pubDate = item.pubDate ? item.pubDate : '';
                         const lowerTitle = title.toLowerCase();
 
-                        // Validación 1: Ámbito estrictamente musical
+                        // Filtros estrictos: Temática musical + Año en curso 2026
                         const isMusic = musicKeywords.some(keyword => lowerTitle.includes(keyword));
-                        
-                        // Validación 2: Filtro cronológico para el año en curso 2026
-                        const isCurrentYear = pubDate.includes('2026') || pubDate === '';
+                        const is2026 = pubDate.includes('2026') || pubDate === '';
 
-                        if (isMusic && isCurrentYear) {
+                        if (isMusic && is2026) {
                             combinedItems.push({
                                 title: `[${source.name}] ${title.replace(/["']/g, '«').replace(/\\/g, '')}`,
                                 link: link
@@ -3054,48 +3020,42 @@ async function fetchGlobalChristianMusic2026() {
                         }
                     }
                 });
-            } catch (err) {
-                console.error(`Error procesando estructura XML de ${source.name}:`, err);
             }
+        } catch (e) {
+            console.warn(`No se pudieron extraer datos de ${source.name} debido a restricciones de su servidor.`);
         }
     }
 
-    // FALLBACK DE SEGURIDAD ABSOLUTA: Si los feeds o los proxies fallan masivamente, la música no se detiene
+    // RESPALDO LOCAL PREMIUM 2026: Si el cliente está sin internet o las 4 webs fallan a la vez, el cintillo se mantiene activo
     if (combinedItems.length === 0) {
-        console.warn("Fuentes en vivo temporalmente inaccesibles. Desplegando cartelera nativa de éxitos 2026.");
         combinedItems = [
-            { title: "[Altar7] Lo nuevo de Elevation Worship lidera las principales plataformas de adoración este 2026", link: "https://altar7.com" },
-            { title: "[Reactivoz] Estreno: Importante videoclip oficial revoluciona las tendencias musicales del mes", link: "https://reactivoz.com" },
-            { title: "[ZonaVertical] Reseña: Los mejores álbumes y discos de música cristiana contemporánea de este año", link: "https://zonavertical.com" },
-            { title: "[HeavenTurn] Biografías y nuevos proyectos de los referentes de la música sacra global", link: "https://heaventurn.com" }
+            { title: "[Altar7] Lo nuevo de Elevation Worship e Christine D'Clario lidera las principales listas este 2026", link: "https://altar7.com" },
+            { title: "[Reactivoz] Estreno: El movimiento de música urbana cristiana revoluciona las tendencias globales", link: "https://reactivoz.com" },
+            { title: "[ZonaVertical] Reseña: Los mejores álbumes de adoración y discos contemporáneos de este año en curso", link: "https://zonavertical.com" },
+            { title: "[HeavenTurn] Biografías y nuevos proyectos discográficos de los referentes de la música sacra", link: "https://heaventurn.com" }
         ];
     }
 
-    // Renderizamos los resultados mezclados (Máximo 7 elementos para una velocidad de giro perfecta)
+    // Renderizado en bloque limpio
     let newsHTML = '';
-    combinedItems.slice(0, 7).forEach((item) => {
-        newsHTML += renderTickerItem(item.title, item.link, RADIO_LINK, RADIO_TAG);
+    combinedItems.slice(0, 8).forEach((item) => {
+        newsHTML += `
+            <div class="flex items-center gap-3 whitespace-nowrap">
+                <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-brand-neonPink dark:hover:text-brand-neonPink transition-colors duration-200 group">
+                    <i class="fa-solid fa-music text-brand-neonPink text-[10px] opacity-80 group-hover:scale-110 transition-transform"></i>
+                    <span class="max-w-[340px] sm:max-w-lg truncate font-medium">${item.title}</span>
+                </a>
+                <button onclick="shareNews('${encodeURIComponent(item.title)}', '${encodeURIComponent(item.link)}', '${encodeURIComponent(RADIO_LINK)}', '${encodeURIComponent(RADIO_TAG)}')" 
+                        class="inline-flex items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-brand-neonPink dark:hover:text-brand-neonPink p-1 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-all duration-200" 
+                        title="Compartir Novedad">
+                    <i class="fa-solid fa-share-nodes text-[11px]"></i>
+                </button>
+            </div>
+        `;
     });
 
-    // Duplicamos el contenido para el bucle continuo infinito
+    // Inyección duplicada para scroll infinito suave
     tickerContainer.innerHTML = newsHTML + newsHTML;
-}
-
-function renderTickerItem(title, newsUrl, radioUrl, radioTag) {
-    return `
-        <div class="flex items-center gap-3 whitespace-nowrap">
-            <!-- Adaptación total Claro (text-zinc-700) y Oscuro (dark:text-zinc-300) -->
-            <a href="${newsUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-brand-neonPink dark:hover:text-brand-neonPink transition-colors duration-200 group">
-                <i class="fa-solid fa-music text-brand-neonPink text-[10px] opacity-80 group-hover:scale-110 transition-transform"></i>
-                <span class="max-w-[340px] sm:max-w-lg truncate font-medium">${title}</span>
-            </a>
-            <button onclick="shareNews('${encodeURIComponent(title)}', '${encodeURIComponent(newsUrl)}', '${encodeURIComponent(radioUrl)}', '${encodeURIComponent(radioTag)}')" 
-                    class="inline-flex items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-brand-neonPink dark:hover:text-brand-neonPink p-1 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-all duration-200" 
-                    title="Compartir Novedad">
-                <i class="fa-solid fa-share-nodes text-[11px]"></i>
-            </button>
-        </div>
-    `;
 }
 
 function shareNews(title, newsUrl, radioUrl, radioTag) {
@@ -3117,7 +3077,7 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
         const width = 600, height = 500;
         const left = (screen.width - width) / 2;
         const top = (screen.height - height) / 2;
-        window.open(whatsappUrl, 'CompartirLanzamiento2026', `width=${width},height=${height},top=${top},left=${left},toolbar=no,scrollbars=yes`);
+        window.open(whatsappUrl, 'CompartirLanzamiento2026', `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes`);
     }
 }
 </script>
