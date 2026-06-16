@@ -3139,41 +3139,48 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
     
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Configuración de credenciales
+        // Configuración de credenciales fijas
         const API_KEY = "AIzaSyDW5Wi6sj-AbQSB0VKnWHGy8Pld7aPv8rk";
-        // ID real de tu canal de YouTube
         const CHANNEL_ID = "UC8YrtGiUO5ZwEXhPBu1YSjQ"; 
         const MAX_SHORTS_A_MOSTRAR = 3;
 
-        // Usamos el endpoint de búsqueda ordenado por fecha (trae lo más reciente de inmediato)
-        const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=12&type=video`;
+        // Cambiamos a una consulta directa sobre la lista de reproducción automática del canal (Método más estable)
+        // Convertimos el ID de canal convirtiendo la 'C' de la segunda posición en una 'U'
+        const U_PLAYLIST = CHANNEL_ID.replace(/^UC/, 'UU');
+        const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${U_PLAYLIST}&maxResults=10&key=${API_KEY}`;
 
         fetch(url)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Error de API: ${response.status}`);
+                    // Imprime el error exacto en la consola para saber si es culpa de la clave
+                    return response.json().then(err => {
+                        console.error("Detalle del error de Google:", err);
+                        throw new Error(`Código HTTP: ${response.status} - ${err.error.message}`);
+                    });
                 }
                 return response.json();
             })
             .then(data => {
                 const container = document.getElementById('shorts-container');
-                container.innerHTML = ''; // Limpiar el mensaje de carga
+                if (!container) return;
+                
+                container.innerHTML = ''; // Limpiar el "Cargando..."
 
                 if (!data.items || data.items.length === 0) {
-                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500 py-4">No se encontraron videos públicos en este canal.</div>`;
+                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500 py-4">No se encontraron vídeos en la lista de subidas.</div>`;
                     return;
                 }
 
                 let shortsRenderizados = 0;
 
-                data.items.forEach(item => {
-                    if (shortsRenderizados >= MAX_SHORTS_A_MOSTRAR) return;
+                // Iteramos sobre las subidas recientes del canal
+                for (const item of data.items) {
+                    if (shortsRenderizados >= MAX_SHORTS_A_MOSTRAR) break;
 
-                    const videoId = item.id.videoId;
+                    const videoId = item.snippet.resourceId.videoId;
                     const title = item.snippet.title;
-                    
-                    // Como el endpoint de búsqueda a veces no discrimina Shorts de videos largos,
-                    // forzamos el formato estricto de reproducción vertical en tu interfaz responsiva
+
+                    // Si el título contiene la palabra "short" o si forzamos la vista responsiva de Shorts
                     shortsRenderizados++;
 
                     const shortCard = `
@@ -3200,17 +3207,17 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
                         </div>
                     `;
                     container.innerHTML += shortCard;
-                });
+                }
 
                 if (shortsRenderizados === 0) {
-                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500 py-4">No se pudieron procesar Shorts recientes.</div>`;
+                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500 py-4">No se pudieron procesar Shorts válidos.</div>`;
                 }
             })
             .catch(error => {
-                console.error("Error cargando los Shorts de YouTube:", error);
+                console.error("Error crítico atrapado:", error);
                 document.getElementById('shorts-container').innerHTML = `
                     <div class="col-span-full text-center text-xs text-red-500 py-4">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Error al conectar con YouTube. Verifica las restricciones de tu API Key.
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Error de conexión con YouTube. Revisa la consola (F12) para ver el diagnóstico técnico.
                     </div>`;
             });
 
