@@ -648,33 +648,18 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
 </section>
 
             <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
-                <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
-                    <i class="fa-brands fa-youtube mr-2 text-red-500 text-base"></i> PLAYLIST RECOMENDADAS                 </h4>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    
-                                        <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
-                        <div class="w-full aspect-video rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
-                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/videoseries?si=Zgee5knZtc6rydhB&amp;list=PL8-D_cKVzYmLYnxB4XKbBD9ND2O5TfILD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                        <div class="px-1 py-1">
-                            <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors">REFLEXIONES DIARIAS</h5>
-                            <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">Pastor. Eliaquin Marin</p>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
-                        <div class="w-full aspect-video rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
-                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/videoseries?si=mrh76uupgJBMtBSt&amp;list=PL8-D_cKVzYmJBdEJWXhnHN6bNGwlYWZV_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                        <div class="px-1 py-1">
-                            <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors">HOGARES DE ROCA</h5>
-                            <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">Pastor Eliaquin Marin</p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
+    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
+        <i class="fa-brands fa-youtube mr-2 text-red-500 text-base"></i> SHORTS RECOMENDADOS
+    </h4>
+    
+    <!-- Contenedor donde se cargarán los Shorts automáticamente -->
+    <div id="shorts-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4">
+        <!-- Estado de carga inicial -->
+        <div class="col-span-full text-center py-4 text-xs text-zinc-500 dark:text-zinc-400 animate-pulse">
+            Cargando últimos Shorts...
+        </div>
+    </div>
+</section>
 
 <!-- SECCIÓN: CAJÓN DE MENSAJES EN TIEMPO REAL DESDE GOOGLE SHEETS -->
 <section class="w-full mx-auto mt-6 bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border-x-0 border-y sm:border border-zinc-200 dark:border-zinc-850 p-5 sm:p-6 md:p-8 rounded-3xl transition-all duration-300 shadow-xl neon-glow">
@@ -3127,5 +3112,67 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
 }
 </script>
     
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Configuración de credenciales
+        const API_KEY = "AIzaSyARE0Z3ez-gAGYg-uJfall9lKpv_Og1pig";
+        // ID de la lista de subidas del canal @EliaquinMarin (reemplaza la 'C' inicial por una 'U')
+        const PLAYLIST_ID = "UULFlF_m8uLAKbWz9Pz-9pbyA"; 
+        const MAX_RESULTS = 3; // Cantidad de Shorts a mostrar
+
+        const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${MAX_RESULTS}&key=${API_KEY}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('shorts-container');
+                container.innerHTML = ''; // Limpiar el mensaje de carga
+
+                if (!data.items || data.items.length === 0) {
+                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500">No se encontraron videos recientes.</div>`;
+                    return;
+                }
+
+                data.items.forEach(item => {
+                    const videoId = item.snippet.resourceId.videoId;
+                    const title = item.snippet.title;
+
+                    // Estructura HTML idéntica a tu diseño original pero adaptada a Shorts (9:16)
+                    const shortCard = `
+                        <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
+                            <div class="w-full aspect-[9/16] rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
+                                <iframe 
+                                    class="absolute top-0 left-0 w-full h-full" 
+                                    src="https://www.youtube.com/embed/${videoId}" 
+                                    title="${title}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerpolicy="strict-origin-when-cross-origin" 
+                                    allowfullscreen>
+                                Imiframe>
+                            </div>
+                            <div class="px-1 py-1">
+                                <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors" title="${title}">
+                                    ${title}
+                                </h5>
+                                <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">
+                                    Pastor Eliaquin Marín
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += shortCard;
+                });
+            })
+            .catch(error => {
+                console.error("Error cargando los Shorts de YouTube:", error);
+                document.getElementById('shorts-container').innerHTML = `
+                    <div class="col-span-full text-center text-xs text-red-500">
+                        Error al cargar los Shorts. Inténtalo de nuevo más tarde.
+                    </div>`;
+                });
+    });
+</script>
+
 </body>
 </html>
