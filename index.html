@@ -279,28 +279,26 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         </div>
     </header>
 
-<!-- Cintillo de Noticias: Música Cristiana 2026 (Diseño Combinado con Index) -->
-<div class="w-full bg-zinc-900 border-b border-brand-neonPink/30 py-2.5 overflow-hidden relative z-40 transition-colors duration-300">
+<!-- Cintillo de Noticias Contexto Media Group -->
+<div class="w-full bg-brand-neonPink/10 dark:bg-zinc-900/90 border-b border-zinc-200 dark:border-brand-neonPink/30 py-2.5 overflow-hidden relative z-40 transition-colors duration-300">
     <div class="max-w-7xl mx-auto flex items-center relative px-4">
         
-        <!-- Etiqueta Fija Izquierda con la identidad de tu Index -->
-        <div class="absolute left-0 top-0 bottom-0 bg-brand-neonPink text-white text-[10px] font-black tracking-widest uppercase flex items-center px-3 z-10 shadow-md rounded-r-lg select-none">
-            <i class="fa-solid fa-trophy mr-1.5 animate-pulse"></i> ÉXITOS 2026
+        <!-- Etiqueta Fija Izquierda -->
+        <div class="absolute left-0 top-0 bottom-0 bg-brand-neonPink text-white text-[10px] font-black tracking-widest uppercase flex items-center px-3 z-10 shadow-md rounded-r-lg">
+            <i class="fa-solid fa-newspaper mr-1.5 animate-pulse"></i> NOTICIAS
         </div>
 
         <!-- Contenedor con Máscara de Desvanecido y Movimiento -->
-        <div class="w-full overflow-hidden pl-28 select-none relative [mask-image:linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]">
-            <div id="ticker-content" class="animate-ticker flex gap-12 text-xs sm:text-sm font-semibold text-zinc-300">
-                <!-- Estado Inicial de Carga Rápida -->
-                <span class="flex items-center gap-2 text-zinc-400">
-                    <i class="fa-solid fa-circle-notch animate-spin text-[10px] text-brand-neonPink"></i> 
-                    Sincronizando los mayores éxitos de la Música Cristiana 2026...
-                </span>
+        <div class="w-full overflow-hidden pl-24 select-none relative [mask-image:linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]">
+            <div id="ticker-content" class="animate-ticker flex gap-12 text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                <!-- Se duplica el contenido en JS para asegurar el bucle infinito suave -->
+                <span class="flex items-center gap-2"><i class="fa-solid fa-circle text-[6px] text-brand-neonPink"></i> Conectando con Contexto Media Group...</span>
             </div>
         </div>
         
     </div>
 </div>
+
      <!-- COMPONENTE: PRÓXIMO PROGRAMA EN VIVO (CENTRADO Y COMPACTO) -->
 <div class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/50 py-2 px-4 transition-colors duration-300 relative z-40">
     <!-- Cambiado a: justify-center y gap-x-2 para mantener todo el bloque unido en el centro -->
@@ -2969,93 +2967,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    buildChristianMusicTicker();
+    fetchContextoNews();
 });
 
-function buildChristianMusicTicker() {
+async function fetchContextoNews() {
     const tickerContainer = document.getElementById('ticker-content');
     if (!tickerContainer) return;
-
-    // Configuración obligatoria de tu emisora para el botón compartir
+    
+    // Configuración de tu emisora para los mensajes compartidos
     const RADIO_LINK = 'https://radiofe418.vercel.app';
-    const RADIO_TAG = 'Escucha estos éxitos en Radio FE 4:18 📻✨';
+    const RADIO_TAG = 'Escucha la mejor programación en Radio FE 4:18 📻✨';
 
-    // API de Datos Nativa: Lo mejor, lanzamientos, récords y Billboard de Música Cristiana de 2026
-    const christianMusicNews2026 = [
-        {
-            title: "Elevation Worship rompe récords este 2026 con su nuevo sencillo en el Top 1 de Billboard Christian Charts",
-            url: "https://www.billboard.com/charts/christian-songs/"
-        },
-        {
-            title: "Maverick City Music anuncia gira mundial 2026 tras el rotundo éxito de su último álbum de adoración",
-            url: "https://www.ccmmagazine.com"
-        },
-        {
-            title: "Premios Dove 2026: Se revelan los primeros nominados a Álbum del Año y Artista Cristiano Contemporáneo",
-            url: "https://www.doveawards.com"
-        },
-        {
-            title: "Chris Tomlin alcanza un hito histórico este año al posicionar su nuevo hit en las listas globales de streaming",
-            url: "https://www.billboard.com/charts/christian-songs/"
-        },
-        {
-            title: "Lanzamiento: Lauren Daigle estrena una emotiva balada que conmueve a las audiencias de todo el mundo este 2026",
-            url: "https://www.ccmmagazine.com"
-        },
-        {
-            title: "El movimiento de música urbana cristiana lidera las tendencias de reproducciones en lo que va del 2026",
-            url: "https://www.doveawards.com"
-        }
-    ];
+    // URL del Feed de Contexto Media Group + Proxy
+    const targetUrl = 'https://www.contextomediagroup.com/feed/';
+    const feedUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
 
     try {
-        let newsHTML = '';
+        // Intentamos obtener el feed en tiempo real
+        const response = await fetch(feedUrl);
+        if (!response.ok) throw new Error('Error de red');
+        
+        const data = await response.json();
+        if (!data || !data.contents) throw new Error('Contenido vacío');
+        
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+        
+        // Validamos que el XML sea correcto y no tenga errores de parseo
+        if (xmlDoc.querySelector("parsererror")) throw new Error('Error en formato XML');
+        
+        const items = xmlDoc.querySelectorAll("item");
+        if (!items || items.length === 0) throw new Error('No se encontraron noticias');
 
-        // Procesamos la colección de éxitos musicales de forma ultra veloz y limpia
-        christianMusicNews2026.forEach((item) => {
-            // Limpieza preventiva de textos para evitar rupturas de HTML
-            const cleanTitle = item.title.replace(/["']/g, '«');
-            
-            newsHTML += `
-                <div class="flex items-center gap-3 whitespace-nowrap">
-                    <!-- Enlace Principal con Colores de tu Index -->
-                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-300 hover:text-brand-neonPink transition-colors duration-200 group">
-                        <i class="fa-solid fa-cross text-brand-neonPink text-[10px] opacity-80 group-hover:scale-110 transition-transform"></i>
-                        <span class="font-extrabold text-[9px] tracking-wider uppercase bg-brand-neonPink/10 text-brand-neonPink px-1.5 py-0.5 rounded-md border border-brand-neonPink/20">2026</span>
-                        <span class="max-w-[340px] sm:max-w-lg truncate font-medium">${cleanTitle}</span>
-                    </a>
-                    
-                    <!-- Botón de Compartir Integrado con la Radio -->
-                    <button onclick="shareNews('${encodeURIComponent(cleanTitle)}', '${encodeURIComponent(item.url)}', '${encodeURIComponent(RADIO_LINK)}', '${encodeURIComponent(RADIO_TAG)}')" 
-                            class="inline-flex items-center justify-center text-zinc-500 hover:text-brand-neonPink p-1 rounded-full hover:bg-zinc-800 transition-all duration-200" 
-                            title="Compartir Éxito">
-                        <i class="fa-solid fa-share-nodes text-[11px]"></i>
-                    </button>
-                </div>
-            `;
+        let newsHTML = '';
+        let count = 0;
+        
+        // Procesamos un máximo de 6 noticias del feed en vivo
+        items.forEach((item) => {
+            if (count < 6) {
+                const titleNode = item.querySelector("title");
+                const linkNode = item.querySelector("link");
+                
+                if (!titleNode || !linkNode) return;
+
+                const rawTitle = titleNode.textContent.trim();
+                // Limpieza de comillas para evitar conflictos en el botón compartir
+                const cleanTitle = rawTitle.replace(/["']/g, '«').replace(/\\/g, '');
+                const link = linkNode.textContent.trim();
+                
+                newsHTML += renderTickerItem(cleanTitle, link, RADIO_LINK, RADIO_TAG);
+                count++;
+            }
         });
 
-        // Duplicación perfecta inmediata (Cero esperas, carga instantánea garantizada)
+        // Inyectamos las noticias duplicadas para el bucle infinito
         tickerContainer.innerHTML = newsHTML + newsHTML;
 
     } catch (error) {
-        console.error("Error al renderizar el cintillo:", error);
-        tickerContainer.innerHTML = `<span class="text-zinc-500">Disfruta de lo mejor de la Música Cristiana 2026 en Radio FE 4:18</span>`;
+        console.warn("Proxy inestable o caído. Activando respaldo local de noticias.");
+        
+        // RESPALDO DE SEGURIDAD (Fallback): Si el proxy falla, se muestran estos titulares de inmediato
+        const fallbackNews = [
+            { title: "Elevation Worship lidera las listas de éxitos de la Música Cristiana este 2026", url: "https://www.contextomediagroup.com" },
+            { title: "Premios Dove 2026: Conoce los últimos lanzamientos y nominaciones de la industria", url: "https://www.contextomediagroup.com" },
+            { title: "Maverick City Music anuncia nuevos proyectos de adoración contemporánea para este año", url: "https://www.contextomediagroup.com" },
+            { title: "Grandes logros y récords de distribución en las plataformas globales de streaming cristiano", url: "https://www.contextomediagroup.com" }
+        ];
+
+        let fallbackHTML = '';
+        fallbackNews.forEach((item) => {
+            fallbackHTML += renderTickerItem(item.title, item.url, RADIO_LINK, RADIO_TAG);
+        });
+
+        tickerContainer.innerHTML = fallbackHTML + fallbackHTML;
     }
 }
 
-// Función global encargada del módulo de Compartir (Nativo en Móvil / WhatsApp en PC)
+// Función auxiliar profesional para renderizar cada elemento del carrusel de forma idéntica
+function renderTickerItem(title, newsUrl, radioUrl, radioTag) {
+    return `
+        <div class="flex items-center gap-3 whitespace-nowrap">
+            <a href="${newsUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-300 hover:text-brand-neonPink transition-colors duration-200 group">
+                <i class="fa-solid fa-bolt text-brand-neonPink text-[10px] opacity-80 group-hover:scale-110 transition-transform"></i>
+                <span class="max-w-[340px] sm:max-w-lg truncate font-medium">${title}</span>
+            </a>
+            <button onclick="shareNews('${encodeURIComponent(title)}', '${encodeURIComponent(newsUrl)}', '${encodeURIComponent(radioUrl)}', '${encodeURIComponent(radioTag)}')" 
+                    class="inline-flex items-center justify-center text-zinc-500 hover:text-brand-neonPink p-1 rounded-full hover:bg-zinc-800 transition-all duration-200" 
+                    title="Compartir Noticia">
+                <i class="fa-solid fa-share-nodes text-[11px]"></i>
+            </button>
+        </div>
+    `;
+}
+
+// Función global encargada del módulo de Compartir (Nativo en móvil / WhatsApp en PC)
 function shareNews(title, newsUrl, radioUrl, radioTag) {
     const decodedTitle = decodeURIComponent(title);
     const decodedNewsUrl = decodeURIComponent(newsUrl);
     const decodedRadioUrl = decodeURIComponent(radioUrl);
     const decodedRadioTag = decodeURIComponent(radioTag);
     
-    const textMessage = `🔥 ¡Alucinante! Mira este logro de la música cristiana 2026:\n\n"${decodedTitle}"\n\n🔹 Más detalles aquí: ${decodedNewsUrl}\n\n📻 ${decodedRadioTag}\n👉 ${decodedRadioUrl}`;
+    const textMessage = `🔥 ¡Al día con las novedades! Mira esta noticia de Contexto Media Group:\n\n"${decodedTitle}"\n\n🔹 Leer noticia completa aquí: ${decodedNewsUrl}\n\n📻 ${decodedRadioTag}\n👉 ${decodedRadioUrl}`;
 
     if (navigator.share) {
         navigator.share({
-            title: 'Éxitos Música Cristiana 2026',
+            title: 'Noticias Música Cristiana',
             text: `"${decodedTitle}"\n\n${decodedRadioTag}\n`,
             url: decodedNewsUrl
         }).catch(() => console.log('Ventana nativa cerrada'));
@@ -3064,7 +3080,7 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
         const width = 600, height = 500;
         const left = (screen.width - width) / 2;
         const top = (screen.height - height) / 2;
-        window.open(whatsappUrl, 'CompartirÉxito', `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes`);
+        window.open(whatsappUrl, 'CompartirNoticia', `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes`);
     }
 }
 </script>
