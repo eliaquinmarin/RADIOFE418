@@ -452,177 +452,188 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
     </div>
 </section>
 
-           <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300 neon-glow">
-    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-6 flex items-center justify-center">
+          <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 sm:p-6 transition-colors duration-300 neon-glow">
+    <h4 class="font-bold tracking-wide uppercase text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 mb-6 flex items-center justify-center">
         <i class="fa-solid fa-ranking-star mr-2 text-brand-neon"></i> Top 5 Musical - JUNIO
     </h4>
     
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-3.5">
         
         <!-- PUESTO 1 -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
+            <!-- Barra decorativa responsiva -->
             <div class="absolute top-0 left-0 w-full sm:w-1 h-1 sm:h-full bg-brand-neon"></div>
             
-            <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px]">
+            <!-- Indicador de Puesto Optimizado -->
+            <div class="flex-shrink-0 flex flex-row sm:flex-col items-baseline sm:items-center justify-center gap-1 sm:gap-0 min-w-[50px]">
                 <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
-                <span class="text-xl font-black text-brand-neon">1</span>
+                <span class="text-xl sm:text-2xl font-black text-brand-neon leading-none">1</span>
             </div>
             
-            <img src="img/top5/IMAGEN1.png" alt="¡DE ACUERDO! – Forrest Frank" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            <!-- Imagen con tamaño controlado -->
+            <div class="flex-shrink-0">
+                <img src="img/top5/IMAGEN1.png" alt="¡DE ACUERDO! – Forrest Frank" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            </div>
             
-            <div class="flex-grow min-w-0 flex flex-col items-center sm:items-start justify-center">
-                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate max-w-full">OKAY!</h4>
-                <p class="text-[10px] sm:text-[11px] font-semibold text-brand-neonPink uppercase truncate mt-0.5 max-w-full">– Forrest Frank</p>
+            <!-- Información de Canción / Artista con truncado inteligente -->
+            <div class="flex-grow min-w-0 w-full flex flex-col items-center sm:items-start justify-center">
+                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate w-full">OKAY!</h4>
+                <p class="text-[10px] sm:text-[11px] font-semibold text-brand-neonPink uppercase truncate w-full mt-0.5">– Forrest Frank</p>
                 
-                <!-- Iconos centrados debajo -->
-                <div class="flex items-center justify-center sm:justify-start gap-1.5 mt-2.5 relative z-10">
-                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+1*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+OKAY%21%0A%F0%9F%8E%A4+*Artista:*+Forrest+Frank%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-cOHmBJItkU%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                <!-- Redes / Enlaces En Línea -->
+                <div class="flex items-center justify-center sm:justify-start gap-2 mt-3 relative z-10 w-full overflow-x-auto no-scrollbar">
+                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+1*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+OKAY%21%0A%F0%9F%8E%A4+*Artista:*+Forrest+Frank%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-cOHmBJItkU%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
+                        <i class="fa-brands fa-whatsapp text-xs"></i>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=-cOHmBJItkU" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
-                        <i class="fa-brands fa-youtube text-sm"></i>
+                    <a href="http://www.youtube.com/watch?v=-cOHmBJItkU" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
+                        <i class="fa-brands fa-youtube text-xs"></i>
                     </a>
-                    <a href="https://open.spotify.com/search/OKAY!%20Forrest%20Frank" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
-                        <i class="fa-brands fa-spotify text-sm"></i>
+                    <a href="https://open.spotify.com/search/OKAY!%20Forrest%20Frank" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
+                        <i class="fa-brands fa-spotify text-xs"></i>
                     </a>
-                    <a href="https://music.apple.com/us/search?term=OKAY!%20Forrest%20Frank" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
-                        <i class="fa-brands fa-apple text-sm"></i>
+                    <a href="https://music.apple.com/us/search?term=OKAY!%20Forrest%20Frank" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
+                        <i class="fa-brands fa-apple text-xs"></i>
                     </a>
                 </div>
             </div>
         </div>
 
         <!-- PUESTO 2 -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
             <div class="absolute top-0 left-0 w-full sm:w-1 h-1 sm:h-full bg-brand-neonPink"></div>
             
-            <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px]">
+            <div class="flex-shrink-0 flex flex-row sm:flex-col items-baseline sm:items-center justify-center gap-1 sm:gap-0 min-w-[50px]">
                 <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
-                <span class="text-xl font-black text-brand-neonPink">2</span>
+                <span class="text-xl sm:text-2xl font-black text-brand-neonPink leading-none">2</span>
             </div>
             
-            <img src="img/top5/IMAGEN2.png" alt="Santo Por Siempre" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            <div class="flex-shrink-0">
+                <img src="img/top5/IMAGEN2.png" alt="Santo Por Siempre" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            </div>
             
-            <div class="flex-grow min-w-0 flex flex-col items-center sm:items-start justify-center">
-                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate max-w-full">Santo Por Siempre</h4>
-                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5 max-w-full">ECCOS, Steven Richards, Lluvia Richards</p>
+            <div class="flex-grow min-w-0 w-full flex flex-col items-center sm:items-start justify-center">
+                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate w-full">Santo Por Siempre</h4>
+                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate w-full mt-0.5">ECCOS, Steven Richards, Lluvia Richards</p>
                 
-                <!-- Iconos centrados debajo -->
-                <div class="flex items-center justify-center sm:justify-start gap-1.5 mt-2.5 relative z-10">
-                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+2*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Santo+Por+Siempre%0A%F0%9F%8E%A4+*Artista:*+ECCOS%2C+Steven+Richards%2C+Lluvia+Richards%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsE2vem7PuHk%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                <div class="flex items-center justify-center sm:justify-start gap-2 mt-3 relative z-10 w-full overflow-x-auto no-scrollbar">
+                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+2*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Santo+Por+Siempre%0A%F0%9F%8E%A4+*Artista:*+ECCOS%2C+Steven+Richards%2C+Lluvia+Richards%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsE2vem7PuHk%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
+                        <i class="fa-brands fa-whatsapp text-xs"></i>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=sE2vem7PuHk" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
-                        <i class="fa-brands fa-youtube text-sm"></i>
+                    <a href="http://www.youtube.com/watch?v=sE2vem7PuHk" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
+                        <i class="fa-brands fa-youtube text-xs"></i>
                     </a>
-                    <a href="https://open.spotify.com/search/Santo%20Por%20Siempre%20ECCOS%20Steven%20Richards%20Lluvia%20Richards" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
-                        <i class="fa-brands fa-spotify text-sm"></i>
+                    <a href="https://open.spotify.com/search/Santo%20Por%20Siempre%20ECCOS%20Steven%20Richards%20Lluvia%20Richards" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
+                        <i class="fa-brands fa-spotify text-xs"></i>
                     </a>
-                    <a href="https://music.apple.com/us/search?term=Santo%20Por%20Siempre%20ECCOS%20Steven%20Richards%20Lluvia%20Richards" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
-                        <i class="fa-brands fa-apple text-sm"></i>
+                    <a href="https://music.apple.com/us/search?term=Santo%20Por%20Siempre%20ECCOS%20Steven%20Richards%20Lluvia%20Richards" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
+                        <i class="fa-brands fa-apple text-xs"></i>
                     </a>
                 </div>
             </div>
         </div>
 
         <!-- PUESTO 3 -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
             <div class="absolute top-0 left-0 w-full sm:w-1 h-1 sm:h-full bg-zinc-400 dark:bg-zinc-500"></div>
             
-            <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px]">
+            <div class="flex-shrink-0 flex flex-row sm:flex-col items-baseline sm:items-center justify-center gap-1 sm:gap-0 min-w-[50px]">
                 <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
-                <span class="text-xl font-black text-zinc-500 dark:text-zinc-400">3</span>
+                <span class="text-xl sm:text-2xl font-black text-zinc-500 dark:text-zinc-400 leading-none">3</span>
             </div>
             
-            <img src="img/top5/IMAGEN3.png" alt="Dios, estoy muy agradecido" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            <div class="flex-shrink-0">
+                <img src="img/top5/IMAGEN3.png" alt="Dios, estoy muy agradecido" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            </div>
             
-            <div class="flex-grow min-w-0 flex flex-col items-center sm:items-start justify-center">
-                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate max-w-full">Dios, estoy muy agradecido</h4>
-                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5 max-w-full">Elevation Worship, Chandler Moore</p>
+            <div class="flex-grow min-w-0 w-full flex flex-col items-center sm:items-start justify-center">
+                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate w-full">Dios, estoy muy agradecido</h4>
+                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate w-full mt-0.5">Elevation Worship, Chandler Moore</p>
                 
-                <!-- Iconos centrados debajo -->
-                <div class="flex items-center justify-center sm:justify-start gap-1.5 mt-2.5 relative z-10">
-                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+3*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Dios%2C+estoy+muy+agradecido%0A%F0%9F%8E%A4+*Artista:*+Elevation+Worship%2C+Chandler+Moore%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D4BrUReM504w%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                <div class="flex items-center justify-center sm:justify-start gap-2 mt-3 relative z-10 w-full overflow-x-auto no-scrollbar">
+                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+3*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Dios%2C+estoy+muy+agradecido%0A%F0%9F%8E%A4+*Artista:*+Elevation+Worship%2C+Chandler+Moore%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D4BrUReM504w%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
+                        <i class="fa-brands fa-whatsapp text-xs"></i>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=4BrUReM504w" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
-                        <i class="fa-brands fa-youtube text-sm"></i>
+                    <a href="http://www.youtube.com/watch?v=4BrUReM504w" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
+                        <i class="fa-brands fa-youtube text-xs"></i>
                     </a>
-                    <a href="https://open.spotify.com/search/Dios%20estoy%20muy%20agradecido%20Elevation%20Worship%20Chandzer%20Moore" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
-                        <i class="fa-brands fa-spotify text-sm"></i>
+                    <a href="https://open.spotify.com/search/Dios%20estoy%20muy%20agradecido%20Elevation%20Worship%20Chandzer%20Moore" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
+                        <i class="fa-brands fa-spotify text-xs"></i>
                     </a>
-                    <a href="https://music.apple.com/us/search?term=Dios%20estoy%20muy%20agradecido%20Elevation%20Worship%20Chandler%20Moore" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
-                        <i class="fa-brands fa-apple text-sm"></i>
+                    <a href="https://music.apple.com/us/search?term=Dios%20estoy%20muy%20agradecido%20Elevation%20Worship%20Chandler%20Moore" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
+                        <i class="fa-brands fa-apple text-xs"></i>
                     </a>
                 </div>
             </div>
         </div>
 
         <!-- PUESTO 4 -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
             <div class="absolute top-0 left-0 w-full sm:w-1 h-1 sm:h-full bg-zinc-400 dark:bg-zinc-500"></div>
             
-            <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px]">
+            <div class="flex-shrink-0 flex flex-row sm:flex-col items-baseline sm:items-center justify-center gap-1 sm:gap-0 min-w-[50px]">
                 <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
-                <span class="text-xl font-black text-zinc-500 dark:text-zinc-400">4</span>
+                <span class="text-xl sm:text-2xl font-black text-zinc-500 dark:text-zinc-400 leading-none">4</span>
             </div>
             
-            <img src="img/top5/IMAGEN4.png" alt="Para Mí Es Solo Cristo" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            <div class="flex-shrink-0">
+                <img src="img/top5/IMAGEN4.png" alt="Para Mí Es Solo Cristo" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            </div>
             
-            <div class="flex-grow min-w-0 flex flex-col items-center sm:items-start justify-center">
-                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate max-w-full">Para Mí Es Solo Cristo</h4>
-                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5 max-w-full">Christine D'Clario, Majo y Dan</p>
+            <div class="flex-grow min-w-0 w-full flex flex-col items-center sm:items-start justify-center">
+                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate w-full">Para Mí Es Solo Cristo</h4>
+                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate w-full mt-0.5">Christine D'Clario, Majo y Dan</p>
                 
-                <!-- Iconos centrados debajo -->
-                <div class="flex items-center justify-center sm:justify-start gap-1.5 mt-2.5 relative z-10">
-                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+4*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Para+M%C3%AD+Es+Solo+Cristo%0A%F0%9F%8E%A4+*Artista:*+Christine+D%27Clario%2C+Majo+y+Dan%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsFGifL48VFA%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                <div class="flex items-center justify-center sm:justify-start gap-2 mt-3 relative z-10 w-full overflow-x-auto no-scrollbar">
+                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+4*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Para+M%C3%AD+Es+Solo+Cristo%0A%F0%9F%8E%A4+*Artista:*+Christine+D%27Clario%2C+Majo+y+Dan%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsFGifL48VFA%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
+                        <i class="fa-brands fa-whatsapp text-xs"></i>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=sFGifL48VFA" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
-                        <i class="fa-brands fa-youtube text-sm"></i>
+                    <a href="http://www.youtube.com/watch?v=sFGifL48VFA" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
+                        <i class="fa-brands fa-youtube text-xs"></i>
                     </a>
-                    <a href="https://open.spotify.com/search/Para%20Mi%20Es%20Solo%20Cristo%20Christine%20DClario%20Majo%20y%20Dan" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
-                        <i class="fa-brands fa-spotify text-sm"></i>
+                    <a href="https://open.spotify.com/search/Para%20Mi%20Es%20Solo%20Cristo%20Christine%20DClario%20Majo%20y%20Dan" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
+                        <i class="fa-brands fa-spotify text-xs"></i>
                     </a>
-                    <a href="https://music.apple.com/us/search?term=Para%20Mi%20Es%20Solo%20Cristo%20Christine%20DClario%20Majo%20y%20Dan" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
-                        <i class="fa-brands fa-apple text-sm"></i>
+                    <a href="https://music.apple.com/us/search?term=Para%20Mi%20Es%20Solo%20Cristo%20Christine%20DClario%20Majo%20y%20Dan" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
+                        <i class="fa-brands fa-apple text-xs"></i>
                     </a>
                 </div>
             </div>
         </div>
 
         <!-- PUESTO 5 -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 relative overflow-hidden group shadow-sm hover:border-brand-neon text-center sm:text-left">
             <div class="absolute top-0 left-0 w-full sm:w-1 h-1 sm:h-full bg-zinc-400 dark:bg-zinc-500"></div>
             
-            <div class="flex-shrink-0 flex flex-col items-center justify-center min-w-[55px]">
+            <div class="flex-shrink-0 flex flex-row sm:flex-col items-baseline sm:items-center justify-center gap-1 sm:gap-0 min-w-[50px]">
                 <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Puesto</span>
-                <span class="text-xl font-black text-zinc-500 dark:text-zinc-400">5</span>
+                <span class="text-xl sm:text-2xl font-black text-zinc-500 dark:text-zinc-400 leading-none">5</span>
             </div>
             
-            <img src="img/top5/IMAGEN5.png" alt="Cantaremos (Que Cante La Iglesia)" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            <div class="flex-shrink-0">
+                <img src="img/top5/IMAGEN5.png" alt="Cantaremos (Que Cante La Iglesia)" class="w-14 h-14 rounded-xl object-cover border border-zinc-300 dark:border-zinc-700 shadow-sm group-hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+            </div>
             
-            <div class="flex-grow min-w-0 flex flex-col items-center sm:items-start justify-center">
-                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate max-w-full">Cantaremos (Que Cante La Iglesia)</h4>
-                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate mt-0.5 max-w-full">Tauren Wells, ECCOS, Samu Robles</p>
+            <div class="flex-grow min-w-0 w-full flex flex-col items-center sm:items-start justify-center">
+                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white truncate w-full">Cantaremos (Que Cante La Iglesia)</h4>
+                <p class="text-[10px] sm:text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase truncate w-full mt-0.5">Tauren Wells, ECCOS, Samu Robles</p>
                 
-                <!-- Iconos centrados debajo -->
-                <div class="flex items-center justify-center sm:justify-start gap-1.5 mt-2.5 relative z-10">
-                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+5*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Cantaremos+%28Que+Cante+La+Iglesia%29%0A%F0%9F%8E%A4+*Artista:*+Tauren+Wells%2C+ECCOS%2C+Samu+Robles%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dqw8OqoPOnQY%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                <div class="flex items-center justify-center sm:justify-start gap-2 mt-3 relative z-10 w-full overflow-x-auto no-scrollbar">
+                    <a href="https://wa.me/?text=%C2%A1Hola%21+Estoy+escuchando+el+*Puesto+5*+del+Top+5%0A%0A%F0%9F%8E%B5+*Canci%C3%B3n:*+Cantaremos+%28Que+Cante+La+Iglesia%29%0A%F0%9F%8E%A4+*Artista:*+Tauren+Wells%2C+ECCOS%2C+Samu+Robles%0A%0A%F0%9F%93%BA+*Escuchar+en+YouTube:*+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dqw8OqoPOnQY%0A%0A%F0%9F%93%BB+*Sintoniza+la+radio:*+https%3A%2F%2Fradiofe418.vercel.app%2F%0A%0A%23TOP5RADIOFE418" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all duration-200" title="Compartir en WhatsApp">
+                        <i class="fa-brands fa-whatsapp text-xs"></i>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=qw8OqoPOnQY" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
-                        <i class="fa-brands fa-youtube text-sm"></i>
+                    <a href="http://www.youtube.com/watch?v=qw8OqoPOnQY" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-200" title="Ver en YouTube">
+                        <i class="fa-brands fa-youtube text-xs"></i>
                     </a>
-                    <a href="https://open.spotify.com/search/Cantaremos%20Que%20Cante%20La%20Iglesia%20Tauren%20Wells%20ECCOS%20Samu%20Robles" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
-                        <i class="fa-brands fa-spotify text-sm"></i>
+                    <a href="https://open.spotify.com/search/Cantaremos%20Que%20Cante%20La%20Iglesia%20Tauren%20Wells%20ECCOS%20Samu%20Robles" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#1DB954] hover:bg-[#1DB954]/10 transition-all duration-200" title="Escuchar en Spotify">
+                        <i class="fa-brands fa-spotify text-xs"></i>
                     </a>
-                    <a href="https://music.apple.com/us/search?term=Cantaremos%20Que%20Cante%20La%20Iglesia%20Tauren%20Wells%20ECCOS%20Samu%20Robles" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex items-center justify-center rounded-xl bg-zinc-200/40 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
-                        <i class="fa-brands fa-apple text-sm"></i>
+                    <a href="https://music.apple.com/us/search?term=Cantaremos%20Que%20Cante%20La%20Iglesia%20Tauren%20Wells%20ECCOS%20Samu%20Robles" target="_blank" rel="noopener noreferrer" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-xl bg-zinc-200/50 dark:bg-zinc-700/30 text-zinc-500 dark:text-zinc-400 hover:text-[#FA243C] hover:bg-[#FA243C]/10 transition-all duration-200" title="Escuchar en iTunes / Apple Music">
+                        <i class="fa-brands fa-apple text-xs"></i>
                     </a>
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 
