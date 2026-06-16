@@ -298,7 +298,41 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         
     </div>
 </div>
-       
+     <!-- COMPONENTE: PRÓXIMO PROGRAMA EN VIVO (CENTRADO Y COMPACTO) -->
+<div class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/50 py-2 px-4 transition-colors duration-300 relative z-40">
+    <!-- Cambiado a: justify-center y gap-x-2 para mantener todo el bloque unido en el centro -->
+    <div class="max-w-7xl mx-auto flex items-center justify-center flex-wrap gap-y-1 gap-x-2 text-xs sm:text-sm">
+        
+        <!-- Indicador de En Vivo y Etiqueta -->
+        <div class="flex items-center gap-2 shrink-0">
+            <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
+            </span>
+            <span class="font-black text-brand-neon uppercase text-[10px] tracking-widest">A continuación:</span>
+        </div>
+
+        <!-- Separador Visual 1 -->
+        <span class="text-zinc-300 dark:text-zinc-700 font-light">•</span>
+
+        <!-- Título del Programa (Se eliminó el 'sm:max-w-...' para que no empuje el contenido) -->
+        <div class="min-w-0 max-w-full truncate">
+            <span id="next-program-title" class="font-extrabold text-zinc-800 dark:text-zinc-200 uppercase tracking-wide block truncate">
+                CARGANDO PROGRAMA...
+            </span>
+        </div>
+
+        <!-- Separador Visual 2 -->
+        <span class="text-zinc-300 dark:text-zinc-700 font-light">•</span>
+
+        <!-- Horario Compacto (Se eliminó 'sm:ml-auto' para que no se vaya a la derecha) -->
+        <div class="flex items-center gap-1.5 font-mono text-[11px] font-bold text-zinc-500 dark:text-zinc-400 shrink-0">
+            <i class="fa-regular fa-clock text-brand-neonPink text-xs"></i>
+            <span id="next-program-time" class="uppercase tracking-wider">00:00 HORA</span>
+        </div>
+
+    </div>
+</div>  
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         <div class="lg:col-span-7 space-y-6 w-full">
