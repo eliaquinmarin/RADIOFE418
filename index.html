@@ -2971,8 +2971,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchNewsTicker() {
     const tickerContainer = document.getElementById('ticker-content');
-    // Feed RSS de Contexto Media Group pasado por un proxy CORS libre
-    const feedUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.contextomediagroup.com/feed/');
+    
+    // URL específica del feed de la sección "Lanzamientos" pasada por el proxy CORS
+    const targetUrl = 'https://www.contextomediagroup.com/lanzamientos/feed/';
+    const feedUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
 
     try {
         const response = await fetch(feedUrl);
@@ -2980,15 +2982,16 @@ async function fetchNewsTicker() {
         
         const data = await response.json();
         const parser = new DOMParser();
-        // Parseamos el string XML devuelto por el proxy
+        
+        // Parseamos la estructura XML devuelta por el proxy
         const xmlDoc = parser.parseFromString(data.contents, "text/xml");
         const items = xmlDoc.querySelectorAll("item");
 
-        if (items.length === 0) throw new Error('No se encontraron noticias');
+        if (items.length === 0) throw new Error('No se encontraron noticias en lanzamientos');
 
         let newsHTML = '';
         
-        // Tomamos las últimas 6 noticias del feed
+        // Tomamos los últimos 6 lanzamientos musicales publicados en el feed
         items.forEach((item, index) => {
             if(index < 6) {
                 const title = item.querySelector("title").textContent;
@@ -3007,12 +3010,13 @@ async function fetchNewsTicker() {
         tickerContainer.innerHTML = newsHTML + newsHTML;
 
     } catch (error) {
-        console.error("Error cargando el cintillo:", error);
-        // Fallback en caso de que falle la API/Proxy, muestra el titular que ya tienes estático abajo
+        console.error("Error cargando el cintillo de lanzamientos:", error);
+        
+        // Fallback elegante en caso de caída del proxy/API
         const fallbackHTML = `
-            <a href="https://www.contextomediagroup.com/la-familia-maldonado-estrena-pentecostes-en-fuego-coritos/" target="_blank" class="flex items-center gap-2 hover:text-brand-neon">
+            <a href="https://www.contextomediagroup.com/lanzamientos/" target="_blank" class="flex items-center gap-2 hover:text-brand-neon">
                 <i class="fa-solid fa-star text-brand-neonPink text-[10px]"></i>
-                <span>La Familia Maldonado estrena «Pentecostés en Fuego Coritos»</span>
+                <span>Descubre los últimos Lanzamientos Musicales en Contexto Media Group</span>
             </a>
         `;
         tickerContainer.innerHTML = fallbackHTML + fallbackHTML + fallbackHTML;
