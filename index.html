@@ -217,9 +217,17 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
 .animate-ticker:hover {
     animation-play-state: paused; /* Se pausa cuando el usuario pone el mouse encima */
 }
+/* Ocultar barra de desplazamiento en el carrete RSS manteniendo soporte nativo táctil */
+#rss-carousel::-webkit-scrollbar {
+    display: none;
+}
+#rss-carousel {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 </style>
 
- <script type="text/javascript">
+<script type="text/javascript">
   (function() {
     var dominioAutorizado = "radiofe418.vercel.app"; // CAMBIA ESTO
     var hostnameActual = window.location.hostname;
@@ -248,7 +256,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
       }, 3000);
     }
   })();
-</script>   
+</script>    
 
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -1097,6 +1105,57 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
                 </div>
             </section>
 
+<!-- SECCIÓN: CINTILLO INFORMATIVO CON MOVIMIENTO AUTOMÁTICO -->
+<section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-2xl p-4 transition-colors duration-300 shadow-lg neon-glow">
+    
+    <!-- Encabezado (Texto arriba) -->
+    <div class="flex items-center mb-3 pb-2 border-b border-zinc-200/50 dark:border-zinc-800/50">
+        <span class="flex h-2 w-2 relative mr-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
+        </span>
+        <h4 class="font-black tracking-widest uppercase text-xs text-zinc-800 dark:text-zinc-200 flex items-center">
+            Últimas Notas Contexto Media Group<span class="mx-1.5 text-brand-neonPink font-light">|</span>
+        </h4>
+    </div>
+
+    <!-- Zona del Cintillo en Movimiento (Abajo del texto) -->
+    <div class="relative w-full overflow-hidden bg-white/30 dark:bg-zinc-900/20 border border-zinc-200/60 dark:border-zinc-800/60 rounded-xl py-2">
+        <!-- El contenedor 'ticker-track' duplicará el contenido en JS para hacer el bucle infinito -->
+        <div id="rss-ticker" class="ticker-track flex items-center gap-8 w-max">
+            
+            <!-- Estado de carga inicial -->
+            <div id="rss-loader" class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 animate-pulse px-4">
+                <i class="fa-solid fa-spinner fa-spin mr-2 text-brand-neon"></i> Sincronizando flujo de titulares...
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ESTILOS DE ANIMACIÓN (Añádelos a tu bloque general de <style>) -->
+<style>
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll 90s linear infinite;
+}
+
+/* Pausa el movimiento al pasar el mouse por encima */
+.ticker-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* Se desplaza exactamente la mitad (el bloque clonado) para el bucle perfecto */
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+</style>
 <!-- SECCIÓN: STAFF DIRECTIVO Y PRODUCCIÓN PROFESIONAL -->
 <section class="w-full max-w-4xl mx-auto mt-6 bg-brand-lightCard/60 dark:bg-brand-card/50 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 p-5 sm:p-8 rounded-3xl transition-all duration-300 shadow-xl neon-glow">
     
@@ -3228,6 +3287,83 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
         }
     });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const RSS_URL = "https://us12.campaign-archive.com/feed?u=3539fcbfe953c0ac53d58614a&id=566aa32ae0";
+    const API_CONVERTER = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+    
+    // Configura aquí el enlace oficial de tu estación de radio
+    const LINK_NUESTRA_RADIO = "https://radiofe418.vercel.app/"; 
 
+    const ticker = document.getElementById('rss-ticker');
+
+    async function cargarCintilloAnimado() {
+        try {
+            const response = await fetch(API_CONVERTER);
+            if (!response.ok) throw new Error("Error cargando feed");
+            const data = await response.json();
+
+            if (data.status !== 'ok' || !data.items || data.items.length === 0) {
+                mostrarErrorTicker();
+                return;
+            }
+
+            // Contenedor temporal para generar el bloque de noticias
+            let HTMLContenido = "";
+
+            data.items.forEach(item => {
+                const date = new Date(item.pubDate);
+                const fechaFormateada = isNaN(date) ? "HOY" : date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }).toUpperCase().replace('.','');
+
+                // Mensaje estructurado de WhatsApp
+                const mensajeNoticia = `¡Te comparto esta importante información de RADIO FE 4:18 Gracias a Contexto Media Group! 📻✨\n\n*Noticia:* ${item.title}\n\n👉 *Leer boletín original aquí:* ${item.link}\n\n🌐 *Sintoniza nuestra Radio aquí:* ${LINK_NUESTRA_RADIO}`;
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensajeNoticia)}`;
+
+                // Diseñamos cada noticia individual dentro del flujo horizontal
+                HTMLContenido += `
+                    <div class="flex items-center gap-3 shrink-0 whitespace-nowrap group">
+                        <!-- Fecha -->
+                        <span class="text-[9px] font-black bg-zinc-200/80 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-1.5 py-0.5 rounded tracking-wide group-hover:bg-brand-neon/20 group-hover:text-brand-neon transition-colors">
+                            ${fechaFormateada}
+                        </span>
+                        
+                        <!-- Titular Link -->
+                        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-zinc-800 dark:text-zinc-200 hover:text-brand-neon transition-colors tracking-wide max-w-[300px] sm:max-w-[450px] overflow-hidden text-ellipsis block">
+                            ${escapeHTML(item.title)}
+                        </a>
+
+                        <!-- Botón WhatsApp -->
+                        <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="w-6 h-6 flex items-center justify-center rounded-md bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white transition-all shadow-sm active:scale-90" title="Compartir noticia en WhatsApp">
+                            <i class="fa-brands fa-whatsapp text-xs font-bold"></i>
+                        </a>
+
+                        <!-- Separador decorativo entre noticias -->
+                        <span class="text-zinc-300 dark:text-zinc-700 font-light ml-2 select-none">✦</span>
+                    </div>
+                `;
+            });
+
+            // TRUCO DE BUCLE INFINITO: Inyectamos el bloque original y una copia idéntica justo al lado
+            ticker.innerHTML = HTMLContenido + HTMLContenido;
+
+        } catch (error) {
+            console.error(error);
+            mostrarErrorTicker();
+        }
+    }
+
+    function mostrarErrorTicker() {
+        if (ticker) {
+            ticker.innerHTML = `<div class="text-[11px] font-bold text-brand-neonPink uppercase px-4"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Titulares temporalmente no disponibles</div>`;
+        }
+    }
+
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+    }
+
+    cargarCintilloAnimado();
+});
+</script>
 </body>
 </html>
