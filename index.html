@@ -2974,85 +2974,108 @@ async function fetchContextoNews() {
     const tickerContainer = document.getElementById('ticker-content');
     if (!tickerContainer) return;
     
-    // Configuración de tu emisora para los mensajes compartidos
     const RADIO_LINK = 'https://radiofe418.vercel.app';
     const RADIO_TAG = 'Escucha la mejor programación en Radio FE 4:18 📻✨';
-
-    // URL del Feed de Contexto Media Group + Proxy
     const targetUrl = 'https://www.contextomediagroup.com/feed/';
-    const feedUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
 
-    try {
-        // Intentamos obtener el feed en tiempo real
-        const response = await fetch(feedUrl);
-        if (!response.ok) throw new Error('Error de red');
-        
-        const data = await response.json();
-        if (!data || !data.contents) throw new Error('Contenido vacío');
-        
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data.contents, "text/xml");
-        
-        // Validamos que el XML sea correcto y no tenga errores de parseo
-        if (xmlDoc.querySelector("parsererror")) throw new Error('Error en formato XML');
-        
-        const items = xmlDoc.querySelectorAll("item");
-        if (!items || items.length === 0) throw new Error('No se encontraron noticias');
+    // Lista de proxies de respaldo para garantizar un 100% de efectividad
+    const proxies = [
+        `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
+        `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+        `https://cors-anywhere.herokuapp.com/${targetUrl}` // Tercera opción (fallback secundario)
+    ];
 
-        let newsHTML = '';
-        let count = 0;
-        
-        // Procesamos un máximo de 6 noticias del feed en vivo
-        items.forEach((item) => {
-            if (count < 6) {
-                const titleNode = item.querySelector("title");
-                const linkNode = item.querySelector("link");
-                
-                if (!titleNode || !linkNode) return;
+    let xmlText = null;
+    let isAllOrigins = false;
 
-                const rawTitle = titleNode.textContent.trim();
-                // Limpieza de comillas para evitar conflictos en el botón compartir
-                const cleanTitle = rawTitle.replace(/["']/g, '«').replace(/\\/g, '');
-                const link = linkNode.textContent.trim();
-                
-                newsHTML += renderTickerItem(cleanTitle, link, RADIO_LINK, RADIO_TAG);
-                count++;
+    // Bucle inteligente: intenta con cada proxy hasta que uno responda con éxito
+    for (let i = 0; i < proxies.length; i++) {
+        try {
+            const response = await fetch(proxies[i]);
+            if (!response.ok) throw new Error('Proxy no disponible');
+            
+            if (proxies[i].includes('allorigins')) {
+                const data = await response.json();
+                if (data && data.contents) {
+                    xmlText = data.contents;
+                    isAllOrigins = true;
+                    break;
+                }
+            } else {
+                // proxies como corsproxy.io devuelven el XML directamente como texto limpio
+                xmlText = await response.text();
+                isAllOrigins = false;
+                break;
             }
-        });
-
-        // Inyectamos las noticias duplicadas para el bucle infinito
-        tickerContainer.innerHTML = newsHTML + newsHTML;
-
-    } catch (error) {
-        console.warn("Proxy inestable o caído. Activando respaldo local de noticias.");
-        
-        // RESPALDO DE SEGURIDAD (Fallback): Si el proxy falla, se muestran estos titulares de inmediato
-        const fallbackNews = [
-            { title: "Elevation Worship lidera las listas de éxitos de la Música Cristiana este 2026", url: "https://www.contextomediagroup.com" },
-            { title: "Premios Dove 2026: Conoce los últimos lanzamientos y nominaciones de la industria", url: "https://www.contextomediagroup.com" },
-            { title: "Maverick City Music anuncia nuevos proyectos de adoración contemporánea para este año", url: "https://www.contextomediagroup.com" },
-            { title: "Grandes logros y récords de distribución en las plataformas globales de streaming cristiano", url: "https://www.contextomediagroup.com" }
-        ];
-
-        let fallbackHTML = '';
-        fallbackNews.forEach((item) => {
-            fallbackHTML += renderTickerItem(item.title, item.url, RADIO_LINK, RADIO_TAG);
-        });
-
-        tickerContainer.innerHTML = fallbackHTML + fallbackHTML;
+        } catch (err) {
+            console.warn(`Proxy ${i + 1} falló, intentando el siguiente...`);
+        }
     }
+
+    // Si logramos obtener el XML de cualquiera de los proxies
+    if (xmlText) {
+        try {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+            
+            if (xmlDoc.querySelector("parsererror")) throw new Error('Error parseando XML');
+            
+            const items = xmlDoc.querySelectorAll("item");
+            if (!items || items.length === 0) throw new Error('Feed sin noticias');
+
+            let newsHTML = '';
+            let count = 0;
+            
+            items.forEach((item) => {
+                if (count < 6) {
+                    const titleNode = item.querySelector("title");
+                    const linkNode = item.querySelector("link");
+                    
+                    if (!titleNode || !linkNode) return;
+
+                    const rawTitle = titleNode.textContent.trim();
+                    const cleanTitle = rawTitle.replace(/["']/g, '«').replace(/\\/g, '');
+                    const link = linkNode.textContent.trim();
+                    
+                    newsHTML += renderTickerItem(cleanTitle, link, RADIO_LINK, RADIO_TAG);
+                    count++;
+                }
+            });
+
+            if (newsHTML !== '') {
+                tickerContainer.innerHTML = newsHTML + newsHTML;
+                return; // Proceso completado con éxito 100% real en vivo
+            }
+        } catch (parseError) {
+            console.error("Error al procesar el XML obtenido:", parseError);
+        }
+    }
+
+    // RESPALDO LOCAL DE SEGURIDAD (Solo se activa si TODO internet/proxies fallan simultáneamente)
+    console.warn("Todos los proxies fallaron. Mostrando respaldo local optimizado 2026.");
+    const fallbackNews = [
+        { title: "Elevation Worship lidera las listas de éxitos de la Música Cristiana este 2026", url: "https://www.contextomediagroup.com" },
+        { title: "Premios Dove 2026: Conoce los últimos lanzamientos y nominaciones de la industria", url: "https://www.contextomediagroup.com" },
+        { title: "Maverick City Music anuncia nuevos proyectos de adoración contemporánea para este año", url: "https://www.contextomediagroup.com" },
+        { title: "Grandes logros y récords de distribución en las plataformas globales de streaming cristiano", url: "https://www.contextomediagroup.com" }
+    ];
+
+    let fallbackHTML = '';
+    fallbackNews.forEach((item) => {
+        fallbackHTML += renderTickerItem(item.title, item.url, RADIO_LINK, RADIO_TAG);
+    });
+    tickerContainer.innerHTML = fallbackHTML + fallbackHTML;
 }
 
-// Función auxiliar profesional para renderizar cada elemento del carrusel de forma idéntica
 function renderTickerItem(title, newsUrl, radioUrl, radioTag) {
     return `
         <div class="flex items-center gap-3 whitespace-nowrap">
-            <a href="${newsUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-300 hover:text-brand-neonPink transition-colors duration-200 group">
+            <a href="${newsUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-brand-neonPink dark:hover:text-brand-neonPink transition-colors duration-200 group">
                 <i class="fa-solid fa-bolt text-brand-neonPink text-[10px] opacity-80 group-hover:scale-110 transition-transform"></i>
                 <span class="max-w-[340px] sm:max-w-lg truncate font-medium">${title}</span>
             </a>
             <button onclick="shareNews('${encodeURIComponent(title)}', '${encodeURIComponent(newsUrl)}', '${encodeURIComponent(radioUrl)}', '${encodeURIComponent(radioTag)}')" 
-                    class="inline-flex items-center justify-center text-zinc-500 hover:text-brand-neonPink p-1 rounded-full hover:bg-zinc-800 transition-all duration-200" 
+                    class="inline-flex items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-brand-neonPink dark:hover:text-brand-neonPink p-1 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-all duration-200" 
                     title="Compartir Noticia">
                 <i class="fa-solid fa-share-nodes text-[11px]"></i>
             </button>
@@ -3060,7 +3083,6 @@ function renderTickerItem(title, newsUrl, radioUrl, radioTag) {
     `;
 }
 
-// Función global encargada del módulo de Compartir (Nativo en móvil / WhatsApp en PC)
 function shareNews(title, newsUrl, radioUrl, radioTag) {
     const decodedTitle = decodeURIComponent(title);
     const decodedNewsUrl = decodeURIComponent(newsUrl);
