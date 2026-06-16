@@ -279,22 +279,18 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         </div>
     </header>
 
-<!-- Cintillo de Noticias: Música Cristiana 2026 -->
-<div class="w-full bg-amber-500/10 dark:bg-zinc-900/90 border-b border-zinc-200 dark:border-amber-500/30 py-2.5 overflow-hidden relative z-40 transition-colors duration-300">
+<div class="w-full bg-amber-500/5 dark:bg-zinc-950/40 border-b border-zinc-200/80 dark:border-amber-500/20 py-2.5 overflow-hidden relative z-40 transition-colors duration-300">
     <div class="max-w-7xl mx-auto flex items-center relative px-4">
         
-        <!-- Etiqueta Fija Izquierda -->
-        <div class="absolute left-0 top-0 bottom-0 bg-amber-500 text-zinc-950 text-[10px] font-black tracking-widest uppercase flex items-center px-3 z-10 shadow-md rounded-r-lg">
+        <div class="absolute left-0 top-0 bottom-0 bg-amber-500 dark:bg-amber-500 text-zinc-950 text-[10px] font-black tracking-widest uppercase flex items-center px-3 z-10 shadow-md rounded-r-lg select-none">
             <i class="fa-solid fa-trophy mr-1.5 animate-pulse"></i> MUSICA 2026
         </div>
 
-        <!-- Contenedor con Máscara de Desvanecido y Movimiento -->
         <div class="w-full overflow-hidden pl-28 select-none relative [mask-image:linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]">
             <div id="ticker-content" class="animate-ticker flex gap-12 text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                <!-- Se duplica el contenido en JS para asegurar el bucle infinito suave -->
-                <span class="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                <span class="flex items-center gap-2 text-zinc-400 dark:text-zinc-500">
                     <i class="fa-solid fa-circle-notch animate-spin text-[10px] text-amber-500"></i> 
-                    Cargando lanzamientos, premios y éxitos de la Música Cristiana 2026...
+                    Sincronizando lanzamientos, premios y éxitos de la Música Cristiana 2026...
                 </span>
             </div>
         </div>
@@ -2974,60 +2970,116 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchChristianMusicNews() {
     const tickerContainer = document.getElementById('ticker-content');
+    if (!tickerContainer) return;
     
-    // Usamos el feed de noticias de la industria musical cristiana mundial (vía proxy)
+    // Fuentes estables y Proxy CORS libre
     const targetUrl = 'https://www.jesusfreakhideout.com/xml/jfhnews.xml';
     const feedUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
+    
+    // Configuración de tu emisora para los mensajes compartidos
+    const RADIO_LINK = 'https://radiofe418.vercel.app';
+    const RADIO_TAG = 'Escucha más en Radio FE 4:18 📻✨';
 
     try {
         const response = await fetch(feedUrl);
-        if (!response.ok) throw new Error('Error de conexión');
+        if (!response.ok) throw new Error('Error de red al conectar con el servidor');
         
         const data = await response.json();
+        if (!data || !data.contents) throw new Error('Datos del servidor RSS vacíos');
+        
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+        
+        // Validamos fallos estructurales en el XML parseado
+        if (xmlDoc.querySelector("parsererror")) throw new Error('Error parseando estructura XML');
+        
         const items = xmlDoc.querySelectorAll("item");
-
-        if (items.length === 0) throw new Error('No se encontraron noticias de música cristiana');
+        if (!items || items.length === 0) throw new Error('No se encontraron registros de noticias');
 
         let newsHTML = '';
         let count = 0;
         
         items.forEach((item) => {
-            // Filtramos un máximo de 6 noticias relevantes del 2026
-            if(count < 6) {
-                const title = item.querySelector("title").textContent;
-                const link = item.querySelector("link").textContent;
-                const pubDate = item.querySelector("pubDate") ? item.querySelector("pubDate").textContent : '';
+            if (count < 6) {
+                // Extracción segura (Manejo defensivo de fallos si faltan datos en el feed)
+                const titleNode = item.querySelector("title");
+                const linkNode = item.querySelector("link");
+                const pubDateNode = item.querySelector("pubDate");
                 
-                // Nos aseguramos de que priorice las noticias más frescas del año 2026
+                if (!titleNode || !linkNode) return; // Salta este registro si es inválido
+                
+                // Limpieza de caracteres y comillas peligrosas en cadenas de texto
+                const rawTitle = titleNode.textContent.trim();
+                const cleanTitle = rawTitle.replace(/["']/g, '«').replace(/\\/g, '');
+                const link = linkNode.textContent.trim();
+                const pubDate = pubDateNode ? pubDateNode.textContent : '';
+                
+                // Filtrado estricto año actual 2026
                 if (pubDate.includes('2026') || pubDate === '') {
                     newsHTML += `
-                        <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-brand-neon transition-colors duration-200 group whitespace-nowrap">
-                            <i class="fa-solid fa-cross text-amber-400 text-[10px]"></i>
-                            <span class="font-bold text-xs uppercase bg-amber-500/10 text-amber-400 px-1.5 py-0.5 rounded text-[10px]">2026</span>
-                            <span class="text-white hover:text-amber-300 transition-colors">${title}</span>
-                        </a>
+                        <div class="flex items-center gap-3 whitespace-nowrap">
+                            <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-amber-500 dark:hover:text-amber-400 transition-colors duration-200 group">
+                                <i class="fa-solid fa-cross text-amber-500 text-[10px] opacity-80 group-hover:scale-110 transition-transform"></i>
+                                <span class="font-extrabold text-[9px] tracking-wider uppercase bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded-md border border-amber-500/20">2026</span>
+                                <span class="max-w-[320px] sm:max-w-md truncate">${cleanTitle}</span>
+                            </a>
+                            
+                            <button onclick="shareNews('${encodeURIComponent(cleanTitle)}', '${encodeURIComponent(link)}', '${encodeURIComponent(RADIO_LINK)}', '${encodeURIComponent(RADIO_TAG)}')" 
+                                    class="inline-flex items-center justify-center text-zinc-400 hover:text-amber-500 dark:text-zinc-500 dark:hover:text-amber-400 p-1 rounded-full hover:bg-zinc-200/50 dark:hover:bg-zinc-800/60 transition-all duration-200" 
+                                    title="Compartir Noticia">
+                                <i class="fa-solid fa-share-nodes text-[11px]"></i>
+                            </button>
+                        </div>
                     `;
                     count++;
                 }
             }
         });
 
-        // Duplicamos el contenido para el efecto de scroll infinito
+        if (newsHTML === '') throw new Error('Ninguna noticia cumple el filtro de fecha 2026');
+
+        // Duplicación perfecta para scroll infinito fluido
         tickerContainer.innerHTML = newsHTML + newsHTML;
 
     } catch (error) {
-        console.error("Error cargando noticias de música cristiana 2026:", error);
+        console.error("Manejador del Cintillo -> Log:", error.message);
         
-        // Fallback elegante con logros e información general si la API falla
+        // Fallback robusto adaptativo en Texto y Color a los dos modos
         const fallbackHTML = `
-            <div class="flex items-center gap-2 text-amber-400">
-                <i class="fa-solid fa-trophy"></i>
-                <span>Monitoreando lo mejor de la Música Cristiana, Premios Dove y Listas Billboard 2026</span>
+            <div class="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
+                <i class="fa-solid fa-trophy text-amber-500"></i>
+                <span>Monitoreando los mayores éxitos, Premios Dove y Listas Billboard de la Música Cristiana 2026</span>
+                <a href="${RADIO_LINK}" target="_blank" class="ml-2 text-amber-600 dark:text-amber-400 underline hover:no-underline font-bold text-xs">Escuchar Radio FE 4:18 📻</a>
             </div>
         `;
         tickerContainer.innerHTML = fallbackHTML + fallbackHTML;
+    }
+}
+
+// Función global eficiente encargada del proceso de Compartir Compartido
+function shareNews(title, newsUrl, radioUrl, radioTag) {
+    const decodedTitle = decodeURIComponent(title);
+    const decodedNewsUrl = decodeURIComponent(newsUrl);
+    const decodedRadioUrl = decodeURIComponent(radioUrl);
+    const decodedRadioTag = decodeURIComponent(radioTag);
+    
+    const textMessage = `🔥 ¡Impresionante! Mira este logro de la música cristiana 2026:\n\n"${decodedTitle}"\n\n🔹 Noticia: ${decodedNewsUrl}\n\n📻 ${decodedRadioTag}\n👉 ${decodedRadioUrl}`;
+
+    // 1. Si el dispositivo soporta compartir de forma nativa (Móviles, Tablets, Safari)
+    if (navigator.share) {
+        navigator.share({
+            title: 'Música Cristiana 2026',
+            text: `"${decodedTitle}"\n\n${decodedRadioTag}\n`,
+            url: decodedNewsUrl
+        }).catch((err) => console.log('Interrupción al compartir de forma nativa'));
+    } else {
+        // 2. Fallback Profesional: Abre ventana flotante para compartir vía WhatsApp de inmediato
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(textMessage)}`;
+        const width = 600, height = 500;
+        const left = (screen.width - width) / 2;
+        const top = (screen.height - height) / 2;
+        
+        window.open(whatsappUrl, 'CompartirNoticia', `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes`);
     }
 }
 </script>
