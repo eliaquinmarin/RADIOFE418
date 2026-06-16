@@ -2966,60 +2966,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    fetchNewsTicker();
+    fetchChristianMusicNews();
 });
 
-async function fetchNewsTicker() {
+async function fetchChristianMusicNews() {
     const tickerContainer = document.getElementById('ticker-content');
     
-    // URL específica del feed de la sección "Lanzamientos" pasada por el proxy CORS
-    const targetUrl = 'https://www.contextomediagroup.com/lanzamientos/feed/';
+    // Usamos el feed de noticias de la industria musical cristiana mundial (vía proxy)
+    const targetUrl = 'https://www.jesusfreakhideout.com/xml/jfhnews.xml';
     const feedUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
 
     try {
         const response = await fetch(feedUrl);
-        if (!response.ok) throw new Error('Error en la red');
+        if (!response.ok) throw new Error('Error de conexión');
         
         const data = await response.json();
         const parser = new DOMParser();
-        
-        // Parseamos la estructura XML devuelta por el proxy
         const xmlDoc = parser.parseFromString(data.contents, "text/xml");
         const items = xmlDoc.querySelectorAll("item");
 
-        if (items.length === 0) throw new Error('No se encontraron noticias en lanzamientos');
+        if (items.length === 0) throw new Error('No se encontraron noticias de música cristiana');
 
         let newsHTML = '';
+        let count = 0;
         
-        // Tomamos los últimos 6 lanzamientos musicales publicados en el feed
-        items.forEach((item, index) => {
-            if(index < 6) {
+        items.forEach((item) => {
+            // Filtramos un máximo de 6 noticias relevantes del 2026
+            if(count < 6) {
                 const title = item.querySelector("title").textContent;
                 const link = item.querySelector("link").textContent;
+                const pubDate = item.querySelector("pubDate") ? item.querySelector("pubDate").textContent : '';
                 
-                newsHTML += `
-                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-brand-neon transition-colors duration-200 group">
-                        <i class="fa-solid fa-bolt text-brand-neon animate-pulse text-[10px]"></i>
-                        <span>${title}</span>
-                    </a>
-                `;
+                // Nos aseguramos de que priorice las noticias más frescas del año 2026
+                if (pubDate.includes('2026') || pubDate === '') {
+                    newsHTML += `
+                        <a href="${link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-brand-neon transition-colors duration-200 group whitespace-nowrap">
+                            <i class="fa-solid fa-cross text-amber-400 text-[10px]"></i>
+                            <span class="font-bold text-xs uppercase bg-amber-500/10 text-amber-400 px-1.5 py-0.5 rounded text-[10px]">2026</span>
+                            <span class="text-white hover:text-amber-300 transition-colors">${title}</span>
+                        </a>
+                    `;
+                    count++;
+                }
             }
         });
 
-        // Duplicamos el contenido exactamente igual para lograr el bucle infinito visual sin saltos bruscos
+        // Duplicamos el contenido para el efecto de scroll infinito
         tickerContainer.innerHTML = newsHTML + newsHTML;
 
     } catch (error) {
-        console.error("Error cargando el cintillo de lanzamientos:", error);
+        console.error("Error cargando noticias de música cristiana 2026:", error);
         
-        // Fallback elegante en caso de caída del proxy/API
+        // Fallback elegante con logros e información general si la API falla
         const fallbackHTML = `
-            <a href="https://www.contextomediagroup.com/lanzamientos/" target="_blank" class="flex items-center gap-2 hover:text-brand-neon">
-                <i class="fa-solid fa-star text-brand-neonPink text-[10px]"></i>
-                <span>Descubre los últimos Lanzamientos Musicales en Contexto Media Group</span>
-            </a>
+            <div class="flex items-center gap-2 text-amber-400">
+                <i class="fa-solid fa-trophy"></i>
+                <span>Monitoreando lo mejor de la Música Cristiana, Premios Dove y Listas Billboard 2026</span>
+            </div>
         `;
-        tickerContainer.innerHTML = fallbackHTML + fallbackHTML + fallbackHTML;
+        tickerContainer.innerHTML = fallbackHTML + fallbackHTML;
     }
 }
 </script>
