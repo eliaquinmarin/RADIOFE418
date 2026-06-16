@@ -3141,94 +3141,79 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
     document.addEventListener("DOMContentLoaded", function() {
         // Configuración de credenciales
         const API_KEY = "AIzaSyDW5Wi6sj-AbQSB0VKnWHGy8Pld7aPv8rk";
-        // ID de la lista de subidas del canal
-        const PLAYLIST_ID = "UC8YrtGiUO5ZwEXhPBu1YSjQ"; 
-        const MAX_SHORTS_A_MOSTRAR = 3; // Cantidad exacta de Shorts que quieres renderizar
+        // ID real de tu canal de YouTube
+        const CHANNEL_ID = "UC8YrtGiUO5ZwEXhPBu1YSjQ"; 
+        const MAX_SHORTS_A_MOSTRAR = 3;
 
-        // Pedimos más resultados de los necesarios para asegurarnos de filtrar y encontrar Shorts reales
-        const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=15&key=${API_KEY}`;
+        // Usamos el endpoint de búsqueda ordenado por fecha (trae lo más reciente de inmediato)
+        const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=12&type=video`;
 
         fetch(url)
-            .then(response => response.json())
-            .then(async data => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error de API: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
                 const container = document.getElementById('shorts-container');
                 container.innerHTML = ''; // Limpiar el mensaje de carga
 
                 if (!data.items || data.items.length === 0) {
-                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500">No se encontraron videos recientes.</div>`;
+                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500 py-4">No se encontraron videos públicos en este canal.</div>`;
                     return;
                 }
 
                 let shortsRenderizados = 0;
 
-                for (const item of data.items) {
-                    // Detenerse si ya alcanzamos el límite de Shorts configurado
-                    if (shortsRenderizados >= MAX_SHORTS_A_MOSTRAR) break;
+                data.items.forEach(item => {
+                    if (shortsRenderizados >= MAX_SHORTS_A_MOSTRAR) return;
 
-                    const videoId = item.snippet.resourceId.videoId;
+                    const videoId = item.id.videoId;
                     const title = item.snippet.title;
-
-                    // FILTRO: Validamos en tiempo real si el video es un Short real midiendo la orientación de su miniatura
-                    // Los Shorts de YouTube generan por defecto una miniaturaHQ con barras negras laterales o formato vertical.
-                    const esShort = await verificarSiEsShort(videoId);
                     
-                    if (esShort) {
-                        shortsRenderizados++;
+                    // Como el endpoint de búsqueda a veces no discrimina Shorts de videos largos,
+                    // forzamos el formato estricto de reproducción vertical en tu interfaz responsiva
+                    shortsRenderizados++;
 
-                        // Estructura limpia y adaptada a la URL de incrustación de Shorts de YouTube
-                        const shortCard = `
-                            <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
-                                <div class="w-full aspect-[9/16] rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
-                                    <iframe 
-                                        class="absolute top-0 left-0 w-full h-full" 
-                                        src="https://www.youtube.com/embed/${videoId}" 
-                                        title="${title}" 
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                        referrerpolicy="strict-origin-when-cross-origin" 
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
-                                <div class="px-1 py-1">
-                                    <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors" title="${escapeHTML(title)}">
-                                        ${escapeHTML(title)}
-                                    </h5>
-                                    <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">
-                                        Pastor Eliaquin Marín
-                                    </p>
-                                </div>
+                    const shortCard = `
+                        <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
+                            <div class="w-full aspect-[9/16] rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
+                                <iframe 
+                                    class="absolute top-0 left-0 w-full h-full" 
+                                    src="https://www.youtube.com/embed/${videoId}" 
+                                    title="${escapeHTML(title)}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerpolicy="strict-origin-when-cross-origin" 
+                                    allowfullscreen>
+                                </iframe>
                             </div>
-                        `;
-                        container.innerHTML += shortCard;
-                    }
-                }
+                            <div class="px-1 py-1">
+                                <h5 class="font-bold text-xs text-zinc-900 dark:text-white truncate group-hover:text-brand-neon transition-colors" title="${escapeHTML(title)}">
+                                    ${escapeHTML(title)}
+                                </h5>
+                                <p class="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">
+                                    Pastor Eliaquin Marín
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += shortCard;
+                });
 
-                // En caso de que el canal no tenga Shorts en las últimas subidas analizadas
                 if (shortsRenderizados === 0) {
-                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500">No se encontraron Shorts verticales recientes en el canal.</div>`;
+                    container.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500 py-4">No se pudieron procesar Shorts recientes.</div>`;
                 }
             })
             .catch(error => {
                 console.error("Error cargando los Shorts de YouTube:", error);
                 document.getElementById('shorts-container').innerHTML = `
-                    <div class="col-span-full text-center text-xs text-red-500">
-                        Error al cargar los Shorts. Inténtalo de nuevo más tarde.
+                    <div class="col-span-full text-center text-xs text-red-500 py-4">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Error al conectar con YouTube. Verifica las restricciones de tu API Key.
                     </div>`;
             });
 
-        // Función de apoyo para discernir de forma rápida si es formato Short mediante su cabecera URL de miniatura
-        async function verificarSiEsShort(videoId) {
-            try {
-                // Hacemos una petición rápida al formato de previsualización estricto de Shorts de YouTube
-                const res = await fetch(`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, { method: 'HEAD' });
-                return res.ok;
-            } catch {
-                // Si falla el detector por políticas CORS, permitimos el flujo visual clásico
-                return true;
-            }
-        }
-
-        // Función de seguridad para evitar roturas de diseño por caracteres especiales en los títulos
         function escapeHTML(str) {
             return str.replace(/[&<>'"]/g, 
                 tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
