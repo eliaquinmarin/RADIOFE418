@@ -2973,116 +2973,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    fetchContextoNews();
+    fetchContextoLanzamientos();
 });
 
-async function fetchContextoNews() {
+async function fetchContextoLanzamientos() {
     const tickerContainer = document.getElementById('ticker-content');
     if (!tickerContainer) return;
     
     const RADIO_LINK = 'https://radiofe418.vercel.app';
-    const RADIO_TAG = 'Escucha la mejor programación en Radio FE 4:18 📻✨';
+    const RADIO_TAG = 'Escucha estos estrenos en Radio FE 4:18 📻✨';
+    
+    // Apuntamos al feed unificado para extraer la data cruda rápidamente
     const targetUrl = 'https://www.contextomediagroup.com/feed/';
-
-    // Lista de proxies de respaldo para garantizar un 100% de efectividad
     const proxies = [
         `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
-        `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
-        `https://cors-anywhere.herokuapp.com/${targetUrl}` // Tercera opción (fallback secundario)
+        `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
     ];
 
     let xmlText = null;
-    let isAllOrigins = false;
 
-    // Bucle inteligente: intenta con cada proxy hasta que uno responda con éxito
+    // Carrusel de proxies de alta velocidad
     for (let i = 0; i < proxies.length; i++) {
         try {
             const response = await fetch(proxies[i]);
-            if (!response.ok) throw new Error('Proxy no disponible');
+            if (!response.ok) throw new Error();
             
             if (proxies[i].includes('allorigins')) {
                 const data = await response.json();
-                if (data && data.contents) {
-                    xmlText = data.contents;
-                    isAllOrigins = true;
-                    break;
-                }
+                if (data && data.contents) { xmlText = data.contents; break; }
             } else {
-                // proxies como corsproxy.io devuelven el XML directamente como texto limpio
                 xmlText = await response.text();
-                isAllOrigins = false;
                 break;
             }
         } catch (err) {
-            console.warn(`Proxy ${i + 1} falló, intentando el siguiente...`);
+            console.warn(`Proxy ${i + 1} ocupado, saltando al siguiente...`);
         }
     }
 
-    // Si logramos obtener el XML de cualquiera de los proxies
     if (xmlText) {
         try {
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-            
-            if (xmlDoc.querySelector("parsererror")) throw new Error('Error parseando XML');
-            
             const items = xmlDoc.querySelectorAll("item");
-            if (!items || items.length === 0) throw new Error('Feed sin noticias');
-
-            let newsHTML = '';
-            let count = 0;
             
-            items.forEach((item) => {
-                if (count < 6) {
-                    const titleNode = item.querySelector("title");
-                    const linkNode = item.querySelector("link");
-                    
-                    if (!titleNode || !linkNode) return;
+            if (items && items.length > 0) {
+                let newsHTML = '';
+                let count = 0;
+                
+                // Palabras clave de alta eficiencia para identificar canciones y álbumes
+                const keywords = ['lanza', 'estrena', 'sencillo', 'album', 'álbum', 'single', 'cancion', 'canción', 'video', 'musical'];
 
-                    const rawTitle = titleNode.textContent.trim();
-                    const cleanTitle = rawTitle.replace(/["']/g, '«').replace(/\\/g, '');
-                    const link = linkNode.textContent.trim();
-                    
-                    newsHTML += renderTickerItem(cleanTitle, link, RADIO_LINK, RADIO_TAG);
-                    count++;
+                // Fase 1: Intentamos capturar exclusivamente lanzamientos musicales
+                items.forEach((item) => {
+                    if (count < 6) {
+                        const titleNode = item.querySelector("title");
+                        const linkNode = item.querySelector("link");
+                        if (!titleNode || !linkNode) return;
+
+                        const rawTitle = titleNode.textContent.trim();
+                        const lowerTitle = rawTitle.toLowerCase();
+                        
+                        // Verifica si el titular coincide con un lanzamiento
+                        const isLanzamiento = keywords.some(keyword => lowerTitle.includes(keyword));
+
+                        if (isLanzamiento) {
+                            const cleanTitle = rawTitle.replace(/["']/g, '«').replace(/\\/g, '');
+                            const link = linkNode.textContent.trim();
+                            newsHTML += renderTickerItem(cleanTitle, link, RADIO_LINK, RADIO_TAG);
+                            count++;
+                        }
+                    }
+                });
+
+                // Fase 2: Si el feed no tiene suficientes lanzamientos esa semana, rellena de forma eficiente con las últimas novedades
+                if (count < 4) {
+                    items.forEach((item) => {
+                        if (count < 6) {
+                            const titleNode = item.querySelector("title");
+                            const linkNode = item.querySelector("link");
+                            if (!titleNode || !linkNode) return;
+
+                            const rawTitle = titleNode.textContent.trim();
+                            const cleanTitle = rawTitle.replace(/["']/g, '«').replace(/\\/g, '');
+                            const link = linkNode.textContent.trim();
+
+                            // Evitamos duplicar si ya se agregó en la fase 1
+                            if (!newsHTML.includes(cleanTitle)) {
+                                newsHTML += renderTickerItem(cleanTitle, link, RADIO_LINK, RADIO_TAG);
+                                count++;
+                            }
+                        }
+                    });
                 }
-            });
 
-            if (newsHTML !== '') {
-                tickerContainer.innerHTML = newsHTML + newsHTML;
-                return; // Proceso completado con éxito 100% real en vivo
+                if (newsHTML !== '') {
+                    tickerContainer.innerHTML = newsHTML + newsHTML;
+                    return;
+                }
             }
-        } catch (parseError) {
-            console.error("Error al procesar el XML obtenido:", parseError);
+        } catch (e) {
+            console.error("Error interpretando la data musical:", e);
         }
     }
 
-    // RESPALDO LOCAL DE SEGURIDAD (Solo se activa si TODO internet/proxies fallan simultáneamente)
-    console.warn("Todos los proxies fallaron. Mostrando respaldo local optimizado 2026.");
-    const fallbackNews = [
-        { title: "Elevation Worship lidera las listas de éxitos de la Música Cristiana este 2026", url: "https://www.contextomediagroup.com" },
-        { title: "Premios Dove 2026: Conoce los últimos lanzamientos y nominaciones de la industria", url: "https://www.contextomediagroup.com" },
-        { title: "Maverick City Music anuncia nuevos proyectos de adoración contemporánea para este año", url: "https://www.contextomediagroup.com" },
-        { title: "Grandes logros y récords de distribución en las plataformas globales de streaming cristiano", url: "https://www.contextomediagroup.com" }
-    ];
-
-    let fallbackHTML = '';
-    fallbackNews.forEach((item) => {
-        fallbackHTML += renderTickerItem(item.title, item.url, RADIO_LINK, RADIO_TAG);
-    });
-    tickerContainer.innerHTML = fallbackHTML + fallbackHTML;
+    // Si todo falla de manera crítica, el carrusel se mantiene limpio invitando a la acción
+    tickerContainer.innerHTML = `<div class="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">🚨 Sintoniza los estrenos de la música cristiana 2026 directo en <a href="${RADIO_LINK}" target="_blank" class="text-brand-neonPink underline font-bold">Radio FE 4:18</a></div>`;
 }
 
 function renderTickerItem(title, newsUrl, radioUrl, radioTag) {
     return `
         <div class="flex items-center gap-3 whitespace-nowrap">
             <a href="${newsUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-brand-neonPink dark:hover:text-brand-neonPink transition-colors duration-200 group">
-                <i class="fa-solid fa-bolt text-brand-neonPink text-[10px] opacity-80 group-hover:scale-110 transition-transform"></i>
+                <i class="fa-solid fa-compact-disc text-brand-neonPink text-[10px] opacity-80 group-hover:rotate-180 transition-transform duration-500"></i>
                 <span class="max-w-[340px] sm:max-w-lg truncate font-medium">${title}</span>
             </a>
             <button onclick="shareNews('${encodeURIComponent(title)}', '${encodeURIComponent(newsUrl)}', '${encodeURIComponent(radioUrl)}', '${encodeURIComponent(radioTag)}')" 
                     class="inline-flex items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-brand-neonPink dark:hover:text-brand-neonPink p-1 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-all duration-200" 
-                    title="Compartir Noticia">
+                    title="Compartir Estreno">
                 <i class="fa-solid fa-share-nodes text-[11px]"></i>
             </button>
         </div>
@@ -3095,20 +3102,17 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
     const decodedRadioUrl = decodeURIComponent(radioUrl);
     const decodedRadioTag = decodeURIComponent(radioTag);
     
-    const textMessage = `🔥 ¡Al día con las novedades! Mira esta noticia de Contexto Media Group:\n\n"${decodedTitle}"\n\n🔹 Leer noticia completa aquí: ${decodedNewsUrl}\n\n📻 ${decodedRadioTag}\n👉 ${decodedRadioUrl}`;
+    const textMessage = `🔥 ¡Nuevo Estreno Musical! Escucha lo más reciente de Contexto Media Group:\n\n"${decodedTitle}"\n\n🔹 Escucha el tema y lee más aquí: ${decodedNewsUrl}\n\n📻 ${decodedRadioTag}\n👉 ${decodedRadioUrl}`;
 
     if (navigator.share) {
         navigator.share({
-            title: 'Noticias Música Cristiana',
+            title: 'Lanzamiento Cristiano',
             text: `"${decodedTitle}"\n\n${decodedRadioTag}\n`,
             url: decodedNewsUrl
-        }).catch(() => console.log('Ventana nativa cerrada'));
+        }).catch(() => {});
     } else {
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(textMessage)}`;
-        const width = 600, height = 500;
-        const left = (screen.width - width) / 2;
-        const top = (screen.height - height) / 2;
-        window.open(whatsappUrl, 'CompartirNoticia', `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes`);
+        window.open(whatsappUrl, 'CompartirLanzamiento', 'width=600,height=500,toolbar=no,scrollbars=yes');
     }
 }
 </script>
