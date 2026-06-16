@@ -2484,54 +2484,7 @@ document.addEventListener('DOMContentLoaded', () => {
              { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Jesus Marin", img: "img/programas/pastormarin.png",  youtube: "" }
 
         ];
-const linkRadio = "https://radiofe418.vercel.app/";
-const telefonoRadio = "584125183677"; // Configurado con el código de Venezuela
 
-// Días de la semana para el mensaje
-const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-
-function obtenerLinkWhatsApp(programa) {
-    const diaTexto = diasSemana[programa.dia];
-    
-    // Construcción del mensaje personalizado
-    const saludo = "¡Hola! Estoy escuchando la radio en vivo 📻";
-    const estado = "🔴 *¡ESTÁ EN VIVO!*";
-    const detalles = `*Programa:* ${programa.nombre}\n*Conduce:* ${programa.dj}\n*Horario:* ${diaTexto} de ${programa.horaInicio} a ${programa.horaFin}`;
-    const link = `👉 Escúchalo aquí: ${linkRadio}`;
-    
-    // Juntamos el texto con saltos de línea
-    const mensajeCompleto = `${saludo}\n\n${estado}\n${detalles}\n\n${link}`;
-    
-    // Codificamos el mensaje para que sea una URL válida
-    return `https://wa.me/${telefonoRadio}?text=${encodeURIComponent(mensajeCompleto)}`;
-}
-
-// --- RECORRIDO DEL ARRAY PARA PINTAR EN TU HTML ---
-// Cambia "contenedor-programas" por el ID real de tu HTML
-const contenedor = document.getElementById("contenedor-programas"); 
-
-if (contenedor) {
-    miProgramacion.forEach(programa => {
-        const urlWhatsApp = obtenerLinkWhatsApp(programa);
-        
-        // Aquí generas la estructura de tu tarjeta/tarjetas actuales
-        const programaCard = `
-            <div class="programa-item">
-                <img src="${programa.img}" alt="${programa.nombre}" width="100">
-                <h2>${programa.nombre}</h2>
-                <p>Conductor: ${programa.dj}</p>
-                <p>Hora: ${programa.horaInicio} - ${programa.horaFin}</p>
-                
-                <!-- BOTÓN DE WHATSAPP INTEGRADO -->
-                <a href="${urlWhatsApp}" target="_blank" style="background-color: #25D366; color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold; margin-top: 5px;">
-                     Escribir al programa en vivo
-                </a>
-            </div>
-        `;
-        
-        contenedor.innerHTML += programaCard;
-    });
-}
         // Función auxiliar para convertir "17:00" a un formato legible "05:00 PM"
         function formatearAMPM(horaStr) {
             const [horas, minutos] = horaStr.split(':').map(Number);
