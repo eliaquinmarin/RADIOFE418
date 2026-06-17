@@ -1315,42 +1315,46 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         </div>
     </main>
 
-    <footer class="w-full bg-zinc-100/80 dark:bg-brand-card/50 border-t border-zinc-200 dark:border-zinc-800/80 mt-12 py-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
-        <!-- Contenedor maestro con distribución exacta en 3 columnas en escritorio -->
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-6 text-center md:text-left">
-            
-            <!-- Bloque 1: Derechos Reservados -->
-            <div class="space-y-0.5">
-                <p class="text-xs font-bold text-zinc-800 dark:text-zinc-300">
-                    © <span id="footer-year"></span> Radio FE 4:18. <span class="font-medium text-zinc-500 dark:text-zinc-500">Sonando por todo lo alto.</span>
-                </p>
-                <p class="text-[11px] text-zinc-400 dark:text-zinc-500 font-medium">
-                    Todos los derechos reservados.
-                </p>
-            </div>
-            
-            <!-- Bloque 2: Insignia de Protección DMCA (Centrado Absoluto) -->
-            <div class="flex items-center justify-center transition-all duration-300 hover:opacity-75">
-                <a href="//www.dmca.com/Protection/Status.aspx?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" title="DMCA.com Protection Status" class="dmca-badge inline-block bg-zinc-200/40 dark:bg-zinc-900/45 p-1 rounded-xl border border-zinc-300/60 dark:border-zinc-800/60"> 
+   <footer class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800/80 mt-12 py-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 relative z-50">
+    <!-- Contenedor maestro con distribución exacta en 3 columnas en escritorio -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-6 text-center md:text-left">
+        
+        <!-- Bloque 1: Propiedad Legal & Identidad -->
+        <div class="space-y-1">
+            <p class="text-xs font-black tracking-wide text-zinc-800 dark:text-zinc-200 uppercase">
+                © <span id="footer-year">2026</span> Radio FE 4:18
+            </p>
+            <p class="text-[11px] text-zinc-400 dark:text-zinc-500 font-medium leading-relaxed">
+                Estación Cristiana Digital • Barinas, Venezuela.<br>
+                Sonando por todo lo alto.
+            </p>
+        </div>
+        
+        <!-- Bloque 2: Insignia de Protección DMCA (Centrado Absoluto) -->
+        <div class="flex flex-col items-center justify-center gap-2">
+            <div class="transition-all duration-300 hover:opacity-80">
+                <a href="//www.dmca.com/Protection/Status.aspx?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" title="DMCA.com Protection Status" class="dmca-badge inline-block bg-zinc-200/40 dark:bg-zinc-900/45 p-1 rounded-xl border border-zinc-300/60 dark:border-zinc-800/60 shadow-inner"> 
                     <img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" alt="DMCA.com Protection Status" class="h-5 w-auto block grayscale dark:contrast-125 dark:brightness-90 hover:grayscale-0 transition-all duration-300" />
                 </a> 
                 <!-- Script oficial invisible DMCA -->
                 <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
             </div>
-
-            <!-- Bloque 3: Créditos de Desarrollo (Alineado a la derecha en escritorio) -->
-            <div class="md:text-right flex flex-col md:items-end justify-center gap-1">
-                <p class="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 flex items-center justify-center md:justify-end gap-1.5">
-                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-neon animate-pulse"></span>
-                    Desarrollado para RADIO FE 4:18
-                </p>
-                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-                    Por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-700 dark:text-white hover:text-brand-neon dark:hover:text-brand-neonPink transition-colors">@EliaquinMarin</a>
-                </p>
-            </div>
-            
+            <span class="text-[9px] uppercase tracking-widest font-bold text-zinc-400 dark:text-zinc-600">Copyright Protection Online</span>
         </div>
-    </footer>
+
+        <!-- Bloque 3: Créditos de Desarrollo (Alineado a la derecha en escritorio) -->
+        <div class="md:text-right flex flex-col md:items-end justify-center gap-1">
+            <p class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 flex items-center justify-center md:justify-end gap-1.5 uppercase tracking-wider">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-neon animate-pulse"></span>
+                2 Corintios 4:18
+            </p>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 font-semibold tracking-wide">
+                Desarrollado por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-extrabold text-zinc-800 dark:text-white hover:text-brand-neon dark:hover:text-brand-neon transition-colors">@EliaquinMarin</a>
+            </p>
+        </div>
+        
+    </div>
+</footer>
 
     <audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" autoplay preload="auto" crossorigin="anonymous"></audio>
 
@@ -1602,6 +1606,71 @@ if (audio) {
 
 
 // --- CARÁTULAS Y METADATOS (iTunes / Last.fm) ---
+
+/**
+ * Helper para validar de forma segura las URLs de imágenes de iTunes y escalarlas a 600x600.
+ */
+function formatearUrlItunes(urlRaw) {
+    if (!urlRaw) return null;
+    return urlRaw.replace(/\/source\/\d+x\d+bb\.jpg$/, '/source/600x600bb.jpg')
+                 .replace(/\/\d+x\d+bb\.jpg$/, '/600x600bb.jpg');
+}
+
+/**
+ * Busca en la API de iTunes filtrando los resultados para evitar carátulas falsas.
+ */
+async function consultariTunes(terminoBusqueda, artistaEsperado = '', tituloEsperado = '') {
+    try {
+        // Pedimos hasta 3 resultados para tener margen de filtrado inteligente
+        const url = `https://itunes.apple.com/search?term=${encodeURIComponent(terminoBusqueda)}&media=music&limit=3`;
+        const response = await fetch(url);
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        if (!data.results || data.results.length === 0) return null;
+
+        // Validación estricta: Buscar el resultado que coincida razonablemente con nuestros metadatos
+        const mejorResultado = data.results.find(track => {
+            const matchArtista = artistaEsperado ? track.artistName.toLowerCase().includes(artistaEsperado.toLowerCase()) : true;
+            const matchTitulo = tituloEsperado ? track.trackName.toLowerCase().includes(tituloEsperado.toLowerCase()) : true;
+            return matchArtista && matchTitulo;
+        });
+
+        // Si hay una coincidencia válida, devolvemos su arte en HD, si no, ignoramos para evitar errores
+        return mejorResultado ? formatearUrlItunes(mejorResultado.artworkUrl100) : null;
+    } catch (error) {
+        console.error("Error consultando iTunes:", error);
+        return null;
+    }
+}
+
+/**
+ * Busca en la API de Last.fm como última alternativa musical.
+ */
+async function consultarLastFM(artista, titulo, apiKey) {
+    try {
+        const url = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${apiKey}&artist=${encodeURIComponent(artista)}&track=${encodeURIComponent(titulo)}&format=json`;
+        const response = await fetch(url);
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        if (data.track?.album?.image) {
+            const imagenes = data.track.album.image;
+            const imgObj = imagenes.find(img => img.size === 'extralarge') 
+                        || imagenes.find(img => img.size === 'large') 
+                        || imagenes.at(-1);
+            
+            if (imgObj && imgObj['#text']) return imgObj['#text'];
+        }
+    } catch (error) {
+        console.error("Error consultando Last.fm:", error);
+    }
+    return null;
+}
+
+/**
+ * Función principal adaptada para procesar la lógica de negocio radial y musical.
+ */
 async function buscarCaratula(titulo, artista) {
     const terminosIgnorar = ["RADIO FE", "IDENTIFICACIÓN", "PUBLICIDAD", "PROGRAMA", "SONANDO"];
     
@@ -1621,7 +1690,9 @@ async function buscarCaratula(titulo, artista) {
 
     let tClean = titulo.trim().toUpperCase();
     const trackCover = document.getElementById('track-cover');
+    const ambientBg = document.getElementById('ambient-background');
 
+    // 1. Validar Interrupciones Estáticas / Publicidades
     let coincidenciaAudio = null;
     for (const clave in mapaAudios) {
         const item = mapaAudios[clave];
@@ -1633,81 +1704,62 @@ async function buscarCaratula(titulo, artista) {
 
     if (coincidenciaAudio) {
         if (trackCover) trackCover.src = coincidenciaAudio.img;
-        const ambientBg = document.getElementById('ambient-background');
-        if (ambientBg) {
-            ambientBg.style.backgroundImage = `url('${coincidenciaAudio.img}')`;
-        }
-        console.log("Escudo Activo: Mostrando carátula personalizada para " + coincidenciaAudio.nombre);
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${coincidenciaAudio.img}')`;
+        console.log(`Escudo Activo: Mostrando carátula personalizada para ${coincidenciaAudio.nombre}`);
         return; 
     }
 
+    // 2. Validar Términos Genéricos a Ignorar
     if (terminosIgnorar.some(term => tClean.includes(term)) || tClean === "") {
         if (trackCover) trackCover.src = caratulaPorDefecto;
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${caratulaPorDefecto}')`;
         return;
     }
 
+    // 3. Limpieza de metadatos para búsqueda musical
     let titleCleaned = titulo.replace(/EN VIVO:/gi, '').replace(/¡EN DIRECTO!/gi, '').replace(/\.(mp3|wav|aac|ogg)/gi, '').trim();
     let artistCleaned = artista.trim();
     let queryTarget = `${titleCleaned} ${artistCleaned}`.trim();
 
+    // 4. Verificar memoria Caché para optimizar rendimiento
     if (cacheCaratulas[queryTarget]) {
-        if (trackCover) trackCover.src = cacheCaratulas[queryTarget];
+        aplicarImagen(cacheCaratulas[queryTarget], queryTarget);
         return;
     }
 
-    try {
-        const urlAPI = `https://itunes.apple.com/search?term=${encodeURIComponent(queryTarget)}&media=music&limit=1`;
-        const response = await fetch(urlAPI);
-        const data = await response.json();
+    // 5. Flujo de Búsqueda Secuencial Inteligente (Cascada)
+    let urlCaratulaHD = null;
 
-        if (data.results && data.results.length > 0) {
-            let imgRaw = data.results[0].artworkUrl100;
-            let urlCaratulaHD = imgRaw ? imgRaw.replace("100x100bb.jpg", "600x600bb.jpg") : caratulaPorDefecto;
-            aplicarImagen(urlCaratulaHD, queryTarget);
-            return;
-        }
-    } catch (error) {
-        console.error("Error en iTunes (Completo):", error);
+    // Intento A: iTunes con consulta combinada (Validando que coincidan artista y título)
+    urlCaratulaHD = await consultariTunes(queryTarget, artistCleaned, titleCleaned);
+
+    // Intento B: iTunes usando solo el título (Pero asegurando mediante filtro que el artista corresponda)
+    if (!urlCaratulaHD && titleCleaned) {
+        urlCaratulaHD = await consultariTunes(titleCleaned, artistCleaned);
     }
 
-    try {
-        const urlSoloTitulo = `https://itunes.apple.com/search?term=${encodeURIComponent(titleCleaned)}&media=music&limit=1`;
-        const resTitulo = await fetch(urlSoloTitulo);
-        const dataTitulo = await resTitulo.json();
-
-        if (dataTitulo.results && dataTitulo.results.length > 0) {
-            let urlCaratulaHD = dataTitulo.results[0].artworkUrl100.replace("100x100bb.jpg", "600x600bb.jpg");
-            aplicarImagen(urlCaratulaHD, queryTarget);
-            return;
-        }
-    } catch (error) {
-        console.error("Error en iTunes (Solo Título):", error);
+    // Intento C: Last.fm (Como salvavidas final)
+    if (!urlCaratulaHD && artistCleaned && titleCleaned) {
+        urlCaratulaHD = await consultarLastFM(artistCleaned, titleCleaned, LASTFM_API_KEY);
     }
 
-    try {
-        const urlLastFM = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${LASTFM_API_KEY}&artist=${encodeURIComponent(artistCleaned)}&track=${encodeURIComponent(titleCleaned)}&format=json`;
-        const resLast = await fetch(urlLastFM);
-        const dataLast = await resLast.json();
-
-        if (dataLast.track && dataLast.track.album && dataLast.track.album.image) {
-            const imagenes = dataLast.track.album.image;
-            const imgObj = imagenes.find(img => img.size === 'extralarge') || imagenes.find(img => img.size === 'large') || imagenes.at(-1);
-            
-            if (imgObj && imgObj['#text']) {
-                aplicarImagen(imgObj['#text'], queryTarget);
-                return;
-            }
-        }
-    } catch (error) {
-        console.error("Error en Last.fm:", error);
+    // 6. Resolución de Imagen Encontrada u Omisión
+    if (urlCaratulaHD) {
+        aplicarImagen(urlCaratulaHD, queryTarget);
+    } else {
+        console.warn(`No se localizó arte verificado para: "${queryTarget}". Colocando miniatura por defecto.`);
+        if (trackCover) trackCover.src = caratulaPorDefecto;
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${caratulaPorDefecto}')`;
     }
-
-    if (trackCover) trackCover.src = caratulaPorDefecto;
 }
 
 function aplicarImagen(url, query) {
     const tCover = document.getElementById('track-cover');
+    const ambientBg = document.getElementById('ambient-background');
+    
     if (tCover) tCover.src = url;
+    if (ambientBg) ambientBg.style.backgroundImage = `url('${url}')`;
+    
     cacheCaratulas[query] = url;
 
     if ('mediaSession' in navigator) {
