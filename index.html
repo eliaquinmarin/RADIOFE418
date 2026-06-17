@@ -3289,7 +3289,10 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const RSS_URL = "https://us12.campaign-archive.com/feed?u=3539fcbfe953c0ac53d58614a&id=566aa32ae0";
+    // URL DEL FEED RSS NATIVO DE LA CATEGORÍA "LANZAMIENTOS" de Contexto Media Group
+    const RSS_URL = "https://www.contextomediagroup.com/category/lanzamientos/feed/";
+    
+    // Convertidor a JSON (Mantenemos tu API converter actual)
     const API_CONVERTER = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
     
     // Configura aquí el enlace oficial de tu estación de radio
@@ -3312,32 +3315,32 @@ document.addEventListener('DOMContentLoaded', () => {
             let HTMLContenido = "";
 
             data.items.forEach(item => {
+                // Formateo de fecha óptimo (intenta leer pubDate, de lo contrario pone "HOY")
                 const date = new Date(item.pubDate);
                 const fechaFormateada = isNaN(date) ? "HOY" : date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }).toUpperCase().replace('.','');
 
+                // Limpiamos posibles caracteres extraños o HTML del título
+                const tituloLimpio = escapeHTML(item.title.trim());
+
                 // Mensaje estructurado de WhatsApp
-                const mensajeNoticia = `¡Te comparto esta importante información de RADIO FE 4:18 Gracias a Contexto Media Group! 📻✨\n\n*Noticia:* ${item.title}\n\n👉 *Leer boletín original aquí:* ${item.link}\n\n🌐 *Sintoniza nuestra Radio aquí:* ${LINK_NUESTRA_RADIO}`;
+                const mensajeNoticia = `¡Te comparto esta importante información de RADIO FE 4:18 Gracias a Contexto Media Group! 📻✨\n\n*Noticia:* ${tituloLimpio}\n\n👉 *Leer boletín original aquí:* ${item.link}\n\n🌐 *Sintoniza nuestra Radio aquí:* ${LINK_NUESTRA_RADIO}`;
                 const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensajeNoticia)}`;
 
                 // Diseñamos cada noticia individual dentro del flujo horizontal
                 HTMLContenido += `
                     <div class="flex items-center gap-3 shrink-0 whitespace-nowrap group">
-                        <!-- Fecha -->
                         <span class="text-[9px] font-black bg-zinc-200/80 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-1.5 py-0.5 rounded tracking-wide group-hover:bg-brand-neon/20 group-hover:text-brand-neon transition-colors">
                             ${fechaFormateada}
                         </span>
                         
-                        <!-- Titular Link -->
                         <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-zinc-800 dark:text-zinc-200 hover:text-brand-neon transition-colors tracking-wide max-w-[300px] sm:max-w-[450px] overflow-hidden text-ellipsis block">
-                            ${escapeHTML(item.title)}
+                            ${tituloLimpio}
                         </a>
 
-                        <!-- Botón WhatsApp -->
                         <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="w-6 h-6 flex items-center justify-center rounded-md bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white transition-all shadow-sm active:scale-90" title="Compartir noticia en WhatsApp">
                             <i class="fa-brands fa-whatsapp text-xs font-bold"></i>
                         </a>
 
-                        <!-- Separador decorativo entre noticias -->
                         <span class="text-zinc-300 dark:text-zinc-700 font-light ml-2 select-none">✦</span>
                     </div>
                 `;
