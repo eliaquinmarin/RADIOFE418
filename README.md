@@ -51,5 +51,5 @@ La plataforma está optimizada para ser alojada en plataformas de hosting modern
 ## 📦 Estructura del Proyecto
 
 <p align="center">
-<img src="https://i.ibb.co/5xhXmJMf/FACEBOOK.png" alt="LOGOMETA" border="0">
+<img src="https://i.ibb.co/BK4GDv60/FACEBOOK.png" alt="LOGOMETA" border="0">
 </p>
