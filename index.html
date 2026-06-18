@@ -729,91 +729,46 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
     </div>
 </section>
 
-<!-- SECCIÓN: CAJÓN DE MENSAJES EN TIEMPO REAL DESDE GOOGLE SHEETS -->
-<section class="w-full mx-auto mt-6 bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border-x-0 border-y sm:border border-zinc-200 dark:border-zinc-850 p-5 sm:p-6 md:p-8 rounded-3xl transition-all duration-300 shadow-xl neon-glow">
-    
-    <div class="flex items-center justify-between mb-4">
-        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center justify-center sm:justify-start">
-           <i class="fa-solid fa-comments mr-2 text-brand-neonPink text-base animate-pulse"></i> 
-           La Voz del Oyente
-        </h4>
-        <!-- Pestaña interactiva para abrir el formulario -->
-        <button id="btn-abrir-formulario" class="text-xs font-black px-3 py-1.5 rounded-xl bg-brand-neonPink/10 hover:bg-brand-neonPink text-brand-neonPink hover:text-white border border-brand-neonPink/20 dark:border-brand-neonPink/30 uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 active:scale-95">
-            <i class="fa-solid fa-pen-to-square"></i> Escribir Mensaje
-        </button>
-    </div>
-
-    <!-- Contenedor Desplegable con animación fluida -->
-    <div id="wrapper-formulario-muro" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out" style="max-h: 0px;">
-        <!-- Formulario Interno -->
-        <form id="sheet-message-form" class="space-y-3 mb-6 bg-zinc-100/50 dark:bg-zinc-900/40 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/60">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <input type="text" id="sheet-name" required maxlength="25" placeholder="Tu nombre..." class="sm:col-span-1 p-3 text-sm bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-700/80 rounded-xl focus:border-brand-neonPink focus:ring-1 focus:ring-brand-neonPink outline-none transition-all duration-200 text-zinc-800 dark:text-zinc-100 font-medium placeholder-zinc-400 dark:placeholder-zinc-500">
-                
-                <!-- Input de mensaje con contenedor relativo para posicionar el contador interno -->
-                <div class="sm:col-span-2 relative flex items-center">
-                    <input type="text" id="sheet-msg" required maxlength="180" placeholder="Escribe un saludo o petición de oración..." class="w-full p-3 pr-12 text-sm bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-700/80 rounded-xl focus:border-brand-neonPink focus:ring-1 focus:ring-brand-neonPink outline-none transition-all duration-200 text-zinc-800 dark:text-zinc-100 font-medium placeholder-zinc-400 dark:placeholder-zinc-500">
-                    <!-- Contador visual discreto -->
-                    <span id="msg-counter" class="absolute right-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 pointer-events-none transition-colors duration-200">180</span>
-                </div>
-            </div>
-            <div class="flex gap-2">
-                <button type="button" id="btn-cancelar-muro" class="w-1/4 py-3 bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-400 font-bold uppercase text-xs rounded-xl transition-all duration-200 active:scale-95 tracking-wider hover:bg-zinc-300 dark:hover:bg-zinc-700">
-                    Cancelar
-                </button>
-                <button type="submit" id="sheet-submit-btn" class="w-3/4 py-3 bg-gradient-to-r from-brand-neon to-brand-neonPink text-white font-black uppercase text-xs rounded-xl transition-all duration-300 active:scale-95 tracking-wider flex items-center justify-center shadow-lg">
-                    <i class="fa-solid fa-paper-plane mr-2 text-xs"></i> Publicar en el Muro
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Contenedor Estricto de 5 Mensajes uno abajo del otro -->
-    <div id="messages-display-container" class="space-y-3">
-        <!-- Estado de carga inicial -->
-        <div class="text-center py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 animate-pulse">
-            <i class="fa-solid fa-spinner fa-spin mr-2 text-brand-neon"></i> Cargando muro de bendiciones...
-        </div>
-    </div>
-</section>
-<!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
-<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
-    <div class="flex items-center justify-between mb-3">
-        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
-            <i class="fa-solid fa-book-open mr-2 text-brand-neon animate-pulse"></i> Pan de Vida
-        </h4>
-        <!-- Indicador de Versión Bíblica -->
-        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400">
-            RVR1960
+<!-- SECCIÓN: ALIANZAS COMERCIALES COMPACTA -->
+<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 sm:p-5 overflow-hidden transition-colors duration-300 shadow-xl neon-glow">
+    <!-- Encabezado de Sección -->
+    <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-200/60 dark:border-zinc-800/60">
+        <p class="text-xs tracking-widest font-black uppercase text-zinc-400 dark:text-zinc-500 flex items-center">
+            <i class="fa-solid fa-handshake mr-2 text-brand-neon"></i> Nuestros Aliados
+        </p>
+        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-800 text-zinc-400 dark:text-zinc-500">
+            Sponsors
         </span>
     </div>
-    
-    <div class="p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 text-center relative overflow-hidden group">
-        <!-- Esqueleto de Carga (Spinner) -->
-        <div id="verse-loader" class="py-4 flex flex-col items-center justify-center space-y-2">
-            <i class="fa-solid fa-circle-notch animate-spin text-brand-neon text-lg"></i>
-            <span class="text-xs text-zinc-400">Alimentando el espíritu...</span>
-        </div>
 
-        <!-- Contenido del Versículo (Oculto al inicio) -->
-        <div id="verse-content" class="hidden opacity-0 transition-opacity duration-500">
-            <p id="verse-text" class="text-xs sm:text-sm italic text-zinc-800 dark:text-gray-200 font-medium leading-relaxed">
-                <!-- Se inyecta dinámicamente -->
-            </p>
-            <span id="verse-ref" class="block text-[11px] uppercase font-black text-brand-neon mt-2 tracking-widest">
-                <!-- Se inyecta dinámicamente -->
-            </span>
-        </div>
+    <!-- Texto Animando a Visitar -->
+    <p class="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-4 flex items-center gap-1.5 bg-zinc-100/60 dark:bg-zinc-900/40 p-3 rounded-xl border border-zinc-200/50 dark:border-zinc-800/40">
+        <i class="fa-solid fa-circle-nodes text-brand-neonPink animate-pulse text-sm"></i>
+        <span>¡Apoya a quienes hacen posible nuestra señal! Haz clic para conocer y visitar.</span>
+    </p>
+
+    <!-- Contenedor Grid Compacto (3 columnas) -->
+    <div id="aliados-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <!-- Generación dinámica mediante el script -->
     </div>
 
-    <!-- Botón de Compartir Personalizado -->
-    <div class="mt-3">
-        <button id="btn-share-verse" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-brand-neon hover:text-black hover:border-brand-neon dark:hover:bg-brand-neon dark:hover:text-black transition-all duration-300 shadow-sm cursor-pointer">
-            <i class="fa-solid fa-share-nodes"></i>
-            Compartir Bendición
-        </button>
+    <!-- LLAMADA A LA ACCIÓN: ÚNETE A LOS ALIADOS (Alineado con tu diseño premium) -->
+    <div class="mt-4 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-star text-amber-400 text-xs animate-bounce"></i>
+            <span class="text-[10px] font-bold tracking-wide uppercase text-zinc-500 dark:text-zinc-400">¿Quieres impulsar tu marca? ¡Únete y sé parte de nuestros aliados!</span>
+        </div>
+        
+        <!-- Botón de WhatsApp para pedir Información -->
+        <a id="btn-pedir-info" href="#" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-3 py-2 text-[9px] font-black tracking-widest uppercase rounded-xl border border-brand-neon text-brand-neon bg-brand-neon/5 dark:bg-brand-neon/10 hover:bg-brand-neon hover:text-white dark:hover:text-black transition-all duration-300 active:scale-95 shadow-sm">
+            <i class="fa-brands fa-whatsapp text-xs"></i>
+            <span>Solicitar Información</span>
+        </a>
     </div>
 </section>
+
+
 
 <!-- LÓGICA DE INTERACCIÓN CON GOOGLE SHEETS SIN SALIR DE LA PÁGINA -->
 <script>
@@ -1047,13 +1002,6 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
     </div>
 </section>
 
-            <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
-                <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Aliados</p>
-                <a id="partner-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full h-auto rounded-xl bg-transparent border border-zinc-200 dark:border-zinc-800 relative overflow-hidden transition-all duration-300 hover:opacity-95 shadow-sm">
-                    <img id="partner-banner" src="" alt="Aliado" class="w-full h-auto object-cover block transition-all duration-500 opacity-100">
-                    <span class="absolute bottom-2 right-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-zinc-300 tracking-wider">VISITAR SITIO</span>
-                </a>
-            </section>
 
 <!-- Formulario de Interacción Principal - Ajustado al 100% del ancho de la pantalla -->
 <section class="w-full mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border-x-0 border-y border-zinc-200 dark:border-zinc-800/80 p-3 sm:p-6 md:p-8 transition-all duration-300 shadow-xl">
@@ -1344,6 +1292,47 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
         </div>
     </div>
 </section>
+
+<!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
+<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
+    <div class="flex items-center justify-between mb-3">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-book-open mr-2 text-brand-neon animate-pulse"></i> Pan de Vida
+        </h4>
+        <!-- Indicador de Versión Bíblica -->
+        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400">
+            RVR1960
+        </span>
+    </div>
+    
+    <div class="p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 text-center relative overflow-hidden group">
+        <!-- Esqueleto de Carga (Spinner) -->
+        <div id="verse-loader" class="py-4 flex flex-col items-center justify-center space-y-2">
+            <i class="fa-solid fa-circle-notch animate-spin text-brand-neon text-lg"></i>
+            <span class="text-xs text-zinc-400">Alimentando el espíritu...</span>
+        </div>
+
+        <!-- Contenido del Versículo (Oculto al inicio) -->
+        <div id="verse-content" class="hidden opacity-0 transition-opacity duration-500">
+            <p id="verse-text" class="text-xs sm:text-sm italic text-zinc-800 dark:text-gray-200 font-medium leading-relaxed">
+                <!-- Se inyecta dinámicamente -->
+            </p>
+            <span id="verse-ref" class="block text-[11px] uppercase font-black text-brand-neon mt-2 tracking-widest">
+                <!-- Se inyecta dinámicamente -->
+            </span>
+        </div>
+    </div>
+
+    <!-- Botón de Compartir Personalizado -->
+    <div class="mt-3">
+        <button id="btn-share-verse" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-brand-neon hover:text-black hover:border-brand-neon dark:hover:bg-brand-neon dark:hover:text-black transition-all duration-300 shadow-sm cursor-pointer">
+            <i class="fa-solid fa-share-nodes"></i>
+            Compartir Bendición
+        </button>
+    </div>
+</section>
+
+
 
 <!-- SECCIÓN: ENLACE PRE-FOOTER DE CONTACTO RÁPIDO -->
 <section class="w-full max-w-7xl mx-auto mt-8 px-4">
@@ -3522,5 +3511,118 @@ function descargarRecordatorio(hora, titulo) {
     document.body.removeChild(link);
 }
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // MENSAJE ÚNICO AUTOMÁTICO PARA ANIMAR A VISITAR A CADA UNO
+    const mensajeGlobal = "¡Te invitamos a conocer y visitar su sitio oficial!";
+
+    // Base de datos de tus aliados
+    const aliados = [
+        {
+            nombre: "VIP SHOP",
+            imagen: "img/partners/vipshop.png",
+            enlace: "https://vipshopbarinas.vercel.app/"
+        },
+        {
+            nombre: "CONTXETO MEDIA GROUP",
+            imagen: "img/partners/contexto.png", 
+            enlace: "https://www.contextomediagroup.com/"
+        },
+        {
+            nombre: "SERVI AUTOS RORAIMA",
+            imagen: "img/partners/roraima.png",
+            enlace: "https://www.instagram.com/serviautosroraima/"
+        },
+        {
+            nombre: "DIRECTORIO UNISALUD",
+            imagen: "img/partners/unnisalud.png", 
+            enlace: "https://directoriounisalud.com/"
+        },
+        {
+            nombre: "TATIHANA POZO",
+            imagen: "img/partners/tatihana.png", 
+            enlace: "https://www.tatihanapozopuccini.com/"
+        },
+        {
+            nombre: "IGLESIA FE 4:18",
+            imagen: "img/partners/iglesia.png",
+            enlace: "https://ib-fe418.vercel.app/"
+        }
+    ];
+
+    const gridContainer = document.getElementById("aliados-grid");
+    const linkRadioOficial = "https://radiofe418.vercel.app/";
+
+    // 1. Renderizar Cuadrícula de Aliados
+    if (gridContainer && aliados.length > 0) {
+        gridContainer.innerHTML = ""; 
+
+        aliados.forEach(aliado => {
+            const textoWhatsApp = encodeURIComponent(
+                `👋 ¡Hola! Te recomiendo visitar a este gran Aliado de *Radio FE 4:18*:\n\n` +
+                `🏢 *${aliado.nombre}*\n` +
+                `📝 _${mensajeGlobal}_\n\n` +
+                `🌐 *Visita su sitio aquí:* ${aliado.enlace}\n\n` +
+                `📻 _Sintoniza nuestra estación en vivo desde:_ ${linkRadioOficial}`
+            );
+
+            const urlWhatsApp = `https://wa.me/?text=${textoWhatsApp}`;
+
+            const cardHTML = `
+                <div class="group relative flex flex-col p-2.5 bg-zinc-100/50 dark:bg-zinc-900/30 border border-zinc-200/80 dark:border-zinc-800/80 rounded-2xl transition-all duration-300 hover:border-brand-neon hover:bg-white dark:hover:bg-brand-card/80 shadow-sm hover:shadow-md hover:shadow-brand-neon/5">
+                    
+                    <div class="relative w-full h-24 overflow-hidden rounded-xl border border-zinc-300/80 dark:border-zinc-700/50 bg-zinc-200 dark:bg-zinc-800">
+                        <img src="${aliado.imagen}" alt="${aliado.nombre}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='img/caratula.png';">
+                        <div class="absolute inset-0 bg-black/5 dark:bg-black/10"></div>
+                        <span class="absolute bottom-1.5 right-1.5 text-[7px] font-bold bg-black/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-zinc-300 tracking-widest uppercase">Aliado</span>
+                    </div>
+
+                    <div class="mt-2.5 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h5 class="font-extrabold text-xs text-zinc-900 dark:text-zinc-100 truncate tracking-wide group-hover:text-brand-neon transition-colors duration-300">
+                                ${aliado.nombre}
+                            </h5>
+                            <p class="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium mt-0.5 line-clamp-2 min-h-[1.5rem] leading-snug">
+                                ${mensajeGlobal}
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-zinc-200/60 dark:border-zinc-800/60">
+                            <a href="${aliado.enlace}" target="_blank" rel="noopener noreferrer" 
+                               class="flex-grow inline-flex items-center justify-center gap-1 px-2 py-1.5 text-[9px] font-black tracking-widest uppercase rounded-lg bg-zinc-200/80 dark:bg-zinc-800/60 text-zinc-700 dark:text-zinc-300 hover:bg-gradient-to-r hover:from-brand-neon hover:to-cyan-500 hover:text-white dark:hover:text-black transition-all duration-300 active:scale-95 text-center shadow-sm">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                                <span>VISITAR</span>
+                            </a>
+
+                            <a href="${urlWhatsApp}" target="_blank" rel="noopener noreferrer" 
+                               class="w-7 h-7 shrink-0 inline-flex items-center justify-center rounded-lg bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 border border-green-500/20" 
+                               title="Compartir en WhatsApp">
+                                <i class="fa-brands fa-whatsapp text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            `;
+            gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+        });
+    }
+
+    // 2. Configurar el Mensaje Personalizado para el botón de captación de Sponsors
+    const btnPedirInfo = document.getElementById("btn-pedir-info");
+    if (btnPedirInfo) {
+        const numeroTelefono = "584125183677"; // Formato internacional correcto para Barinas, Venezuela
+        const textoInformativo = encodeURIComponent(
+            "👋 ¡Hola, equipo de Radio FE 4:18! Un saludo cordial.\n\n" +
+            "✨ Estoy interesado en ser un Aliado, en la plataforma web y la señal de la radio.\n\n" +
+            "📊 ¿Podrían facilitarme los requisitos, planes y opciones de publicidad disponibles? ¡Muchas gracias!"
+        );
+        
+        btnPedirInfo.href = `https://wa.me/${numeroTelefono}?text=${textoInformativo}`;
+    }
+});
+</script>
+
 </body>
 </html>
