@@ -256,7 +256,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
       }, 3000);
     }
   })();
-</script>    
+</script>   
 
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -963,6 +963,89 @@ eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/
                 <div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">Cargando fecha...</div>
                 <div class="space-y-3 mt-3" id="schedule-container"></div>
             </section>
+
+<!-- SECCIÓN: PLAN DE ORACIÓN 6 - 3 - 9 -->
+<section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-colors duration-300 shadow-xl neon-glow">
+    
+    <!-- Encabezado de la Sección -->
+    <div class="flex items-center justify-between mb-5 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60">
+        <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
+            <i class="fa-solid fa-hands-praying mr-2 text-brand-neon animate-pulse"></i> 
+            Plan de Oración <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink ml-1">6 - 3 - 9</span>
+        </h4>
+        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400">
+            1 TESALONICENSES 5:17
+        </span>
+    </div>
+
+    <!-- Contenedor de las 3 Tarjetas de Oración -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <!-- Bloque 6:00 AM -->
+        <div class="group relative flex flex-col justify-between p-4 bg-zinc-100/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/60 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm">
+            <div class="absolute left-0 top-3 bottom-3 w-1 rounded-r-md bg-brand-neon"></div>
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-mono font-black text-sm text-brand-neon">06:00 AM</span>
+                    <i class="fa-solid fa-sun text-amber-500 text-xs"></i>
+                </div>
+                <h5 class="font-black text-xs uppercase text-zinc-400 dark:text-zinc-500 tracking-wider">Oramos por:</h5>
+                <p class="font-bold text-sm text-zinc-900 dark:text-zinc-100 tracking-tight mt-1 mb-4 leading-snug">Pastores y Líderes</p>
+            </div>
+            <div class="flex gap-2 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50">
+                <button onclick="enviarOracionWhatsapp('Pastores y Líderes')" class="w-1/2 py-2 bg-green-500/10 hover:bg-green-500 text-green-500 hover:text-white rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95" title="Enviar petición">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                </button>
+                <button onclick="descargarRecordatorio(6, 'Oración por Pastores y Líderes')" class="w-1/2 py-2 bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-brand-neon hover:text-black rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95" title="Agregar Alarma/Calendario">
+                    <i class="fa-regular fa-bell text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bloque 3:00 PM -->
+        <div class="group relative flex flex-col justify-between p-4 bg-zinc-100/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/60 rounded-2xl transition-all duration-300 hover:border-brand-neonPink shadow-sm">
+            <div class="absolute left-0 top-3 bottom-3 w-1 rounded-r-md bg-brand-neonPink"></div>
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-mono font-black text-sm text-brand-neonPink">03:00 PM</span>
+                    <i class="fa-solid fa-cloud-sun text-orange-400 text-xs"></i>
+                </div>
+                <h5 class="font-black text-xs uppercase text-zinc-400 dark:text-zinc-500 tracking-wider">Oramos por:</h5>
+                <p class="font-bold text-sm text-zinc-900 dark:text-zinc-100 tracking-tight mt-1 mb-4 leading-snug">Nuestra Nación, Venezuela</p>
+            </div>
+            <div class="flex gap-2 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50">
+                <button onclick="enviarOracionWhatsapp('Venezuela')" class="w-1/2 py-2 bg-green-500/10 hover:bg-green-500 text-green-500 hover:text-white rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95" title="Enviar petición">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                </button>
+                <button onclick="descargarRecordatorio(15, 'Oración por Venezuela')" class="w-1/2 py-2 bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-brand-neonPink hover:text-white rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95" title="Agregar Alarma/Calendario">
+                    <i class="fa-regular fa-bell text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bloque 9:00 PM -->
+        <div class="group relative flex flex-col justify-between p-4 bg-zinc-100/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/60 rounded-2xl transition-all duration-300 hover:border-zinc-400 dark:hover:border-zinc-500 shadow-sm">
+            <div class="absolute left-0 top-3 bottom-3 w-1 rounded-r-md bg-zinc-400 dark:bg-zinc-500"></div>
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-mono font-black text-sm text-zinc-500 dark:text-zinc-400">09:00 PM</span>
+                    <i class="fa-solid fa-moon text-indigo-400 text-xs"></i>
+                </div>
+                <h5 class="font-black text-xs uppercase text-zinc-400 dark:text-zinc-500 tracking-wider">Oramos por:</h5>
+                <p class="font-bold text-sm text-zinc-900 dark:text-zinc-100 tracking-tight mt-1 mb-4 leading-snug">Las Familias</p>
+            </div>
+            <div class="flex gap-2 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50">
+                <button onclick="enviarOracionWhatsapp('las Familias')" class="w-1/2 py-2 bg-green-500/10 hover:bg-green-500 text-green-500 hover:text-white rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95" title="Enviar petición">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                </button>
+                <button onclick="descargarRecordatorio(21, 'Oración por las Familias')" class="w-1/2 py-2 bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600 hover:text-white dark:hover:text-black rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95" title="Agregar Alarma/Calendario">
+                    <i class="fa-regular fa-bell text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
 
             <section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 overflow-hidden transition-colors duration-300">
                 <p class="text-[10px] tracking-widest font-bold uppercase text-zinc-400 dark:text-zinc-500 mb-2">Aliados</p>
@@ -3377,6 +3460,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cargarCintilloAnimado();
 });
+</script>
+<script>
+// Función para enviar mensajes personalizados de WhatsApp
+function enviarOracionWhatsapp(motivo) {
+    const numeroTelefono = "584125183677"; // Mantiene el número asignado en tu landing
+    let mensaje = `¡Hola Radio FE 4:18! 👋 Me uno al Plan de Oración 6-3-9. Me gustaría dejar mi petición especial para el bloque de oración por: *${motivo}*.`;
+    
+    const url = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+}
+
+// Función universal para descargar archivo de calendario (.ics) con Alarma Diaria para el Smartphone
+function descargarRecordatorio(hora, titulo) {
+    const fechaActual = new Date();
+    const anio = fechaActual.getFullYear();
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+    const dia = String(fechaActual.getDate()).padStart(2, '0');
+    
+    const horaFormateada = String(hora).padStart(2, '0');
+    
+    // Estructura estándar iCalendar (.ics) compatible con Android, iOS y Google Calendar
+    const contenidoICS = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//RadioFE418//PlanOracion//ES",
+        "BEGIN:VEVENT",
+        `SUMMARY:🙏 ${titulo} - Radio FE 4:18`,
+        `DTSTART;TZID=America/Caracas:${anio}${mes}${dia}T${horaFormateada}0000`,
+        `DTEND;TZID=America/Caracas:${anio}${mes}${dia}T${horaFormateada}1500`,
+        "RRULE:FREQ=DAILY", // Hace que la alarma se repita TODOS los días automáticamente
+        "DESCRIPTION:Sintoniza Radio FE 4:18 y únete a nosotros en este clamor diario en la aplicación web.",
+        "BEGIN:VALARM",
+        "TRIGGER:-PT0M", // Activa la notificación justo en el minuto exacto
+        "ACTION:DISPLAY",
+        "DESCRIPTION:Hora de orar",
+        "END:VALARM",
+        "END:VEVENT",
+        "END:VCALENDAR"
+    ].join("\r\n");
+
+    const blob = new Blob([contenidoICS], { type: "text/calendar;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `alarma_oracion_${hora}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 </script>
 </body>
 </html>
