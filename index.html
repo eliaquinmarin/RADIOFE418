@@ -3462,15 +3462,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script>
-// Función para enviar mensajes personalizados de WhatsApp
-function enviarOracionWhatsapp(motivo) {
+// Función para enviar mensajes personalizados de WhatsApp según la hora del plan
+function enviarOracionWhatsapp(horaBloque) {
     const numeroTelefono = "584125183677"; // Mantiene el número asignado en tu landing
-    let mensaje = `¡Hola Radio FE 4:18! 👋 Me uno al Plan de Oración 6-3-9. Me gustaría dejar mi petición especial para el bloque de oración por: *${motivo}*.`;
+    let mensaje = "";
+
+    // Estructura de mensajes personalizados individuales según la hora
+    if (horaBloque === "6:00 AM") {
+        mensaje = `¡Hola Radio FE 4:18! 👋 Me uno al Plan de Oración 6-3-9 iniciando el día. Quiero dejar mi petición especial en este bloque matutino donde oramos por nuestros *Pastores y Líderes*.\n\nSintonizo en vivo a través de: https://radiofe418.vercel.app/`;
+    } else if (horaBloque === "3:00 PM") {
+        mensaje = `¡Hola Radio FE 4:18! 👋 Me uno al Plan de Oración 6-3-9 de la tarde. Quiero presentar mi clamor y sumarme al bloque de intercesión por *Nuestra Nación, Venezuela* 🇻🇪.\n\nSintonizo en vivo a través de: https://radiofe418.vercel.app/`;
+    } else if (horaBloque === "9:00 PM") {
+        mensaje = `¡Hola Radio FE 4:18! 👋 Me uno al Plan de Oración 6-3-9 al cerrar el día. Dejo mi petición especial para el bloque de oración por *Las Familias*.\n\nSintonizo en vivo a través de: https://radiofe418.vercel.app/`;
+    }
+
+    // Si por alguna razón no coincide, dejamos un respaldo genérico seguro
+    if (!mensaje) {
+        mensaje = `¡Hola Radio FE 4:18! 👋 Me uno al Plan de Oración 6-3-9 para presentar mi petición de oración.\n\nSintonizo a través de: https://radiofe418.vercel.app/`;
+    }
     
     const url = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
 }
-
 // Función universal para descargar archivo de calendario (.ics) con Alarma Diaria para el Smartphone
 function descargarRecordatorio(hora, titulo) {
     const fechaActual = new Date();
