@@ -2,9 +2,11 @@
   "name": "Radio FE 4:18",
   "short_name": "Radio FE 4:18",
   "description": "Radio FE 4:18 - Sonando por todo lo alto. desde Barinas, Venezuela.",
+  "lang": "es",
+  "categories": ["entertainment", "music", "audio"],
   "start_url": "./index.html",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "background_color": "#FFFFFF00",
   "theme_color": "#FFFFFF00",
   "icons": [
