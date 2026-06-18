@@ -1,7 +1,7 @@
 {
   "name": "Radio FE 4:18",
   "short_name": "Radio FE 4:18",
-  "description": "Radio cristiana en vivo, transmitiendo desde Barinas, Venezuela.",
+  "description": "Radio FE 4:18 - Sonando por todo lo alto. desde Barinas, Venezuela.",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait-primary",
