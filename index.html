@@ -390,8 +390,11 @@ html {
 <!-- Texto y Contador adaptado a Supabase -->
 <p class="text-xs sm:text-sm font-medium tracking-wide flex items-center gap-1.5 m-0 text-slate-700 dark:text-white/90">
     <span>AL AIRE</span> <i class="fa-solid fa-headphones text-red-600 dark:text-red-400 text-base animate-pulse"></i>
-    
-  </p>
+    <span id="live-listeners-icon" class="hidden items-center gap-1.5 transition-all duration-300 animate-fade-in">
+            </span>
+            
+            <span id="sonic_listeners">0</span> <i class="fa-solid fa-user-group text-red-600 dark:text-red-400 text-sm animate-pulse"></i>
+        </p>
     </div>
 
     <!-- Contenedor de Carátula -->
@@ -3814,5 +3817,45 @@ document.getElementById('close-app-btn').addEventListener('click', function() {
     }
 });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const targetSpan = document.getElementById('sonic_listeners');
+    const iconContainer = document.getElementById('live-listeners-icon');
+
+    // Función para controlar la visibilidad del ícono según los oyentes actuales
+    function verificarOyentes(total) {
+        const cantidad = parseInt(total, 10) || 0;
+
+        if (cantidad >= 10) {
+            if (iconContainer.classList.contains('hidden')) {
+                iconContainer.classList.remove('hidden');
+                iconContainer.classList.add('flex');
+            }
+        } else {
+            if (iconContainer.classList.contains('flex')) {
+                iconContainer.classList.remove('flex');
+                iconContainer.classList.add('hidden');
+            }
+        }
+    }
+
+    if (targetSpan && iconContainer) {
+        // Observador en tiempo real para reaccionar a las actualizaciones de Supabase
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                verificarOyentes(targetSpan.textContent);
+            });
+        });
+
+        // Configuración del observador
+        observer.observe(targetSpan, { childList: true, characterData: true, subtree: true });
+
+        // Evaluación inicial al cargar la página
+        verificarOyentes(targetSpan.textContent);
+    }
+});
+</script>
+
 </body>
 </html>
