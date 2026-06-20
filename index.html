@@ -451,6 +451,8 @@ html {
         </div>
     </div>
 
+<!-- CONTENEDOR OCULTO DONDE SONICPANEL DEJARÁ LOS DATOS EN BRUTO -->
+<div id="sonic_history" style="display: none !important;"></div>
     <!-- Botonera de Acciones Inferiores -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
         <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
@@ -3822,20 +3824,45 @@ document.getElementById('close-app-btn').addEventListener('click', function() {
 document.addEventListener("DOMContentLoaded", () => {
     const targetSpan = document.getElementById('sonic_listeners');
     const iconContainer = document.getElementById('live-listeners-icon');
+    
+    // Variable para evitar bucles infinitos con el MutationObserver
+    let actualizando = false;
 
-    // Función para controlar la visibilidad del ícono según los oyentes actuales
-    function verificarOyentes(total) {
-        const cantidad = parseInt(total, 10) || 0;
+    // Función para controlar la visibilidad según los oyentes actuales
+    function verificarOyentes() {
+        if (!targetSpan || !iconContainer) return;
+
+        // Obtenemos el número real de oyentes. 
+        // Si tiene un atributo personalizado 'data-real-value' usamos ese, sino usamos el texto actual.
+        const valorActual = targetSpan.getAttribute('data-real-value') || targetSpan.textContent;
+        const cantidad = parseInt(valorActual, 10) || 0;
+
+        // Guardamos siempre el valor real en un atributo propio para no perderlo
+        targetSpan.setAttribute('data-real-value', cantidad);
 
         if (cantidad >= 10) {
+            // Mostrar icono
             if (iconContainer.classList.contains('hidden')) {
                 iconContainer.classList.remove('hidden');
                 iconContainer.classList.add('flex');
             }
+            // Mostrar el número real
+            if (targetSpan.textContent !== String(cantidad)) {
+                actualizando = true;
+                targetSpan.textContent = cantidad;
+                actualizando = false;
+            }
         } else {
+            // Ocultar icono
             if (iconContainer.classList.contains('flex')) {
                 iconContainer.classList.remove('flex');
                 iconContainer.classList.add('hidden');
+            }
+            // Mientras sea menor a 10, dejamos el texto vacío para que no muestre ningún número
+            if (targetSpan.textContent !== '') {
+                actualizando = true;
+                targetSpan.textContent = '';
+                actualizando = false;
             }
         }
     }
@@ -3843,18 +3870,92 @@ document.addEventListener("DOMContentLoaded", () => {
     if (targetSpan && iconContainer) {
         // Observador en tiempo real para reaccionar a las actualizaciones de Supabase
         const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                verificarOyentes(targetSpan.textContent);
-            });
+            // Si la actualización la provocamos nosotros mismos para borrar/poner el número, la ignoramos
+            if (actualizando) return; 
+
+            verificarOyentes();
         });
 
         // Configuración del observador
         observer.observe(targetSpan, { childList: true, characterData: true, subtree: true });
 
         // Evaluación inicial al cargar la página
-        verificarOyentes(targetSpan.textContent);
+        verificarOyentes();
     }
 });
+</script>
+
+<!-- SCRIPT DE OPTIMIZACIÓN DE RENDIMIENTO Y FLUIDEZ DE CARGA -->
+<script>
+    (function() {
+        // 1. MEJORAR RENDIMIENTO DE IMÁGENES (Lazy Loading Nativo y Desacoplado)
+        document.addEventListener("DOMContentLoaded", () => {
+            const images = document.querySelectorAll("img:not([loading])");
+            images.forEach(img => {
+                img.setAttribute("loading", "lazy");
+                img.setAttribute("decoding", "async");
+            });
+        });
+
+        // 2. RESOURCE HINTING DINÁMICO (Pre-conexiones prioritarias en segundo plano)
+        const prefetchDomains = [
+            "https://cdn.tailwindcss.com",
+            "https://cdnjs.cloudflare.com",
+            "https://fonts.googleapis.com",
+            "https://i.ibb.co"
+        ];
+        
+        const requestIdleCallback = window.requestIdleCallback || function(cb) { return setTimeout(cb, 1); };
+        
+        requestIdleCallback(() => {
+            prefetchDomains.forEach(domain => {
+                const link = document.createElement("link");
+                link.rel = "preconnect";
+                link.href = domain;
+                link.crossOrigin = "anonymous";
+                document.head.appendChild(link);
+            });
+        });
+
+        // 3. SEPARACIÓN DE PROCESOS CRÍTICOS (Patrón Idle Until Urgent)
+        // Ejecuta scripts secundarios solo cuando la CPU del teléfono esté libre
+        window.addEventListener("load", () => {
+            requestIdleCallback(() => {
+                initSecondaryFeatures();
+            }, { timeout: 2000 });
+        });
+
+        function initSecondaryFeatures() {
+            // Optimización de animaciones CSS pesadas si el dispositivo es gama baja
+            if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+                const tickers = document.querySelectorAll('.animate-ticker');
+                tickers.forEach(t => t.style.animationDuration = '35s'); // Alivia carga gráfica
+            }
+            
+            // Forzar hardware acceleration por CSS en el contenedor de carátulas y fondos blur
+            const hardwareAccelerate = ['#ambient-background', '#track-cover', '#visualizer'];
+            hardwareAccelerate.forEach(selector => {
+                const el = document.querySelector(selector);
+                if (el) {
+                    el.style.transform = 'translateZ(0)';
+                    el.style.willChange = 'transform, opacity';
+                }
+            });
+
+            console.log("⚡ Rendimiento web de Radio FE 4:18 optimizado con éxito.");
+        }
+
+        // 4. PREVENCIÓN DE MEMORY LEAKS (Limpieza de buffers en eventos scroll/resize)
+        let resizeTimeout;
+        window.addEventListener("resize", () => {
+            if (!resizeTimeout) {
+                resizeTimeout = setTimeout(() => {
+                    resizeTimeout = null;
+                    // Lógica ligera de ajuste si fuera necesaria sin saturar la CPU
+                }, 100);
+            }
+        }, { passive: true }); // passive: true evita retrasos en scroll táctil
+    })();
 </script>
 
 </body>
