@@ -1429,11 +1429,9 @@ html {
         </div>
     </main>
 
-   <footer class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800/80 mt-12 py-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 relative z-50">
-    <!-- Contenedor maestro con distribución exacta en 3 columnas en escritorio -->
+<footer class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800/80 mt-12 pt-8 pb-24 md:pb-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 relative z-50">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-6 text-center md:text-left">
         
-        <!-- Bloque 1: Propiedad Legal & Identidad -->
         <div class="space-y-1">
             <p class="text-xs font-black tracking-wide text-zinc-800 dark:text-zinc-200 uppercase">
                 © <span id="footer-year">2026</span> Radio FE 4:18
@@ -1444,19 +1442,16 @@ html {
             </p>
         </div>
         
-        <!-- Bloque 2: Insignia de Protección DMCA (Centrado Absoluto) -->
         <div class="flex flex-col items-center justify-center gap-2">
             <div class="transition-all duration-300 hover:opacity-80">
                 <a href="//www.dmca.com/Protection/Status.aspx?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" title="DMCA.com Protection Status" class="dmca-badge inline-block bg-zinc-200/40 dark:bg-zinc-900/45 p-1 rounded-xl border border-zinc-300/60 dark:border-zinc-800/60 shadow-inner"> 
                     <img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" alt="DMCA.com Protection Status" class="h-5 w-auto block grayscale dark:contrast-125 dark:brightness-90 hover:grayscale-0 transition-all duration-300" />
                 </a> 
-                <!-- Script oficial invisible DMCA -->
                 <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
             </div>
             <span class="text-[9px] uppercase tracking-widest font-bold text-zinc-400 dark:text-zinc-600">Copyright Protection Online</span>
         </div>
 
-        <!-- Bloque 3: Créditos de Desarrollo (Alineado a la derecha en escritorio) -->
         <div class="md:text-right flex flex-col md:items-end justify-center gap-1">
             <p class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 flex items-center justify-center md:justify-end gap-1.5 uppercase tracking-wider">
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-neon animate-pulse"></span>
@@ -1466,7 +1461,6 @@ html {
                 Desarrollado por <a href="https://wa.me/584125183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-extrabold text-zinc-800 dark:text-white hover:text-brand-neon dark:hover:text-brand-neon transition-colors">@EliaquinMarin</a>
             </p>
         </div>
-        
     </div>
 </footer>
 
@@ -3039,15 +3033,21 @@ document.addEventListener('DOMContentLoaded', () => {
     <button id="btn-reconnect-stream" class="w-full px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all duration-300 active:scale-95 shadow-lg shadow-blue-500/10 flex items-center justify-center gap-2">
         <i class="fa-solid fa-arrows-rotate"></i> Intentar Reconectar Transmisión
     </button>
-</div>
 
+<button id="btn-close-signal-banner" class="ml-auto text-white hover:text-gray-200 focus:outline-none p-1" title="Cerrar aviso y seguir navegando">
+        <i class="fas fa-times text-lg"></i> 
+    </button>
+</div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const audioPlayer = document.getElementById('audio-player');
     const signalBanner = document.getElementById('signal-alert-banner');
     const reconnectBtn = document.getElementById('btn-reconnect-stream');
     const reportarWaBtn = document.getElementById('btn-reportar-falla-wa');
+    const closeBannerBtn = document.getElementById('btn-close-signal-banner'); // 👈 Captura del nuevo botón
+    
     let reconnectTimeout = null;
+    let bannerCerradoManualmente = false; // Estado para respetar la navegación del usuario
 
     // Configurar Mensaje de Reporte Personalizado Automático
     if (reportarWaBtn) {
@@ -3057,6 +3057,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función Profesional para mostrar el aviso flotante con deslizamiento suave
     function mostrarAlertaSinSenal() {
+        // Si el usuario ya cerró el aviso manualmente o el reproductor está pausado por él, no invadir la pantalla
+        if (bannerCerradoManualmente || (audioPlayer && audioPlayer.paused)) return;
+
         if (signalBanner && signalBanner.classList.contains('hidden')) {
             signalBanner.classList.remove('hidden');
             signalBanner.classList.add('flex');
@@ -3066,7 +3069,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 signalBanner.classList.remove('translate-y-4', 'opacity-0');
                 signalBanner.classList.add('translate-y-0', 'opacity-100');
             }, 50);
-            console.log("Aviso técnico: Transmisión en mantenimiento. Modo de navegación libre activo.");
+            console.log("Aviso técnico: Transmisión inestable. Modo de navegación libre activo.");
         }
     }
 
@@ -3085,36 +3088,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- ESCUCHA DE EVENTOS DEL MOTOR AUDIO HTML5 ---
-    audioPlayer.addEventListener('error', () => {
-        mostrarAlertaSinSenal();
-        audioPlayer.pause(); // Libera búfer corrupto en dispositivos móviles
-    });
+    if (audioPlayer) {
+        audioPlayer.addEventListener('error', () => {
+            // Evita saltar si el reproductor está en pausa programada
+            if (!audioPlayer.paused) {
+                mostrarAlertaSinSenal();
+                audioPlayer.pause(); // Libera búfer corrupto en dispositivos móviles
+            }
+        });
 
-    audioPlayer.addEventListener('stalled', () => {
-        mostrarAlertaSinSenal(); // Activación inmediata si el servidor detiene la transferencia
-    });
+        audioPlayer.addEventListener('stalled', () => {
+            // Tolerancia pasiva de 10 segundos ante la congelación de datos del servidor antes de molestar al usuario
+            clearTimeout(reconnectTimeout);
+            reconnectTimeout = setTimeout(() => {
+                if (!audioPlayer.paused) mostrarAlertaSinSenal();
+            }, 10000);
+        });
 
-    audioPlayer.addEventListener('waiting', () => {
-        // Tolerancia inteligente de 7 segundos antes de alarmar al oyente
-        reconnectTimeout = setTimeout(() => {
-            mostrarAlertaSinSenal();
-        }, 7000);
-    });
+        audioPlayer.addEventListener('waiting', () => {
+            // Tolerancia inteligente ampliada a 12 segundos para microcortes comunes de internet
+            clearTimeout(reconnectTimeout);
+            reconnectTimeout = setTimeout(() => {
+                if (!audioPlayer.paused) mostrarAlertaSinSenal();
+            }, 12000);
+        });
 
-    audioPlayer.addEventListener('playing', () => {
-        clearTimeout(reconnectTimeout);
-        oclutarAlertaConSenal();
-    });
+        audioPlayer.addEventListener('playing', () => {
+            clearTimeout(reconnectTimeout);
+            oclutarAlertaConSenal();
+        });
+
+        audioPlayer.addEventListener('pause', () => {
+            clearTimeout(reconnectTimeout); // Si el usuario lo pausa, se cancelan las alertas de error por falta de datos
+        });
+    }
 
     // --- ACCIÓN DE RECONEXIÓN TÉCNICA DEL REPRODUCTOR ---
     async function forzarReconexionStreaming() {
-        if (!audioPlayer) return;
+        if (!audioPlayer || !reconnectBtn) return;
         
         reconnectBtn.disabled = true;
         const iconI = reconnectBtn.querySelector('i');
         if (iconI) iconI.classList.add('fa-spin');
         
         try {
+            bannerCerradoManualmente = false; // Se limpia el bloqueo manual si el usuario decide reintentar él mismo
             audioPlayer.load(); // Destruye caché y re-inicializa la conexión limpia
             await audioPlayer.play();
             oclutarAlertaConSenal();
@@ -3127,7 +3145,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    reconnectBtn.addEventListener('click', forzarReconexionStreaming);
+    if (reconnectBtn) {
+        reconnectBtn.addEventListener('click', forzarReconexionStreaming);
+    }
+
+    // --- LÓGICA DEL NUEVO BOTÓN DE CIERRE (MÁXIMA PRIORIDAD PARA EL USUARIO) ---
+    if (closeBannerBtn) {
+        closeBannerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            bannerCerradoManualmente = true; // Guarda que el usuario desea navegar sin avisos
+            oclutarAlertaConSenal();
+        });
+    }
 });
 </script>
 
@@ -3698,7 +3727,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
-
 <div class="lg:hidden fixed bottom-4 left-4 right-4 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-lg border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl shadow-xl transition-all duration-300">
     <nav class="flex items-center justify-between py-3 px-3">
         
@@ -3729,7 +3757,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </nav>
 </div>
-
 <script>
 function actualizarReloj() {
     const contenedorClock = document.getElementById('live-date-time');
@@ -3768,7 +3795,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(actualizarReloj, 1000);
 });
 </script>
-
 <script>
 document.getElementById('close-app-btn').addEventListener('click', function() {
     // 1. Apaga el audio de inmediato para que no quede sonando en segundo plano
