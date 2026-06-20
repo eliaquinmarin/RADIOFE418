@@ -235,6 +235,15 @@ html {
         padding-bottom: 90px !important;
     }
 }
+/* Animación premium de desvanecimiento para salida de la app */
+.fade-out-exit {
+    animation: fadeOutExit 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeOutExit {
+    from { opacity: 1; transform: scale(1); filter: blur(0px); }
+    to { opacity: 0; transform: scale(0.96); filter: blur(20px); }
+}
 </style>
 
 <script type="text/javascript">
@@ -283,7 +292,13 @@ html {
                 <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-widest uppercase">Radio OnLine</p>
             </div>
         </div>
-
+                <!-- Bloque de fecha y hora dinámico adaptado al diseño -->
+                <div id="header-clock" class="text-[10px] text-zinc-500 dark:text-zinc-400 font-bold tracking-wide uppercase font-mono flex items-center gap-1.5 mt-0.5">
+                    <i class="fa-regular fa-calendar-days text-brand-neon animate-pulse"></i>
+                    <span id="live-date-time">Fecha y Hora Actual</span>
+                </div>
+            </div>
+        </div>
         <div class="flex items-center space-x-4 sm:space-x-5">
           <!-- Botón de WhatsApp simplificado para el Header -->
 <a href="https://whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" target="_blank" title="Únete al Canal de WhatsApp"
@@ -294,6 +309,11 @@ html {
            <button id="theme-toggle" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
                 <i id="theme-icon" class="fa-solid fa-moon"></i>
             </button>
+<!-- Botón Profesional de Cerrar / Salir -->
+<button id="close-app-btn" title="Cerrar y Salir"
+   class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm hover:border-brand-neonPink hover:text-brand-neonPink dark:hover:border-brand-neonPink">
+    <i class="fa-solid fa-power-off text-lg"></i>
+</button>
         </div>
     </header>
 
@@ -3712,5 +3732,63 @@ document.addEventListener("DOMContentLoaded", function() {
     </nav>
 </div>
 
+<script>
+function actualizarReloj() {
+    const contenedorClock = document.getElementById('live-date-time');
+    if (!contenedorClock) return;
+
+    const ahora = new Date();
+    
+    // Arreglos personalizados para las abreviaciones exactas
+    const diasAbrev = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const mesesAbrev = ['jan', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+    const diaSemana = diasAbrev[ahora.getDay()];
+    const diaMes = ahora.getDate();
+    const mes = mesesAbrev[ahora.getMonth()];
+    // Obtener los últimos 2 dígitos del año (Ej: 2026 -> 26)
+    const ano = ahora.getFullYear().toString().slice(-2); 
+
+    // Formatear la hora en formato 12 horas (AM/PM)
+    let horas = ahora.getHours();
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+    
+    horas = horas % 12;
+    horas = horas ? horas : 12; // El número '0' debería ser '12'
+    const horaFormateada = horas.toString().padStart(2, '0');
+
+    // Construir la cadena exacta: "Vie 19 jun 26 09:06 PM"
+    const resultado = `${diaSemana} ${diaMes} ${mes} ${ano} ${horaFormateada}:${minutos} ${ampm}`;
+    
+    contenedorClock.textContent = resultado;
+}
+
+// Inicializar el reloj y configurarlo para actualizarse cada segundo
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarReloj();
+    setInterval(actualizarReloj, 1000);
+});
+</script>
+
+<script>
+document.getElementById('close-app-btn').addEventListener('click', function() {
+    // 1. Apaga el audio de inmediato para que no quede sonando en segundo plano
+    document.querySelectorAll('audio, video').forEach(media => {
+        media.pause();
+        media.src = '';
+    });
+
+    // 2. Ejecuta el cierre absoluto de la ventana/app
+    window.close();
+    
+    // 3. Si es una app móvil (Android/iOS WebView), este comando la destruye por completo:
+    if (navigator.app && navigator.app.exitApp) {
+        navigator.app.exitApp();
+    } else if (navigator.device && navigator.device.exitApp) {
+        navigator.device.exitApp();
+    }
+});
+</script>
 </body>
 </html>
