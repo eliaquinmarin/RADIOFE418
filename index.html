@@ -245,6 +245,19 @@ html {
     to { opacity: 0; transform: scale(0.96); filter: blur(20px); }
 }
 </style>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ec4899; /* El color rosa neón */
+            border-radius: 10px;
+        }
+        /* Opcional: Color de fondo de la barra para que no desentone en modo oscuro */
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+    </style>
 
 <script type="text/javascript">
   (function() {
@@ -815,6 +828,45 @@ html {
     </div>
 </section>
 
+<!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
+<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
+    <div class="flex items-center justify-between mb-3">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-book-open mr-2 text-brand-neon animate-pulse"></i> Pan de Vida
+        </h4>
+        <!-- Indicador de Versión Bíblica -->
+        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400">
+            RVR1960
+        </span>
+    </div>
+    
+    <div class="p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 text-center relative overflow-hidden group">
+        <!-- Esqueleto de Carga (Spinner) -->
+        <div id="verse-loader" class="py-4 flex flex-col items-center justify-center space-y-2">
+            <i class="fa-solid fa-circle-notch animate-spin text-brand-neon text-lg"></i>
+            <span class="text-xs text-zinc-400">Alimentando el espíritu...</span>
+        </div>
+
+        <!-- Contenido del Versículo (Oculto al inicio) -->
+        <div id="verse-content" class="hidden opacity-0 transition-opacity duration-500">
+            <p id="verse-text" class="text-xs sm:text-sm italic text-zinc-800 dark:text-gray-200 font-medium leading-relaxed">
+                <!-- Se inyecta dinámicamente -->
+            </p>
+            <span id="verse-ref" class="block text-[11px] uppercase font-black text-brand-neon mt-2 tracking-widest">
+                <!-- Se inyecta dinámicamente -->
+            </span>
+        </div>
+    </div>
+
+    <!-- Botón de Compartir Personalizado -->
+    <div class="mt-3">
+        <button id="btn-share-verse" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-brand-neon hover:text-black hover:border-brand-neon dark:hover:bg-brand-neon dark:hover:text-black transition-all duration-300 shadow-sm cursor-pointer">
+            <i class="fa-solid fa-share-nodes"></i>
+            Compartir Bendición
+        </button>
+    </div>
+</section>
+
 
 
 <!-- LÓGICA DE INTERACCIÓN CON GOOGLE SHEETS SIN SALIR DE LA PÁGINA -->
@@ -957,14 +1009,55 @@ html {
         </div> 
        
         <div class="lg:col-span-5 space-y-6 w-full">
-           <section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 neon-glow-pink transition-colors duration-300">
-                <h3 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center">
-                    <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink"></i> Programación
+<section class="bg-gradient-to-b from-brand-lightCard/80 to-brand-lightCard/50 dark:from-brand-card/70 dark:to-brand-card/40 backdrop-blur-xl border border-zinc-200/60 dark:border-zinc-800/60 rounded-3xl p-5 sm:p-6 shadow-xl neon-glow-pink transition-all duration-300 relative overflow-hidden h-[630px] flex flex-col justify-between">
+    
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-neonPink/5 rounded-full blur-2xl pointer-events-none"></div>
+
+    <div class="shrink-0">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-zinc-200/50 dark:border-zinc-800/50 relative z-10">
+            <div class="space-y-0.5">
+                <h3 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
+                    <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink text-base animate-pulse"></i> 
+                    Parrilla <span class="mx-1.5 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neonPink to-pink-500 font-black">Programación</span>
                 </h3>
-                <div id="tabs-container" class="flex gap-1 mb-4 overflow-x-auto pb-2 scrollbar-hide"></div>
-                <div id="full-date-time" class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-1">Cargando fecha...</div>
-                <div class="space-y-3 mt-3" id="schedule-container"></div>
-            </section>
+                <div id="full-date-time" class="text-[10px] font-mono font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">
+                    Cargando fecha...
+                </div>
+            </div>
+            <span class="text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md bg-zinc-200/60 dark:bg-zinc-900/60 border border-zinc-300/40 dark:border-zinc-800/40 text-zinc-500 dark:text-zinc-400 self-start sm:self-auto shadow-sm">
+                Horario Oficial
+            </span>
+        </div>
+
+        <div id="tabs-container" class="flex gap-1.5 mb-4 overflow-x-auto pb-2 scrollbar-hide relative z-10 [mask-image:linear-gradient(to_right,white_85%,transparent_100%)] select-none shrink-0">
+            </div>
+    </div>
+
+    <div class="flex-grow overflow-y-auto pr-1.5 custom-scrollbar relative min-h-0">
+        <div class="absolute left-[20px] sm:left-[27px] top-0 bottom-0 w-0.5 bg-zinc-200/60 dark:bg-zinc-800/80 pointer-events-none z-0"></div>
+        
+        <div class="space-y-3 my-1 relative z-10" id="schedule-container">
+            </div>
+    </div>
+</section>
+
+<section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl mt-6">
+    <div class="flex items-center justify-between mb-5 pb-3 border-b border-zinc-200/60 dark:border-zinc-800/60">
+        <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
+            <i class="fa-solid fa-clock-rotate-left mr-2 text-brand-neonPink text-base animate-pulse"></i> 
+            Recién Sonadas <span class="mx-1 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink font-extrabold">Historial</span>
+        </h4>
+        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-neon animate-ping"></span> 4 Últimas
+        </span>
+    </div>
+
+    <div id="historial-canciones-display" class="flex flex-col space-y-3.5 w-full">
+        <div class="text-center py-4 text-xs font-medium text-zinc-400 dark:text-zinc-500 animate-pulse">
+            <i class="fa-solid fa-compact-disc animate-spin mr-1.5"></i> Cargando canciones recientes...
+        </div>
+    </div>
+</section>
 
 <!-- SECCIÓN: PLAN DE ORACIÓN 6 - 3 - 9 -->
 <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-colors duration-300 shadow-xl neon-glow">
@@ -1337,45 +1430,6 @@ html {
                 </a>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
-<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
-    <div class="flex items-center justify-between mb-3">
-        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
-            <i class="fa-solid fa-book-open mr-2 text-brand-neon animate-pulse"></i> Pan de Vida
-        </h4>
-        <!-- Indicador de Versión Bíblica -->
-        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400">
-            RVR1960
-        </span>
-    </div>
-    
-    <div class="p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 text-center relative overflow-hidden group">
-        <!-- Esqueleto de Carga (Spinner) -->
-        <div id="verse-loader" class="py-4 flex flex-col items-center justify-center space-y-2">
-            <i class="fa-solid fa-circle-notch animate-spin text-brand-neon text-lg"></i>
-            <span class="text-xs text-zinc-400">Alimentando el espíritu...</span>
-        </div>
-
-        <!-- Contenido del Versículo (Oculto al inicio) -->
-        <div id="verse-content" class="hidden opacity-0 transition-opacity duration-500">
-            <p id="verse-text" class="text-xs sm:text-sm italic text-zinc-800 dark:text-gray-200 font-medium leading-relaxed">
-                <!-- Se inyecta dinámicamente -->
-            </p>
-            <span id="verse-ref" class="block text-[11px] uppercase font-black text-brand-neon mt-2 tracking-widest">
-                <!-- Se inyecta dinámicamente -->
-            </span>
-        </div>
-    </div>
-
-    <!-- Botón de Compartir Personalizado -->
-    <div class="mt-3">
-        <button id="btn-share-verse" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-brand-neon hover:text-black hover:border-brand-neon dark:hover:bg-brand-neon dark:hover:text-black transition-all duration-300 shadow-sm cursor-pointer">
-            <i class="fa-solid fa-share-nodes"></i>
-            Compartir Bendición
-        </button>
     </div>
 </section>
 
@@ -1986,35 +2040,76 @@ function renderizarProgramacion(diaIndex) {
     
     filtrados.sort((a,b) => a.horaInicio.localeCompare(b.horaInicio));
 
+    if (filtrados.length === 0) {
+        // Altura simétrica para el estado vacío sin romper la caja
+        scheduleContainer.innerHTML = `
+            <div class="flex flex-col items-center justify-center text-center h-[320px] text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-wider">
+                <i class="fa-solid fa-bed text-2xl mb-2 opacity-40 animate-bounce"></i> 
+                <span>No hay transmisiones asignadas</span>
+            </div>`;
+        return;
+    }
+
     filtrados.forEach(p => {
         const [hI, mI] = p.horaInicio.split(':').map(Number);
         const [hF, mF] = p.horaFin.split(':').map(Number);
         const ahora = new Date();
         const esHoy = ahora.getDay() === diaIndex;
-        const horaMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+        const horaMinutos = grandma = ahora.getHours() * 60 + ahora.getMinutes();
         const estaAlAire = esHoy && (horaMinutos >= (hI * 60 + mI) && horaMinutos < (hF * 60 + mF));
-const botonWhatsapp = p.whatsapp ? `<a href="${p.whatsapp}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 flex items-center justify-center rounded-xl bg-green-600/10 text-green-500 hover:bg-green-600 hover:text-white transition-all duration-200 ml-2" title="Contactar por WhatsApp"> <i class="fa-brands fa-whatsapp text-base"></i> </a>` : '';
+        
+        const botonWhatsapp = p.whatsapp ? `<a href="${p.whatsapp}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 flex items-center justify-center rounded-xl bg-green-600/10 text-green-500 hover:bg-green-600 hover:text-white transition-all duration-200 shadow-sm shrink-0" title="Contactar por WhatsApp"> <i class="fa-brands fa-whatsapp text-base"></i> </a>` : '';
         const botonYoutube = p.youtube 
-            ? `<a href="${p.youtube}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 flex items-center justify-center rounded-xl bg-red-600/10 text-red-500 hover:bg-red-600 hover:text-white transition-all duration-200 ml-2" title="Ver en YouTube">
+            ? `<a href="${p.youtube}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 flex items-center justify-center rounded-xl bg-red-600/10 text-red-500 hover:bg-red-600 hover:text-white transition-all duration-200 shadow-sm shrink-0" title="Ver en YouTube">
                 <i class="fa-brands fa-youtube text-base"></i>
                </a>`
             : '';
 
         const div = document.createElement('div');
-        div.className = `p-3 border-l-4 rounded-r-xl flex items-center gap-4 ${estaAlAire ? 'bg-brand-neonPink/10 border-brand-neonPink' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-500'}`;
-       div.innerHTML = ` 
-    <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover"> 
-    <div class="flex-grow"> 
-        <p class="font-bold text-xs text-zinc-900 dark:text-white">${p.nombre}</p> 
-        <p class="text-[12px] text-zinc-500 dark:text-zinc-400 font-mono">${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}</p> 
-    </div> 
-    ${botonYoutube}
-    ${botonWhatsapp}
-`;
+        
+        // Estructura fija de tarjeta con alturas simétricas estrictas (h-[68px])
+        div.className = `group relative p-2.5 h-[68px] rounded-2xl border transition-all duration-300 z-10 ${
+            estaAlAire 
+                ? 'bg-brand-neonPink/10 border-brand-neonPink shadow-md shadow-brand-neonPink/5 translate-x-1' 
+                : 'bg-white/40 dark:bg-zinc-900/30 border-zinc-200/80 dark:border-zinc-800/60 hover:border-zinc-400 dark:hover:border-zinc-700 hover:bg-white/80 dark:hover:bg-zinc-900/60'
+        }`;
+
+        div.innerHTML = ` 
+            <div class="absolute left-[11px] sm:[18px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 transition-all duration-500 z-20 ${
+                estaAlAire 
+                    ? 'bg-brand-neonPink border-brand-lightBg dark:border-brand-dark scale-125 shadow-[0_0_8px_rgba(236,72,153,0.8)]' 
+                    : 'bg-zinc-300 dark:bg-zinc-700 border-brand-lightBg dark:border-brand-dark group-hover:bg-zinc-400 dark:group-hover:bg-zinc-500'
+            }"></div>
+
+            <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 h-full pl-6 sm:pl-8">
+                
+                <div class="w-11 h-11 rounded-xl overflow-hidden shrink-0 border border-zinc-300/60 dark:border-zinc-700/50 shadow-sm relative bg-zinc-800">
+                    <img src="${p.img}" class="w-full h-full object-cover" onerror="this.src='img/caratula.png'">
+                    ${estaAlAire ? '<div class="absolute inset-0 bg-brand-neonPink/10 animate-pulse"></div>' : ''}
+                </div>
+
+                <div class="min-w-0 flex flex-col justify-center"> 
+                    <div class="flex items-center gap-2 overflow-hidden">
+                        <span class="text-[10px] font-mono font-bold tracking-wider text-zinc-500 dark:text-zinc-400 flex items-center gap-1 shrink-0">
+                            <i class="fa-regular fa-clock text-zinc-400 dark:text-zinc-500 ${estaAlAire ? 'text-brand-neonPink animate-spin [animation-duration:8s]' : ''}"></i>
+                            ${formatearHora(p.horaInicio)} - ${formatearHora(p.horaFin)}
+                        </span>
+                        ${estaAlAire ? `<span class="text-[7px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded bg-brand-neonPink text-white shadow-sm shrink-0 animate-pulse">Al Aire</span>` : ''}
+                    </div>
+                    <h4 class="font-extrabold text-xs sm:text-sm text-zinc-900 dark:text-white uppercase tracking-wide truncate mt-0.5 group-hover:text-brand-neonPink transition-colors" title="${p.nombre}">
+                        ${p.nombre}
+                    </h4> 
+                </div> 
+                
+                <div class="flex items-center gap-1 shrink-0">
+                    ${botonYoutube}
+                    ${botonWhatsapp}
+                </div>
+            </div>
+        `;
         scheduleContainer.appendChild(div);
     });
 }
-
 // Inicializar pestañas de días
 if (tabsContainer) {
     diasSemana.forEach((nombre, index) => {
@@ -3957,6 +4052,109 @@ document.addEventListener("DOMContentLoaded", () => {
         }, { passive: true }); // passive: true evita retrasos en scroll táctil
     })();
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const rawHistoryDiv = document.getElementById("sonic_history");
+    const displayContainer = document.getElementById("historial-canciones-display");
 
+    if (!rawHistoryDiv || !displayContainer) return;
+
+    function actualizarHistorialVisual() {
+        let rawText = rawHistoryDiv.innerText || rawHistoryDiv.textContent;
+        if (!rawText || rawText.trim() === "" || rawText.includes("Cargando")) return;
+
+        // --- SOLUCIÓN PARA EL PROBLEMA DE REGLÓN CORRIDO (Screenshot 2026-06-20 105731.png) ---
+        // Expresión regular que detecta patrones como "2.)", "3.)", "4.)" o "2-", "3-" para picar el texto
+        let canciones = rawText.split(/\s*(?:\d+[\.\)]+)\s*/g)
+            .map(item => item.trim())
+            .filter(item => item.length > 2);
+
+        // Forzar estrictamente las primeras 4 canciones obtenidas del desglose
+        let ultimasCuatro = canciones.slice(0, 4);
+
+        if (ultimasCuatro.length === 0) {
+            displayContainer.innerHTML = `
+                <div class="text-center py-4 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+                    Historial de canciones no disponible.
+                </div>`;
+            return;
+        }
+
+        displayContainer.innerHTML = ultimasCuatro.map((cancion, index) => {
+            // Separación de Artista y Título por el guion
+            let partes = cancion.split("-");
+            let artista = "Radio FE 4:18";
+            let titulo = cancion;
+
+            if (partes.length > 1) {
+                artista = partes[0].trim();
+                titulo = partes.slice(1).join("-").trim();
+            }
+
+            // Limpieza final de extensiones molestas (.mp3, .aac, etc.)
+            titulo = titulo.replace(/\.(mp3|wav|aac|ogg)/gi, '').trim();
+
+            // Configuración estética individual por fila
+            const esPrimera = index === 0;
+            const bgCard = esPrimera 
+                ? "bg-zinc-100/90 dark:bg-zinc-900/70 border-brand-neon/40 shadow-md" 
+                : "bg-zinc-100/40 dark:bg-zinc-900/20 border-zinc-200/60 dark:border-zinc-800/60 shadow-sm";
+            
+            const colorNumero = esPrimera ? "text-brand-neon font-black" : "text-zinc-400 dark:text-zinc-600 font-bold";
+
+            // Mensaje personalizado dinámico capturando Grupo/Artista y Canción
+            const textoMensaje = `Hola Radio FE 4:18, me gustaría escuchar otra vez el tema musical:\n\n🎵 Canción: ${titulo}\n🎤 Grupo/Artista: ${artista}`;
+            const urlWhatsapp = `https://wa.me/584125183677?text=${encodeURIComponent(textoMensaje)}`;
+
+            return `
+                <div class="group relative flex items-center justify-between p-3.5 w-full ${bgCard} border rounded-2xl transition-all duration-300 hover:border-brand-neonPink/50 hover:bg-white dark:hover:bg-brand-card/90 hover:shadow-md overflow-hidden">
+                    
+                    <div class="flex items-center gap-4 min-w-0 flex-1">
+                        
+                        <span class="text-xs sm:text-sm tracking-tighter w-5 text-center ${colorNumero}">
+                            0${index + 1}
+                        </span>
+
+                        <div class="w-9 h-9 rounded-xl bg-zinc-200/50 dark:bg-zinc-800/50 flex items-center justify-center flex-shrink-0 text-zinc-500 dark:text-zinc-400 group-hover:text-brand-neonPink transition-colors duration-300">
+                            <i class="fa-solid ${esPrimera ? 'fa-compact-disc animate-spin [animation-duration:4s] text-brand-neon text-base' : 'fa-music text-xs'}"></i>
+                        </div>
+
+                        <div class="min-w-0 flex-1">
+                            <h5 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 truncate block group-hover:text-brand-neon transition-colors duration-300" title="${titulo}">
+                                ${titulo}
+                            </h5>
+                            <p class="text-[10px] sm:text-xs text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-wider truncate block mt-0.5" title="${artista}">
+                                ${artista}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 ml-3 flex-shrink-0">
+                        <a href="${urlWhatsapp}" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="w-7 h-7 flex items-center justify-center rounded-lg bg-green-600/10 text-green-500 hover:bg-green-600 hover:text-white transition-all duration-200 shadow-sm" 
+                           title="Pedir canción otra vez">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                        </a>
+
+                        ${esPrimera 
+                            ? `<span class="text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded-md bg-brand-neon/10 text-brand-neon border border-brand-neon/20 animate-pulse">Sonando</span>` 
+                            : `<span class="text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-400 dark:text-zinc-500">Previa</span>`
+                        }
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    // Escucha de variaciones de SonicPanel en tiempo real
+    const observer = new MutationObserver(() => { actualizarHistorialVisual(); });
+    observer.observe(rawHistoryDiv, { childList: true, characterData: true, subtree: true });
+
+    // Ejecución inicial reactiva
+    setTimeout(actualizarHistorialVisual, 1000);
+});
+</script>
 </body>
 </html>
