@@ -258,7 +258,6 @@ html {
             background: transparent;
         }
     </style>
-
 <script type="text/javascript">
   (function() {
     var dominioAutorizado = "radiofe418.vercel.app"; // CAMBIA ESTO
@@ -290,6 +289,7 @@ html {
   })();
 </script>   
 
+
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
     
@@ -320,11 +320,10 @@ html {
            <button id="theme-toggle" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
                 <i id="theme-icon" class="fa-solid fa-moon"></i>
             </button>
-<!-- Botón Profesional de Cerrar / Salir -->
-<button id="close-app-btn" title="Cerrar y Salir"
-   class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm hover:border-brand-neonPink hover:text-brand-neonPink dark:hover:border-brand-neonPink">
-    <i class="fa-solid fa-power-off text-lg"></i>
-</button>
+<!-- Botón Profesional para Compartir la Radio -->
+    <button id="share-btn" class="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none border border-zinc-300 dark:border-zinc-700 shadow-sm">
+                <i id="theme-icon" class= "fa-solid fa-share-nodes"></i>
+          </button>
         </div>
     </header>
 
@@ -348,145 +347,145 @@ html {
     </div>
 </div>
 
-     <!-- COMPONENTE: PRÓXIMO PROGRAMA EN VIVO (CENTRADO Y COMPACTO) -->
-<div class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/50 py-2 px-4 transition-colors duration-300 relative z-40">
-    <!-- Cambiado a: justify-center y gap-x-2 para mantener todo el bloque unido en el centro -->
-    <div class="max-w-7xl mx-auto flex items-center justify-center flex-wrap gap-y-1 gap-x-2 text-xs sm:text-sm">
+<div class="w-full bg-gradient-to-r from-brand-lightCard/95 via-white/80 to-brand-lightCard/95 dark:from-brand-card/90 dark:via-zinc-950/40 dark:to-brand-card/90 backdrop-blur-xl border-b border-zinc-200/50 dark:border-zinc-800/30 py-2 px-4 transition-all duration-300 relative z-40 shadow-sm">
+    
+    <div class="max-w-7xl mx-auto flex items-center justify-center flex-wrap gap-y-1.5 gap-x-4 text-[11px] sm:text-xs">
         
-        <!-- Indicador de En Vivo y Etiqueta -->
-        <div class="flex items-center gap-2 shrink-0">
-            <span class="flex h-2 w-2 relative">
+        <div class="flex items-center gap-2 shrink-0 bg-brand-neon/5 dark:bg-brand-neon/10 px-2.5 py-0.5 rounded-full border border-brand-neon/20">
+            <span class="flex h-1.5 w-1.5 relative">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
+                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-neon"></span>
             </span>
-            <span class="font-black text-brand-neon uppercase text-[10px] tracking-widest">A continuación:</span>
+            <span class="font-black text-brand-neon uppercase tracking-widest text-[9px]">
+                A continuación
+            </span>
         </div>
 
-        <!-- Separador Visual 1 -->
-        <span class="text-zinc-300 dark:text-zinc-700 font-light">•</span>
-
-        <!-- Título del Programa (Se eliminó el 'sm:max-w-...' para que no empuje el contenido) -->
-        <div class="min-w-0 max-w-full truncate">
-            <span id="next-program-title" class="font-extrabold text-zinc-800 dark:text-zinc-200 uppercase tracking-wide block truncate">
+        <div class="min-w-0 max-w-full">
+            <span id="next-program-title" class="font-black text-transparent bg-clip-text bg-gradient-to-r from-zinc-800 to-zinc-600 dark:from-zinc-100 dark:to-zinc-300 uppercase tracking-wider block truncate max-w-[260px] sm:max-w-md md:max-w-xl">
                 CARGANDO PROGRAMA...
             </span>
         </div>
 
-        <!-- Separador Visual 2 -->
-        <span class="text-zinc-300 dark:text-zinc-700 font-light">•</span>
-
-        <!-- Horario Compacto (Se eliminó 'sm:ml-auto' para que no se vaya a la derecha) -->
-        <div class="flex items-center gap-1.5 font-mono text-[11px] font-bold text-zinc-500 dark:text-zinc-400 shrink-0">
-            <i class="fa-regular fa-clock text-brand-neonPink text-xs"></i>
-            <span id="next-program-time" class="uppercase tracking-wider">00:00 HORA</span>
+        <div class="flex items-center gap-1.5 font-mono text-[10px] font-black text-zinc-500 dark:text-zinc-400 shrink-0 bg-white/60 dark:bg-zinc-900/50 px-2.5 py-0.5 rounded-lg border border-zinc-200/60 dark:border-zinc-800/50 shadow-sm transition-colors duration-300">
+            <i class="fa-regular fa-clock text-brand-neonPink text-xs animate-pulse"></i>
+            <span id="next-program-time" class="uppercase tracking-widest text-zinc-600 dark:text-zinc-300">00:00 HORA</span>
         </div>
 
     </div>
-</div>  
+</div>
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         <div class="lg:col-span-7 space-y-6 w-full">
 <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden neon-glow transition-colors duration-300">
                 
-    <!-- Contenedor Adaptativo de Oyentes (Glassmorphism Light & Dark con Base de Datos) -->
-    <div class="listeners-badge flex items-center gap-3 px-4 py-2 rounded-full border transition-all duration-300 hover:scale-105 w-fit mx-auto my-3
-                border-black/10 bg-white/60 backdrop-blur-md shadow-md
-                dark:border-white/20 dark:bg-black/30 dark:shadow-lg">
-      
-       <!-- Pulso de luz rojo "En Vivo" -->
-<span class="relative flex h-3 w-3">
-    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500 dark:bg-red-400"></span>
-</span>
+<div class="listeners-badge flex items-center gap-2.5 px-4 py-1.5 rounded-full border transition-all duration-300 hover:scale-105 w-fit mx-auto my-4 select-none
+            border-zinc-200 bg-white/70 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-neon/30
+            dark:border-zinc-800/80 dark:bg-zinc-950/40 dark:shadow-lg dark:hover:border-brand-neon/40">
+  
+    <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
+    </span>
+  
+    <p class="text-[11px] sm:text-xs font-black tracking-widest flex items-center gap-2 m-0 text-zinc-600 dark:text-zinc-400 uppercase">
+        <span>Al Aire</span> 
+        
+        <span id="listeners-counter-wrapper" class="hidden items-center gap-1 bg-zinc-200/50 dark:bg-zinc-900/60 px-2 py-0.5 rounded-md border border-zinc-300/30 dark:border-zinc-800/50 font-mono text-zinc-800 dark:text-brand-neon font-black shadow-inner animate-fade-in">
+            <i class="fa-solid fa-user-group text-[10px] text-brand-neonPink animate-pulse mr-0.5"></i>
+            <span id="sonic_listeners">0</span>
         </span>
-      
-<!-- Texto y Contador adaptado a Supabase -->
-<p class="text-xs sm:text-sm font-medium tracking-wide flex items-center gap-1.5 m-0 text-slate-700 dark:text-white/90">
-    <span>AL AIRE</span> <i class="fa-solid fa-headphones text-red-600 dark:text-red-400 text-base animate-pulse"></i>
-    <span id="live-listeners-icon" class="hidden items-center gap-1.5 transition-all duration-300 animate-fade-in">
-            </span>
-            
-            <span id="sonic_listeners">0</span> <i class="fa-solid fa-user-group text-red-600 dark:text-red-400 text-sm animate-pulse"></i>
-        </p>
-    </div>
+        
+        <span id="listeners-text-label" class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 tracking-normal normal-case sm:inline hidden"></span>
+    </p>
+</div>
 
-    <!-- Contenedor de Carátula -->
-    <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-8 mb-4 relative group">
+    <!-- Contenedor de Carátula con Efecto Premium -->
+    <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-6 mb-6 relative group cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl z-10 flex items-center justify-center">
+            <i class="fa-solid fa-radio text-white/80 text-3xl animate-pulse"></i>
+        </div>
         <img id="track-cover" 
              src="img/caratula.png" 
              alt="Carátula" 
-             class="w-full h-full object-cover rounded-2xl shadow-xl border-2 border-zinc-300 dark:border-zinc-700/50">
+             class="w-full h-full object-cover rounded-2xl shadow-2xl border border-zinc-300/60 dark:border-zinc-700/50 group-hover:scale-[1.02] transition-all duration-500">
     </div>
 
     <!-- Títulos de la Emisora -->
-    <div class="text-center w-full max-w-md mb-3">
-        <h2 id="sonic_title" class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+    <div class="text-center w-full max-w-md mb-4">
+        <h2 id="sonic_title" class="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 dark:text-white transition-colors duration-300">
             Radio FE 4:18
         </h2>
-        <p id="sonic_artist" class="text-brand-neon font-semibold text-sm mt-0.5 tracking-wide uppercase">
+        <p id="sonic_artist" class="text-brand-neon font-bold text-xs sm:text-sm mt-1 tracking-widest uppercase">
             Sonando por todo lo alto
         </p>
     </div>
 
     <!-- Mensajes Rotativos -->
     <div id="rotator-container" class="w-full max-w-lg mx-auto mb-6 px-4">
-        <a id="dynamic-link" href="#" class="block">
-            <div id="dynamic-message" class="text-[11px] font-bold text-center py-2 px-4 rounded-full border border-brand-neon/30 bg-zinc-100/50 dark:bg-zinc-800/30 text-zinc-600 dark:text-zinc-300 hover:border-brand-neon hover:text-brand-neon transition-all duration-700 opacity-0 cursor-pointer shadow-sm"></div>
+        <a id="dynamic-link" href="#" class="block group">
+            <div id="dynamic-message" class="text-[11px] font-bold text-center py-2 px-5 rounded-full border border-brand-neon/20 bg-zinc-100/80 dark:bg-zinc-800/40 text-zinc-600 dark:text-zinc-300 group-hover:border-brand-neon group-hover:text-brand-neon transition-all duration-500 opacity-0 cursor-pointer shadow-sm backdrop-blur-sm"></div>
         </a>
     </div>
 
     <!-- Visualizador de Audio (Canvas) -->
-    <div class="w-full flex justify-center mb-4 px-4 relative z-10">
-        <canvas id="visualizer" class="w-full max-w-[300px] h-16 opacity-80 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] dark:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)] transition-all duration-300"></canvas>
+    <div class="w-full flex justify-center mb-6 px-4 relative z-10">
+        <canvas id="visualizer" class="w-full max-w-[280px] h-12 opacity-80 drop-shadow-[0_0_8px_rgba(6,182,212,0.4)] dark:drop-shadow-[0_0_12px_rgba(236,72,153,0.4)] transition-all duration-300"></canvas>
     </div>
 
-<div class="w-full max-w-md mb-4 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl p-1.5 flex items-center justify-between transition-colors duration-300">
-        <span class="text-[10px] font-black uppercase tracking-widest pl-3 text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5">
+    <!-- Selector de Calidad Rediseñado -->
+    <div class="w-full max-w-md mb-4 bg-zinc-100/80 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800/80 rounded-2xl p-1.5 flex items-center justify-between transition-colors duration-300 backdrop-blur-sm">
+        <span class="text-[10px] font-black uppercase tracking-widest pl-3 text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
             <i class="fa-solid fa-sliders text-brand-neon"></i> Calidad:
         </span>
         <div class="flex items-center space-x-1">
-            <button id="quality-64" class="px-3 py-1.5 rounded-xl text-[10px] font-black tracking-wider uppercase transition-all duration-300 border border-transparent bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
-                64K <span class="font-medium text-[9px] opacity-70">(Media)</span>
-            </button>
-            <button id="quality-128" class="px-3 py-1.5 rounded-xl text-[10px] font-black tracking-wider uppercase transition-all duration-300 border border-brand-neon bg-brand-neon/10 text-brand-neon shadow-sm shadow-brand-neon/10">
-                128K <span class="font-medium text-[9px] opacity-90">HD</span>
-            </button>
+<!-- Contenedor Segmentado Premium para el Selector de Calidad -->
+<div class="flex items-center gap-1 p-1 bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/40 dark:border-zinc-800/50 rounded-2xl w-full max-w-sm mx-auto backdrop-blur-sm transition-colors duration-300">
+    
+    <!-- Opción: 64 Kbps (Estado Inactivo / Estado Base) -->
+    <button id="quality-64" class="flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 py-2 px-3 rounded-xl text-[11px] font-bold tracking-wide transition-all duration-300 border border-transparent bg-transparent text-zinc-500 dark:text-zinc-400 hover:bg-zinc-300/40 dark:hover:bg-zinc-800/40 hover:text-zinc-800 dark:hover:text-zinc-200 focus:outline-none group">
+        <div class="flex items-center gap-1.5">
+            <i class="fa-solid fa-gauge-simple-high opacity-60 text-[10px] group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors"></i>
+            <span>64 Kbps</span>
+        </div>
+        <span class="text-[9px] font-medium opacity-50 tracking-normal text-zinc-600 dark:text-zinc-400 sm:before:content-['•_'] sm:before:mx-0.5">Móvil</span>
+    </button>
+
+    <!-- Opción: 128 Kbps (Estado Activo / Seleccionado por defecto) -->
+    <button id="quality-128" class="flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 py-2 px-3 rounded-xl text-[11px] font-black tracking-wide transition-all duration-300 focus:outline-none border border-brand-neon/20 dark:border-brand-neon/30 bg-white dark:bg-zinc-800 text-brand-neon shadow-sm shadow-brand-neon/5">
+        <div class="flex items-center gap-1.5">
+            <i class="fa-solid fa-bolt text-[10px] animate-pulse text-brand-neon"></i>
+            <span>128 Kbps</span>
+        </div>
+        <span class="text-[8px] font-black tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-brand-neon text-black dark:text-zinc-950 scale-90 sm:scale-95 origin-center">HD</span>
+    </button>
+
+</div>
         </div>
     </div>
 
-    <!-- Controles de Reproducción -->
-    <div class="w-full max-w-md grid grid-cols-12 gap-4">
-        <button id="play-btn" class="col-span-7 bg-zinc-200/70 dark:bg-zinc-900/60 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-16">
-            <i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i>
+    <!-- Controles de Reproducción e Integración de Volumen -->
+    <div class="w-full max-w-md grid grid-cols-12 gap-3 bg-zinc-100/50 dark:bg-black/20 p-2 border border-zinc-200/60 dark:border-zinc-800/50 rounded-2xl backdrop-blur-sm">
+        <button id="play-btn" class="col-span-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl flex items-center justify-center text-brand-neon hover:text-white dark:hover:text-black hover:bg-gradient-to-tr hover:from-brand-neon hover:to-cyan-400 hover:border-transparent transition-all duration-300 active:scale-95 focus:outline-none h-14 shadow-sm">
+            <i id="play-icon" class="fa-solid fa-play text-lg ml-0.5"></i>
         </button>
-        <div class="col-span-5 bg-zinc-200/50 dark:bg-black/20 border border-zinc-300 dark:border-zinc-800 rounded-2xl flex items-center justify-center px-4 transition-colors duration-300">
-            <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
+        <div class="col-span-8 bg-white/50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/60 rounded-xl flex items-center justify-center px-4 transition-colors duration-300 shadow-inner">
+            <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-brand-neon hover:accent-brand-neonPink transition-all duration-300">
         </div>
     </div>
 
-<!-- CONTENEDOR OCULTO DONDE SONICPANEL DEJARÁ LOS DATOS EN BRUTO -->
-<div id="sonic_history" style="display: none !important;"></div>
+    <!-- CONTENEDOR OCULTO DONDE SONICPANEL DEJARÁ LOS DATOS EN BRUTO -->
+    <div id="sonic_history" style="display: none !important;"></div>
+    
     <!-- Botonera de Acciones Inferiores -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50">
-        <button id="share-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neon hover:text-brand-neon transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-            <i class="fa-solid fa-share-nodes text-base"></i>
-            <span>Compartir</span>
-        </button>
-        <button id="donate-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-brand-neonPink bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300 text-[10px] font-bold uppercase tracking-wider">
-            <i class="fa-solid fa-heart text-base"></i>
-            <span>Apoyar</span>
-        </button>
-        <button id="report-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-            <i class="fa-solid fa-circle-exclamation text-base"></i>
-            <span>Reportar</span>
-        </button>
-        <button id="trigger-install-btn" class="flex flex-col items-center justify-center space-y-1.5 py-3 px-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30 hover:border-brand-neonPink hover:text-brand-neonPink transition-all duration-300 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-            <i class="fa-solid fa-download text-base"></i>
-            <span>Instalar</span>
+    <div class="w-full mt-6 pt-5 border-t border-zinc-200/60 dark:border-zinc-800/60 flex justify-center">
+        <button id="donate-btn" title="Apoyar el Ministerio de Radio FE 4:18"
+            class="w-full max-w-md py-3.5 px-6 rounded-2xl border border-brand-neonPink bg-brand-neonPink/5 dark:bg-brand-neonPink/10 text-brand-neonPink hover:bg-gradient-to-r hover:from-brand-neonPink hover:to-pink-500 hover:text-white hover:border-transparent transition-all duration-300 active:scale-[0.98] cursor-pointer focus:outline-none text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2.5 shadow-md shadow-brand-neonPink/5 hover:shadow-xl hover:shadow-brand-neonPink/20 group">
+            <i class="fa-solid fa-heart text-sm transition-transform duration-300 group-hover:scale-125 animate-pulse"></i>
+            <span>Apoya nuestra Radio FE 4:18</span>
         </button>
     </div>
 </section>
-
 
 <!-- SECCIÓN: ALIANZAS COMERCIALES (TEXTO COMERCIAL DE ALTA CONVERSIÓN) -->
 <section class="w-full max-w-4xl mx-auto mt-6 bg-zinc-50/60 dark:bg-zinc-900/30 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:border-brand-neon/40 hover:bg-white dark:hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-brand-neon/5">
@@ -789,45 +788,40 @@ html {
     </div>
 </section>
 
-<!-- SECCIÓN: ALIANZAS COMERCIALES COMPACTA -->
-<section class="bg-brand-lightCard dark:bg-brand-card border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-4 sm:p-5 overflow-hidden transition-colors duration-300 shadow-xl neon-glow">
-    <!-- Encabezado de Sección -->
-    <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-200/60 dark:border-zinc-800/60">
-        <p class="text-xs tracking-widest font-black uppercase text-zinc-400 dark:text-zinc-500 flex items-center">
-            <i class="fa-solid fa-handshake mr-2 text-brand-neon"></i> Nuestros Aliados
+<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 lg:p-6 overflow-hidden transition-colors duration-300 shadow-xl neon-glow">
+    
+    <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-200/60 dark:border-zinc-800/60 select-none">
+        <p class="text-[11px] tracking-widest font-black uppercase text-zinc-400 dark:text-zinc-500 flex items-center">
+            <i class="fa-solid fa-handshake mr-2.5 text-brand-neon"></i> Nuestros Aliados
         </p>
-        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-800 text-zinc-400 dark:text-zinc-500">
-            ALIADOS
+        <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300/40 dark:border-zinc-800 text-zinc-500 dark:text-brand-neon font-mono shadow-inner">
+            Ellos confian
         </span>
     </div>
 
-    <!-- Texto Animando a Visitar -->
-    <p class="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-4 flex items-center gap-1.5 bg-zinc-100/60 dark:bg-zinc-900/40 p-3 rounded-xl border border-zinc-200/50 dark:border-zinc-800/40">
-        <i class="fa-solid fa-circle-nodes text-brand-neonPink animate-pulse text-sm"></i>
-        <span>¡Apoya a quienes hacen posible nuestra señal! Haz clic para conocer y visitar.</span>
-    </p>
-
-    <!-- Contenedor Grid Compacto (3 columnas) -->
-    <div id="aliados-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        <!-- Generación dinámica mediante el script -->
+    <div class="text-[11px] sm:text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-5 flex items-center gap-3 bg-zinc-100/60 dark:bg-zinc-950/40 p-3.5 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/50 backdrop-blur-sm shadow-inner">
+        <i class="fa-solid fa-circle-nodes text-brand-neonPink animate-pulse text-base flex-shrink-0"></i>
+        <span>¡Apoya a quienes hacen posible nuestra señal! Haz clic sobre cualquiera de ellos para conocerlos y visitarlos.</span>
     </div>
 
-    <!-- LLAMADA A LA ACCIÓN: ÚNETE A LOS ALIADOS (Alineado con tu diseño premium) -->
-    <div class="mt-4 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-            <i class="fa-solid fa-star text-amber-400 text-xs animate-bounce"></i>
-            <span class="text-[10px] font-bold tracking-wide uppercase text-zinc-500 dark:text-zinc-400">¿Quieres aparecrer aqui tambien? ¡Únete y sé parte de nuestros aliados!</span>
+    <div id="aliados-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 min-h-[60px]">
+        </div>
+
+    <div class="mt-5 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2 text-center sm:text-left">
+            <i class="fa-solid fa-star text-amber-400 text-[10px] animate-pulse flex-shrink-0"></i>
+            <span class="text-[10px] font-bold tracking-wide uppercase text-zinc-500 dark:text-zinc-400 leading-normal">
+                ¿Quieres destacar aquí? sé parte de nuestra señal.
+            </span>
         </div>
         
-        <!-- Botón de WhatsApp para pedir Información -->
         <a id="btn-pedir-info" href="#" target="_blank" rel="noopener noreferrer" 
-           class="inline-flex items-center gap-2 px-3 py-2 text-[9px] font-black tracking-widest uppercase rounded-xl border border-brand-neon text-brand-neon bg-brand-neon/5 dark:bg-brand-neon/10 hover:bg-brand-neon hover:text-white dark:hover:text-black transition-all duration-300 active:scale-95 shadow-sm">
-            <i class="fa-brands fa-whatsapp text-xs"></i>
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-4 py-2.5 text-[9px] font-black tracking-widest uppercase rounded-xl border border-brand-neon text-brand-neon bg-brand-neon/5 dark:bg-brand-neon/10 hover:bg-gradient-to-r hover:from-brand-neon hover:to-cyan-400 hover:text-white dark:hover:text-black hover:border-transparent transition-all duration-300 active:scale-[0.97] shadow-sm focus:outline-none group flex-shrink-0">
+            <i class="fa-brands fa-whatsapp text-sm transition-transform duration-200 group-hover:scale-110"></i>
             <span>Solicitar Información</span>
         </a>
     </div>
 </section>
-
 <!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
 <section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
     <div class="flex items-center justify-between mb-3">
@@ -1009,20 +1003,18 @@ html {
         </div> 
        
         <div class="lg:col-span-5 space-y-6 w-full">
+
 <section class="bg-gradient-to-b from-brand-lightCard/80 to-brand-lightCard/50 dark:from-brand-card/70 dark:to-brand-card/40 backdrop-blur-xl border border-zinc-200/60 dark:border-zinc-800/60 rounded-3xl p-5 sm:p-6 shadow-xl neon-glow-pink transition-all duration-300 relative overflow-hidden h-[630px] flex flex-col justify-between">
     
     <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-neonPink/5 rounded-full blur-2xl pointer-events-none"></div>
 
     <div class="shrink-0">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-zinc-200/50 dark:border-zinc-800/50 relative z-10">
-            <div class="space-y-0.5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-zinc-200/50 dark:border-zinc-800/50 relative z-10">
+            <div>
                 <h3 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
                     <i class="fa-solid fa-calendar-days mr-2 text-brand-neonPink text-base animate-pulse"></i> 
                     Parrilla <span class="mx-1.5 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neonPink to-pink-500 font-black">Programación</span>
                 </h3>
-                <div id="full-date-time" class="text-[10px] font-mono font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">
-                    Cargando fecha...
-                </div>
             </div>
             <span class="text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md bg-zinc-200/60 dark:bg-zinc-900/60 border border-zinc-300/40 dark:border-zinc-800/40 text-zinc-500 dark:text-zinc-400 self-start sm:self-auto shadow-sm">
                 Horario Oficial
@@ -1030,14 +1022,14 @@ html {
         </div>
 
         <div id="tabs-container" class="flex gap-1.5 mb-4 overflow-x-auto pb-2 scrollbar-hide relative z-10 [mask-image:linear-gradient(to_right,white_85%,transparent_100%)] select-none shrink-0">
-            </div>
+        </div>
     </div>
 
     <div class="flex-grow overflow-y-auto pr-1.5 custom-scrollbar relative min-h-0">
         <div class="absolute left-[20px] sm:left-[27px] top-0 bottom-0 w-0.5 bg-zinc-200/60 dark:bg-zinc-800/80 pointer-events-none z-0"></div>
         
         <div class="space-y-3 my-1 relative z-10" id="schedule-container">
-            </div>
+        </div>
     </div>
 </section>
 
@@ -1142,48 +1134,26 @@ html {
     </div>
 </section>
 
-
-<!-- Formulario de Interacción Principal - Ajustado al 100% del ancho de la pantalla -->
-<section class="w-full mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border-x-0 border-y border-zinc-200 dark:border-zinc-800/80 p-3 sm:p-6 md:p-8 transition-all duration-300 shadow-xl">
+<section class="w-full mx-auto bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border-x-0 border-y border-zinc-200 dark:border-zinc-800/80 p-4 sm:p-6 md:p-8 transition-all duration-300 shadow-xl">
     
-    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 mb-4 flex items-center justify-center sm:justify-start">
+    <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 mb-4 flex items-center justify-center sm:justify-start">
         <i class="fa-solid fa-comment-dots mr-2 text-brand-neon text-base animate-bounce"></i> 
         Comunícate con nosotros
     </h4>
 
-    <!-- PANEL DE CONTADORES REALES EN TIEMPO REAL -->
-    <div class="mb-5 p-3.5 rounded-2xl border border-black/5 bg-black/[0.02] dark:border-white/10 dark:bg-white/[0.02] bg-gradient-to-b from-transparent via-brand-neon/5 to-transparent">
-        <div class="flex items-center gap-2 justify-center mb-3">
-            <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <p class="text-xs font-black tracking-wider uppercase text-zinc-500 dark:text-zinc-400 m-0">
-                Interacciones Reales de Hoy
-            </p>
-        </div>
-        
-        <!-- 3 columnas horizontales optimizadas para pantallas muy estrechas -->
-        <div class="grid grid-cols-3 gap-1.5 sm:gap-4">
-            <!-- Contador: Oraciones -->
-            <div class="flex flex-col items-center p-1.5 sm:p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
-                <i class="fa-solid fa-hands-praying text-brand-neonPink text-xs mb-1"></i>
-                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Oraciones</span>
-                <strong id="count-oracion" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1 sm:px-2 py-0.5 rounded shadow-inner min-w-[22px] sm:min-w-[28px] transition-all duration-300">...</strong>
+    <div class="mb-5 p-4 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/50 bg-gradient-to-r from-brand-neon/5 via-brand-neonPink/5 to-transparent backdrop-blur-sm relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-brand-neon/5 rounded-full blur-xl pointer-events-none"></div>
+        <div class="flex items-start gap-3 relative z-10">
+            <div class="flex items-center justify-center w-8 h-8 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/40 dark:border-zinc-800/60 text-brand-neon animate-pulse shrink-0 shadow-sm">
+                <i class="fa-solid fa-comments text-sm"></i>
             </div>
-
-            <!-- Contador: Saludos -->
-            <div class="flex flex-col items-center p-1.5 sm:p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
-                <i class="fa-solid fa-microphone text-brand-neon text-xs mb-1"></i>
-                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Saludos</span>
-                <strong id="count-saludo" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1 sm:px-2 py-0.5 rounded shadow-inner min-w-[22px] sm:min-w-[28px] transition-all duration-300">...</strong>
-            </div>
-
-            <!-- Contador: Canciones -->
-            <div class="flex flex-col items-center p-1.5 sm:p-3 rounded-xl bg-zinc-200/40 dark:bg-zinc-800/40 border border-zinc-300/30 dark:border-zinc-700/30 text-center min-w-0">
-                <i class="fa-solid fa-music text-brand-neon text-xs mb-1"></i>
-                <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1 truncate w-full">Canciones</span>
-                <strong id="count-cancion" class="font-mono font-black text-xs sm:text-sm text-zinc-950 dark:text-white bg-zinc-300/50 dark:bg-zinc-900/50 px-1 sm:px-2 py-0.5 rounded shadow-inner min-w-[22px] sm:min-w-[28px] transition-all duration-300">...</strong>
+            <div class="space-y-0.5">
+                <p class="text-[11px] font-black tracking-wider uppercase text-zinc-800 dark:text-zinc-200">
+                    Tu voz edifica nuestra señal
+                </p>
+                <p class="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl">
+                    ¿Quieres enviar un saludo especial, solicitar una alabanza o compartir una petición de oración? Escríbenos ahora mismo; nuestro equipo ministerial está listo para leerte y bendecir tu vida.
+                </p>
             </div>
         </div>
     </div>
@@ -1191,7 +1161,6 @@ html {
     <form id="whatsapp-contact-form" class="space-y-4">
         <div>
             <label class="block text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Selecciona una opción:</label>
-            <!-- 3 columnas horizontales de opciones estables al 100% de la anchura -->
             <div class="grid grid-cols-3 gap-1.5 sm:gap-3">
                 <label class="group cursor-pointer min-w-0">
                     <input type="radio" name="msg_type" value="oracion" checked class="sr-only peer">
@@ -1217,7 +1186,6 @@ html {
             </div>
         </div>
 
-        <!-- Inputs que ocupan todo el ancho de su bloque de forma natural -->
         <div>
             <input type="text" id="form-name" required placeholder="Tu nombre..." class="w-full p-3 text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all duration-200">
         </div>
@@ -1225,7 +1193,7 @@ html {
             <textarea id="form-message" rows="3" required placeholder="Escribe tu mensaje aquí..." class="w-full p-3 text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all duration-200 resize-none"></textarea>
         </div>
 
-        <button type="submit" class="w-full py-3.5 bg-[#25D366] hover:bg-[#128C7E] text-white font-black uppercase text-xs rounded-xl transition-all duration-300 active:scale-95 tracking-wider flex items-center justify-center shadow-lg shadow-[#25D366]/30">
+        <button type="submit" class="w-full py-3.5 bg-[#25D366] hover:bg-[#128C7E] text-white font-black uppercase text-xs rounded-xl transition-all duration-300 active:scale-95 tracking-wider flex items-center justify-center shadow-lg shadow-[#25D366]/30 cursor-pointer">
             <i class="fa-brands fa-whatsapp mr-2 text-sm"></i> Enviar por WhatsApp
         </button>
     </form>
@@ -1234,7 +1202,6 @@ html {
         <i class="fa-solid fa-circle-check mr-1"></i> ¡Abriendo WhatsApp!
     </div>
 </section>
-
 
 <!-- Formulario de Interacción Principal -->
 
@@ -1433,58 +1400,62 @@ html {
     </div>
 </section>
 
-
-
-<!-- SECCIÓN: ENLACE PRE-FOOTER DE CONTACTO RÁPIDO -->
-<section class="w-full max-w-7xl mx-auto mt-8 px-4">
-    <div class="w-full bg-zinc-100/90 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-3xl p-5 transition-colors duration-300 shadow-lg">
-        <!-- Flexbox adaptativo: de columna en móviles a filas fluidas en pantallas grandes -->
-        <div class="flex flex-col md:flex-row flex-wrap items-center justify-between gap-6 md:gap-4">
+<section class="w-full max-w-7xl mx-auto mt-8 px-4 select-none">
+    <div class="w-full bg-brand-lightCard/70 dark:bg-zinc-950/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 shadow-xl neon-glow">
+        
+        <!-- Encabezado de la Sección Adaptado a Radio FE 4:18 -->
+        <div class="flex items-center justify-between mb-5 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60">
+            <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
+                <i class="fa-solid fa-headset mr-2 text-brand-neon text-base animate-pulse"></i> 
+                Canales de Atención <span class="mx-1 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">Contacto Directo</span>
+            </h4>
+            <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                24/7
+            </span>
+        </div>
+        
+        <!-- Bloque de contactos original -->
+        <div class="flex flex-col md:flex-row flex-wrap items-center justify-between gap-5 md:gap-2">
             
-            <!-- Ubicación Física -->
-            <div class="flex flex-row items-center gap-3.5 px-3 w-full md:w-auto md:flex-1 min-w-[200px]">
-                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0">
+            <div class="flex flex-row items-center gap-4 px-3 py-2 md:py-0 w-full md:w-auto md:flex-1 min-w-[220px]">
+                <div class="w-10 h-10 rounded-2xl bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/30 dark:border-zinc-800/60 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0 shadow-inner transition-transform duration-300 hover:rotate-3">
                     <i class="fa-solid fa-location-dot text-sm text-brand-neonPink"></i>
                 </div>
                 <div>
-                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none">Nuestra Estación</p>
-                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-300 mt-1 whitespace-normal md:whitespace-nowrap">Barinas, Edo. Barinas — Venezuela</p>
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none font-mono">Sede Central</p>
+                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-300 mt-1.5 whitespace-normal md:whitespace-nowrap leading-tight">Barinas, Edo. Barinas — Venezuela</p>
                 </div>
             </div>
 
-            <!-- Separador visual solo en escritorio si hay espacio -->
-            <div class="hidden md:block w-[1px] h-8 bg-zinc-200 dark:bg-zinc-800/80 self-center"></div>
+            <div class="hidden md:block w-[1px] h-8 bg-zinc-200 dark:bg-zinc-800/60 self-center"></div>
+            <div class="block md:hidden w-full h-[1px] bg-zinc-200 dark:bg-zinc-800/40"></div>
 
-            <!-- Correo Electrónico -->
-            <div class="flex flex-row items-center gap-3.5 px-3 w-full md:w-auto md:flex-1 min-w-[200px]">
-                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0">
+            <div class="flex flex-row items-center gap-4 px-3 py-2 md:py-0 w-full md:w-auto md:flex-1 min-w-[220px]">
+                <div class="w-10 h-10 rounded-2xl bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/30 dark:border-zinc-800/60 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0 shadow-inner transition-transform duration-300 hover:rotate-3">
                     <i class="fa-solid fa-envelope text-sm text-brand-neon"></i>
                 </div>
                 <div>
-                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none">Canal Escrito</p>
-                    <a href="mailto:radiofe418@gmail.com" class="text-xs font-bold text-zinc-800 dark:text-zinc-300 hover:text-brand-neon transition-colors mt-1 block break-all md:break-normal">eliaquinmarin@gmail.com</a>
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none font-mono">Canal Escrito</p>
+                    <a href="mailto:eliaquinmarin@gmail.com" class="text-xs font-bold text-zinc-800 dark:text-zinc-300 hover:text-brand-neon dark:hover:text-brand-neon transition-colors duration-200 mt-1.5 block break-all md:break-normal leading-tight">eliaquinmarin@gmail.com</a>
                 </div>
             </div>
 
-            <!-- Separador visual solo en escritorio si hay espacio -->
-            <div class="hidden md:block w-[1px] h-8 bg-zinc-200 dark:bg-zinc-800/80 self-center"></div>
+            <div class="hidden md:block w-[1px] h-8 bg-zinc-200 dark:bg-zinc-800/60 self-center"></div>
+            <div class="block md:hidden w-full h-[1px] bg-zinc-200 dark:bg-zinc-800/40"></div>
 
-            <!-- Teléfono Directo -->
-            <div class="flex flex-row items-center gap-3.5 px-3 w-full md:w-auto md:flex-1 min-w-[180px]">
-                <div class="w-9 h-9 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0">
-                    <i class="fa-solid fa-phone text-sm text-emerald-500"></i>
+            <div class="flex flex-row items-center gap-4 px-3 py-2 md:py-0 w-full md:w-auto md:flex-1 min-w-[200px]">
+                <div class="w-10 h-10 rounded-2xl bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/30 dark:border-zinc-800/60 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0 shadow-inner transition-transform duration-300 hover:rotate-3">
+                    <i class="fa-solid fa-phone text-sm text-brand-neon"></i>
                 </div>
                 <div>
-                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none">Línea de Cabina</p>
-                    <a href="tel:+584125183677" class="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-300 hover:text-emerald-500 transition-colors mt-1 block whitespace-nowrap">+58 (412) 518-3677</a>
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none font-mono">Línea Máster</p>
+                    <a href="tel:+584125183677" class="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-300 hover:text-brand-neon dark:hover:text-brand-neon transition-colors duration-200 mt-1.5 block whitespace-nowrap leading-tight">+58 (412) 518-3677</a>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-
-
         </div>
     </main>
 
@@ -3487,17 +3458,16 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
         // Configuración de credenciales fijas
         const API_KEY = "AIzaSyDW5Wi6sj-AbQSB0VKnWHGy8Pld7aPv8rk";
         const CHANNEL_ID = "UC8YrtGiUO5ZwEXhPBu1YSjQ"; 
-        const MAX_SHORTS_A_MOSTRAR = 3;
+        // Cambiamos el límite a 4 para asegurar que el móvil reciba su cuarto video
+        const MAX_SHORTS_A_MOSTRAR = 4;
 
-        // Cambiamos a una consulta directa sobre la lista de reproducción automática del canal (Método más estable)
-        // Convertimos el ID de canal convirtiendo la 'C' de la segunda posición en una 'U'
+        // Consulta directa sobre la lista de reproducción automática del canal
         const U_PLAYLIST = CHANNEL_ID.replace(/^UC/, 'UU');
         const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${U_PLAYLIST}&maxResults=10&key=${API_KEY}`;
 
         fetch(url)
             .then(response => {
                 if (!response.ok) {
-                    // Imprime el error exacto en la consola para saber si es culpa de la clave
                     return response.json().then(err => {
                         console.error("Detalle del error de Google:", err);
                         throw new Error(`Código HTTP: ${response.status} - ${err.error.message}`);
@@ -3525,11 +3495,15 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
                     const videoId = item.snippet.resourceId.videoId;
                     const title = item.snippet.title;
 
-                    // Si el título contiene la palabra "short" o si forzamos la vista responsiva de Shorts
                     shortsRenderizados++;
 
+                    // MEJORA PROFESIONAL: Si es el 4to Short, le añadimos clases para ocultarlo en pantallas grandes (sm y superiores)
+                    const responsiveClass = (shortsRenderizados === 4) 
+                        ? 'flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group sm:hidden' 
+                        : 'flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group';
+
                     const shortCard = `
-                        <div class="flex flex-col p-2 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:border-brand-neon shadow-sm group">
+                        <div class="${responsiveClass}">
                             <div class="w-full aspect-[9/16] rounded-xl overflow-hidden mb-2 border border-zinc-300 dark:border-zinc-700/50 relative">
                                 <iframe 
                                     class="absolute top-0 left-0 w-full h-full" 
@@ -3562,7 +3536,7 @@ function shareNews(title, newsUrl, radioUrl, radioTag) {
                 console.error("Error crítico atrapado:", error);
                 document.getElementById('shorts-container').innerHTML = `
                     <div class="col-span-full text-center text-xs text-red-500 py-4">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Error de conexión con YouTube. Revisa la consola (F12) para ver el diagnóstico técnico.
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Error de conexión con YouTube. Revisa la consola para más detalles.
                     </div>`;
             });
 
@@ -3920,66 +3894,71 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetSpan = document.getElementById('sonic_listeners');
     const iconContainer = document.getElementById('live-listeners-icon');
     
-    // Variable para evitar bucles infinitos con el MutationObserver
-    let actualizando = false;
+    // Bandera de control para prevenir recursión infinita en el MutationObserver
+    let isUpdating = false;
 
-    // Función para controlar la visibilidad según los oyentes actuales
-    function verificarOyentes() {
+    /**
+     * Evalúa la audiencia en tiempo real y gestiona de forma profesional
+     * la visualización de los componentes del contador.
+     */
+    function gestionarFlujoAudiencia() {
         if (!targetSpan || !iconContainer) return;
 
-        // Obtenemos el número real de oyentes. 
-        // Si tiene un atributo personalizado 'data-real-value' usamos ese, sino usamos el texto actual.
-        const valorActual = targetSpan.getAttribute('data-real-value') || targetSpan.textContent;
-        const cantidad = parseInt(valorActual, 10) || 0;
+        // Recuperar el valor numérico bruto de forma segura (Prioriza el atributo persistente)
+        const rawValue = targetSpan.getAttribute('data-real-value') || targetSpan.textContent;
+        const totalListeners = parseInt(rawValue, 10) || 0;
 
-        // Guardamos siempre el valor real en un atributo propio para no perderlo
-        targetSpan.setAttribute('data-real-value', cantidad);
+        // Almacenar el valor real en caché de nodo para mantener la persistencia de datos
+        targetSpan.setAttribute('data-real-value', totalListeners);
 
-        if (cantidad >= 10) {
-            // Mostrar icono
+        if (totalListeners >= 10) {
+            // Umbral alcanzado: Renderizar y activar empaquetado visual
             if (iconContainer.classList.contains('hidden')) {
                 iconContainer.classList.remove('hidden');
-                iconContainer.classList.add('flex');
+                iconContainer.classList.add('inline-flex', 'animate-fade-in');
             }
-            // Mostrar el número real
-            if (targetSpan.textContent !== String(cantidad)) {
-                actualizando = true;
-                targetSpan.textContent = cantidad;
-                actualizando = false;
+            
+            // Inyectar el string numérico solo si ha cambiado
+            if (targetSpan.textContent !== String(totalListeners)) {
+                isUpdating = true;
+                targetSpan.textContent = totalListeners;
+                isUpdating = false;
             }
         } else {
-            // Ocultar icono
-            if (iconContainer.classList.contains('flex')) {
-                iconContainer.classList.remove('flex');
+            // Audiencia discreta: Ocultar el módulo y limpiar buffers visuales
+            if (!iconContainer.classList.contains('hidden')) {
+                iconContainer.classList.remove('inline-flex', 'animate-fade-in');
                 iconContainer.classList.add('hidden');
             }
-            // Mientras sea menor a 10, dejamos el texto vacío para que no muestre ningún número
+            
+            // Evitar contaminación visual dejando el nodo de texto despejado
             if (targetSpan.textContent !== '') {
-                actualizando = true;
+                isUpdating = true;
                 targetSpan.textContent = '';
-                actualizando = false;
+                isUpdating = false;
             }
         }
     }
 
     if (targetSpan && iconContainer) {
-        // Observador en tiempo real para reaccionar a las actualizaciones de Supabase
-        const observer = new MutationObserver((mutations) => {
-            // Si la actualización la provocamos nosotros mismos para borrar/poner el número, la ignoramos
-            if (actualizando) return; 
-
-            verificarOyentes();
+        // Monitoreo reactivo asíncrono acoplado a mutaciones externas de Supabase
+        const listenerObserver = new MutationObserver((mutations) => {
+            if (isUpdating) return;
+            gestionarFlujoAudiencia();
         });
 
-        // Configuración del observador
-        observer.observe(targetSpan, { childList: true, characterData: true, subtree: true });
+        // Configuración de interceptores para cambios de texto e inyecciones de nodos hijos
+        listenerObserver.observe(targetSpan, { 
+            childList: true, 
+            characterData: true, 
+            subtree: true 
+        });
 
-        // Evaluación inicial al cargar la página
-        verificarOyentes();
+        // Ejecución inmediata del ciclo de verificación inicial
+        gestionarFlujoAudiencia();
     }
 });
 </script>
-
 <!-- SCRIPT DE OPTIMIZACIÓN DE RENDIMIENTO Y FLUIDEZ DE CARGA -->
 <script>
     (function() {
@@ -4156,5 +4135,141 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(actualizarHistorialVisual, 1000);
 });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Identificar la carátula de tu reproductor
+    // (Asegúrate de que la etiqueta <img> de tu carátula tenga id="track-cover" o ajústalo aquí)
+    const trackCover = document.getElementById('track-cover') || document.querySelector('#sonic_art_container img');
+    
+    if (!trackCover) {
+        console.warn("Extractor de color: No se encontró la etiqueta de la carátula en el DOM.");
+        return;
+    }
+
+    /**
+     * Extrae el color predominante de una imagen de forma nativa e inteligente.
+     * @param {HTMLImageElement} imgElement - El elemento de imagen.
+     */
+    function adaptarPaletaDesdeCaratula(imgElement) {
+        // Validar que la imagen esté completamente cargada y tenga dimensiones válidas
+        if (!imgElement.complete || imgElement.naturalWidth === 0) return;
+
+        try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Muestreo a baja resolución para optimizar rendimiento y promediar el color dominante
+            canvas.width = 40;
+            canvas.height = 40;
+            
+            // Dibujar imagen en el canvas
+            ctx.drawImage(imgElement, 0, 0, 40, 40);
+            
+            // Obtener mapa de píxeles
+            const imgData = ctx.getImageData(0, 0, 40, 40).data;
+            
+            let r = 0, g = 0, b = 0, cuenta = 0;
+            
+            // Iterar saltando de 4 en 4 píxeles para promediar el fondo, ignorando píxeles demasiado oscuros o puros
+            for (let i = 0; i < imgData.length; i += 16) {
+                const R = imgData[i];
+                const G = imgData[i+1];
+                const B = imgData[i+2];
+                const A = imgData[i+3];
+                
+                if (A > 200) { // Ignorar transparencias
+                    r += R;
+                    g += G;
+                    b += B;
+                    cuenta++;
+                }
+            }
+            
+            if (cuenta === 0) return;
+            
+            // Color dominante promedio
+            r = Math.floor(r / cuenta);
+            g = Math.floor(g / cuenta);
+            b = Math.floor(b / cuenta);
+            
+            // Elevar saturación del color si es muy apagado para mantener estética Neon Premium
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2 / 255;
+
+            // Asegurar que el color extraído tenga la suficiente viveza para ser usado como Neón
+            if (max === min) {
+                h = s = 0; // Escala de grises
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                // Si el color es muy pálido, forzamos un boost de vibrancia
+                if (s < 0.4) s = 0.65; 
+                if (l < 0.3) l = 0.45; // Evitar que se mezcle por completo con el fondo oscuro
+            }
+
+            // Convertir de vuelta a RGB vibrante si es necesario o usar el extraído directo
+            const colorDominante = `rgb(${r}, ${g}, ${b})`;
+            const colorGlow = `rgba(${r}, ${g}, ${b}, 0.35)`;
+            const colorGradienteFin = `rgb(${Math.min(r + 40, 255)}, ${Math.max(g - 30, 0)}, ${Math.min(b + 50, 255)})`; // Color complementario calculado en caliente
+
+            // 2. Inyección Dinámica al DOM mediante Variables CSS y mutación de Tailwind
+            document.documentElement.style.setProperty('--dinamico-neon', colorDominante);
+            document.documentElement.style.setProperty('--dinamico-glow', colorGlow);
+            document.documentElement.style.setProperty('--dinamico-neon-pink', colorGradienteFin);
+
+            // 3. Modificar el objeto de configuración de Tailwind en tiempo real
+            if (window.tailwind) {
+                tailwind.config.theme.extend.colors.brand.neon = colorDominante;
+                tailwind.config.theme.extend.colors.brand.neonPink = colorGradienteFin;
+            }
+
+            // 4. Actualizar el color de la barra del navegador (Tema Mobile Safari/Chrome)
+            const metaTheme = document.getElementById('meta-theme-color');
+            if (metaTheme) {
+                // En modo oscuro se queda en zinc-950, en claro se acopla sutilmente
+                metaTheme.setAttribute('content', document.documentElement.classList.contains('dark') ? '#09090b' : colorDominante);
+            }
+
+            console.log(`%c🎨 Paleta Adaptada Exitosamente: ${colorDominante}`, `color: ${colorDominante}; font-weight: bold;`);
+
+        } catch (error) {
+            // Evitar fallos si la imagen viene de un dominio externo sin CORS configurado
+            console.warn("La carátula actual tiene restricciones de CORS. Usando paleta base estándar.");
+        }
+    }
+
+    // --- INTERCEPTOR DE CAMBIOS EN LA CARÁTULA ---
+    
+    // Ejecutar cuando la imagen se cargue inicialmente
+    trackCover.addEventListener('load', () => {
+        adaptarPaletaDesdeCaratula(trackCover);
+    });
+
+    // Soporte para imágenes cruzadas (CORS) por si LastFM o SonicPanel traen arte externo
+    trackCover.crossOrigin = "anonymous";
+
+    // Si la imagen ya estaba cargada en caché al iniciar el script, forzar ejecución
+    if (trackCover.complete) {
+        adaptarPaletaDesdeCaratula(trackCover);
+    }
+
+    // Escucha activa en caso de que un script de SonicPanel reemplace el atributo 'src' de la imagen
+    const observerCaratula = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'src') {
+                // Pequeño delay para asegurar que el buffer gráfico de la nueva carátula esté listo
+                setTimeout(() => {
+                    adaptarPaletaDesdeCaratula(trackCover);
+                }, 100);
+            }
+        });
+    });
+
+    observerCaratula.observe(trackCover, { attributes: true });
+});
+</script>
+
 </body>
 </html>
