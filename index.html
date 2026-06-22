@@ -258,6 +258,7 @@ html {
             background: transparent;
         }
     </style>
+
 <script type="text/javascript">
   (function() {
     var dominioAutorizado = "radiofe418.vercel.app"; // CAMBIA ESTO
@@ -288,7 +289,6 @@ html {
     }
   })();
 </script>   
-
 
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -341,38 +341,9 @@ html {
                     <i class="fa-solid fa-circle-notch animate-spin text-[11px] text-brand-neonPink"></i> 
                     Sincronizando lanzamientos 2026 desde Altar7, ZonaVertical, Reactivoz y HeavenTurn...
                 </span>
+ </div>
+ </div>
             </div>
-        </div>
-        
-    </div>
-</div>
-
-<div class="w-full bg-gradient-to-r from-brand-lightCard/95 via-white/80 to-brand-lightCard/95 dark:from-brand-card/90 dark:via-zinc-950/40 dark:to-brand-card/90 backdrop-blur-xl border-b border-zinc-200/50 dark:border-zinc-800/30 py-2 px-4 transition-all duration-300 relative z-40 shadow-sm">
-    
-    <div class="max-w-7xl mx-auto flex items-center justify-center flex-wrap gap-y-1.5 gap-x-4 text-[11px] sm:text-xs">
-        
-        <div class="flex items-center gap-2 shrink-0 bg-brand-neon/5 dark:bg-brand-neon/10 px-2.5 py-0.5 rounded-full border border-brand-neon/20">
-            <span class="flex h-1.5 w-1.5 relative">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-neon"></span>
-            </span>
-            <span class="font-black text-brand-neon uppercase tracking-widest text-[9px]">
-                A continuación
-            </span>
-        </div>
-
-        <div class="min-w-0 max-w-full">
-            <span id="next-program-title" class="font-black text-transparent bg-clip-text bg-gradient-to-r from-zinc-800 to-zinc-600 dark:from-zinc-100 dark:to-zinc-300 uppercase tracking-wider block truncate max-w-[260px] sm:max-w-md md:max-w-xl">
-                CARGANDO PROGRAMA...
-            </span>
-        </div>
-
-        <div class="flex items-center gap-1.5 font-mono text-[10px] font-black text-zinc-500 dark:text-zinc-400 shrink-0 bg-white/60 dark:bg-zinc-900/50 px-2.5 py-0.5 rounded-lg border border-zinc-200/60 dark:border-zinc-800/50 shadow-sm transition-colors duration-300">
-            <i class="fa-regular fa-clock text-brand-neonPink text-xs animate-pulse"></i>
-            <span id="next-program-time" class="uppercase tracking-widest text-zinc-600 dark:text-zinc-300">00:00 HORA</span>
-        </div>
-
-    </div>
 </div>
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
@@ -400,16 +371,44 @@ html {
     </p>
 </div>
 
-    <!-- Contenedor de Carátula con Efecto Premium -->
-    <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-6 mb-6 relative group cursor-pointer">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl z-10 flex items-center justify-center">
-            <i class="fa-solid fa-radio text-white/80 text-3xl animate-pulse"></i>
-        </div>
-        <img id="track-cover" 
-             src="img/caratula.png" 
-             alt="Carátula" 
-             class="w-full h-full object-cover rounded-2xl shadow-2xl border border-zinc-300/60 dark:border-zinc-700/50 group-hover:scale-[1.02] transition-all duration-500">
+<div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-6 mb-6 relative group cursor-pointer overflow-hidden rounded-2xl">
+    
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl z-10 flex items-center justify-center">
+        <i class="fa-solid fa-radio text-white/80 text-3xl animate-pulse"></i>
     </div>
+    
+    <img id="track-cover" 
+         src="img/caratula.png" 
+         alt="Carátula" 
+         class="w-full h-full object-cover rounded-2xl shadow-2xl border border-zinc-300/60 dark:border-zinc-700/50 group-hover:scale-[1.02] transition-all duration-500">
+
+    <div id="countdown-overlay" class="absolute bottom-2 left-2 right-2 z-20 translate-y-3 opacity-0 pointer-events-none transition-all duration-700 ease-out bg-zinc-950/85 dark:bg-black/85 backdrop-blur-md p-2 rounded-xl border border-white/10 dark:border-zinc-800/80 shadow-xl flex items-center gap-2.5">
+        
+        <div class="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-sm">
+            <img id="next-prog-thumb" src="img/caratula.png" class="w-full h-full object-cover" alt="Siguiente programa">
+        </div>
+
+        <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-1.5 mb-0.5">
+                <span class="inline-flex h-1 w-1 rounded-full bg-brand-neon animate-pulse"></span>
+                <span id="countdown-label" class="block font-black text-brand-neon tracking-widest text-[8px] uppercase leading-none">
+                    Siguiente bloque en --:--
+                </span>
+            </div>
+            <span id="next-prog-name" class="block font-black text-[10px] text-white uppercase tracking-wide truncate leading-tight">
+                Cargando programa...
+            </span>
+            <span id="next-prog-schedule" class="block font-medium font-mono text-[8px] text-zinc-400 dark:text-zinc-500 tracking-wider">
+                00:00 HORA
+            </span>
+        </div>
+
+        <div class="flex items-center justify-center shrink-0 w-7 h-7 bg-white/10 dark:bg-zinc-900/60 border border-white/5 rounded-lg">
+            <i class="fa-regular fa-clock text-brand-neonPink text-[10px]"></i>
+        </div>
+
+    </div>
+</div>
 
     <!-- Títulos de la Emisora -->
     <div class="text-center w-full max-w-md mb-4">
@@ -4270,6 +4269,101 @@ document.addEventListener("DOMContentLoaded", () => {
     observerCaratula.observe(trackCover, { attributes: true });
 });
 </script>
+<script>
+// CONFIGURACIÓN: Datos del siguiente programa (Puedes modificarlos dinámicamente)
+const proxProgramaRadio = {
+    nombre: "Conexión 4:18", 
+    horaInicio: "16:18", // Formato 24 Horas (Ej: 16:18 es 4:18 PM)
+    imagen: "img/caratula.png" // Puedes usar una ruta local o URL de internet
+};
 
+// Captura de elementos de la interfaz
+const domOverlay = document.getElementById('countdown-overlay');
+const domCountdownLabel = document.getElementById('countdown-label');
+const domProgName = document.getElementById('next-prog-name');
+const domProgSchedule = document.getElementById('next-prog-schedule');
+const domProgThumb = document.getElementById('next-prog-thumb');
+
+// Inicializar la información del próximo bloque
+function inicializarInfoSiguiente() {
+    if (!domProgName) return;
+    
+    domProgName.textContent = proxProgramaRadio.nombre.toUpperCase();
+    domProgThumb.src = proxProgramaRadio.imagen;
+    
+    // Convertir y dar formato legible a la hora
+    const [h, m] = proxProgramaRadio.horaInicio.split(':');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const hora12 = h % 12 || 12;
+    domProgSchedule.textContent = `HOY • ${String(hora12).padStart(2, '0')}:${m} ${ampm}`;
+}
+
+// Lógica matemática de la cuenta regresiva
+function procesarCuentaRegresiva() {
+    if (!domCountdownLabel) return;
+
+    const ahora = new Date();
+    const [targetH, targetM] = proxProgramaRadio.horaInicio.split(':').map(Number);
+    
+    let tiempoDestino = new Date();
+    tiempoDestino.setHours(targetH, targetM, 0, 0);
+
+    // Si la hora ya pasó hoy, calcular con base al día de mañana
+    if (tiempoDestino < ahora) {
+        tiempoDestino.setDate(tiempoDestino.getDate() + 1);
+    }
+
+    const diferenciaMs = tiempoDestino - ahora;
+
+    const horas = Math.floor(diferenciaMs / (1000 * 60 * 60));
+    const minutos = Math.floor((diferenciaMs % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferenciaMs % (1000 * 60)) / 1000);
+
+    // Renderizar formato de tiempo
+    let visualTiempo = "";
+    if (horas > 0) {
+        visualTiempo += `${horas}h ${minutos}m`;
+    } else {
+        visualTiempo += `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+    }
+
+    domCountdownLabel.textContent = `Siguiente bloque en ${visualTiempo}`;
+}
+
+// Control inteligente de visibilidad (Bucle no invasivo)
+function inicializarCicloVisibilidad() {
+    if (!domOverlay) return;
+
+    const mostrarAviso = () => {
+        domOverlay.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+        domOverlay.classList.add('opacity-100', 'translate-y-0');
+    };
+
+    const ocultarAviso = () => {
+        domOverlay.classList.remove('opacity-100', 'translate-y-0');
+        domOverlay.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+    };
+
+    // Bucle continuo: Cada 60 segundos muestra la info por 12 segundos
+    setInterval(() => {
+        mostrarAviso();
+        setTimeout(ocultarAviso, 12000); 
+    }, 60000);
+
+    // Primera aparición de cortesía a los 4 segundos de haber entrado a la web
+    setTimeout(() => {
+        mostrarAviso();
+        setTimeout(ocultarAviso, 12000);
+    }, 4000);
+}
+
+// Ejecutar todos los procesos al iniciar la página
+document.addEventListener("DOMContentLoaded", () => {
+    inicializarInfoSiguiente();
+    procesarCuentaRegresiva();
+    setInterval(procesarCuentaRegresiva, 1000); // Actualiza la cuenta segundo a segundo
+    inicializarCicloVisibilidad();
+});
+</script>
 </body>
 </html>
