@@ -341,9 +341,51 @@ html {
                     <i class="fa-solid fa-circle-notch animate-spin text-[11px] text-brand-neonPink"></i> 
                     Sincronizando lanzamientos 2026 desde Altar7, ZonaVertical, Reactivoz y HeavenTurn...
                 </span>
- </div>
- </div>
             </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="relative z-40 w-full select-none border-b border-zinc-200/60 bg-gradient-to-r from-brand-lightCard/95 via-white/90 to-brand-lightCard/95 px-4 py-2.5 shadow-sm backdrop-blur-xl transition-all duration-300 dark:border-zinc-800/40 dark:from-brand-card/90 dark:via-zinc-950/50 dark:to-brand-card/90">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-center gap-y-3 gap-x-8 text-xs md:flex-row">
+        
+        <div class="flex w-full flex-col items-center justify-center gap-2 text-center sm:flex-row md:w-auto">
+            <span class="relative flex items-center gap-1.5 rounded-md border border-zinc-300/50 bg-zinc-200/60 px-2 py-0.5 font-mono text-[9px] font-black tracking-widest text-zinc-500 shadow-inner dark:border-zinc-800/50 dark:bg-zinc-900/70 dark:text-zinc-400">
+                <span class="relative flex h-1.5 w-1.5">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                </span>
+                PRÓXIMO
+            </span>
+            
+            <div class="flex items-center justify-center gap-2 text-[11px] sm:text-xs">
+                <span id="cintillo-program-title" class="bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-600 bg-clip-text font-black uppercase tracking-wider text-transparent dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-400">
+                    Sincronizando...
+                </span>
+            </div>
+        </div>
+
+        <div class="hidden h-4 w-px shrink-0 bg-zinc-200 dark:bg-zinc-800/80 md:block"></div>
+
+        <a id="cintillo-whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" 
+           class="group relative flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-white/70 px-4 py-1.5 font-mono text-[11px] font-black shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-500/40 hover:bg-white hover:shadow-md hover:shadow-emerald-500/5 active:translate-y-0 active:scale-98 dark:border-emerald-400/10 dark:bg-zinc-900/50 dark:hover:border-emerald-400/30 dark:hover:bg-zinc-900"
+           title="¡Escríbenos por WhatsApp para este programa!">
+            
+            <i class="fa-brands fa-whatsapp text-sm text-emerald-500 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 dark:text-emerald-400"></i>
+            
+            <span id="countdown-label" class="font-sans text-[9px] font-extrabold uppercase tracking-widest text-zinc-400 transition-colors duration-300 group-hover:text-emerald-500 dark:text-zinc-500 dark:group-hover:text-emerald-400">
+                INICIA EN:
+            </span>
+            
+            <span id="cintillo-program-time" class="bg-gradient-to-r from-[var(--dinamico-neon,#06b6d4)] to-[var(--dinamico-neon-pink,#ec4899)] bg-clip-text font-black tracking-widest text-transparent sm:text-xs">
+                00:00:00
+            </span>
+            
+            <span class="absolute inset-0 -z-10 rounded-full bg-emerald-500/0 opacity-0 blur-md transition-all duration-300 group-hover:bg-emerald-500/5 group-hover:opacity-100"></span>
+        </a>
+
+    </div>
 </div>
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
@@ -371,44 +413,16 @@ html {
     </p>
 </div>
 
-<div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-6 mb-6 relative group cursor-pointer overflow-hidden rounded-2xl">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl z-10 flex items-center justify-center">
-        <i class="fa-solid fa-radio text-white/80 text-3xl animate-pulse"></i>
+    <!-- Contenedor de Carátula con Efecto Premium -->
+    <div id="sonic_art_container" class="w-60 h-60 md:w-72 md:h-72 mt-6 mb-6 relative group cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl z-10 flex items-center justify-center">
+            <i class="fa-solid fa-radio text-white/80 text-3xl animate-pulse"></i>
+        </div>
+        <img id="track-cover" 
+             src="img/caratula.png" 
+             alt="Carátula" 
+             class="w-full h-full object-cover rounded-2xl shadow-2xl border border-zinc-300/60 dark:border-zinc-700/50 group-hover:scale-[1.02] transition-all duration-500">
     </div>
-    
-    <img id="track-cover" 
-         src="img/caratula.png" 
-         alt="Carátula" 
-         class="w-full h-full object-cover rounded-2xl shadow-2xl border border-zinc-300/60 dark:border-zinc-700/50 group-hover:scale-[1.02] transition-all duration-500">
-
-    <div id="countdown-overlay" class="absolute bottom-2 left-2 right-2 z-20 translate-y-3 opacity-0 pointer-events-none transition-all duration-700 ease-out bg-zinc-950/85 dark:bg-black/85 backdrop-blur-md p-2 rounded-xl border border-white/10 dark:border-zinc-800/80 shadow-xl flex items-center gap-2.5">
-        
-        <div class="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-sm">
-            <img id="next-prog-thumb" src="img/caratula.png" class="w-full h-full object-cover" alt="Siguiente programa">
-        </div>
-
-        <div class="min-w-0 flex-1">
-            <div class="flex items-center gap-1.5 mb-0.5">
-                <span class="inline-flex h-1 w-1 rounded-full bg-brand-neon animate-pulse"></span>
-                <span id="countdown-label" class="block font-black text-brand-neon tracking-widest text-[8px] uppercase leading-none">
-                    Siguiente bloque en --:--
-                </span>
-            </div>
-            <span id="next-prog-name" class="block font-black text-[10px] text-white uppercase tracking-wide truncate leading-tight">
-                Cargando programa...
-            </span>
-            <span id="next-prog-schedule" class="block font-medium font-mono text-[8px] text-zinc-400 dark:text-zinc-500 tracking-wider">
-                00:00 HORA
-            </span>
-        </div>
-
-        <div class="flex items-center justify-center shrink-0 w-7 h-7 bg-white/10 dark:bg-zinc-900/60 border border-white/5 rounded-lg">
-            <i class="fa-regular fa-clock text-brand-neonPink text-[10px]"></i>
-        </div>
-
-    </div>
-</div>
 
     <!-- Títulos de la Emisora -->
     <div class="text-center w-full max-w-md mb-4">
@@ -4270,100 +4284,112 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 <script>
-// CONFIGURACIÓN: Datos del siguiente programa (Puedes modificarlos dinámicamente)
-const proxProgramaRadio = {
-    nombre: "Conexión 4:18", 
-    horaInicio: "16:18", // Formato 24 Horas (Ej: 16:18 es 4:18 PM)
-    imagen: "img/caratula.png" // Puedes usar una ruta local o URL de internet
-};
+(function() {
+    // Parrilla Oficial Completa de Radio FE 4:18
+    const parrillaProgramas = [
+        { dia: 1, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
+        { dia: 3, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
+        { dia: 5, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
+        { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "MUJERES CON PROPOSITO" },
+        { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "ALEJANDRO ARTIGAZ" },
+        { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "ELIO FRANCO" },
+        { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "HOMBRES DE VALOR" },
+        { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Eliaquin & Damiana" },
+        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+        { dia: 0, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+        { dia: 1, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+        { dia: 2, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+        { dia: 3, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+        { dia: 4, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+        { dia: 5, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+        { dia: 6, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+        { dia: 0, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+        { dia: 1, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+        { dia: 2, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+        { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+        { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+        { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+        { dia: 6, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+        { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Jesus Marin" }
+    ];
 
-// Captura de elementos de la interfaz
-const domOverlay = document.getElementById('countdown-overlay');
-const domCountdownLabel = document.getElementById('countdown-label');
-const domProgName = document.getElementById('next-prog-name');
-const domProgSchedule = document.getElementById('next-prog-schedule');
-const domProgThumb = document.getElementById('next-prog-thumb');
+    function actualizarCintilloDinamico() {
+        const titleEl = document.getElementById('cintillo-program-title');
+        const timeEl = document.getElementById('cintillo-program-time');
+        const whatsappLinkEl = document.getElementById('cintillo-whatsapp-link');
+        
+        if (!titleEl || !timeEl) return;
 
-// Inicializar la información del próximo bloque
-function inicializarInfoSiguiente() {
-    if (!domProgName) return;
-    
-    domProgName.textContent = proxProgramaRadio.nombre.toUpperCase();
-    domProgThumb.src = proxProgramaRadio.imagen;
-    
-    // Convertir y dar formato legible a la hora
-    const [h, m] = proxProgramaRadio.horaInicio.split(':');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const hora12 = h % 12 || 12;
-    domProgSchedule.textContent = `HOY • ${String(hora12).padStart(2, '0')}:${m} ${ampm}`;
-}
+        const ahora = new Date();
+        const diaActual = ahora.getDay();
 
-// Lógica matemática de la cuenta regresiva
-function procesarCuentaRegresiva() {
-    if (!domCountdownLabel) return;
+        let proximoProg = null;
+        let fechaObjetivo = null;
+        let menorDiferencia = Infinity;
 
-    const ahora = new Date();
-    const [targetH, targetM] = proxProgramaRadio.horaInicio.split(':').map(Number);
-    
-    let tiempoDestino = new Date();
-    tiempoDestino.setHours(targetH, targetM, 0, 0);
+        parrillaProgramas.forEach(prog => {
+            const [horas, minutos] = prog.horaInicio.split(':').map(Number);
+            let pFecha = new Date(ahora);
+            pFecha.setHours(horas, minutos, 0, 0);
 
-    // Si la hora ya pasó hoy, calcular con base al día de mañana
-    if (tiempoDestino < ahora) {
-        tiempoDestino.setDate(tiempoDestino.getDate() + 1);
+            let diferenciaDias = prog.dia - diaActual;
+            
+            if (diferenciaDias < 0 || (diferenciaDias === 0 && pFecha <= ahora)) {
+                diferenciaDias += 7;
+            }
+            
+            pFecha.setDate(pFecha.getDate() + diferenciaDias);
+            const diferenciaMs = pFecha - ahora;
+
+            if (diferenciaMs < menorDiferencia) {
+                menorDiferencia = diferenciaMs;
+                proximoProg = prog;
+                fechaObjetivo = pFecha;
+            }
+        });
+
+        if (fechaObjetivo && proximoProg) {
+            const totalSegundos = Math.floor(menorDiferencia / 1000);
+
+            if (totalSegundos <= 0) {
+                timeEl.innerText = "00:00:00";
+                return;
+            }
+
+            const horas = String(Math.floor(totalSegundos / 3600)).padStart(2, '0');
+            const minutos = String(Math.floor((totalSegundos % 3600) / 60)).padStart(2, '0');
+            const segundos = String(totalSegundos % 60).padStart(2, '0');
+
+            const nombreDisplay = `${proximoProg.nombre} — CON ${proximoProg.dj.toUpperCase()}`;
+
+            // 1. Actualizar título del programa
+            if (titleEl.textContent !== nombreDisplay) {
+                titleEl.textContent = nombreDisplay;
+            }
+            
+            // 2. Actualizar el temporizador en vivo
+            timeEl.innerText = `${horas}:${minutos}:${segundos}`;
+
+            // 3. Modificar el link de WhatsApp dinámicamente con el texto personalizado y link de la radio
+            if (whatsappLinkEl) {
+                const mensajeBase = `¡Hola! Ya estoy listo esperando el próximo programa: *${proximoProg.nombre}* con *${proximoProg.dj}*. Sintonizando desde la web oficial de la radio: https://radiofe418.vercel.app/`;
+                const mensajeCodificado = encodeURIComponent(mensajeBase);
+                whatsappLinkEl.href = `https://wa.me/584125183677?text=${mensajeCodificado}`;
+            }
+        }
     }
 
-    const diferenciaMs = tiempoDestino - ahora;
-
-    const horas = Math.floor(diferenciaMs / (1000 * 60 * 60));
-    const minutos = Math.floor((diferenciaMs % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferenciaMs % (1000 * 60)) / 1000);
-
-    // Renderizar formato de tiempo
-    let visualTiempo = "";
-    if (horas > 0) {
-        visualTiempo += `${horas}h ${minutos}m`;
-    } else {
-        visualTiempo += `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
-    }
-
-    domCountdownLabel.textContent = `Siguiente bloque en ${visualTiempo}`;
-}
-
-// Control inteligente de visibilidad (Bucle no invasivo)
-function inicializarCicloVisibilidad() {
-    if (!domOverlay) return;
-
-    const mostrarAviso = () => {
-        domOverlay.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
-        domOverlay.classList.add('opacity-100', 'translate-y-0');
-    };
-
-    const ocultarAviso = () => {
-        domOverlay.classList.remove('opacity-100', 'translate-y-0');
-        domOverlay.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
-    };
-
-    // Bucle continuo: Cada 60 segundos muestra la info por 12 segundos
-    setInterval(() => {
-        mostrarAviso();
-        setTimeout(ocultarAviso, 12000); 
-    }, 60000);
-
-    // Primera aparición de cortesía a los 4 segundos de haber entrado a la web
     setTimeout(() => {
-        mostrarAviso();
-        setTimeout(ocultarAviso, 12000);
-    }, 4000);
-}
-
-// Ejecutar todos los procesos al iniciar la página
-document.addEventListener("DOMContentLoaded", () => {
-    inicializarInfoSiguiente();
-    procesarCuentaRegresiva();
-    setInterval(procesarCuentaRegresiva, 1000); // Actualiza la cuenta segundo a segundo
-    inicializarCicloVisibilidad();
-});
+        actualizarCintilloDinamico();
+        setInterval(actualizarCintilloDinamico, 1000);
+    }, 400);
+})();
 </script>
 </body>
 </html>
