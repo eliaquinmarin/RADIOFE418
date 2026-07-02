@@ -452,26 +452,21 @@ html {
         </span>
         <div class="flex items-center space-x-1">
 <!-- Contenedor Segmentado Premium para el Selector de Calidad -->
-<div class="flex items-center gap-1 p-1 bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/40 dark:border-zinc-800/50 rounded-2xl w-full max-w-sm mx-auto backdrop-blur-sm transition-colors duration-300">
+<div class="flex items-center gap-1 p-1 bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/40 dark:border-zinc-800/50 rounded-2xl w-full max-w-sm backdrop-blur-sm transition-colors duration-300">
     
     <!-- Opción: 64 Kbps (Estado Inactivo / Estado Base) -->
-    <button id="quality-64" class="flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 py-2 px-3 rounded-xl text-[11px] font-bold tracking-wide transition-all duration-300 border border-transparent bg-transparent text-zinc-500 dark:text-zinc-400 hover:bg-zinc-300/40 dark:hover:bg-zinc-800/40 hover:text-zinc-800 dark:hover:text-zinc-200 focus:outline-none group">
-        <div class="flex items-center gap-1.5">
-            <i class="fa-solid fa-gauge-simple-high opacity-60 text-[10px] group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors"></i>
-            <span>64 Kbps</span>
-        </div>
-        <span class="text-[9px] font-medium opacity-50 tracking-normal text-zinc-600 dark:text-zinc-400 sm:before:content-['•_'] sm:before:mx-0.5">Móvil</span>
+<button id="quality-64" class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-[11px] font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-300/40 dark:hover:bg-zinc-800/40 transition-all duration-300">
+        <i class="fa-solid fa-signal-low opacity-60"></i>
+        <span>64 Kbps</span>
+        <span class="hidden sm:inline opacity-50 font-normal">/ Ahorro</span>
     </button>
 
     <!-- Opción: 128 Kbps (Estado Activo / Seleccionado por defecto) -->
-    <button id="quality-128" class="flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 py-2 px-3 rounded-xl text-[11px] font-black tracking-wide transition-all duration-300 focus:outline-none border border-brand-neon/20 dark:border-brand-neon/30 bg-white dark:bg-zinc-800 text-brand-neon shadow-sm shadow-brand-neon/5">
-        <div class="flex items-center gap-1.5">
-            <i class="fa-solid fa-bolt text-[10px] animate-pulse text-brand-neon"></i>
-            <span>128 Kbps</span>
-        </div>
-        <span class="text-[8px] font-black tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-brand-neon text-black dark:text-zinc-950 scale-90 sm:scale-95 origin-center">HD</span>
+<button id="quality-128" class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-[11px] font-black text-brand-neon bg-white dark:bg-zinc-800 shadow-sm border border-brand-neon/20 transition-all duration-300">
+        <i class="fa-solid fa-bolt text-brand-neon"></i>
+        <span>128 Kbps</span>
+        <span class="hidden sm:inline text-[8px] font-black uppercase px-1.5 py-0.5 rounded-md bg-brand-neon text-white">HD</span>
     </button>
-
 </div>
         </div>
     </div>
