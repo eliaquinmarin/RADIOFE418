@@ -1350,54 +1350,68 @@ html {
     </div>
 </section>
 
-<section id="muro-interactivo" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl">
+<section id="promo-youtube" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl">
     
+    <!-- Encabezado de la Tarjeta -->
     <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-200/60 dark:border-zinc-800/60 select-none">
         <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
-            <i class="fa-solid fa-heart-pulse mr-2.5 text-brand-neonPink animate-pulse"></i> 
-            Muro de Fe <span class="mx-1 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">Saludos</span>
+            <i class="fa-brands fa-youtube mr-2.5 text-red-600 text-base animate-pulse"></i> 
+            Canal de YouTube <span class="mx-1 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">@EliaquinMarin</span>
         </h4>
         <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300/40 dark:border-zinc-800 text-zinc-500 dark:text-brand-neon font-mono">
-            En Vivo
+            Oficial
         </span>
     </div>
 
-    <button id="btn-abrir-formulario" class="w-full py-3 px-4 mb-4 rounded-xl border border-brand-neon text-brand-neon bg-brand-neon/5 hover:bg-brand-neon hover:text-black dark:hover:text-black transition-all duration-300 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer">
-        <i class="fa-solid fa-pen-to-square"></i>
-        <span>Dejar un Saludo o Mensaje de Fe</span>
-    </button>
-
-    <div id="wrapper-formulario-muro" class="overflow-hidden transition-all duration-500 max-h-0">
-        <form id="sheet-message-form" class="space-y-3.5 mb-5 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/40 dark:bg-zinc-900/30">
-            <div class="grid grid-cols-1 gap-3">
-                <input type="text" id="sheet-name" required placeholder="Tu nombre..." 
-                       class="w-full p-2.5 text-xs bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none text-zinc-800 dark:text-gray-100">
-                
-                <div class="relative flex items-center">
-                    <textarea id="sheet-msg" required maxlength="180" rows="2" placeholder="Escribe tu mensaje (Máx. 180)..." 
-                              class="w-full p-2.5 pr-12 text-xs bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none resize-none text-zinc-800 dark:text-gray-100"></textarea>
-                    <span id="msg-counter" class="absolute right-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 transition-all duration-200">180</span>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <button type="submit" id="sheet-submit-btn" class="flex-1 py-2 bg-brand-neon text-black font-black uppercase text-[10px] tracking-wider rounded-xl hover:bg-cyan-400 transition-all duration-200 cursor-pointer">
-                    <i class="fa-solid fa-paper-plane mr-1.5"></i>Publicar Mensaje
-                </button>
-                <button type="button" id="btn-cancelar-muro" class="py-2 px-3 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-bold uppercase text-[10px] tracking-wider rounded-xl hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 cursor-pointer">
-                    Cancelar
-                </button>
-            </div>
-        </form>
+    <!-- Contenido Principal / Llamado a la Acción -->
+    <div class="text-center py-2 mb-4">
+        <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed">
+            Únete a nuestra comunidad y edifica tu vida con cada video. ¡Tu apoyo hace la diferencia!
+        </p>
     </div>
 
-    <div id="messages-display-container" class="flex flex-col gap-3 max-h-[320px] overflow-y-auto pr-1 custom-scrollbar">
-        <div class="text-center py-6 text-xs text-zinc-400 dark:text-zinc-500 animate-pulse">
-            <i class="fa-solid fa-rotate fa-spin mr-2 text-brand-neon"></i> Sincronizando peticiones del muro...
+    <!-- Botón Principal de Suscripción -->
+    <a href="https://www.youtube.com/@EliaquinMarin?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 mb-5 rounded-xl bg-red-600 hover:bg-red-700 text-white transition-all duration-300 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-red-600/20 hover:shadow-red-600/30 dynamic-bounce">
+        <i class="fa-brands fa-youtube text-sm"></i>
+        <span>Suscribirse al Canal</span>
+    </a>
+
+    <!-- Lista Interactiva de Acciones -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        
+        <div class="flex items-center gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/40 dark:bg-zinc-900/30">
+            <div class="w-8 h-8 rounded-lg bg-brand-neon/10 flex items-center justify-center text-brand-neon text-xs">
+                <i class="fa-solid fa-thumbs-up"></i>
+            </div>
+            <div>
+                <h5 class="text-[11px] font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200">Dale Me Gusta</h5>
+                <p class="text-[10px] text-zinc-500 dark:text-zinc-400">Apoya el contenido</p>
+            </div>
         </div>
-    </div>
-</section>
 
+        <div class="flex items-center gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/40 dark:bg-zinc-900/30">
+            <div class="w-8 h-8 rounded-lg bg-brand-neonPink/10 flex items-center justify-center text-brand-neonPink text-xs">
+                <i class="fa-solid fa-comment-dots"></i>
+            </div>
+            <div>
+                <h5 class="text-[11px] font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200">Comenta</h5>
+                <p class="text-[10px] text-zinc-500 dark:text-zinc-400">Queremos leerte</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/40 dark:bg-zinc-900/30 sm:col-span-1">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-500 text-xs">
+                <i class="fa-solid fa-share-nodes"></i>
+            </div>
+            <div>
+                <h5 class="text-[11px] font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200">Comparte</h5>
+                <p class="text-[10px] text-zinc-500 dark:text-zinc-400">Llega a más personas</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
 <section class="w-full max-w-7xl mx-auto mt-8 px-4 select-none">
     <div class="w-full bg-brand-lightCard/70 dark:bg-zinc-950/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 shadow-xl neon-glow">
         
