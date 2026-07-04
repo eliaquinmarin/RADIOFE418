@@ -288,7 +288,7 @@ html {
       }, 3000);
     }
   })();
-</script>   
+</script>
 
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
@@ -491,6 +491,31 @@ html {
             <i class="fa-solid fa-heart text-sm transition-transform duration-300 group-hover:scale-125 animate-pulse"></i>
             <span>Apoya nuestra Radio FE 4:18</span>
         </button>
+    </div>
+</section>
+
+<!-- OPCIÓN 1: SECCIÓN DE PRESENTACIÓN EN EL CUERPO PRINCIPAL -->
+<section class="w-full max-w-4xl mx-auto mt-12 mb-8 px-4 animate-fade-in">
+    <div class="bg-zinc-50/60 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 p-6 md:p-8 rounded-3xl transition-all duration-300 shadow-sm">
+        
+        <!-- Título con diseño moderno -->
+        <div class="flex items-center space-x-3 mb-4">
+            <div class="w-2 h-6 bg-gradient-to-b from-brand-neon to-brand-neonPink rounded-full"></div>
+            <h2 class="text-md md:text-lg font-black tracking-wider uppercase bg-gradient-to-r from-brand-neon to-brand-neonPink bg-clip-text text-transparent">
+                Nuestra Misión y Señal
+            </h2>
+        </div>
+
+        <!-- Cuerpo del texto optimizado para SEO -->
+        <div class="space-y-4 text-sm text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed">
+            <p>
+                Bienvenidos a <strong class="text-zinc-800 dark:text-zinc-200">Radio FE 4:18</strong>, una estación de radio cristiana transmitiendo de forma digital desde Barinas, Venezuela. Nuestra visión es ser un faro de luz en internet, compartiendo la palabra de Dios y promoviendo valores a través de contenido edificante las 24 horas del día.
+            </p>
+            <p>
+                A través de nuestra plataforma, puedes sintonizar una cuidada selección de <strong class="text-zinc-800 dark:text-zinc-200">música cristiana contemporánea</strong>, reflexiones bíblicas de impacto y espacios dedicados a la oración comunitaria. Acompaña tus días con una señal optimizada en alta fidelidad y llena tu hogar de paz y fe.
+            </p>
+        </div>
+
     </div>
 </section>
 
@@ -772,8 +797,6 @@ html {
 </section>
 
 
-
-<!-- LÓGICA DE INTERACCIÓN CON GOOGLE SHEETS SIN SALIR DE LA PÁGINA -->
 <script>
     const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbywCTcq3Q2-sqN0t_FI5ulxPIf2gCW84-blz2BFMFjN3L6K3OkafU4s3KsEcLuUBQHqGw/exec";
 
@@ -789,20 +812,22 @@ html {
     const msgCounter = document.getElementById('msg-counter');
 
     // Escuchador en tiempo real para actualizar el contador numérico
-    msgInput.addEventListener('input', () => {
-        const caracteresRestantes = 180 - msgInput.value.length;
-        msgCounter.textContent = caracteresRestantes;
-        
-        if (caracteresRestantes <= 20) {
-            msgCounter.className = "absolute right-3 text-[10px] font-black text-brand-neonPink pointer-events-none animate-pulse";
-        } else {
-            msgCounter.className = "absolute right-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 pointer-events-none";
-        }
-    });
+    if (msgInput && msgCounter) {
+        msgInput.addEventListener('input', () => {
+            const caracteresRestantes = 180 - msgInput.value.length;
+            msgCounter.textContent = caracteresRestantes;
+            
+            if (caracteresRestantes <= 20) {
+                msgCounter.className = "absolute right-3 text-[10px] font-black text-brand-neonPink pointer-events-none animate-pulse";
+            } else {
+                msgCounter.className = "absolute right-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 pointer-events-none";
+            }
+        });
+    }
 
-    // Manejo del estado colapsable del panel de escritura
+   // Manejo del estado colapsable del panel de escritura
     btnAbrirFormulario.addEventListener('click', () => {
-        wrapperFormulario.style.maxHeight = '300px'; 
+        wrapperFormulario.style.maxHeight = '400px'; 
         btnAbrirFormulario.classList.add('hidden');  
     });
 
@@ -815,10 +840,13 @@ html {
         }, 350);
     }
 
-    btnCancelarMuro.addEventListener('click', cerrarFormularioAnimado);
+    if (btnCancelarMuro) {
+        btnCancelarMuro.addEventListener('click', cerrarFormularioAnimado);
+    }
 
-    // Función para obtener y renderizar los mensajes actualizados (Siempre máximo 5)
+    // Función para obtener y renderizar los mensajes actualizados (Muestra los 4 que devuelve tu script)
     async function fetchMuroMensajes() {
+        if (!displayContainer) return;
         try {
             const response = await fetch(GOOGLE_WEB_APP_URL);
             if (!response.ok) throw new Error('Error de red');
@@ -826,7 +854,7 @@ html {
 
             displayContainer.innerHTML = "";
 
-            if (mensajes.length === 0) {
+            if (!mensajes || mensajes.length === 0) {
                 displayContainer.innerHTML = `
                     <div class="text-center py-4 text-xs font-semibold text-zinc-500 dark:text-zinc-400 italic">
                         Sé el primero en dejar un mensaje de fe o saludo de aliento.
@@ -834,19 +862,19 @@ html {
                 return;
             }
 
-            // MODIFICADO: .slice(0, 5) extrae estrictamente los primeros 5 elementos del array devuelto
-            mensajes.slice(0, 5).forEach(item => {
+            // Muestra los elementos del array devuelto (Tu script devuelve un top 4)
+            mensajes.forEach(item => {
                 const messageCard = document.createElement('div');
                 messageCard.className = "p-3.5 bg-white/60 dark:bg-zinc-900/30 border border-zinc-200/70 dark:border-zinc-800 rounded-2xl shadow-sm transition-all duration-300 hover:border-brand-neon/40 animate-fade-in";
                 
                 messageCard.innerHTML = `
                     <div class="flex items-start justify-between gap-2">
                         <span class="font-black text-xs uppercase tracking-wider text-brand-neon bg-brand-neon/5 dark:bg-brand-neon/10 px-2.5 py-1 rounded-lg">
-                            <i class="fa-solid fa-user mr-1.5 text-[10px]"></i>${escapeHTML(item.nombre)}
+                            <i class="fa-solid fa-user mr-1.5 text-[10px]"></i>${escapeHTML(item.nombre || 'Anónimo')}
                         </span>
                     </div>
                     <p class="text-sm mt-2 text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium pl-1">
-                        ${escapeHTML(item.mensaje)}
+                        ${escapeHTML(item.mensaje || '')}
                     </p>
                 `;
                 displayContainer.appendChild(messageCard);
@@ -862,53 +890,65 @@ html {
     }
 
     // Manejar el envío del formulario mediante solicitudes asíncronas de fondo (AJAX/Fetch)
-    sheetForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const nombreInput = document.getElementById('sheet-name').value.trim();
-        const mensajeInput = msgInput.value.trim();
-
-        if(!nombreInput || !mensajeInput) return;
-
-        sheetSubmitBtn.disabled = true;
-        const originalBtnContent = sheetSubmitBtn.innerHTML;
-        sheetSubmitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Publicando...`;
-
-        const payload = {
-            nombre: nombreInput,
-            mensaje: mensajeInput
-        };
-
-        try {
-            await fetch(GOOGLE_WEB_APP_URL, {
-                method: 'POST',
-                mode: 'no-cors', 
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            sheetForm.reset();
-            cerrarFormularioAnimado();
+    if (sheetForm) {
+        sheetForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            setTimeout(() => {
-                fetchMuroMensajes();
-            }, 800);
+            const nombreInput = document.getElementById('sheet-name').value.trim();
+            const mensajeInput = msgInput ? msgInput.value.trim() : '';
 
-        } catch (error) {
-            console.error("Error al publicar:", error);
-        } finally {
-            sheetSubmitBtn.disabled = false;
-            sheetSubmitBtn.innerHTML = originalBtnContent;
-        }
-    });
+            if(!nombreInput || !mensajeInput) return;
 
-    function escapeHTML(str) {
-        return str.replace(/[&<>'"]/g, 
-            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-        );
+            sheetSubmitBtn.disabled = true;
+            const originalBtnContent = sheetSubmitBtn.innerHTML;
+            sheetSubmitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Publicando...`;
+
+            const payload = {
+                nombre: nombreInput,
+                mensaje: mensajeInput
+            };
+
+            try {
+                // MODIFICACIÓN CRÍTICA: Enviamos el JSON como text/plain bajo modo no-cors.
+                // Esto evita el error de CORS y permite que `e.postData.contents` reciba el string JSON perfectamente en tu Apps Script.
+                await fetch(GOOGLE_WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    headers: { 'Content-Type': 'text/plain' }, 
+                    body: JSON.stringify(payload)
+                });
+
+                sheetForm.reset();
+                cerrarFormularioAnimado();
+                
+                // Espera 1.2 segundos para darle margen de escritura a la API de Google Sheets
+                setTimeout(() => {
+                    fetchMuroMensajes();
+                }, 1200);
+
+            } catch (error) {
+                console.error("Error al publicar:", error);
+            } finally {
+                sheetSubmitBtn.disabled = false;
+                sheetSubmitBtn.innerHTML = originalBtnContent;
+            }
+        });
     }
 
-    document.addEventListener('DOMContentLoaded', fetchMuroMensajes);
+    function escapeHTML(str) {
+        if (!str) return '';
+        return str.replace(/[&<>'"]/g, tag => {
+            const chars = { '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' };
+            return chars[tag] || tag;
+        });
+    }
+
+    // Inicializar la carga del muro de manera segura
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fetchMuroMensajes);
+    } else {
+        fetchMuroMensajes();
+    }
 </script>
         </div> 
        
@@ -1310,6 +1350,54 @@ html {
     </div>
 </section>
 
+<section id="muro-interactivo" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl">
+    
+    <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-200/60 dark:border-zinc-800/60 select-none">
+        <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
+            <i class="fa-solid fa-heart-pulse mr-2.5 text-brand-neonPink animate-pulse"></i> 
+            Muro de Fe <span class="mx-1 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">Saludos</span>
+        </h4>
+        <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300/40 dark:border-zinc-800 text-zinc-500 dark:text-brand-neon font-mono">
+            En Vivo
+        </span>
+    </div>
+
+    <button id="btn-abrir-formulario" class="w-full py-3 px-4 mb-4 rounded-xl border border-brand-neon text-brand-neon bg-brand-neon/5 hover:bg-brand-neon hover:text-black dark:hover:text-black transition-all duration-300 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span>Dejar un Saludo o Mensaje de Fe</span>
+    </button>
+
+    <div id="wrapper-formulario-muro" class="overflow-hidden transition-all duration-500 max-h-0">
+        <form id="sheet-message-form" class="space-y-3.5 mb-5 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/40 dark:bg-zinc-900/30">
+            <div class="grid grid-cols-1 gap-3">
+                <input type="text" id="sheet-name" required placeholder="Tu nombre..." 
+                       class="w-full p-2.5 text-xs bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none text-zinc-800 dark:text-gray-100">
+                
+                <div class="relative flex items-center">
+                    <textarea id="sheet-msg" required maxlength="180" rows="2" placeholder="Escribe tu mensaje (Máx. 180)..." 
+                              class="w-full p-2.5 pr-12 text-xs bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none resize-none text-zinc-800 dark:text-gray-100"></textarea>
+                    <span id="msg-counter" class="absolute right-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 transition-all duration-200">180</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button type="submit" id="sheet-submit-btn" class="flex-1 py-2 bg-brand-neon text-black font-black uppercase text-[10px] tracking-wider rounded-xl hover:bg-cyan-400 transition-all duration-200 cursor-pointer">
+                    <i class="fa-solid fa-paper-plane mr-1.5"></i>Publicar Mensaje
+                </button>
+                <button type="button" id="btn-cancelar-muro" class="py-2 px-3 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-bold uppercase text-[10px] tracking-wider rounded-xl hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 cursor-pointer">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="messages-display-container" class="flex flex-col gap-3 max-h-[320px] overflow-y-auto pr-1 custom-scrollbar">
+        <div class="text-center py-6 text-xs text-zinc-400 dark:text-zinc-500 animate-pulse">
+            <i class="fa-solid fa-rotate fa-spin mr-2 text-brand-neon"></i> Sincronizando peticiones del muro...
+        </div>
+    </div>
+</section>
+
 <section class="w-full max-w-7xl mx-auto mt-8 px-4 select-none">
     <div class="w-full bg-brand-lightCard/70 dark:bg-zinc-950/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 shadow-xl neon-glow">
         
@@ -1366,7 +1454,8 @@ html {
         </div>
     </div>
 </section>
-        </div>
+ 
+ </div>
     </main>
 
 <footer class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800/80 mt-12 pt-8 pb-24 md:pb-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 relative z-50">
@@ -4288,5 +4377,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 400);
 })();
 </script>
+
 </body>
 </html>
