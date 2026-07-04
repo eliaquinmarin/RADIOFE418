@@ -290,6 +290,7 @@ html {
   })();
 </script>
 
+
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
     
@@ -829,159 +830,6 @@ html {
 </section>
 
 
-<script>
-    const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbywCTcq3Q2-sqN0t_FI5ulxPIf2gCW84-blz2BFMFjN3L6K3OkafU4s3KsEcLuUBQHqGw/exec";
-
-    const btnAbrirFormulario = document.getElementById('btn-abrir-formulario');
-    const btnCancelarMuro = document.getElementById('btn-cancelar-muro');
-    const wrapperFormulario = document.getElementById('wrapper-formulario-muro');
-    const sheetForm = document.getElementById('sheet-message-form');
-    const sheetSubmitBtn = document.getElementById('sheet-submit-btn');
-    const displayContainer = document.getElementById('messages-display-container');
-    
-    // Elementos del control de caracteres
-    const msgInput = document.getElementById('sheet-msg');
-    const msgCounter = document.getElementById('msg-counter');
-
-    // Escuchador en tiempo real para actualizar el contador numérico
-    if (msgInput && msgCounter) {
-        msgInput.addEventListener('input', () => {
-            const caracteresRestantes = 180 - msgInput.value.length;
-            msgCounter.textContent = caracteresRestantes;
-            
-            if (caracteresRestantes <= 20) {
-                msgCounter.className = "absolute right-3 text-[10px] font-black text-brand-neonPink pointer-events-none animate-pulse";
-            } else {
-                msgCounter.className = "absolute right-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 pointer-events-none";
-            }
-        });
-    }
-
-   // Manejo del estado colapsable del panel de escritura
-    btnAbrirFormulario.addEventListener('click', () => {
-        wrapperFormulario.style.maxHeight = '400px'; 
-        btnAbrirFormulario.classList.add('hidden');  
-    });
-
-    function cerrarFormularioAnimado() {
-        wrapperFormulario.style.maxHeight = '0px';  
-        setTimeout(() => {
-            btnAbrirFormulario.classList.remove('hidden'); 
-            msgCounter.textContent = "180";
-            msgCounter.className = "absolute right-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 pointer-events-none";
-        }, 350);
-    }
-
-    if (btnCancelarMuro) {
-        btnCancelarMuro.addEventListener('click', cerrarFormularioAnimado);
-    }
-
-    // Función para obtener y renderizar los mensajes actualizados (Muestra los 4 que devuelve tu script)
-    async function fetchMuroMensajes() {
-        if (!displayContainer) return;
-        try {
-            const response = await fetch(GOOGLE_WEB_APP_URL);
-            if (!response.ok) throw new Error('Error de red');
-            const mensajes = await response.json();
-
-            displayContainer.innerHTML = "";
-
-            if (!mensajes || mensajes.length === 0) {
-                displayContainer.innerHTML = `
-                    <div class="text-center py-4 text-xs font-semibold text-zinc-500 dark:text-zinc-400 italic">
-                        Sé el primero en dejar un mensaje de fe o saludo de aliento.
-                    </div>`;
-                return;
-            }
-
-            // Muestra los elementos del array devuelto (Tu script devuelve un top 4)
-            mensajes.forEach(item => {
-                const messageCard = document.createElement('div');
-                messageCard.className = "p-3.5 bg-white/60 dark:bg-zinc-900/30 border border-zinc-200/70 dark:border-zinc-800 rounded-2xl shadow-sm transition-all duration-300 hover:border-brand-neon/40 animate-fade-in";
-                
-                messageCard.innerHTML = `
-                    <div class="flex items-start justify-between gap-2">
-                        <span class="font-black text-xs uppercase tracking-wider text-brand-neon bg-brand-neon/5 dark:bg-brand-neon/10 px-2.5 py-1 rounded-lg">
-                            <i class="fa-solid fa-user mr-1.5 text-[10px]"></i>${escapeHTML(item.nombre || 'Anónimo')}
-                        </span>
-                    </div>
-                    <p class="text-sm mt-2 text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium pl-1">
-                        ${escapeHTML(item.mensaje || '')}
-                    </p>
-                `;
-                displayContainer.appendChild(messageCard);
-            });
-
-        } catch (error) {
-            console.error("Error cargando el muro:", error);
-            displayContainer.innerHTML = `
-                <div class="text-center py-4 text-xs font-bold text-brand-neonPink uppercase">
-                    <i class="fa-solid fa-circle-exclamation mr-1"></i> No se pudo sincronizar el muro en este momento.
-                </div>`;
-        }
-    }
-
-    // Manejar el envío del formulario mediante solicitudes asíncronas de fondo (AJAX/Fetch)
-    if (sheetForm) {
-        sheetForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const nombreInput = document.getElementById('sheet-name').value.trim();
-            const mensajeInput = msgInput ? msgInput.value.trim() : '';
-
-            if(!nombreInput || !mensajeInput) return;
-
-            sheetSubmitBtn.disabled = true;
-            const originalBtnContent = sheetSubmitBtn.innerHTML;
-            sheetSubmitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Publicando...`;
-
-            const payload = {
-                nombre: nombreInput,
-                mensaje: mensajeInput
-            };
-
-            try {
-                // MODIFICACIÓN CRÍTICA: Enviamos el JSON como text/plain bajo modo no-cors.
-                // Esto evita el error de CORS y permite que `e.postData.contents` reciba el string JSON perfectamente en tu Apps Script.
-                await fetch(GOOGLE_WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'text/plain' }, 
-                    body: JSON.stringify(payload)
-                });
-
-                sheetForm.reset();
-                cerrarFormularioAnimado();
-                
-                // Espera 1.2 segundos para darle margen de escritura a la API de Google Sheets
-                setTimeout(() => {
-                    fetchMuroMensajes();
-                }, 1200);
-
-            } catch (error) {
-                console.error("Error al publicar:", error);
-            } finally {
-                sheetSubmitBtn.disabled = false;
-                sheetSubmitBtn.innerHTML = originalBtnContent;
-            }
-        });
-    }
-
-    function escapeHTML(str) {
-        if (!str) return '';
-        return str.replace(/[&<>'"]/g, tag => {
-            const chars = { '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' };
-            return chars[tag] || tag;
-        });
-    }
-
-    // Inicializar la carga del muro de manera segura
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fetchMuroMensajes);
-    } else {
-        fetchMuroMensajes();
-    }
-</script>
         </div> 
        
         <div class="lg:col-span-5 space-y-6 w-full">
@@ -1501,105 +1349,59 @@ html {
     </div>
 </section>
  
-<div class="bg-zinc-50/60 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 p-5 rounded-3xl transition-all duration-300 shadow-xl mt-4">
+<div class="bg-zinc-50/60 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 p-5 rounded-3xl transition-all duration-300 shadow-xl mt-4 relative overflow-hidden group">
     
-    <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center space-x-2">
-            <span class="flex h-2 w-2 relative">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
-            </span>
-            <h3 class="text-xs font-black tracking-wider uppercase text-zinc-500 dark:text-zinc-400">
-                Nuestra Audiencia
-            </h3>
+    <!-- Efecto de destello al pasar el cursor -->
+    <div class="absolute -inset-y-0 -left-16 w-12 bg-gradient-to-r from-transparent via-white/20 dark:via-brand-neon/10 to-transparent skew-x-12 group-hover:animate-[shine_1.5s_ease-in-out_infinite] pointer-events-none"></div>
+
+    <div class="flex items-start space-x-4 relative z-10">
+        <!-- Contenedor del Ícono Animado -->
+        <div class="flex-shrink-0 relative mt-1">
+            <div class="absolute inset-0 bg-emerald-500/20 dark:bg-brand-neon/20 rounded-2xl animate-ping opacity-75"></div>
+            <div class="relative bg-gradient-to-br from-emerald-400 to-emerald-600 dark:from-brand-neon dark:to-emerald-600 text-white p-3 rounded-2xl shadow-md transform group-hover:scale-110 transition-transform duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.174.012 6.161 1.241 8.411 3.461 2.25 2.22 3.492 5.174 3.492 8.354 0 6.55-5.337 11.899-11.891 11.899-2.001-.001-3.973-.51-5.716-1.48L0 24zm6.59-4.846c1.6.95 3.198 1.451 4.752 1.452 5.4 0 9.794-4.402 9.797-9.817.002-2.624-1.022-5.09-2.885-6.957C16.4 1.966 13.93 .941 11.95 .942c-5.405 0-9.8 4.403-9.804 9.818a9.803 9.803 0 001.483 5.101l-.993 3.626 3.72-.975zm11.367-7.384c-.33-.164-1.951-.955-2.251-1.064-.3-.11-.518-.165-.736.164-.218.33-.846 1.064-1.037 1.282-.19.218-.382.245-.712.082-.33-.164-1.393-.512-2.653-1.635-.98-.873-1.643-1.953-1.835-2.28-.192-.327-.02-.504.145-.668.148-.148.33-.382.495-.572.165-.19.22-.327.33-.545.11-.218.055-.41-.028-.572-.082-.164-.736-1.759-1.009-2.426-.266-.64-.537-.552-.736-.562-.19-.01-.409-.011-.628-.011-.218 0-.573.082-.873.41-.3.327-1.146 1.118-1.146 2.727 0 1.609 1.172 3.164 1.336 3.382.164.218 2.307 3.522 5.59 4.943.78.337 1.39.539 1.864.69.784.248 1.497.213 2.062.128.63-.095 1.952-.797 2.225-1.567.272-.769.272-1.428.191-1.567-.082-.14-.299-.218-.63-.382z"/>
+                </svg>
+            </div>
         </div>
-        <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300/40 dark:border-zinc-800 text-zinc-500 dark:text-brand-neon font-mono">
-            En Vivo: <span id="stats-online">--</span>
-        </span>
+
+        <!-- Textos Profesionales e Institucionales -->
+        <div class="flex-1 space-y-1">
+            <div class="flex items-center space-x-2">
+                <span class="text-[10px] font-black uppercase tracking-wider text-emerald-500 dark:text-brand-neon font-mono bg-emerald-500/10 dark:bg-brand-neon/10 px-2 py-0.5 rounded-md border border-emerald-500/20 dark:border-brand-neon/20 animate-pulse">
+                    Espacio Informativo
+                </span>
+            </div>
+            <h4 class="text-sm font-extrabold text-zinc-800 dark:text-zinc-100 tracking-tight leading-snug">
+                Canal Oficial de Radio FE 4:18
+            </h4>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-sm">
+                Sintonice nuestra visión: un espacio diseñado para compartir nuestra programación diaria, reflexiones espirituales y devocionales edificantes. Al ser un canal estrictamente informativo, garantizamos una experiencia silenciosa, organizada y enteramente libre de spam.
+            </p>
+        </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-3">
-        
-        <div class="bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200/40 dark:border-zinc-700/40 p-3 rounded-2xl text-center">
-            <span class="block text-[10px] font-bold tracking-widest uppercase text-zinc-400 mb-1">Hoy</span>
-            <span id="stats-hoy" class="text-base font-black text-zinc-800 dark:text-zinc-100">--</span>
-        </div>
-
-        <div class="bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200/40 dark:border-zinc-700/40 p-3 rounded-2xl text-center">
-            <span class="block text-[10px] font-bold tracking-widest uppercase text-zinc-400 mb-1">Mes</span>
-            <span id="stats-mes" class="text-base font-black text-brand-neon">--</span>
-        </div>
-
-        <div class="bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200/40 dark:border-zinc-700/40 p-3 rounded-2xl text-center">
-            <span class="block text-[10px] font-bold tracking-widest uppercase text-zinc-400 mb-1">Año</span>
-            <span id="stats-ano" class="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">--</span>
-        </div>
-
+    <!-- Botón de Acción con Llamado a Activar Notificaciones -->
+    <div class="mt-4 pt-1">
+        <a href="https://www.whatsapp.com/channel/0029Vb8ZXt605MUinpmOZJ0P" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 dark:from-brand-neon dark:to-emerald-600 text-white font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-brand-neon/10 hover:shadow-xl transition-all duration-300 transform active:scale-[0.98]">
+            <span>Unirse y Activar Notificaciones</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+        </a>
     </div>
-
-    <p class="text-[9px] text-center text-zinc-400/80 mt-3 italic">
-        * Métricas globales vinculadas a ShouCast Database.
-    </p>
 </div>
 
-<script>
-    // Enlace público en formato CSV de tu Google Sheets
-    const GOOGLE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vROItHplhSaznsme04WpVSIng2orrJEVqMALO15g_2JitjYJMX0xAs3Xx-OVewWPwxQ_kwyXztDEHv4/pub?output=csv";
-    const SONICPANEL_API = "https://app0102.sonicpanelradio.com/cp/get_info.php?p=8246";
-
-    async function syncRadioCounters() {
-        // 1. Cargar Datos en vivo desde SonicPanel
-        try {
-            const resSonic = await fetch(SONICPANEL_API);
-            if(resSonic.ok) {
-                const dataSonic = await resSonic.json();
-                document.getElementById('stats-online').innerText = dataSonic.listeners || 0;
-            }
-        } catch(e) { 
-            document.getElementById('stats-online').innerText = "0";
-        }
-
-        // 2. Cargar datos acumulativos desde tu Google Sheets (Hoy, Mes, Año)
-        try {
-            const resSheets = await fetch(`${GOOGLE_CSV_URL}&cache_burst=${new Date().getTime()}`);
-            if(!resSheets.ok) throw new Error();
-            const csvText = await resSheets.text();
-            
-            const lineas = csvText.split("\n");
-            if(lineas.length >= 2) {
-                const columnas = lineas[1].split(",");
-                
-                const hoy = parseInt(columnas[0]) || 50;
-                const mes = parseInt(columnas[1]) || 300;
-                const ano = parseInt(columnas[2]) || 1400;
-
-                // Asignar y formatear de forma limpia cada contenedor
-                document.getElementById('stats-hoy').innerText = hoy.toLocaleString('en-US');
-                
-                document.getElementById('stats-mes').innerText = (mes >= 1000) 
-                    ? (mes / 1000).toFixed(1) + 'K' 
-                    : mes;
-                    
-                document.getElementById('stats-ano').innerText = (ano >= 1000) 
-                    ? (ano / 1000).toFixed(0) + 'K' 
-                    : ano;
-            }
-        } catch(err) {
-            console.error("Error al leer Google Sheets:", err);
-            document.getElementById('stats-hoy').innerText = "Activo";
-            document.getElementById('stats-mes').innerText = "+14K";
-            document.getElementById('stats-ano').innerText = "+118K";
-        }
+<style>
+@keyframes shine {
+    100% {
+        left: 125%;
     }
-
-    // Inicializar al cargar el documento
-    document.addEventListener("DOMContentLoaded", () => {
-        syncRadioCounters();
-        // Sincroniza cada 30 segundos
-        setInterval(syncRadioCounters, 30000);
-    });
-</script>
-
+}
+</style>
  </div>
     </main>
 
