@@ -2638,43 +2638,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // TU PARRILLA DE PROGRAMACIÓN COMPLETA
         const parrilla = [
-{ dia: 1, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ", img: "img/programas/ysmael.webp", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20DE%20TODO%20UN%20POCO" },
-    { dia: 3, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ", img: "img/programas/ysmael.webp", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20DE%20TODO%20UN%20POCO" },
-    { dia: 5, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ", img: "img/programas/ysmael.webp", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20DE%20TODO%20UN%20POCO" },
-    
+         // ==========================================
+    // DE TODO UN POCO (Lunes, Miércoles y Viernes)
+    // ==========================================
+    { dia: 1, horaInicio: "09:00", horaFin: "09:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ", img: "img/programas/ysmael.webp", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20DE%20TODO%20UN%20POCO" },
+    { dia: 3, horaInicio: "09:00", horaFin: "09:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ", img: "img/programas/ysmael.webp", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20DE%20TODO%20UN%20POCO" },
+    { dia: 5, horaInicio: "09:00", horaFin: "09:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ", img: "img/programas/ysmael.webp", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20DE%20TODO%20UN%20POCO" },
+  
+    // ==========================================
+    // BLOQUE MATUTINO DE ENSEÑANZA (Lunes a Viernes)
+    // ==========================================
     { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "MUJERES CON PROPOSITO", img: "img/programas/mujeres.png", youtube: "https://www.youtube.com/@Mujeresconproposito-pv", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20MUJERES%20CON%20PROPOSITO" },
-{ dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro aRTIGAZ", img: "img/programas/alejandro.png", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20FAMILIA%20ACTUAL" },
+    { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "Alejandro aRTIGAZ", img: "img/programas/alejandro.png", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20FAMILIA%20ACTUAL" },
     { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "ELIO FRANCO", img: "img/programas/apostol.png", youtube: "https://www.youtube.com/@Ap%C3%B3stolElioFranco", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20ESCUELA%20DE%20ENSE%C3%91ANZA%20PALABRA%20DE%20VIDA" },
+    { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Jesus Marin", img: "img/programas/pastormarin.png", youtube: "", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20REFLEXIONANDO%20CON%20JESUS" },
     { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "HOMBRES DE VALOR", img: "img/programas/hombres.png", youtube: "https://www.youtube.com/@HombresDevalorpv", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20HOMBRES%20DE%20VALOR" },
     { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Eliaquin & Damiana", img: "img/programas/lazosdevida.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKQtD4a05_xoAi1A5NtOa4O&si=zwmgdlZB5mjCTaHl", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20LAZOS%20DE%20VIDA" },
 
-    { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
+    // ==========================================
+    // TOP 5 MUSICAL (Lunes a Domingo)
+    // Fin de semana adaptado al mediodía familiar
+    // ==========================================
     { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
     { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
     { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
     { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
     { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
-    { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
+    { dia: 6, horaInicio: "12:00", horaFin: "12:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
+    { dia: 0, horaInicio: "12:00", horaFin: "12:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno", img: "img/programas/andreatop.gif", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmKJRi1USoBLzQv3nZ3bFBQk&si=t8Lu3GUHztx8EXAT", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20TOP%205%20MUSICAL" },
 
-    { dia: 0, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
-    { dia: 1, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
-    { dia: 2, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
-    { dia: 3, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
-    { dia: 4, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
-    { dia: 5, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
-    { dia: 6, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
-
-    { dia: 0, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmIXfGfUTSip8yCysro-qaHI&si=Q-YYcfDHpOqCopYw", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20CONEXION%204:18" },
+    // ==========================================
+    // CONEXION 4:18 (Únicamente de Lunes a Viernes)
+    // ==========================================
     { dia: 1, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmIXfGfUTSip8yCysro-qaHI&si=Q-YYcfDHpOqCopYw", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20CONEXION%204:18" },
     { dia: 2, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmIXfGfUTSip8yCysro-qaHI&si=Q-YYcfDHpOqCopYw", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20CONEXION%204:18" },
     { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmIXfGfUTSip8yCysro-qaHI&si=Q-YYcfDHpOqCopYw", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20CONEXION%204:18" },
     { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmIXfGfUTSip8yCysro-qaHI&si=Q-YYcfDHpOqCopYw", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20CONEXION%204:18" },
     { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmIXfGfUTSip8yCysro-qaHI&si=Q-YYcfDHpOqCopYw", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20CONEXION%204:18" },
-    { dia: 6, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN", img: "img/programas/COEXION418.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmIXfGfUTSip8yCysro-qaHI&si=Q-YYcfDHpOqCopYw", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20CONEXION%204:18" }, 
 
-    { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Jesus Marin", img: "img/programas/pastormarin.png", youtube: "", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20REFLEXIONANDO%20CON%20JESUS" }
+    // ==========================================
+    // EN SINTONÍA CON TU PROPÓSITO (Únicamente de Lunes a Viernes)
+    // ==========================================
+    { dia: 1, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
+    { dia: 2, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
+    { dia: 3, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
+    { dia: 4, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" },
+    { dia: 5, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA MEZA DE MARIN", img: "img/programas/ENSINTONIACONTUPROPOSITO.png", youtube: "https://youtube.com/playlist?list=PL8-D_cKVzYmJQZ1TVQcXbIS0AZyg2fiJm&si=C47Tvwf63MzFBcEZ", whatsapp: "https://wa.me/584125183677?text=Hola!%20Estoy%20en%20sinton%C3%ADa%20del%20programa:%20EN%20SINTON%C3%8DA%20CON%20TU%20PROP%C3%93SITO" }
 ];
-
         // Función auxiliar para convertir "17:00" a un formato legible "05:00 PM"
         function formatearAMPM(horaStr) {
             const [horas, minutos] = horaStr.split(':').map(Number);
@@ -4230,38 +4240,54 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 (function() {
     // Parrilla Oficial Completa de Radio FE 4:18
-    const parrillaProgramas = [
-        { dia: 1, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
-        { dia: 3, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
-        { dia: 5, horaInicio: "13:00", horaFin: "13:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
-        { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "MUJERES CON PROPOSITO" },
-        { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "ALEJANDRO ARTIGAZ" },
-        { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "ELIO FRANCO" },
-        { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "HOMBRES DE VALOR" },
-        { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Eliaquin & Damiana" },
-        { dia: 0, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
-        { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
-        { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
-        { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
-        { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
-        { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
-        { dia: 6, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
-        { dia: 0, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
-        { dia: 1, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
-        { dia: 2, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
-        { dia: 3, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
-        { dia: 4, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
-        { dia: 5, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
-        { dia: 6, horaInicio: "19:00", horaFin: "19:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
-        { dia: 0, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
-        { dia: 1, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
-        { dia: 2, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
-        { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
-        { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
-        { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
-        { dia: 6, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
-        { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Jesus Marin" }
-    ];
+   const parrillaProgramas = [
+    // ==========================================
+    // DE TODO UN POCO (Lunes, Miércoles y Viernes)
+    // ==========================================
+    { dia: 1, horaInicio: "09:00", horaFin: "09:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
+    { dia: 3, horaInicio: "09:00", horaFin: "09:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
+    { dia: 5, horaInicio: "09:00", horaFin: "09:55", nombre: "DE TODO UN POCO", dj: "YSAMEL MARQUEZ" },
+
+    // ==========================================
+    // BLOQUE MATUTINO DE ENSEÑANZA (Lunes a Viernes)
+    // ==========================================
+    { dia: 1, horaInicio: "10:00", horaFin: "11:55", nombre: "MUJERES CON PROPOSITO", dj: "MUJERES CON PROPOSITO" },
+    { dia: 2, horaInicio: "08:00", horaFin: "08:55", nombre: "FAMILIA ACTUAL", dj: "ALEJANDRO ARTIGAZ" },
+    { dia: 2, horaInicio: "10:00", horaFin: "11:55", nombre: "ESCUELA DE ENSEÑANZA PALABRA DE VIDA", dj: "ELIO FRANCO" },
+    { dia: 3, horaInicio: "10:00", horaFin: "10:55", nombre: "REFLEXIONANDO CON JESUS", dj: "Jesus Marin" },
+    { dia: 4, horaInicio: "10:00", horaFin: "11:55", nombre: "HOMBRES DE VALOR", dj: "HOMBRES DE VALOR" },
+    { dia: 5, horaInicio: "10:00", horaFin: "10:55", nombre: "LAZOS DE VIDA", dj: "Eliaquin & Damiana" },
+
+    // ==========================================
+    // TOP 5 MUSICAL (Lunes a Domingo)
+    // Fin de semana exclusivo al mediodía (12:00)
+    // ==========================================
+    { dia: 1, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+    { dia: 2, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+    { dia: 3, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+    { dia: 4, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+    { dia: 5, horaInicio: "14:00", horaFin: "14:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" },
+    { dia: 6, horaInicio: "12:00", horaFin: "12:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" }, // Sábado Solo Música
+    { dia: 0, horaInicio: "12:00", horaFin: "12:55", nombre: "TOP 5 MUSICAL", dj: "Andrea Moreno" }, // Domingo Solo Música
+
+    // ==========================================
+    // CONEXION 4:18 (Únicamente Lunes a Viernes)
+    // ==========================================
+    { dia: 1, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+    { dia: 2, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+    { dia: 3, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+    { dia: 4, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+    { dia: 5, horaInicio: "17:00", horaFin: "17:55", nombre: "CONEXION 4:18", dj: "ELIAQUIN MARIN" },
+
+    // ==========================================
+    // EN SINTONÍA CON TU PROPÓSITO (Únicamente Lunes a Viernes)
+    // ==========================================
+    { dia: 1, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+    { dia: 2, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+    { dia: 3, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+    { dia: 4, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" },
+    { dia: 5, horaInicio: "20:00", horaFin: "20:55", nombre: "EN SINTONÍA CON TU PROPÓSITO", dj: "DAMIANA DE MARIN" }
+];
 
     function actualizarCintilloDinamico() {
         const titleEl = document.getElementById('cintillo-program-title');
