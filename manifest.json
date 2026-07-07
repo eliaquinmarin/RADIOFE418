@@ -6,7 +6,7 @@
   "categories": ["entertainment", "music", "audio"],
   "start_url": "./index.html",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "background_color": "#fafbfc",
   "theme_color": "#fafbfc",
   "icons": [
