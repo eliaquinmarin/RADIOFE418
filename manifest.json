@@ -6,7 +6,7 @@
   "categories": ["entertainment", "music", "audio"],
   "start_url": "./index.html",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "background_color": "#fafbfc",
   "theme_color": "#fafbfc",
   "icons": [
@@ -21,6 +21,13 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "img/icon-maskable-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
-}
+} 
+
