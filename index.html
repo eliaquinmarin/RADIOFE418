@@ -4362,56 +4362,62 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 <script>
-  // 1. Registrar el Service Worker que creaste
+  // 1. Registrar el Service Worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('👋 Service Worker listo y operando:', reg.scope))
-        .catch(err => console.error('❌ Error al registrar el Service Worker:', err));
+        .then(reg => console.log('👋 SW activo:', reg.scope))
+        .catch(err => console.error('❌ Error SW:', err));
     });
   }
 
-  // 2. Capturar el evento de instalación y activar tu botón
   let eventoInstalacion;
   const botonInstalar = document.getElementById('btn-install-pwa');
 
+  // 2. Capturar el evento de instalación lo antes posible
   window.addEventListener('beforeinstallprompt', (e) => {
-    // Evitamos que Android o Chrome muestren su propio aviso molesto de inmediato
-    e.preventDefault();
-    // Guardamos el evento para cuando el usuario presione tu botón
-    eventoInstalacion = e;
-    
-    // Mostramos tu botón personalizado quitando la clase 'hidden' de Tailwind
+    e.preventDefault(); 
+    eventoInstalacion = e; // Guardamos el disparador nativo
+
+    // Mostramos tu botón por si acaso rechazan el cuadro automático
     if (botonInstalar) {
       botonInstalar.classList.remove('hidden');
       botonInstalar.classList.add('flex');
     }
+
+    // 🔥 TRUCO MÁGICO: Forzar la instalación al primer toque del usuario en la pantalla
+    document.body.addEventListener('click', dispararInstalacionInmediata, { once: true });
+    document.body.addEventListener('touchstart', dispararInstalacionInmediata, { once: true });
   });
 
-  // 3. Acción cuando el usuario pulsa tu botón "Instalar App"
-  if (botonInstalar) {
-    botonInstalar.addEventListener('click', async () => {
-      if (!eventoInstalacion) return;
-      
-      // Disparamos el cuadro oficial de instalación
-      eventoInstalacion.prompt();
-      
-      // Validamos qué eligió el usuario
-      const { outcome } = await eventoInstalacion.userChoice;
-      console.log(`El usuario eligió: ${outcome}`);
-      
-      // Limpiamos la variable para que no cause errores posteriores
-      eventoInstalacion = null;
-      
-      // Escondemos el botón de nuevo
+  // Función para lanzar el cuadro nativo "de una"
+  async function dispararInstalacionInmediata() {
+    if (!eventoInstalacion) return;
+
+    console.log("🚀 Disparando cuadro de instalación automáticamente por interacción.");
+    eventoInstalacion.prompt(); // Abre el cuadro del navegador inmediatamente
+
+    const { outcome } = await eventoInstalacion.userChoice;
+    console.log(`El usuario eligió: ${outcome}`);
+    
+    eventoInstalacion = null; // Limpiamos
+
+    if (botonInstalar) {
       botonInstalar.classList.remove('flex');
       botonInstalar.classList.add('hidden');
+    }
+  }
+
+  // 3. Respaldo manual en tu botón físico por si el truco falla en algún navegador
+  if (botonInstalar) {
+    botonInstalar.addEventListener('click', (e) => {
+      e.stopPropagation(); // Evita conflictos con el evento del body
+      dispararInstalacionInmediata();
     });
   }
 
-  // Ocultar por completo si la app ya se instaló desde el navegador
+  // Ocultar si ya se instaló
   window.addEventListener('appinstalled', () => {
-    console.log('🎉 ¡Aplicación Radio FE 4:18 instalada con éxito!');
     if (botonInstalar) {
       botonInstalar.classList.remove('flex');
       botonInstalar.classList.add('hidden');
