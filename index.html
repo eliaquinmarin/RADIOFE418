@@ -4361,6 +4361,62 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 400);
 })();
 </script>
+<script>
+  // 1. Registrar el Service Worker que creaste
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('👋 Service Worker listo y operando:', reg.scope))
+        .catch(err => console.error('❌ Error al registrar el Service Worker:', err));
+    });
+  }
 
+  // 2. Capturar el evento de instalación y activar tu botón
+  let eventoInstalacion;
+  const botonInstalar = document.getElementById('btn-install-pwa');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Evitamos que Android o Chrome muestren su propio aviso molesto de inmediato
+    e.preventDefault();
+    // Guardamos el evento para cuando el usuario presione tu botón
+    eventoInstalacion = e;
+    
+    // Mostramos tu botón personalizado quitando la clase 'hidden' de Tailwind
+    if (botonInstalar) {
+      botonInstalar.classList.remove('hidden');
+      botonInstalar.classList.add('flex');
+    }
+  });
+
+  // 3. Acción cuando el usuario pulsa tu botón "Instalar App"
+  if (botonInstalar) {
+    botonInstalar.addEventListener('click', async () => {
+      if (!eventoInstalacion) return;
+      
+      // Disparamos el cuadro oficial de instalación
+      eventoInstalacion.prompt();
+      
+      // Validamos qué eligió el usuario
+      const { outcome } = await eventoInstalacion.userChoice;
+      console.log(`El usuario eligió: ${outcome}`);
+      
+      // Limpiamos la variable para que no cause errores posteriores
+      eventoInstalacion = null;
+      
+      // Escondemos el botón de nuevo
+      botonInstalar.classList.remove('flex');
+      botonInstalar.classList.add('hidden');
+    });
+  }
+
+  // Ocultar por completo si la app ya se instaló desde el navegador
+  window.addEventListener('appinstalled', () => {
+    console.log('🎉 ¡Aplicación Radio FE 4:18 instalada con éxito!');
+    if (botonInstalar) {
+      botonInstalar.classList.remove('flex');
+      botonInstalar.classList.add('hidden');
+    }
+  });
+</script>
 </body>
 </html>
