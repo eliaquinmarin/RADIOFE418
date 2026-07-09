@@ -1,11 +1,10 @@
-const CACHE_NAME = 'radio-fe-v2'; // Incrementamos versión por seguridad
+const CACHE_NAME = 'radio-fe-v2';
 
-// Centralizamos los assets locales esenciales (App Shell)
+// Usamos rutas relativas (./) para evitar fallos de resolución en subcarpetas
 const PRECACHE_ASSETS = [
-  '/',
-  '/index.html',
-  // Idealmente, deberías descargar FontAwesome y Tailwind localmente en producción,
-  // pero los mantenemos aquí asegurando que se manejen correctamente.
+  './',
+  './index.html',
+  './manifest.json', // Agregamos el manifest a la caché
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://cdn.tailwindcss.com'
 ];
