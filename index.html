@@ -1072,66 +1072,63 @@ html {
 document.addEventListener("DOMContentLoaded", async function () {
     const BASE_URL = "https://www.contextomediagroup.com/wp-json/wp/v2";
 
-    // Función de extracción profunda de imagen
-    async function obtenerImagenReal(post) {
-        const defaultImg = "img/contextopubli/imagen.png";
+    // Función exhaustiva para detectar la URL real de la imagen
+    async function extraerImagen(post) {
+        let url = null;
 
-        // 1. Intentar por Featured Media embebido
+        // 1. Probar con Jetpack Featured Media URL (Muy común en WP)
+        if (post.jetpack_featured_media_url && post.jetpack_featured_media_url !== "") {
+            return post.jetpack_featured_media_url;
+        }
+
+        // 2. Probar con Yoast SEO (og_image)
+        if (post.yoast_head_json && post.yoast_head_json.og_image && post.yoast_head_json.og_image[0]) {
+            return post.yoast_head_json.og_image[0].url;
+        }
+
+        // 3. Probar con _embedded de WP Standard
         if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
             const media = post._embedded['wp:featuredmedia'][0];
-            const src = media.media_details?.sizes?.medium_large?.source_url 
-                     || media.media_details?.sizes?.full?.source_url 
-                     || media.source_url;
-            
-            if (src && !src.includes('placeholder') && !src.includes('default')) {
-                return src;
-            }
+            url = media.media_details?.sizes?.medium_large?.source_url 
+               || media.media_details?.sizes?.full?.source_url 
+               || media.source_url;
+            if (url) return url;
         }
 
-        // 2. Si featured_media es un ID válido (>0) pero no vino en _embedded, la pedimos directamente
+        // 4. Si hay ID de featured_media, intentar pedirlo a la API directamente
         if (post.featured_media && post.featured_media > 0) {
             try {
-                const mediaRes = await fetch(`${BASE_URL}/media/${post.featured_media}`);
-                if (mediaRes.ok) {
-                    const mediaData = await mediaRes.json();
-                    const src = mediaData.media_details?.sizes?.medium_large?.source_url || mediaData.source_url;
-                    if (src) return src;
+                const res = await fetch(`${BASE_URL}/media/${post.featured_media}`);
+                if (res.ok) {
+                    const media = await res.json();
+                    url = media.media_details?.sizes?.medium_large?.source_url || media.source_url;
+                    if (url) return url;
                 }
             } catch (e) {
-                console.warn("No se pudo obtener el media por ID", e);
+                console.warn("Error buscando media por ID", e);
             }
         }
 
-        // 3. Buscar la primera etiqueta <img> dentro del HTML del contenido
+        // 5. Extraer directamente la primera etiqueta <img> del HTML del contenido usando Regex
         if (post.content && post.content.rendered) {
-            const temp = document.createElement('div');
-            temp.innerHTML = post.content.rendered;
-            const img = temp.querySelector('img');
-            if (img && img.src) {
-                return img.src;
+            const imgRegex = /<img[^>]+src=["']([^"']+)["']/i;
+            const match = post.content.rendered.match(imgRegex);
+            if (match && match[1]) {
+                return match[1];
             }
         }
 
-        // 4. Buscar la primera <img> dentro del extracto
-        if (post.excerpt && post.excerpt.rendered) {
-            const temp = document.createElement('div');
-            temp.innerHTML = post.excerpt.rendered;
-            const img = temp.querySelector('img');
-            if (img && img.src) {
-                return img.src;
-            }
-        }
-
-        return defaultImg;
+        // Fallback final
+        return "img/contextopubli/imagen.png";
     }
 
     try {
-        // 1. Obtener ID de categoría
+        // 1. Buscar categoría
         const catResponse = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
         const categories = await catResponse.json();
         
         let postsUrl = `${BASE_URL}/posts?_embed&per_page=1`;
-        if (categories.length > 0) {
+        if (categories && categories.length > 0) {
             postsUrl += `&categories=${categories[0].id}`;
         }
 
@@ -1142,8 +1139,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (!posts || posts.length === 0) return;
 
         const post = posts[0];
-        const titulo = post.title.rendered;
-        const enlace = post.link;
+        const titulo = post.title ? post.title.rendered : "";
+        const enlace = post.link || "#";
 
         // Fecha
         const fechaObj = new Date(post.date);
@@ -1153,15 +1150,15 @@ document.addEventListener("DOMContentLoaded", async function () {
             year: 'numeric' 
         }).toUpperCase();
 
-        // Extracto limpio sin etiquetas HTML
+        // Extracto limpio
         const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = post.excerpt.rendered;
+        tempDiv.innerHTML = post.excerpt ? post.excerpt.rendered : "";
         const extracto = tempDiv.textContent || tempDiv.innerText || "";
 
-        // Obtener la imagen real del post
-        const imagenUrl = await obtenerImagenReal(post);
+        // Obtener la imagen
+        const imagenUrl = await extraerImagen(post);
 
-        // 3. Renderizar en el DOM
+        // 3. Imprimir el HTML
         const HTMLNoticia = `
             <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group bg-zinc-100 dark:bg-zinc-900">
                 <img src="${imagenUrl}" 
