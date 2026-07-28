@@ -1057,13 +1057,13 @@ html {
         <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
             <i class="fa-solid fa-newspaper mr-2 text-brand-neonPink"></i> Notas & Entérate
         </h4>
-        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-neonPink/10 text-brand-neonPink border border-brand-neonPink/20 uppercase tracking-wider">Destacado</span>
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-neonPink/10 text-brand-neonPink border border-brand-neonPink/20 uppercase tracking-wider">Últimas Noticias</span>
     </div>
     
-    <div class="flex flex-col" id="contenedor-noticia">
+    <div class="flex flex-col gap-4" id="contenedor-noticia">
         <!-- Loader mientras cargan los datos -->
         <div class="py-8 text-center text-xs text-zinc-500 animate-pulse">
-            Cargando última noticia...
+            Cargando noticias...
         </div>
     </div>
 </section>
@@ -1072,129 +1072,126 @@ html {
 document.addEventListener("DOMContentLoaded", async function () {
     const BASE_URL = "https://www.contextomediagroup.com/wp-json/wp/v2";
 
-    // Función exhaustiva para detectar la URL real de la imagen
-    async function extraerImagen(post) {
-        let url = null;
-
-        // 1. Probar con Jetpack Featured Media URL (Muy común en WP)
-        if (post.jetpack_featured_media_url && post.jetpack_featured_media_url !== "") {
-            return post.jetpack_featured_media_url;
-        }
-
-        // 2. Probar con Yoast SEO (og_image)
-        if (post.yoast_head_json && post.yoast_head_json.og_image && post.yoast_head_json.og_image[0]) {
-            return post.yoast_head_json.og_image[0].url;
-        }
-
-        // 3. Probar con _embedded de WP Standard
-        if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
-            const media = post._embedded['wp:featuredmedia'][0];
-            url = media.media_details?.sizes?.medium_large?.source_url 
-               || media.media_details?.sizes?.full?.source_url 
-               || media.source_url;
-            if (url) return url;
-        }
-
-        // 4. Si hay ID de featured_media, intentar pedirlo a la API directamente
-        if (post.featured_media && post.featured_media > 0) {
-            try {
-                const res = await fetch(`${BASE_URL}/media/${post.featured_media}`);
-                if (res.ok) {
-                    const media = await res.json();
-                    url = media.media_details?.sizes?.medium_large?.source_url || media.source_url;
-                    if (url) return url;
-                }
-            } catch (e) {
-                console.warn("Error buscando media por ID", e);
-            }
-        }
-
-        // 5. Extraer directamente la primera etiqueta <img> del HTML del contenido usando Regex
-        if (post.content && post.content.rendered) {
-            const imgRegex = /<img[^>]+src=["']([^"']+)["']/i;
-            const match = post.content.rendered.match(imgRegex);
-            if (match && match[1]) {
-                return match[1];
-            }
-        }
-
-        // Fallback final
-        return "img/contextopubli/imagen.png";
-    }
-
-    try {
-        // 1. Buscar categoría
-        const catResponse = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
-        const categories = await catResponse.json();
-        
-        let postsUrl = `${BASE_URL}/posts?_embed&per_page=1`;
-        if (categories && categories.length > 0) {
-            postsUrl += `&categories=${categories[0].id}`;
-        }
-
-        // 2. Obtener el post
-        const postResponse = await fetch(postsUrl);
-        const posts = await postResponse.json();
-
-        if (!posts || posts.length === 0) return;
-
-        const post = posts[0];
-        const titulo = post.title ? post.title.rendered : "";
-        const enlace = post.link || "#";
-
-        // Fecha
-        const fechaObj = new Date(post.date);
-        const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
+    // Función auxiliar para formatear la fecha
+    function formatearFecha(dateString) {
+        const fechaObj = new Date(dateString);
+        return fechaObj.toLocaleDateString('es-ES', { 
             day: '2-digit', 
             month: 'short', 
             year: 'numeric' 
         }).toUpperCase();
+    }
 
-        // Extracto limpio
+    // Función auxiliar para limpiar HTML del extracto
+    function limpiarTexto(htmlString) {
         const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = post.excerpt ? post.excerpt.rendered : "";
-        const extracto = tempDiv.textContent || tempDiv.innerText || "";
+        tempDiv.innerHTML = htmlString || "";
+        return tempDiv.textContent || tempDiv.innerText || "";
+    }
 
-        // Obtener la imagen
-        const imagenUrl = await extraerImagen(post);
+    try {
+        // 1. Obtener ID de categoría "lanzamientos"
+        const catResponse = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
+        const categories = await catResponse.json();
+        
+        // Solicitar 2 entradas (per_page=2)
+        let postsUrl = `${BASE_URL}/posts?per_page=2`;
+        if (categories && categories.length > 0) {
+            postsUrl += `&categories=${categories[0].id}`;
+        }
 
-        // 3. Imprimir el HTML
-        const HTMLNoticia = `
-            <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group bg-zinc-100 dark:bg-zinc-900">
-                <img src="${imagenUrl}" 
-                     alt="${titulo}" 
-                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                     onerror="this.onerror=null; this.src='img/contextopubli/imagen.png';">
-                <div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-[9px] font-bold text-white px-2 py-1 rounded-md tracking-wider">
-                    ${fechaFormateada}
+        // 2. Traer los 2 últimos posts
+        const postResponse = await fetch(postsUrl);
+        const posts = await postResponse.json();
+
+        if (!posts || posts.length === 0) {
+            document.getElementById("contenedor-noticia").innerHTML = `
+                <div class="text-center py-4 text-xs text-zinc-500">No hay noticias disponibles.</div>
+            `;
+            return;
+        }
+
+        let HTMLNoticias = "";
+
+        // NOTICIA 1: DESTACADA PRINCIPAL
+        const post1 = posts[0];
+        const titulo1 = post1.title ? post1.title.rendered : "";
+        const enlace1 = post1.link || "#";
+        const fecha1 = formatearFecha(post1.date);
+        const extracto1 = limpiarTexto(post1.excerpt ? post1.excerpt.rendered : "");
+
+        HTMLNoticias += `
+            <!-- Noticia 1 (Destacada) -->
+            <div class="p-4 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/60 border border-brand-neonPink/30 dark:border-brand-neonPink/20 shadow-sm relative group transition-all duration-300 hover:border-brand-neonPink/60">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[9px] font-extrabold text-brand-neonPink bg-brand-neonPink/10 px-2 py-0.5 rounded-md uppercase tracking-wider">
+                        Último Lanzamiento
+                    </span>
+                    <span class="text-[10px] font-bold text-zinc-600 dark:text-zinc-400">
+                        ${fecha1}
+                    </span>
                 </div>
-            </div>
-            
-            <div class="space-y-2">
-                <h3 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-snug hover:text-brand-neon transition-colors duration-300">
-                    <a href="${enlace}" target="_blank" rel="noopener noreferrer">${titulo}</a>
+
+                <h3 class="font-bold text-base sm:text-lg text-zinc-900 dark:text-white leading-snug hover:text-brand-neonPink transition-colors duration-300 mb-2">
+                    <a href="${enlace1}" target="_blank" rel="noopener noreferrer">${titulo1}</a>
                 </h3>
-                
-                <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
-                    ${extracto}
+
+                <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3 mb-3">
+                    ${extracto1}
                 </p>
-            </div>
-            
-            <div class="mt-4 pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
-                <a href="${enlace}" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="w-full bg-zinc-200/50 dark:bg-zinc-900/40 border border-zinc-300 dark:border-zinc-800 hover:border-brand-neon hover:text-brand-neon rounded-xl flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 transition-all duration-300 active:scale-[0.98] group">
-                    <span>Leer noticia completa</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+
+                <a href="${enlace1}" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-neonPink hover:underline">
+                    <span>Leer noticia</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
         `;
 
-        document.getElementById("contenedor-noticia").innerHTML = HTMLNoticia;
+        // NOTICIA 2: SECUNDARIA (si existe)
+        if (posts.length > 1) {
+            const post2 = posts[1];
+            const titulo2 = post2.title ? post2.title.rendered : "";
+            const enlace2 = post2.link || "#";
+            const fecha2 = formatearFecha(post2.date);
+            const extracto2 = limpiarTexto(post2.excerpt ? post2.excerpt.rendered : "");
+
+            HTMLNoticias += `
+                <!-- Noticia 2 (Secundaria) -->
+                <div class="p-3.5 rounded-2xl bg-zinc-50/50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800/60 group transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[9px] font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">
+                            Anterior
+                        </span>
+                        <span class="text-[9px] font-bold text-zinc-600 dark:text-zinc-400">
+                            ${fecha2}
+                        </span>
+                    </div>
+
+                    <h4 class="font-bold text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 leading-snug hover:text-brand-neon transition-colors duration-300 mb-1.5">
+                        <a href="${enlace2}" target="_blank" rel="noopener noreferrer">${titulo2}</a>
+                    </h4>
+
+                    <p class="text-[11px] text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2 mb-2">
+                        ${extracto2}
+                    </p>
+
+                    <a href="${enlace2}" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                        <span>Ver más</span>
+                        <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                </div>
+            `;
+        }
+
+        document.getElementById("contenedor-noticia").innerHTML = HTMLNoticias;
 
     } catch (error) {
-        console.error("Error al obtener la noticia:", error);
+        console.error("Error al obtener las noticias:", error);
+        document.getElementById("contenedor-noticia").innerHTML = `
+            <div class="text-center py-4 text-xs text-red-400">Error al cargar las noticias.</div>
+        `;
     }
 });
 </script>
