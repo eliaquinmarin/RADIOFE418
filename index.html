@@ -1044,42 +1044,101 @@ html {
 <!-- Formulario de Interacción Principal -->
 
 <section id="notas" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
-                <div class="flex items-center justify-between mb-4">
-                    <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
-                        <i class="fa-solid fa-newspaper mr-2 text-brand-neonPink"></i> Notas & Entérate
-                    </h4>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-neonPink/10 text-brand-neonPink border border-brand-neonPink/20 uppercase tracking-wider">Destacado</span>
+    <div class="flex items-center justify-between mb-4">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-newspaper mr-2 text-brand-neonPink"></i> Notas & Entérate
+        </h4>
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-neonPink/10 text-brand-neonPink border border-brand-neonPink/20 uppercase tracking-wider">Destacado</span>
+    </div>
+    
+    <div class="flex flex-col" id="contenedor-noticia">
+        <!-- Loader mientras cargan los datos -->
+        <div class="py-8 text-center text-xs text-zinc-500 animate-pulse">
+            Cargando última noticia...
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+    const BASE_URL = "https://www.contextomediagroup.com/wp-json/wp/v2";
+
+    try {
+        // 1. Obtener el ID dinámico de la categoría "lanzamientos"
+        const catResponse = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
+        const categories = await catResponse.json();
+        
+        let postsUrl = `${BASE_URL}/posts?_embed&per_page=1`;
+        if (categories.length > 0) {
+            postsUrl += `&categories=${categories[0].id}`;
+        }
+
+        // 2. Traer el último post publicado en la sección de Lanzamientos
+        const postResponse = await fetch(postsUrl);
+        const posts = await postResponse.json();
+
+        if (!posts || posts.length === 0) return;
+
+        const post = posts[0];
+        const titulo = post.title.rendered;
+        const enlace = post.link;
+
+        // Formatear la fecha automáticamente (Ejemplo: 10 JUN 2026)
+        const fechaObj = new Date(post.date);
+        const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
+            day: '2-digit', 
+            month: 'short', 
+            year: 'numeric' 
+        }).toUpperCase();
+
+        // Extraer texto limpio del extracto
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = post.excerpt.rendered;
+        const extracto = tempDiv.textContent || tempDiv.innerText || "";
+
+        // Obtener imagen destacada oficial
+        let imagenUrl = "img/contextopubli/imagen.png";
+        if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
+            imagenUrl = post._embedded['wp:featuredmedia'][0].source_url;
+        }
+
+        // 3. Renderizar el componente respetando tu estructura HTML exacta
+        const HTMLNoticia = `
+            <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group">
+                <img src="${imagenUrl}" alt="${titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-[9px] font-bold text-white px-2 py-1 rounded-md tracking-wider">
+                    ${fechaFormateada}
                 </div>
+            </div>
+            
+            <div class="space-y-2">
+                <h3 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-snug hover:text-brand-neon transition-colors duration-300">
+                    <a href="${enlace}" target="_blank" rel="noopener noreferrer">${titulo}</a>
+                </h3>
                 
-                <div class="flex flex-col">
-                    <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group">
-                        <img src="img/contextopubli/imagen.png" alt="La Familia Maldonado - Pentecostés en Fuego Coritos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-[9px] font-bold text-white px-2 py-1 rounded-md tracking-wider">
-                            10 JUN 2026
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <h3 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-snug hover:text-brand-neon transition-colors duration-300">
-                            La Familia Maldonado estrena «Pentecostés en Fuego Coritos»
-                        </h3>
-                        
-                        <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
-                            Bajo el sello Blessing Recording Productions y la dirección del productor Luis Avilés, la familia Maldonado une sus voces para rendir homenaje a los coritos que marcaron generaciones y continúan transformando vidas con un mensaje de restauración familiar.
-                        </p>
-                    </div>
-                    
-                    <div class="mt-4 pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
-                        <a href="https://www.contextomediagroup.com/la-familia-maldonado-estrena-pentecostes-en-fuego-coritos/" 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
-                           class="w-full bg-zinc-200/50 dark:bg-zinc-900/40 border border-zinc-300 dark:border-zinc-800 hover:border-brand-neon hover:text-brand-neon rounded-xl flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 transition-all duration-300 active:scale-[0.98] group">
-                            <span>Leer noticia completa</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
+                <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
+                    ${extracto}
+                </p>
+            </div>
+            
+            <div class="mt-4 pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+                <a href="${enlace}" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="w-full bg-zinc-200/50 dark:bg-zinc-900/40 border border-zinc-300 dark:border-zinc-800 hover:border-brand-neon hover:text-brand-neon rounded-xl flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 transition-all duration-300 active:scale-[0.98] group">
+                   <span>Leer noticia completa</span>
+                   <i class="fa-solid fa-arrow-up-right-from-square text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                </a>
+            </div>
+        `;
+
+        document.getElementById("contenedor-noticia").innerHTML = HTMLNoticia;
+
+    } catch (error) {
+        console.error("Error al obtener el último lanzamiento:", error);
+    }
+});
+</script>
 
 <!-- SECCIÓN: CINTILLO INFORMATIVO CON MOVIMIENTO AUTOMÁTICO -->
 <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-2xl p-4 transition-colors duration-300 shadow-lg neon-glow">
@@ -1109,15 +1168,16 @@ html {
     </div>
 </section>
 
-<!-- ESTILOS DE ANIMACIÓN (Añádelos a tu bloque general de <style>) -->
+<!-- ESTILOS DE ANIMACIÓN EN BUCLE CONTINUO -->
 <style>
 .ticker-track {
     display: flex;
     width: max-content;
-    animation: ticker-scroll 90s linear infinite;
+    will-change: transform;
+    animation: ticker-scroll 60s linear infinite;
 }
 
-/* Pausa el movimiento al pasar el mouse por encima */
+/* Pausa el movimiento al pasar el mouse por encima para facilitar la lectura/clic */
 .ticker-track:hover {
     animation-play-state: paused;
 }
@@ -1127,11 +1187,76 @@ html {
         transform: translate3d(0, 0, 0);
     }
     100% {
-        /* Se desplaza exactamente la mitad (el bloque clonado) para el bucle perfecto */
+        /* Se desplaza exactamente la mitad (el contenido clonado) para el bucle perfecto sin interrupciones */
         transform: translate3d(-50%, 0, 0);
     }
 }
 </style>
+
+<!-- SCRIPT DE CARGA AUTOMÁTICA DE TITULARES -->
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+    const tickerContainer = document.getElementById("rss-ticker");
+    const BASE_URL = "https://www.contextomediagroup.com/wp-json/wp/v2";
+
+    try {
+        // 1. Identificar la categoría "lanzamientos" en WordPress
+        let categoryQuery = "";
+        try {
+            const catRes = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
+            const categories = await catRes.json();
+            if (categories.length > 0) {
+                categoryQuery = `&categories=${categories[0].id}`;
+            }
+        } catch (e) {
+            console.warn("No se pudo filtrar por categoría específica, cargando posts recientes general.");
+        }
+
+        // 2. Traer los últimos 10 titulares de Lanzamientos
+        const response = await fetch(`${BASE_URL}/posts?per_page=10${categoryQuery}`);
+        const posts = await response.json();
+
+        if (!posts || posts.length === 0) {
+            tickerContainer.innerHTML = `<div class="text-xs text-zinc-500 px-4">No se encontraron noticias recientes.</div>`;
+            return;
+        }
+
+        // 3. Renderizar cada noticia con su formato
+        const itemsHTML = posts.map(post => {
+            const titulo = post.title.rendered;
+            const enlace = post.link;
+
+            // Formatear Fecha (ej: 28 JUL 2026)
+            const fechaObj = new Date(post.date);
+            const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
+                day: '2-digit', 
+                month: 'short' 
+            }).toUpperCase();
+
+            return `
+                <a href="${enlace}" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-2 text-xs text-zinc-800 dark:text-zinc-200 hover:text-brand-neon transition-colors duration-200 whitespace-nowrap group font-medium px-2">
+                    <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-brand-neonPink/10 text-brand-neonPink border border-brand-neonPink/20">
+                        ${fechaFormateada}
+                    </span>
+                    <span class="group-hover:underline underline-offset-4 decoration-brand-neon">${titulo}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-zinc-400 group-hover:text-brand-neon ml-1"></i>
+                    <span class="ml-4 text-zinc-300 dark:text-zinc-700">|</span>
+                </a>
+            `;
+        }).join('');
+
+        // 4. Inyectar y duplicar el contenido para crear el bucle infinito perfecto (0% a -50%)
+        const bloqueOriginal = `<div class="flex items-center gap-6">${itemsHTML}</div>`;
+        tickerContainer.innerHTML = bloqueOriginal + bloqueOriginal;
+
+    } catch (error) {
+        console.error("Error al cargar las noticias para el cintillo:", error);
+        tickerContainer.innerHTML = `<div class="text-xs text-red-400 px-4">Error de conexión al obtener los titulares.</div>`;
+    }
+});
+</script>
+
 <!-- SECCIÓN: STAFF DIRECTIVO Y PRODUCCIÓN PROFESIONAL -->
 <section class="w-full max-w-4xl mx-auto mt-6 bg-brand-lightCard/60 dark:bg-brand-card/50 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 p-5 sm:p-8 rounded-3xl transition-all duration-300 shadow-xl neon-glow">
     
