@@ -1072,8 +1072,61 @@ html {
 document.addEventListener("DOMContentLoaded", async function () {
     const BASE_URL = "https://www.contextomediagroup.com/wp-json/wp/v2";
 
+    // Función de extracción profunda de imagen
+    async function obtenerImagenReal(post) {
+        const defaultImg = "img/contextopubli/imagen.png";
+
+        // 1. Intentar por Featured Media embebido
+        if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
+            const media = post._embedded['wp:featuredmedia'][0];
+            const src = media.media_details?.sizes?.medium_large?.source_url 
+                     || media.media_details?.sizes?.full?.source_url 
+                     || media.source_url;
+            
+            if (src && !src.includes('placeholder') && !src.includes('default')) {
+                return src;
+            }
+        }
+
+        // 2. Si featured_media es un ID válido (>0) pero no vino en _embedded, la pedimos directamente
+        if (post.featured_media && post.featured_media > 0) {
+            try {
+                const mediaRes = await fetch(`${BASE_URL}/media/${post.featured_media}`);
+                if (mediaRes.ok) {
+                    const mediaData = await mediaRes.json();
+                    const src = mediaData.media_details?.sizes?.medium_large?.source_url || mediaData.source_url;
+                    if (src) return src;
+                }
+            } catch (e) {
+                console.warn("No se pudo obtener el media por ID", e);
+            }
+        }
+
+        // 3. Buscar la primera etiqueta <img> dentro del HTML del contenido
+        if (post.content && post.content.rendered) {
+            const temp = document.createElement('div');
+            temp.innerHTML = post.content.rendered;
+            const img = temp.querySelector('img');
+            if (img && img.src) {
+                return img.src;
+            }
+        }
+
+        // 4. Buscar la primera <img> dentro del extracto
+        if (post.excerpt && post.excerpt.rendered) {
+            const temp = document.createElement('div');
+            temp.innerHTML = post.excerpt.rendered;
+            const img = temp.querySelector('img');
+            if (img && img.src) {
+                return img.src;
+            }
+        }
+
+        return defaultImg;
+    }
+
     try {
-        // 1. Obtener el ID dinámico de la categoría "lanzamientos"
+        // 1. Obtener ID de categoría
         const catResponse = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
         const categories = await catResponse.json();
         
@@ -1082,7 +1135,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             postsUrl += `&categories=${categories[0].id}`;
         }
 
-        // 2. Traer el último post publicado
+        // 2. Obtener el post
         const postResponse = await fetch(postsUrl);
         const posts = await postResponse.json();
 
@@ -1092,7 +1145,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const titulo = post.title.rendered;
         const enlace = post.link;
 
-        // Formatear la fecha automáticamente
+        // Fecha
         const fechaObj = new Date(post.date);
         const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
             day: '2-digit', 
@@ -1100,40 +1153,21 @@ document.addEventListener("DOMContentLoaded", async function () {
             year: 'numeric' 
         }).toUpperCase();
 
-        // Extraer texto limpio del extracto
+        // Extracto limpio sin etiquetas HTML
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = post.excerpt.rendered;
         const extracto = tempDiv.textContent || tempDiv.innerText || "";
 
-        // --- EXTRACCIÓN MEJORADA DE LA IMAGEN ---
-        let imagenUrl = "img/contextopubli/imagen.png"; // Fallback por defecto
+        // Obtener la imagen real del post
+        const imagenUrl = await obtenerImagenReal(post);
 
-        // Nivel 1: Buscar la imagen destacada (_embedded)
-        if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
-            const media = post._embedded['wp:featuredmedia'][0];
-            
-            // Intentar obtener un tamaño optimizado (medium_large o full)
-            if (media.media_details && media.media_details.sizes) {
-                const sizes = media.media_details.sizes;
-                imagenUrl = sizes.medium_large?.source_url || sizes.full?.source_url || media.source_url;
-            } else if (media.source_url) {
-                imagenUrl = media.source_url;
-            }
-        } 
-        // Nivel 2: Si no hay imagen destacada, buscar la primera etiqueta <img> en el contenido HTML del post
-        else if (post.content && post.content.rendered) {
-            const contentDiv = document.createElement("div");
-            contentDiv.innerHTML = post.content.rendered;
-            const primeraImg = contentDiv.querySelector("img");
-            if (primeraImg && primeraImg.src) {
-                imagenUrl = primeraImg.src;
-            }
-        }
-
-        // 3. Renderizar el componente
+        // 3. Renderizar en el DOM
         const HTMLNoticia = `
-            <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group">
-                <img src="${imagenUrl}" alt="${titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='img/contextopubli/imagen.png';">
+            <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-800/50 shadow-sm relative group bg-zinc-100 dark:bg-zinc-900">
+                <img src="${imagenUrl}" 
+                     alt="${titulo}" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                     onerror="this.onerror=null; this.src='img/contextopubli/imagen.png';">
                 <div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-[9px] font-bold text-white px-2 py-1 rounded-md tracking-wider">
                     ${fechaFormateada}
                 </div>
@@ -1163,7 +1197,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("contenedor-noticia").innerHTML = HTMLNoticia;
 
     } catch (error) {
-        console.error("Error al obtener el último lanzamiento:", error);
+        console.error("Error al obtener la noticia:", error);
     }
 });
 </script>
