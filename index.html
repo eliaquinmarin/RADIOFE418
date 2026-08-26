@@ -274,7 +274,6 @@ html {
         }
     </style>
 
-
 <script type="text/javascript">
       (function() {
         var dominioAutorizado = "radiofe418.vercel.app";
@@ -299,6 +298,7 @@ html {
         }
       })();
     </script>
+
 
 
 
@@ -457,31 +457,6 @@ html {
         <canvas id="visualizer" class="w-full max-w-[280px] h-12 opacity-80 drop-shadow-[0_0_8px_rgba(6,182,212,0.4)] dark:drop-shadow-[0_0_12px_rgba(236,72,153,0.4)] transition-all duration-300"></canvas>
     </div>
 
-    <!-- Selector de Calidad Rediseñado -->
-    <div class="w-full max-w-md mb-4 bg-zinc-100/80 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800/80 rounded-2xl p-1.5 flex items-center justify-between transition-colors duration-300 backdrop-blur-sm">
-        <span class="text-[10px] font-black uppercase tracking-widest pl-3 text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
-            <i class="fa-solid fa-sliders text-brand-neon"></i> Calidad:
-        </span>
-        <div class="flex items-center space-x-1">
-<!-- Contenedor Segmentado Premium para el Selector de Calidad -->
-<div class="flex items-center gap-1 p-1 bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/40 dark:border-zinc-800/50 rounded-2xl w-full max-w-sm backdrop-blur-sm transition-colors duration-300">
-    
-    <!-- Opción: 64 Kbps (Estado Inactivo / Estado Base) -->
-<button id="quality-64" class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-[11px] font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-300/40 dark:hover:bg-zinc-800/40 transition-all duration-300">
-        <i class="fa-solid fa-signal-low opacity-60"></i>
-        <span>64 Kbps</span>
-        <span class="hidden sm:inline opacity-50 font-normal">/ Ahorro</span>
-    </button>
-
-    <!-- Opción: 128 Kbps (Estado Activo / Seleccionado por defecto) -->
-<button id="quality-128" class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-[11px] font-black text-brand-neon bg-white dark:bg-zinc-800 shadow-sm border border-brand-neon/20 transition-all duration-300">
-        <i class="fa-solid fa-bolt text-brand-neon"></i>
-        <span>128 Kbps</span>
-        <span class="hidden sm:inline text-[8px] font-black uppercase px-1.5 py-0.5 rounded-md bg-brand-neon text-white">HD</span>
-    </button>
-</div>
-        </div>
-    </div>
 
     <!-- Controles de Reproducción e Integración de Volumen -->
     <div class="w-full max-w-md grid grid-cols-12 gap-3 bg-zinc-100/50 dark:bg-black/20 p-2 border border-zinc-200/60 dark:border-zinc-800/50 rounded-2xl backdrop-blur-sm">
@@ -1731,7 +1706,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     </div>
 </footer>
 
-    <audio id="audio-player" src="https://app0102.sonicpanelradio.com:8246/stream" autoplay preload="auto" crossorigin="anonymous"></audio>
+    <audio id="audio-player" src="https://guri.tepuyserver.net:8032/stream" autoplay preload="auto" crossorigin="anonymous"></audio>
 
 <!-- Modal de Instalación PWA -->
 <div id="install-modal" class="hidden fixed inset-0 z-[100] items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
@@ -1779,10 +1754,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         const btnQuality128 = document.getElementById('quality-128');
         
         // Direcciones base suministradas
-        const streamHD = "https://app0102.sonicpanelradio.com:8246/stream";
-        const streamMedia = "https://app0102.sonicpanelradio.com/8246/64kbps.acc";
+        const streamHD = "https://guri.tepuyserver.net:4820/stream";
+        const streamMedia = "https://guri.tepuyserver.net/4820/64kbps.acc";
         
-        let currentStreamUrl = streamHD; // Inicial por defecto en HD
+        let currentStreamUrl = streamMedia; // Inicial por defecto en HD
 
         function cambiarCalidad(urlNueva, btnActivo, btnInactivo) {
             if (currentStreamUrl === urlNueva) return; // Ya está en esa calidad
@@ -2814,7 +2789,7 @@ function setupMediaSession() {
 }
 window.addEventListener('load', setupMediaSession);
    </script>
-    <script id='sonic_js' data-port='8246' src='https://app0102.sonicpanelradio.com/cp/widgets.js?r=394'></script>
+   <script id='sonic_js' data-port='8032' src='https://guri.tepuyserver.net/cp/widgets.js?r=836'></script>
 
     <div id="signal-error-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity duration-300">
         <div class="bg-brand-lightCard dark:bg-brand-card w-full max-w-4xl h-[80vh] md:h-[70vh] rounded-3xl p-6 md:p-10 border border-zinc-200 dark:border-zinc-800 shadow-2xl transform transition-all flex flex-col justify-center items-center relative">
@@ -3152,7 +3127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 (function() {
     // URL de la API pública proporcionada por ti
-    const SONIC_API_URL = 'https://app0102.sonicpanelradio.com/cp/get_info.php?p=8246';
+    const SONIC_API_URL = 'https://guri.tepuyserver.net/cp/get_info.php?p=8032';
     let ultimaCancionDetectada = '';
     let sonicIntervalId = null;
 
