@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); // Permite que tu web lea estos datos
 
-$url = "https://app0102.sonicpanelradio.com/cp/get_info.php?p=8246";
+$url = "https://guri.tepuyserver.net/cp/get_info.php?p=8032";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_URL, $url);

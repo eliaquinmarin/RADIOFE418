@@ -8,7 +8,7 @@ Descripción: Radio Cristiana en Vivo - Barinas, Venezuela. 24/7 de música y me
 /* DESARROLLADOR */
 Nombre: Eliaquin Marín
 Rol: Desarrollador y Programador
-Contacto: +58 412 518 3677
+Contacto: +58 422 518 3677
 
 /* TECNOLOGÍAS UTILIZADAS */
 Software: HTML5, CSS3, JavaScript (Tailwind CSS, Vercel)
