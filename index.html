@@ -2369,14 +2369,16 @@ setInterval(rotatePartners, 5000);
 const shareBtn = document.getElementById('share-btn');
 if(shareBtn) {
     shareBtn.addEventListener('click', async () => {
-        // Texto predefinido personalizado listo para enviar
-        const textoPersonalizado = "¡Estoy escuchando Radio FE 4:18 desde Barinas! Música de fe y mensajes de aliento 24/7. ¡Escúchala aquí: " + window.location.href + "!";
-        
-        const shareData = { 
-            title: 'RADIO FE 4:18', 
-            text: textoPersonalizado, 
-            url: window.location.href 
-        };
+
+       // Texto predefinido personalizado listo para enviar
+const appUrl = "https://radiofe418.vercel.app/";
+const textoPersonalizado = "¡Estoy escuchando Radio FE 4:18 desde Barinas! Música de fe y mensajes de aliento 24/7. ¡Escúchala aquí: " + appUrl;
+
+const shareData = { 
+    title: 'RADIO FE 4:18', 
+    text: textoPersonalizado, 
+    url: appUrl 
+};
         
         try {
             // Intenta usar la API nativa del dispositivo (Celulares, Tablets, etc.)
