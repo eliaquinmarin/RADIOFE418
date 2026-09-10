@@ -2161,107 +2161,260 @@ async function consultarLastFM(artista, titulo, apiKey) {
  * Función principal adaptada para procesar la lógica de negocio radial y musical.
  */
 async function buscarCaratula(titulo, artista) {
+
     const terminosIgnorar = ["RADIO FE", "IDENTIFICACIÓN", "PUBLICIDAD", "PROGRAMA", "SONANDO"];
+
     
+
     const mapaAudios = {
-        "CONTEXTO MEDIA GROUP": { nombre: "CONTEXTO MEDIA GROUP", artista: "Publicidad", img: "img/publicidad/contexto.jpg" },
-        "DIRECTORIO UNISALUD": { nombre: "DIRECTORIO UNISALUD", artista: "Publicidad", img: "img/publicidad/unisalud.jpg" },
-        "MICRO": { nombre: "Dia a dia", artista: "Samuel Balaustre", img: "img/diaadia.jpg" },
-        "DIA A DIA": { nombre: "Dia a dia", artista: "Samuel Balaustre", img: "img/diaadia.jpg" },
-        "SERVIAUTOS RORAIMA": { nombre: "SERVIAUTOS RORAIMA", artista: "Publicidad", img: "img/publicidad/roraima.jpg" },
-        "IDE1": { nombre: "IDENTIFICACIÓN RADIAL", artista: "Radio FE 4:18", img: "img/caratula.png" },
-        "IDE2": { nombre: "IDENTIFICACIÓN RADIAL", artista: "Radio FE 4:18", img: "img/caratula.png" },
-        "IDE3": { nombre: "IDENTIFICACIÓN RADIAL", artista: "Radio FE 4:18", img: "img/caratula.png" },
-        "IDE4": { nombre: "IDENTIFICACIÓN RADIAL", artista: "Radio FE 4:18", img: "img/caratula.png" },
-        "6AM": { nombre: "ORAR POR LOS PASTORES Y LIDERES", artista: "Micro de Oración", img: "img/oracion/oracion.jpg" },
-        "3PM": { nombre: "ORAR POR VENEZUELA", artista: "Micro de Oración", img: "img/oracion/oracion.jpg" },
-        "CONCIENCIA": { nombre: "CONCIENCIA", artista: "Radio FE 4:18", img: "img/CONCIENCIA.jpg" },
-        "9PM": { nombre: "ORAR POR LAS FAMILIAS", artista: "Micro de Oración", img: "img/oracion/oracion.jpg" }
+
+        "CONTEXTO MEDIA GROUP": { nombre: "CONTEXTO MEDIA GROUP", img: "img/publicidad/contexto.png" },
+
+        "DIRECTORIO UNISALUD": { nombre: "DIRECTORIO UNISALUD", img: "img/publicidad/unisalud.png" },
+
+        "MICRO": { nombre: "Dia a dia - Samuel Balaustre", img: "img/diaadia.jpg" },
+
+        "SERVIAUTOS RORAIMA": { nombre: "SERVIAUTOS RORAIMA", img: "img/publicidad/roraima.png" },
+
+        "ide1": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+
+        "ide2": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+
+        "ide3": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+
+        "ide4": { nombre: "IDENTIFICACIÓN RADIAL", img: "img/caratula.png" },
+
+        "6AM": { nombre: "ORAR POR LOS PASTORES Y LIDERES", img: "img/oracion/oracion.png" },
+
+        "3PM": { nombre: "ORAR POR VENEZUELA", img: "img/oracion/oracion.png" },
+
+        "CONCIENCIA": { nombre: "CONCIENCIA", img: "img/CONCIENCIA.jpg" },
+
+        "9PM": { nombre: "ORAR POR LAS FAMILIAS", img: "img/oracion/oracion.png" }
+
     };
 
-    let tClean = titulo.trim().toUpperCase();
-    let aClean = artista.trim().toUpperCase();
-    let textoCompleto = `${tClean} ${aClean}`;
 
-    // 1. Validar Interrupciones Estáticas / Publicidades (Prioridad alta)
+
+    let tClean = titulo.trim().toUpperCase();
+
+    const trackCover = document.getElementById('track-cover');
+
+    const ambientBg = document.getElementById('ambient-background');
+
+
+
+    // 1. Validar Interrupciones Estáticas / Publicidades
+
     let coincidenciaAudio = null;
+
     for (const clave in mapaAudios) {
+
         const item = mapaAudios[clave];
-        if (
-            textoCompleto.includes(clave.toUpperCase()) || 
-            textoCompleto.includes(item.nombre.toUpperCase())
-        ) {
+
+        if (tClean.includes(clave) || tClean.includes(item.nombre.toUpperCase())) {
+
             coincidenciaAudio = item;
+
             break;
+
         }
+
     }
+
+
 
     if (coincidenciaAudio) {
-        // Actualizar UI con el nombre e imagen personalizados
-        actualizarTextosInterfaz(coincidenciaAudio.nombre, coincidenciaAudio.artista);
-        aplicarImagen(coincidenciaAudio.img, coincidenciaAudio.nombre);
-        console.log(`Escudo Activo: Aplicado para ${coincidenciaAudio.nombre}`);
+
+        if (trackCover) trackCover.src = coincidenciaAudio.img;
+
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${coincidenciaAudio.img}')`;
+
+        console.log(`Escudo Activo: Mostrando carátula personalizada para ${coincidenciaAudio.nombre}`);
+
         return; 
+
     }
 
-    // 2. Validar Términos Genéricos a Ignorar (Solo si no hubo coincidencia previa)
+
+
+    // 2. Validar Términos Genéricos a Ignorar
+
     if (terminosIgnorar.some(term => tClean.includes(term)) || tClean === "") {
-        aplicarImagen(caratulaPorDefecto, "default");
+
+        if (trackCover) trackCover.src = caratulaPorDefecto;
+
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${caratulaPorDefecto}')`;
+
         return;
+
     }
+
+
 
     // 3. Limpieza de metadatos para búsqueda musical
+
     let titleCleaned = titulo.replace(/EN VIVO:/gi, '').replace(/¡EN DIRECTO!/gi, '').replace(/\.(mp3|wav|aac|ogg)/gi, '').trim();
+
     let artistCleaned = artista.trim();
+
     let queryTarget = `${titleCleaned} ${artistCleaned}`.trim();
 
-    // Actualizar los elementos visuales con la info limpia
-    actualizarTextosInterfaz(titleCleaned, artistCleaned);
 
-    // 4. Verificar memoria Caché
+
+    // 4. Verificar memoria Caché para optimizar rendimiento
+
     if (cacheCaratulas[queryTarget]) {
+
         aplicarImagen(cacheCaratulas[queryTarget], queryTarget);
+
         return;
+
     }
 
-    // 5. Flujo de Búsqueda Secuencial (iTunes / Last.fm)
-    let urlCaratulaHD = await consultariTunes(queryTarget, artistCleaned, titleCleaned);
+
+
+    // 5. Flujo de Búsqueda Secuencial Inteligente (Cascada)
+
+    let urlCaratulaHD = null;
+
+
+
+    // Intento A: iTunes con consulta combinada (Validando que coincidan artista y título)
+
+    urlCaratulaHD = await consultariTunes(queryTarget, artistCleaned, titleCleaned);
+
+
+
+    // Intento B: iTunes usando solo el título (Pero asegurando mediante filtro que el artista corresponda)
 
     if (!urlCaratulaHD && titleCleaned) {
+
         urlCaratulaHD = await consultariTunes(titleCleaned, artistCleaned);
+
     }
+
+
+
+    // Intento C: Last.fm (Como salvavidas final)
 
     if (!urlCaratulaHD && artistCleaned && titleCleaned) {
+
         urlCaratulaHD = await consultarLastFM(artistCleaned, titleCleaned, LASTFM_API_KEY);
+
     }
 
-    // 6. Aplicar Resultado Final
+
+
+    // 6. Resolución de Imagen Encontrada u Omisión
+
     if (urlCaratulaHD) {
+
         aplicarImagen(urlCaratulaHD, queryTarget);
+
     } else {
-        console.warn(`No se localizó arte para: "${queryTarget}". Usando imagen por defecto.`);
-        aplicarImagen(caratulaPorDefecto, queryTarget);
+
+        console.warn(`No se localizó arte verificado para: "${queryTarget}". Colocando miniatura por defecto.`);
+
+        if (trackCover) trackCover.src = caratulaPorDefecto;
+
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${caratulaPorDefecto}')`;
+
     }
+
 }
 
-// Función auxiliar para actualizar los textos del reproductor en el DOM
-function actualizarTextosInterfaz(titulo, artista) {
-    const elTitle = document.getElementById('sonic_title');
-    const elArtist = document.getElementById('sonic_artist');
 
-    if (elTitle && titulo) elTitle.innerText = titulo;
-    if (elArtist && artista) elArtist.innerText = artista;
+
+function aplicarImagen(url, query) {
+
+    const tCover = document.getElementById('track-cover');
+
+    const ambientBg = document.getElementById('ambient-background');
+
+    
+
+    if (tCover) tCover.src = url;
+
+    if (ambientBg) ambientBg.style.backgroundImage = `url('${url}')`;
+
+    
+
+    cacheCaratulas[query] = url;
+
+
+
+    if ('mediaSession' in navigator) {
+
+        const elTitle = document.getElementById('sonic_title');
+
+        const elArtist = document.getElementById('sonic_artist');
+
+        
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+
+            title: elTitle ? elTitle.innerText : "Radio FE 4:18",
+
+            artist: elArtist ? elArtist.innerText : "Sonando por todo lo alto",
+
+            album: "Radio FE 4:18 | En Vivo",
+
+            artwork: [
+
+                { src: url, sizes: '96x96',   type: 'image/png' },
+
+                { src: url, sizes: '128x128', type: 'image/png' },
+
+                { src: url, sizes: '192x192', type: 'image/png' },
+
+                { src: url, sizes: '256x256', type: 'image/png' },
+
+                { src: url, sizes: '384x384', type: 'image/png' },
+
+                { src: url, sizes: '512x512', type: 'image/png' },
+
+            ]
+
+        });
+
+    }
+
 }
 
-// --- GESTIÓN DE PROGRAMACIÓN DE LA RADIO ---
-function formatearHora(hora24) {
-    let [h, m] = hora24.split(':');
-    h = parseInt(h);
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12 || 12;
-    return `${h}:${m} ${ampm}`;
+
+
+function verificarCambio() {
+
+    if (programaEnVivoActivo) return; 
+
+    
+
+    setTimeout(() => {
+
+        const actualTitle = obTitle ? obTitle.innerText : "";
+
+        const actualArtist = obArtist ? obArtist.innerText : "";
+
+        buscarCaratula(actualTitle, actualArtist);
+
+    }, 800);
+
 }
 
+
+
+if (obTitle && obArtist) {
+
+    const trackObserver = new MutationObserver(verificarCambio);
+
+    trackObserver.observe(obTitle, { childList: true, characterData: true, subtree: true });
+
+    trackObserver.observe(obArtist, { childList: true, characterData: true, subtree: true });
+
+    verificarCambio();
+
+}
 function actualizarProgramacion() {
     const ahora = new Date();
     const diaActual = ahora.getDay();
