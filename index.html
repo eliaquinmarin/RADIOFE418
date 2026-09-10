@@ -690,6 +690,56 @@ html {
     </div>
 </section>
 
+<!-- SECCIÓN ESPECIAL: PLAYLIST DE MATRIMONIOS -->
+<section id="matrimonios-playlist" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-colors duration-300 shadow-xl neon-glow">
+    
+    <!-- Encabezado con Identidad y Badge -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60">
+        <div class="flex items-center space-x-3">
+            <div class="w-2 h-6 bg-gradient-to-b from-brand-neonPink to-pink-500 rounded-full"></div>
+            <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+                <i class="fa-solid fa-heart text-brand-neonPink text-base animate-pulse"></i> 
+                Serie Especial <span class="text-zinc-400 dark:text-zinc-600 font-light">|</span> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neonPink to-pink-500">Para Matrimonios</span>
+            </h4>
+        </div>
+        <span class="inline-flex items-center gap-1.5 text-[9px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full border border-brand-neonPink/30 bg-brand-neonPink/10 text-brand-neonPink self-start sm:self-auto">
+            <i class="fa-solid fa-ring text-[9px]"></i> Edificación Familiar
+        </span>
+    </div>
+
+    <!-- Descripción del Contenido -->
+    <div class="mb-5 p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-900/40 border border-zinc-200/60 dark:border-zinc-800/50 text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed">
+        <p class="font-medium">
+            Compartimos esta lista de reproducción concebida especialmente para bendecir, fortalecer y edificar el hogar. Deseamos profundamente que cada enseñanza y mensaje sea de gran bendición para sus vidas y la unión de su matrimonio.
+        </p>
+    </div>
+
+    <!-- Contenedor Responsive del Reproductor de YouTube -->
+    <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-lg bg-black aspect-video mb-5">
+        <iframe 
+            class="absolute top-0 left-0 w-full h-full" 
+            src="https://www.youtube.com/embed/videoseries?list=PL8-D_cKVzYmKQtD4a05_xoAi1A5NtOa4O" 
+            title="Playlist Especial para Matrimonios - Radio FE 4:18" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Botón Directo a WhatsApp -->
+    <div class="pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex justify-center">
+        <a href="https://wa.me/584225183677?text=Hola,%20Dios%20les%20bendiga.%20Estaba%20viendo%20la%20playlist%20para%20matrimonios%20en%20su%20web%20y%20quisiera%20conversar%20con%20ustedes." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-xs font-black tracking-widest uppercase rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-md hover:shadow-emerald-500/20 active:scale-95 group">
+            <i class="fa-brands fa-whatsapp text-base transition-transform duration-300 group-hover:scale-110"></i>
+            <span>¿Quieres hablar o preguntar? Escríbenos</span>
+        </a>
+    </div>
+
+</section>
+
 <!-- SECCIÓN: COMUNIDAD DIGITAL (REDES SOCIALES) -->
 <section class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-6 transition-colors duration-300 neon-glow flex flex-col sm:flex-row items-center justify-between gap-4">
     
@@ -774,44 +824,6 @@ html {
             <i class="fa-brands fa-whatsapp text-sm transition-transform duration-200 group-hover:scale-110"></i>
             <span>Solicitar Información</span>
         </a>
-    </div>
-</section>
-<!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
-<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
-    <div class="flex items-center justify-between mb-3">
-        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
-            <i class="fa-solid fa-book-open mr-2 text-brand-neon animate-pulse"></i> Pan de Vida
-        </h4>
-        <!-- Indicador de Versión Bíblica -->
-        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400">
-            RVR1960
-        </span>
-    </div>
-    
-    <div class="p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 text-center relative overflow-hidden group">
-        <!-- Esqueleto de Carga (Spinner) -->
-        <div id="verse-loader" class="py-4 flex flex-col items-center justify-center space-y-2">
-            <i class="fa-solid fa-circle-notch animate-spin text-brand-neon text-lg"></i>
-            <span class="text-xs text-zinc-400">Alimentando el espíritu...</span>
-        </div>
-
-        <!-- Contenido del Versículo (Oculto al inicio) -->
-        <div id="verse-content" class="hidden opacity-0 transition-opacity duration-500">
-            <p id="verse-text" class="text-xs sm:text-sm italic text-zinc-800 dark:text-gray-200 font-medium leading-relaxed">
-                <!-- Se inyecta dinámicamente -->
-            </p>
-            <span id="verse-ref" class="block text-[11px] uppercase font-black text-brand-neon mt-2 tracking-widest">
-                <!-- Se inyecta dinámicamente -->
-            </span>
-        </div>
-    </div>
-
-    <!-- Botón de Compartir Personalizado -->
-    <div class="mt-3">
-        <button id="btn-share-verse" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-brand-neon hover:text-black hover:border-brand-neon dark:hover:bg-brand-neon dark:hover:text-black transition-all duration-300 shadow-sm cursor-pointer">
-            <i class="fa-solid fa-share-nodes"></i>
-            Compartir Bendición
-        </button>
     </div>
 </section>
 
@@ -1504,6 +1516,46 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 }
 </style>
+
+<!-- SECCIÓN VERSÍCULO DEL DÍA (AUTOMATIZADO) -->
+<section class="bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 neon-glow transition-colors duration-300">
+    <div class="flex items-center justify-between mb-3">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-book-open mr-2 text-brand-neon animate-pulse"></i> Pan de Vida
+        </h4>
+        <!-- Indicador de Versión Bíblica -->
+        <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400">
+            RVR1960
+        </span>
+    </div>
+    
+    <div class="p-4 rounded-2xl bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 text-center relative overflow-hidden group">
+        <!-- Esqueleto de Carga (Spinner) -->
+        <div id="verse-loader" class="py-4 flex flex-col items-center justify-center space-y-2">
+            <i class="fa-solid fa-circle-notch animate-spin text-brand-neon text-lg"></i>
+            <span class="text-xs text-zinc-400">Alimentando el espíritu...</span>
+        </div>
+
+        <!-- Contenido del Versículo (Oculto al inicio) -->
+        <div id="verse-content" class="hidden opacity-0 transition-opacity duration-500">
+            <p id="verse-text" class="text-xs sm:text-sm italic text-zinc-800 dark:text-gray-200 font-medium leading-relaxed">
+                <!-- Se inyecta dinámicamente -->
+            </p>
+            <span id="verse-ref" class="block text-[11px] uppercase font-black text-brand-neon mt-2 tracking-widest">
+                <!-- Se inyecta dinámicamente -->
+            </span>
+        </div>
+    </div>
+
+    <!-- Botón de Compartir Personalizado -->
+    <div class="mt-3">
+        <button id="btn-share-verse" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-brand-neon hover:text-black hover:border-brand-neon dark:hover:bg-brand-neon dark:hover:text-black transition-all duration-300 shadow-sm cursor-pointer">
+            <i class="fa-solid fa-share-nodes"></i>
+            Compartir Bendición
+        </button>
+    </div>
+</section>
+
 
 <section class="w-full max-w-7xl mx-auto mt-8 px-4 select-none">
     <div class="w-full bg-brand-lightCard/70 dark:bg-zinc-950/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 shadow-xl neon-glow">
