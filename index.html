@@ -2160,6 +2160,10 @@ async function consultarLastFM(artista, titulo, apiKey) {
 /**
  * Función principal adaptada para procesar la lógica de negocio radial y musical.
  */
+
+// Variable global para evitar búsquedas repetidas en curso
+let ultimaBusqueda = "";
+
 async function buscarCaratula(titulo, artista) {
     const terminosIgnorar = ["RADIO FE", "IDENTIFICACIÓN", "PUBLICIDAD", "PROGRAMA", "SONANDO"];
     
@@ -2178,9 +2182,13 @@ async function buscarCaratula(titulo, artista) {
         "9PM": { nombre: "ORAR POR LAS FAMILIAS", img: "img/oracion/oracion.png" }
     };
 
-    let tClean = titulo.trim().toUpperCase();
-    const trackCover = document.getElementById('track-cover');
-    const ambientBg = document.getElementById('ambient-background');
+    let tClean = (titulo || "").trim().toUpperCase();
+    let aClean = (artista || "").trim();
+
+    // Evitar re-ejecutar si no ha cambiado la canción
+    const idActual = `${tClean}-${aClean.toUpperCase()}`;
+    if (idActual === ultimaBusqueda) return;
+    ultimaBusqueda = idActual;
 
     // 1. Validar Interrupciones Estáticas / Publicidades
     let coincidenciaAudio = null;
@@ -2193,96 +2201,122 @@ async function buscarCaratula(titulo, artista) {
     }
 
     if (coincidenciaAudio) {
-        if (trackCover) trackCover.src = coincidenciaAudio.img;
-        if (ambientBg) ambientBg.style.backgroundImage = `url('${coincidenciaAudio.img}')`;
-        console.log(`Escudo Activo: Mostrando carátula personalizada para ${coincidenciaAudio.nombre}`);
+        aplicarImagen(coincidenciaAudio.img, idActual, coincidenciaAudio.nombre, aClean);
         return; 
     }
 
     // 2. Validar Términos Genéricos a Ignorar
     if (terminosIgnorar.some(term => tClean.includes(term)) || tClean === "") {
-        if (trackCover) trackCover.src = caratulaPorDefecto;
-        if (ambientBg) ambientBg.style.backgroundImage = `url('${caratulaPorDefecto}')`;
+        aplicarImagen(caratulaPorDefecto, idActual, titulo, artista);
         return;
     }
 
     // 3. Limpieza de metadatos para búsqueda musical
     let titleCleaned = titulo.replace(/EN VIVO:/gi, '').replace(/¡EN DIRECTO!/gi, '').replace(/\.(mp3|wav|aac|ogg)/gi, '').trim();
-    let artistCleaned = artista.trim();
+    let artistCleaned = aClean;
     let queryTarget = `${titleCleaned} ${artistCleaned}`.trim();
 
-    // 4. Verificar memoria Caché para optimizar rendimiento
-    if (cacheCaratulas[queryTarget]) {
-        aplicarImagen(cacheCaratulas[queryTarget], queryTarget);
+    // 4. Verificar memoria Caché
+    if (typeof cacheCaratulas !== "undefined" && cacheCaratulas[queryTarget]) {
+        aplicarImagen(cacheCaratulas[queryTarget], queryTarget, titleCleaned, artistCleaned);
         return;
     }
 
-    // 5. Flujo de Búsqueda Secuencial Inteligente (Cascada)
+    // 5. Flujo de Búsqueda Secuencial (Cascada)
     let urlCaratulaHD = null;
 
-    // Intento A: iTunes con consulta combinada (Validando que coincidan artista y título)
-    urlCaratulaHD = await consultariTunes(queryTarget, artistCleaned, titleCleaned);
+    try {
+        // Intento A
+        if (typeof consultariTunes === "function") {
+            urlCaratulaHD = await consultariTunes(queryTarget, artistCleaned, titleCleaned);
+        }
 
-    // Intento B: iTunes usando solo el título (Pero asegurando mediante filtro que el artista corresponda)
-    if (!urlCaratulaHD && titleCleaned) {
-        urlCaratulaHD = await consultariTunes(titleCleaned, artistCleaned);
+        // Intento B
+        if (!urlCaratulaHD && titleCleaned && typeof consultariTunes === "function") {
+            urlCaratulaHD = await consultariTunes(titleCleaned, artistCleaned);
+        }
+
+        // Intento C
+        if (!urlCaratulaHD && artistCleaned && titleCleaned && typeof consultarLastFM === "function") {
+            urlCaratulaHD = await consultarLastFM(artistCleaned, titleCleaned, typeof LASTFM_API_KEY !== "undefined" ? LASTFM_API_KEY : '');
+        }
+    } catch (e) {
+        console.error("Error consultando APIs de carátulas:", e);
     }
 
-    // Intento C: Last.fm (Como salvavidas final)
-    if (!urlCaratulaHD && artistCleaned && titleCleaned) {
-        urlCaratulaHD = await consultarLastFM(artistCleaned, titleCleaned, LASTFM_API_KEY);
-    }
-
-    // 6. Resolución de Imagen Encontrada u Omisión
+    // 6. Aplicar resultado o fallback
     if (urlCaratulaHD) {
-        aplicarImagen(urlCaratulaHD, queryTarget);
+        // Forzar HTTPS para evitar bloqueo de contenido mixto en navegadores modernos
+        urlCaratulaHD = urlCaratulaHD.replace(/^http:\/\//i, 'https://');
+        aplicarImagen(urlCaratulaHD, queryTarget, titleCleaned, artistCleaned);
     } else {
-        console.warn(`No se localizó arte verificado para: "${queryTarget}". Colocando miniatura por defecto.`);
-        if (trackCover) trackCover.src = caratulaPorDefecto;
-        if (ambientBg) ambientBg.style.backgroundImage = `url('${caratulaPorDefecto}')`;
+        console.warn(`No se localizó arte para: "${queryTarget}". Usando portada por defecto.`);
+        aplicarImagen(caratulaPorDefecto, queryTarget, titleCleaned, artistCleaned);
     }
 }
 
-function aplicarImagen(url, query) {
+function aplicarImagen(url, query, tituloTrack = "Radio FE 4:18", artistaTrack = "En Vivo") {
     const tCover = document.getElementById('track-cover');
     const ambientBg = document.getElementById('ambient-background');
-    
-    if (tCover) tCover.src = url;
-    if (ambientBg) ambientBg.style.backgroundImage = `url('${url}')`;
-    
-    cacheCaratulas[query] = url;
 
+    // Forzar SSL en la URL recibida
+    const urlSegura = url ? url.replace(/^http:\/\//i, 'https://') : caratulaPorDefecto;
+
+    // Precargar la imagen antes de asignarla al DOM para evitar parpadeos/cuadros en blanco
+    const imgLoader = new Image();
+    imgLoader.src = urlSegura;
+
+    imgLoader.onload = () => {
+        if (tCover) tCover.src = urlSegura;
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${urlSegura}')`;
+        if (typeof cacheCaratulas !== "undefined") cacheCaratulas[query] = urlSegura;
+    };
+
+    imgLoader.onerror = () => {
+        console.warn(`Error al cargar la imagen: ${urlSegura}. Aplicando imagen por defecto.`);
+        if (tCover) tCover.src = caratulaPorDefecto;
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${caratulaPorDefecto}')`;
+    };
+
+    // Actualizar MediaSession API de forma segura
     if ('mediaSession' in navigator) {
-        const elTitle = document.getElementById('sonic_title');
-        const elArtist = document.getElementById('sonic_artist');
-        
-        navigator.mediaSession.metadata = new MediaMetadata({
-            title: elTitle ? elTitle.innerText : "Radio FE 4:18",
-            artist: elArtist ? elArtist.innerText : "Sonando por todo lo alto",
-            album: "Radio FE 4:18 | En Vivo",
-            artwork: [
-                { src: url, sizes: '96x96',   type: 'image/png' },
-                { src: url, sizes: '128x128', type: 'image/png' },
-                { src: url, sizes: '192x192', type: 'image/png' },
-                { src: url, sizes: '256x256', type: 'image/png' },
-                { src: url, sizes: '384x384', type: 'image/png' },
-                { src: url, sizes: '512x512', type: 'image/png' },
-            ]
-        });
+        try {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: tituloTrack || "Radio FE 4:18",
+                artist: artistaTrack || "En Vivo",
+                album: "Radio FE 4:18 | En Vivo",
+                artwork: [
+                    { src: urlSegura, sizes: '96x96' },
+                    { src: urlSegura, sizes: '128x128' },
+                    { src: urlSegura, sizes: '192x192' },
+                    { src: urlSegura, sizes: '256x256' },
+                    { src: urlSegura, sizes: '384x384' },
+                    { src: urlSegura, sizes: '512x512' }
+                ]
+            });
+        } catch (err) {
+            console.error("Error en MediaSession:", err);
+        }
     }
 }
 
+// Debounce para evitar llamadas excesivas por mutaciones del DOM
+let timerCambio = null;
 function verificarCambio() {
-    if (programaEnVivoActivo) return; 
+    if (typeof programaEnVivoActivo !== "undefined" && programaEnVivoActivo) return; 
     
-    setTimeout(() => {
-        const actualTitle = obTitle ? obTitle.innerText : "";
-        const actualArtist = obArtist ? obArtist.innerText : "";
-        buscarCaratula(actualTitle, actualArtist);
-    }, 800);
+    clearTimeout(timerCambio);
+    timerCambio = setTimeout(() => {
+        const actualTitle = typeof obTitle !== "undefined" && obTitle ? obTitle.innerText : "";
+        const actualArtist = typeof obArtist !== "undefined" && obArtist ? obArtist.innerText : "";
+        
+        if (actualTitle || actualArtist) {
+            buscarCaratula(actualTitle, actualArtist);
+        }
+    }, 500);
 }
 
-if (obTitle && obArtist) {
+if (typeof obTitle !== "undefined" && obTitle && typeof obArtist !== "undefined" && obArtist) {
     const trackObserver = new MutationObserver(verificarCambio);
     trackObserver.observe(obTitle, { childList: true, characterData: true, subtree: true });
     trackObserver.observe(obArtist, { childList: true, characterData: true, subtree: true });
