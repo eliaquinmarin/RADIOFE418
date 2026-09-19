@@ -1061,12 +1061,28 @@ html {
 
 <!-- Formulario de Interacción Principal -->
 
+<section id="notas" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 neon-glow">
+    <div class="flex items-center justify-between mb-4">
+        <h4 class="font-bold tracking-wide uppercase text-sm text-zinc-700 dark:text-zinc-300 flex items-center">
+            <i class="fa-solid fa-newspaper mr-2 text-brand-neonPink"></i> Notas & Entérate
+        </h4>
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-neonPink/10 text-brand-neonPink border border-brand-neonPink/20 uppercase tracking-wider">Últimas Noticias</span>
+    </div>
+    
+    <div class="flex flex-col gap-4" id="contenedor-noticia">
+        <!-- Loader mientras cargan los datos -->
+        <div class="py-8 text-center text-xs text-zinc-500 animate-pulse">
+            Cargando noticias...
+        </div>
+    </div>
+</section>
+
 <script>
 document.addEventListener("DOMContentLoaded", async function () {
     const BASE_URL = "https://www.contextomediagroup.com/wp-json/wp/v2";
 
+    // Función auxiliar para formatear la fecha
     function formatearFecha(dateString) {
-        if (!dateString) return "";
         const fechaObj = new Date(dateString);
         return fechaObj.toLocaleDateString('es-ES', { 
             day: '2-digit', 
@@ -1075,42 +1091,29 @@ document.addEventListener("DOMContentLoaded", async function () {
         }).toUpperCase();
     }
 
+    // Función auxiliar para limpiar HTML del extracto
     function limpiarTexto(htmlString) {
-        if (!htmlString) return "";
-        const tempDiv = document.createElement("textarea");
-        tempDiv.innerHTML = htmlString;
-        return tempDiv.value.replace(/<[^>]*>?/gm, '').trim();
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = htmlString || "";
+        return tempDiv.textContent || tempDiv.innerText || "";
     }
 
     try {
-        // Evitar caché de navegador agregando un timestamp
-        const cacheBuster = `_nocache=${Date.now()}`;
-
         // 1. Obtener ID de categoría "lanzamientos"
-        let catId = null;
-        try {
-            const catResponse = await fetch(`${BASE_URL}/categories?slug=lanzamientos&${cacheBuster}`);
-            const categories = await catResponse.json();
-            if (Array.isArray(categories) && categories.length > 0) {
-                catId = categories[0].id;
-            }
-        } catch (e) {
-            console.warn("No se pudo obtener la categoría, se cargarán posts generales:", e);
-        }
+        const catResponse = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
+        const categories = await catResponse.json();
         
-        // 2. Parámetros de orden y frescura
-        let postsUrl = `${BASE_URL}/posts?per_page=2&orderby=date&order=desc&${cacheBuster}`;
-        if (catId) {
-            postsUrl += `&categories=${catId}`;
+        // Solicitar 2 entradas (per_page=2)
+        let postsUrl = `${BASE_URL}/posts?per_page=2`;
+        if (categories && categories.length > 0) {
+            postsUrl += `&categories=${categories[0].id}`;
         }
 
-        // 3. Traer las 2 últimas noticias
+        // 2. Traer los 2 últimos posts
         const postResponse = await fetch(postsUrl);
-        if (!postResponse.ok) throw new Error(`HTTP error! status: ${postResponse.status}`);
-        
         const posts = await postResponse.json();
 
-        if (!Array.isArray(posts) || posts.length === 0) {
+        if (!posts || posts.length === 0) {
             document.getElementById("contenedor-noticia").innerHTML = `
                 <div class="text-center py-4 text-xs text-zinc-500">No hay noticias disponibles.</div>
             `;
@@ -1121,7 +1124,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // NOTICIA 1: DESTACADA PRINCIPAL
         const post1 = posts[0];
-        const titulo1 = limpiarTexto(post1.title ? post1.title.rendered : "");
+        const titulo1 = post1.title ? post1.title.rendered : "";
         const enlace1 = post1.link || "#";
         const fecha1 = formatearFecha(post1.date);
         const extracto1 = limpiarTexto(post1.excerpt ? post1.excerpt.rendered : "");
@@ -1157,7 +1160,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // NOTICIA 2: SECUNDARIA (si existe)
         if (posts.length > 1) {
             const post2 = posts[1];
-            const titulo2 = limpiarTexto(post2.title ? post2.title.rendered : "");
+            const titulo2 = post2.title ? post2.title.rendered : "";
             const enlace2 = post2.link || "#";
             const fecha2 = formatearFecha(post2.date);
             const extracto2 = limpiarTexto(post2.excerpt ? post2.excerpt.rendered : "");
@@ -1239,7 +1242,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     animation: ticker-scroll 60s linear infinite;
 }
 
-/* Pausa el movimiento al pasar el mouse por encima */
+/* Pausa el movimiento al pasar el mouse por encima para facilitar la lectura/clic */
 .ticker-track:hover {
     animation-play-state: paused;
 }
@@ -1249,6 +1252,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         transform: translate3d(0, 0, 0);
     }
     100% {
+        /* Se desplaza exactamente la mitad (el contenido clonado) para el bucle perfecto sin interrupciones */
         transform: translate3d(-50%, 0, 0);
     }
 }
@@ -1260,49 +1264,36 @@ document.addEventListener("DOMContentLoaded", async function () {
     const tickerContainer = document.getElementById("rss-ticker");
     const BASE_URL = "https://www.contextomediagroup.com/wp-json/wp/v2";
 
-    // Función para limpiar etiquetas y decodificar caracteres HTML (ej: &#8211;, &amp;)
-    function limpiarTexto(htmlString) {
-        if (!htmlString) return "";
-        const tempDiv = document.createElement("textarea");
-        tempDiv.innerHTML = htmlString;
-        return tempDiv.value.replace(/<[^>]*>?/gm, '').trim();
-    }
-
     try {
-        // Evitar la caché agregando timestamp
-        const cacheBuster = `_nocache=${Date.now()}`;
-
         // 1. Identificar la categoría "lanzamientos" en WordPress
         let categoryQuery = "";
         try {
-            const catRes = await fetch(`${BASE_URL}/categories?slug=lanzamientos&${cacheBuster}`);
+            const catRes = await fetch(`${BASE_URL}/categories?slug=lanzamientos`);
             const categories = await catRes.json();
-            if (Array.isArray(categories) && categories.length > 0) {
+            if (categories.length > 0) {
                 categoryQuery = `&categories=${categories[0].id}`;
             }
         } catch (e) {
             console.warn("No se pudo filtrar por categoría específica, cargando posts recientes general.");
         }
 
-        // 2. Traer los últimos 10 titulares ordenados por fecha descendente
-        const response = await fetch(`${BASE_URL}/posts?per_page=10&orderby=date&order=desc${categoryQuery}&${cacheBuster}`);
-        if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-
+        // 2. Traer los últimos 10 titulares de Lanzamientos
+        const response = await fetch(`${BASE_URL}/posts?per_page=10${categoryQuery}`);
         const posts = await response.json();
 
-        if (!Array.isArray(posts) || posts.length === 0) {
+        if (!posts || posts.length === 0) {
             tickerContainer.innerHTML = `<div class="text-xs text-zinc-500 px-4">No se encontraron noticias recientes.</div>`;
             return;
         }
 
         // 3. Renderizar cada noticia con su formato
         const itemsHTML = posts.map(post => {
-            const titulo = limpiarTexto(post.title ? post.title.rendered : "");
-            const enlace = post.link || "#";
+            const titulo = post.title.rendered;
+            const enlace = post.link;
 
-            // Formatear Fecha
+            // Formatear Fecha (ej: 28 JUL 2026)
             const fechaObj = new Date(post.date);
-            const fechaFormateada = isNaN(fechaObj.getTime()) ? "" : fechaObj.toLocaleDateString('es-ES', { 
+            const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
                 day: '2-digit', 
                 month: 'short' 
             }).toUpperCase();
@@ -1320,14 +1311,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             `;
         }).join('');
 
-        // 4. Inyectar, duplicar y reiniciar la animación para evitar saltos
+        // 4. Inyectar y duplicar el contenido para crear el bucle infinito perfecto (0% a -50%)
         const bloqueOriginal = `<div class="flex items-center gap-6">${itemsHTML}</div>`;
         tickerContainer.innerHTML = bloqueOriginal + bloqueOriginal;
-
-        // Reiniciar la animación CSS tras inyectar el contenido dinámico
-        tickerContainer.style.animation = 'none';
-        tickerContainer.offsetHeight; // Forzar reflow
-        tickerContainer.style.animation = null;
 
     } catch (error) {
         console.error("Error al cargar las noticias para el cintillo:", error);
