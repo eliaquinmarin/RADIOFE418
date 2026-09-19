@@ -1197,17 +1197,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Extrae la URL de la imagen destacada enviada por la API (_embed)
-    function obtenerImagenDestacada(post) {
-        try {
-            if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
-                const media = post._embedded['wp:featuredmedia'][0];
-                return media.media_details?.sizes?.medium?.source_url || media.source_url;
+   // Extrae y procesa la URL de la imagen destacada
+function obtenerImagenDestacada(post) {
+    try {
+        if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
+            const media = post._embedded['wp:featuredmedia'][0];
+            const originalUrl = media.media_details?.sizes?.medium?.source_url || media.source_url;
+            
+            if (originalUrl) {
+                // Usamos wsrv.nl como proxy para bypass de CORS/Hotlinking y optimizar la imagen
+                return `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}`;
             }
-        } catch (e) {
-            console.warn("No se pudo obtener la imagen destacada:", e);
         }
-        return null; // Si no tiene imagen
+    } catch (e) {
+        console.warn("No se pudo obtener la imagen destacada:", e);
     }
+    return null; // Si no tiene imagen
+}
 
     try {
         // Se añade el parámetro _embed=1 para que WordPress devuelva la imagen en la misma consulta
