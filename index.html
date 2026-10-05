@@ -273,7 +273,6 @@ html {
             background: transparent;
         }
     </style>
-
 <script type="text/javascript">
       (function() {
         var dominioAutorizado = "radiofe418.vercel.app";
@@ -1887,160 +1886,264 @@ document.addEventListener("DOMContentLoaded", async function () {
     </div>
 </section>
 
-<!-- MÓDULO: TARJETA DE PRESENTACIÓN - ELIAQUIN MARÍN -->
-<section class="w-full bg-brand-lightCard/80 dark:bg-brand-card/90 backdrop-blur-xl border border-brand-neon/40 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl relative overflow-hidden group hover:border-brand-neon/70">
+<!-- SECCIÓN ARTISTAS DESTACADOS / LANZAMIENTOS -->
+<section id="artistas-destacados" class="w-full max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
     
-    <!-- Luces de fondo neón -->
-    <div class="absolute -top-12 -right-12 w-36 h-36 bg-brand-neon/20 rounded-full blur-3xl pointer-events-none group-hover:bg-brand-neon/30 transition-all"></div>
-    <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-brand-neonPink/20 rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="relative z-10 flex flex-col sm:flex-row items-center gap-5">
-        
-        <!-- Foto Nítida con Marco Neón -->
-        <div class="relative shrink-0">
-            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl p-1 bg-gradient-to-tr from-brand-neon via-cyan-400 to-brand-neonPink shadow-lg shadow-brand-neon/20">
-                <!-- Reemplaza la ruta 'img/eliaquinmarinOFICIAL.png' por la ubicación real de tu foto -->
-                <img src="img/eliaquinmarinOFICIAL.png" 
-                     alt="Eliaquin Marín - Director Radio FE 4:18" 
-                     class="w-full h-full object-cover object-center rounded-[14px] bg-zinc-900 filter brightness-105 contrast-105"
-                     loading="eager">
+    <!-- Encabezado de Sección -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-brand-neon to-brand-neonPink p-0.5 shadow-lg shadow-brand-neon/20 shrink-0">
+                <div class="w-full h-full bg-zinc-900 rounded-[14px] flex items-center justify-center text-brand-neon">
+                    <i class="fa-solid fa-compact-disc text-base sm:text-lg animate-spin-slow"></i>
+                </div>
             </div>
-            <!-- Indicador En Línea -->
-            <span class="absolute -bottom-1 -right-1 flex h-4 w-4">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-zinc-900"></span>
-            </span>
-        </div>
-
-        <!-- Información de Contacto -->
-        <div class="flex-1 text-center sm:text-left space-y-2">
-            
             <div>
-                <!--[cite: 1] -->
-                <span class="text-[10px] font-black uppercase tracking-widest text-brand-neon block">Contacto Directo</span>
-                <!--[cite: 1] -->
-                <h3 class="text-lg sm:text-xl font-black text-zinc-900 dark:text-white leading-tight">Eliaquin Marín</h3>
-                <!--[cite: 1] -->
-                <p class="text-xs font-bold text-brand-neonPink uppercase tracking-wider">Director de Radio FE 4:18</p>
+                <h2 class="text-base sm:text-lg font-black text-zinc-800 dark:text-zinc-100 uppercase tracking-wide leading-tight">
+                   Recomendados.
+                </h2>
+                <p class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+                    Lanzamientos destacados.
+                </p>
             </div>
-
-            <p class="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                ¿Tienes alguna consulta, petición de oración o sugerencia para la emisora? ¡Escríbeme directamente!
-            </p>
-
-            <!-- Botón WhatsApp Directo (Número oculto con mensaje personalizado) -->
-            <div class="pt-1">
-                <a href="https://wa.me/584225183677?text=Hola%20Eliaquin,%20dios%20te%20bendiga.%20Quiero%20comunicarme%20contigo%20desde%20la%20p%C3%A1gina%20web%20de%20Radio%20FE%204:18." 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-95 transition-all">
-                    <i class="fa-brands fa-whatsapp text-base"></i>
-                    Escríbeme Directamente
-                </a>
-            </div>
-
         </div>
+        
+        <span id="mes-destacado-badge" class="self-start sm:self-auto px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-brand-neon/10 text-brand-neon border border-brand-neon/20 shrink-0">
+            Top Del Mes
+        </span>
+    </div>
 
+    <!-- Contenedor Vertical de Tarjetas -->
+    <div class="flex flex-col gap-5 sm:gap-6 w-full">
+        <div id="artista-venezuela"></div>
+        <div id="artista-internacional"></div>
     </div>
 </section>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Actualización automática del distintivo con el mes actual
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const ahora = new Date();
+    const mesNombre = meses[ahora.getMonth()];
+    const anioActual = ahora.getFullYear();
 
-<section class="w-full max-w-7xl mx-auto mt-8 px-4 select-none">
-    <div class="w-full bg-brand-lightCard/70 dark:bg-zinc-950/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 shadow-xl neon-glow">
-        
-        <!-- Encabezado de la Sección Adaptado a Radio FE 4:18 -->
-        <div class="flex items-center justify-between mb-5 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60">
-            <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center">
-                <i class="fa-solid fa-headset mr-2 text-brand-neon text-base animate-pulse"></i> 
-                Canales de Atención <span class="mx-1 text-zinc-400 dark:text-zinc-600 font-light">|</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">Contacto Directo</span>
-            </h4>
-            <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg bg-zinc-200/50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
-                24/7
-            </span>
-        </div>
-        
-        <!-- Bloque de contactos original -->
-        <div class="flex flex-col md:flex-row flex-wrap items-center justify-between gap-5 md:gap-2">
+    const badge = document.getElementById("mes-destacado-badge");
+    if (badge) badge.textContent = ` ${mesNombre} ${anioActual}`;
+
+    // 2. DATOS MANUALES (Modifica directamente estos campos)
+    const artistasManuales = {
+        venezuela: {
+            trackName: "Sólo Alaba",
+            artistName: "Eliezer Boyer, Mata Rica y Jahazielband",
+            collectionName: "#TCVFE418",
+            primaryGenreName: "Música Cristiana",
+            artistFoto: "img/recomendacion/venezolano.jpg",
+            youtubeUrl: "https://youtu.be/oUrs9IHmTGo?si=RfQTuR7YSm6nMAd_",
+                    },
+        internacional: {
+            trackName: "Sublime Gracia",
+            artistName: "Marcos Witt, Marcos Vidal y Marco Barrientos ",
+            collectionName: "#TCIFE418",
+            primaryGenreName: "Música Cristiana",
+            artistFoto: "img/recomendacion/internacional.jpg",
+            youtubeUrl: "https://youtu.be/zmVXN9c91DY?si=I0N_gEW-aBJAcG_e",
+        }
+    };
+
+    // 3. Función para renderizar el HTML de cada tarjeta
+    function renderTarjeta(data, esVenezuela, containerId) {
+        const colorNeonText = esVenezuela ? "text-brand-neon" : "text-brand-neonPink";
+        const borderHover = esVenezuela ? "hover:border-brand-neon/50" : "hover:border-brand-neonPink/50";
+
+        const html = `
+        <div class="group relative bg-brand-lightCard/80 dark:bg-brand-card/80 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-800/80 rounded-2xl p-4 sm:p-5 ${borderHover} transition-all duration-300 shadow-xl flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start">
             
-            <div class="flex flex-row items-center gap-4 px-3 py-2 md:py-0 w-full md:w-auto md:flex-1 min-w-[220px]">
-                <div class="w-10 h-10 rounded-2xl bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/30 dark:border-zinc-800/60 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0 shadow-inner transition-transform duration-300 hover:rotate-3">
-                    <i class="fa-solid fa-location-dot text-sm text-brand-neonPink"></i>
-                </div>
-                <div>
-                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none font-mono">Sede Central</p>
-                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-300 mt-1.5 whitespace-normal md:whitespace-nowrap leading-tight">Barinas, Edo. Barinas — Venezuela</p>
-                </div>
+            <!-- Imagen del Artista / Portada -->
+            <div class="relative w-full max-w-[220px] sm:w-44 sm:max-w-none aspect-square rounded-xl overflow-hidden shrink-0 shadow-md transition-all bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800/50">
+                <img src="${data.artistFoto}" 
+                     alt="${data.artistName}" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                     loading="lazy">
             </div>
 
-            <div class="hidden md:block w-[1px] h-8 bg-zinc-200 dark:bg-zinc-800/60 self-center"></div>
-            <div class="block md:hidden w-full h-[1px] bg-zinc-200 dark:bg-zinc-800/40"></div>
-
-            <div class="flex flex-row items-center gap-4 px-3 py-2 md:py-0 w-full md:w-auto md:flex-1 min-w-[220px]">
-                <div class="w-10 h-10 rounded-2xl bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/30 dark:border-zinc-800/60 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0 shadow-inner transition-transform duration-300 hover:rotate-3">
-                    <i class="fa-solid fa-envelope text-sm text-brand-neon"></i>
-                </div>
+            <!-- Información del Lanzamiento -->
+            <div class="flex-1 w-full flex flex-col justify-between h-full text-center sm:text-left">
                 <div>
-                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none font-mono">Canal Escrito</p>
-                    <a href="mailto:radiofe418@gmail.com" class="text-xs font-bold text-zinc-800 dark:text-zinc-300 hover:text-brand-neon dark:hover:text-brand-neon transition-colors duration-200 mt-1.5 block break-all md:break-normal leading-tight">radiofe418@gmail.com</a>
+                    <div class="flex items-center justify-center sm:justify-start gap-2 mb-1 flex-wrap">
+                        <span class="text-[10px] font-black uppercase tracking-widest ${colorNeonText}">
+                            ${esVenezuela ? '🇻🇪 Venezuela' : '🌎 Internacional'}
+                        </span>
+                        <span class="text-zinc-400 dark:text-zinc-600">•</span>
+                        <span class="text-[10px] font-semibold text-zinc-400">${data.primaryGenreName}</span>
+                    </div>
+
+                    <h3 class="text-base sm:text-xl font-bold text-zinc-800 dark:text-zinc-100 transition-colors leading-snug">
+                        "${data.trackName}"
+                    </h3>
+
+                    <p class="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300 my-1">
+                        Grupo/Artista: <span class="text-zinc-800 dark:text-zinc-100 font-bold">${data.artistName}</span>
+                    </p>
                 </div>
+
+                <!-- Enlaces Directos a Plataformas -->
+                <div class="flex items-center justify-center sm:justify-start gap-2 pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 w-full">
+                    <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-zinc-400 mr-1">Ve el video Aqui:</span>
+                     <a href="${data.youtubeUrl}" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all duration-300 active:scale-95" title="YouTube">
+                        <i class="fa-brands fa-youtube text-base"></i>
+                    </a>
+                       </div>
             </div>
-
-            <div class="hidden md:block w-[1px] h-8 bg-zinc-200 dark:bg-zinc-800/60 self-center"></div>
-            <div class="block md:hidden w-full h-[1px] bg-zinc-200 dark:bg-zinc-800/40"></div>
-
-            <div class="flex flex-row items-center gap-4 px-3 py-2 md:py-0 w-full md:w-auto md:flex-1 min-w-[200px]">
-                <div class="w-10 h-10 rounded-2xl bg-zinc-200/50 dark:bg-zinc-900/60 border border-zinc-300/30 dark:border-zinc-800/60 flex items-center justify-center text-zinc-600 dark:text-zinc-400 shrink-0 shadow-inner transition-transform duration-300 hover:rotate-3">
-                    <i class="fa-solid fa-phone text-sm text-brand-neon"></i>
-                </div>
-                <div>
-                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest m-0 leading-none font-mono">Línea Máster</p>
-                    <a href="tel:+584225183677" class="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-300 hover:text-brand-neon dark:hover:text-brand-neon transition-colors duration-200 mt-1.5 block whitespace-nowrap leading-tight">+58 (422) 518-3677</a>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
+        `;
+
+        const container = document.getElementById(containerId);
+        if (container) container.innerHTML = html;
+    }
+
+    // 4. Renderizado inmediato de los datos
+    renderTarjeta(artistasManuales.venezuela, true, 'artista-venezuela');
+    renderTarjeta(artistasManuales.internacional, false, 'artista-internacional');
+});
+</script>
+
 
 
  </div>
     </main>
 
 
-
-
-<footer class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800/80 mt-12 pt-8 pb-24 md:pb-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 relative z-50">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-6 text-center md:text-left">
+<!-- SECCIÓN: CANALES DE ATENCIÓN Y CONTACTO DIRECTO -->
+<section class="w-full max-w-7xl mx-auto mt-8 px-4 select-none animate-fade-in">
+    <div class="relative w-full bg-brand-lightCard/70 dark:bg-zinc-950/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl neon-glow overflow-hidden">
         
-        <div class="space-y-1">
-            <p class="text-xs font-black tracking-wide text-zinc-800 dark:text-zinc-200 uppercase">
-                © <span id="footer-year">2026</span> Radio FE 4:18
+        <!-- Resplandor neón decorativo ambiental -->
+        <div class="absolute -top-16 -left-16 w-36 h-36 bg-brand-neon/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-brand-neonPink/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <!-- Encabezado de la Sección -->
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60 relative z-10">
+            <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+                <i class="fa-solid fa-headset text-brand-neon text-base animate-pulse"></i> 
+                <span>Canales de Atención</span>
+                <span class="text-zinc-400 dark:text-zinc-600 font-light">|</span> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">Contacto Directo</span>
+            </h4>
+            
+            <!-- Badge Dinámico "En Línea" -->
+            <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 flex items-center gap-1.5 shadow-sm">
+                <span class="relative flex h-1.5 w-1.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                </span>
+                En Línea 24/7
+            </span>
+        </div>
+        
+        <!-- Grid de Tarjetas Interactivas de Contacto -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+            
+            <!-- TARJETA 1: Sede Central -->
+            <div class="group flex items-center gap-4 p-3.5 rounded-2xl bg-zinc-100/60 dark:bg-zinc-900/40 border border-zinc-200/80 dark:border-zinc-800/60 transition-all duration-300 hover:border-brand-neonPink/40 hover:bg-white dark:hover:bg-zinc-900/80 hover:shadow-md">
+                <div class="w-11 h-11 rounded-2xl bg-brand-neonPink/10 border border-brand-neonPink/30 flex items-center justify-center text-brand-neonPink shrink-0 shadow-inner group-hover:scale-105 group-hover:rotate-6 transition-transform duration-300">
+                    <i class="fa-solid fa-location-dot text-base"></i>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-none font-mono">Sede Central</p>
+                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-200 mt-1.5 leading-tight truncate">Barinas, Edo. Barinas — Venezuela</p>
+                </div>
+            </div>
+
+            <!-- TARJETA 2: Correo Electrónico -->
+            <a href="mailto:radiofe418@gmail.com" 
+               title="Enviar un correo electrónico a Radio FE 4:18"
+               class="group flex items-center gap-4 p-3.5 rounded-2xl bg-zinc-100/60 dark:bg-zinc-900/40 border border-zinc-200/80 dark:border-zinc-800/60 transition-all duration-300 hover:border-brand-neon/40 hover:bg-white dark:hover:bg-zinc-900/80 hover:shadow-md">
+                <div class="w-11 h-11 rounded-2xl bg-brand-neon/10 border border-brand-neon/30 flex items-center justify-center text-brand-neon shrink-0 shadow-inner group-hover:scale-105 group-hover:-rotate-6 transition-transform duration-300">
+                    <i class="fa-solid fa-envelope text-base"></i>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-none font-mono">Canal Escrito</p>
+                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-200 group-hover:text-brand-neon transition-colors duration-200 mt-1.5 leading-tight truncate">radiofe418@gmail.com</p>
+                </div>
+            </a>
+
+            <!-- TARJETA 3: Línea Telefónica y WhatsApp -->
+            <a href="https://wa.me/584225183677?text=Hola%20Radio%20FE%204:18,%20les%20escribo%20desde%20la%20web." 
+               target="_blank"
+               rel="noopener noreferrer"
+               title="Llamar o escribir por WhatsApp"
+               class="group flex items-center gap-4 p-3.5 rounded-2xl bg-zinc-100/60 dark:bg-zinc-900/40 border border-zinc-200/80 dark:border-zinc-800/60 transition-all duration-300 hover:border-emerald-500/40 hover:bg-white dark:hover:bg-zinc-900/80 hover:shadow-md">
+                <div class="w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-500 shrink-0 shadow-inner group-hover:scale-105 group-hover:rotate-6 transition-transform duration-300">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-none font-mono">Línea Máster / WhatsApp</p>
+                    <p class="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-200 group-hover:text-emerald-500 transition-colors duration-200 mt-1.5 leading-tight truncate">+58 (422) 518-3677</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER PRINCIPAL -->
+<footer class="w-full bg-brand-lightCard/95 dark:bg-zinc-950/90 backdrop-blur-md border-t border-zinc-200/80 dark:border-zinc-800/80 mt-16 pt-10 pb-28 md:pb-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 relative z-50 overflow-hidden select-none">
+    
+    <!-- Línea sutil superior de resplandor neón -->
+    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-neon/50 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-6 text-center md:text-left relative z-10">
+        
+        <!-- Columna 1: Branding y Ubicación -->
+        <div class="space-y-1.5">
+            <p class="text-xs font-black tracking-widest text-zinc-800 dark:text-zinc-200 uppercase flex items-center justify-center md:justify-start gap-1.5">
+                <span>© <span id="footer-year">2026</span> Radio FE 4:18</span>
+                <span class="inline-block w-1 h-1 rounded-full bg-brand-neon"></span>
             </p>
             <p class="text-[11px] text-zinc-400 dark:text-zinc-500 font-medium leading-relaxed">
                 Estación Cristiana Digital • Barinas, Venezuela.<br>
-                Sonando por todo lo alto.
+                <span class="text-zinc-500 dark:text-zinc-400 font-semibold italic">"Sonando por todo lo alto"</span>
             </p>
         </div>
         
+        <!-- Columna 2: Sello DMCA / Copyright -->
         <div class="flex flex-col items-center justify-center gap-2">
-            <div class="transition-all duration-300 hover:opacity-80">
-                <a href="//www.dmca.com/Protection/Status.aspx?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" title="DMCA.com Protection Status" class="dmca-badge inline-block bg-zinc-200/40 dark:bg-zinc-900/45 p-1 rounded-xl border border-zinc-300/60 dark:border-zinc-800/60 shadow-inner"> 
-                    <img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" alt="DMCA.com Protection Status" class="h-5 w-auto block grayscale dark:contrast-125 dark:brightness-90 hover:grayscale-0 transition-all duration-300" />
+            <div class="p-1.5 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 shadow-sm hover:border-brand-neon/30 transition-all duration-300 group">
+                <a href="//www.dmca.com/Protection/Status.aspx?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" 
+                   title="DMCA.com Protection Status" 
+                   class="dmca-badge inline-block rounded-xl overflow-hidden"> 
+                    <img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=93d435ce-22fb-4507-a247-4ec6e4f55cbe" 
+                         alt="DMCA.com Protection Status" 
+                         class="h-5 w-auto block grayscale opacity-80 dark:contrast-125 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" />
                 </a> 
-                <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
             </div>
-            <span class="text-[9px] uppercase tracking-widest font-bold text-zinc-400 dark:text-zinc-600">Copyright Protection Online</span>
+            <span class="text-[9px] uppercase tracking-widest font-mono font-bold text-zinc-400 dark:text-zinc-600">
+                Protección de Contenido Digital
+            </span>
         </div>
 
-        <div class="md:text-right flex flex-col md:items-end justify-center gap-1">
-            <p class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 flex items-center justify-center md:justify-end gap-1.5 uppercase tracking-wider">
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-neon animate-pulse"></span>
+        <!-- Columna 3: Cita Bíblica y Autoría -->
+        <div class="md:text-right flex flex-col md:items-end justify-center gap-1.5">
+            <p class="text-[11px] font-mono font-bold text-zinc-400 dark:text-zinc-500 flex items-center justify-center md:justify-end gap-2 uppercase tracking-wider">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
+                </span>
                 2 Corintios 4:18
             </p>
-            <p class="text-xs text-zinc-500 dark:text-zinc-400 font-semibold tracking-wide">
-                Desarrollado por <a href="https://wa.me/584225183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%2520diseñador%20del%20sitio%20web." target="_blank" rel="noopener noreferrer" class="font-extrabold text-zinc-800 dark:text-white hover:text-brand-neon dark:hover:text-brand-neon transition-colors">@EliaquinMarin</a>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-wide">
+                Desarrollado por 
+                <a href="https://wa.me/584225183677?text=Hola,%20vi%20tu%20página%20web.%20Me%20interesa%20contactar%20al%20diseñador%20del%20sitio%20web." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-1 font-extrabold text-zinc-800 dark:text-zinc-100 hover:text-brand-neon dark:hover:text-brand-neon transition-colors duration-200 group">
+                    <span>@EliaquinMarin</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-0 group-hover:opacity-100 -translate-y-0.5 transition-all duration-200"></i>
+                </a>
             </p>
         </div>
+
     </div>
 </footer>
 
@@ -2192,14 +2295,11 @@ const hoyIndex = new Date().getDay();
 
 const partnersDatabase = [
     { img: "img/partners/contexto.png", url: "https://www.contextomediagroup.com/" },
-    { img: "img/partners/DISPONIBLE5.png", url: "" },
-    { img: "img/partners/DISPONIBLE3.png", url: "" },
     { img: "img/partners/roraima.png", url: "https://www.instagram.com/serviautosroraima/" },
-    { img: "img/partners/DISPONIBLE4.png", url: "" },
     { img: "img/partners/iglesia.png", url: "https://ib-fe418.vercel.app/" },
-    { img: "img/partners/DISPONIBLE2.png", url: "" },
+    { img: "img/partners/tatihana.png", url: "https://www.tatihanapozopuccini.com/" },
     { img: "img/partners/DISPONIBLE1.png", url: "" },
-    { img: "img/partners/tatihana.png", url: "https://www.tatihanapozopuccini.com/" }
+    { img: "img/partners/DISPONIBLE2.png", url: "" }
 ];
 let currentPartnerIndex = 0;
 
@@ -4295,25 +4395,9 @@ document.addEventListener("DOMContentLoaded", function() {
             enlace: "https://www.tatihanapozopuccini.com/"
         },
        {
-            nombre: "DISPONIBLE",
-            imagen: "img/partners/DISPONIBLE3.png", 
-            enlace: ""
-        },
-       {
-            nombre: "DISPONIBLE",
-            imagen: "img/partners/DISPONIBLE4.png", 
-            enlace: ""
-        },
-
-        {
-            nombre: "IGLESIA FE 4:18",
+           nombre: "IGLESIA FE 4:18",
             imagen: "img/partners/iglesia.png",
             enlace: "https://ib-fe418.vercel.app/"
-      },
-       {
-            nombre: "DISPONIBLE",
-            imagen: "img/partners/DISPONIBLE5.png", 
-            enlace: ""
         }
     ];
 
@@ -4636,8 +4720,8 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(item => item.trim())
             .filter(item => item.length > 2);
 
-        // Forzar estrictamente las primeras 9 canciones obtenidas del desglose
-        let ultimasCuatro = canciones.slice(0, 9);
+        // Forzar estrictamente las primeras 5 canciones obtenidas del desglose
+        let ultimasCuatro = canciones.slice(0, 5);
 
         if (ultimasCuatro.length === 0) {
             displayContainer.innerHTML = `
