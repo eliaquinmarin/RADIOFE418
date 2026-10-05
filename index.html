@@ -935,49 +935,16 @@ html {
                     <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
                     Último Estreno / En Vivo
                 </span>
-                <span class="text-[11px] text-zinc-400 font-medium">Video #1</span>
+                <span id="main-video-title" class="text-[11px] text-zinc-400 font-medium truncate max-w-[200px]">Video #1</span>
             </div>
         </div>
 
-        <!-- LISTA DE LOS OTROS 3 VIDEOS (Solo Miniaturas / Reproductores) -->
-        <div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-3 justify-between">
-            
-            <!-- Video Item 2 -->
-            <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" class="group relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md hover:border-brand-neon/60 transition-all duration-300">
-                <img src="https://img.youtube.com/vi/VIDEO_ID_2/mqdefault.jpg" alt="Video 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
-                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
-                    </div>
-                </div>
-               
-            </a>
-
-            <!-- Video Item 3 -->
-            <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank" class="group relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md hover:border-brand-neon/60 transition-all duration-300">
-                <img src="https://img.youtube.com/vi/VIDEO_ID_3/mqdefault.jpg" alt="Video 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
-                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
-                    </div>
-                </div>
-               
-            </a>
-
-            <!-- Video Item 4 -->
-            <a href="https://www.youtube.com/watch?v=VIDEO_ID_4" target="_blank" class="group relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md hover:border-brand-neon/60 transition-all duration-300">
-                <img src="https://img.youtube.com/vi/VIDEO_ID_4/mqdefault.jpg" alt="Video 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
-                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
-                    </div>
-                </div>
-                
-            </a>
-
+        <!-- LISTA DE LOS OTROS 3 VIDEOS (Contenedor Dinámico) -->
+        <div id="playlist-thumbs-container" class="lg:col-span-5 xl:col-span-4 flex flex-col gap-3 justify-between">
+            <!-- Esqueletos de carga / Placeholders mientras obtiene la lista -->
+            <div class="w-full aspect-video rounded-2xl bg-zinc-800/40 animate-pulse"></div>
+            <div class="w-full aspect-video rounded-2xl bg-zinc-800/40 animate-pulse"></div>
+            <div class="w-full aspect-video rounded-2xl bg-zinc-800/40 animate-pulse"></div>
         </div>
     </div>
 
@@ -1001,6 +968,74 @@ html {
 
 </section>
 
+<!-- SCRIPT DE CARGA Y ACTUALIZACIÓN DINÁMICA DE LA PLAYLIST -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const playlistId = "PLIjqDRnaTRqM";
+    const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "ok" && data.items && data.items.length > 0) {
+                const items = data.items;
+
+                // Helper para extraer el ID de video
+                const getVideoId = (item) => {
+                    if (item.guid) {
+                        const parts = item.guid.split(":");
+                        return parts[parts.length - 1];
+                    }
+                    const match = item.link.match(/v=([a-zA-Z0-9_-]+)/);
+                    return match ? match[1] : null;
+                };
+
+                // 1. Configurar el primer video en el reproductor principal
+                const firstVideoId = getVideoId(items[0]);
+                if (firstVideoId) {
+                    document.getElementById("main-video-player").src = `https://www.youtube.com/embed/${firstVideoId}?autoplay=0`;
+                }
+                if (items[0].title) {
+                    document.getElementById("main-video-title").textContent = items[0].title;
+                }
+
+                // 2. Construir los siguientes 3 videos (posiciones 2, 3 y 4)
+                const thumbsContainer = document.getElementById("playlist-thumbs-container");
+                thumbsContainer.innerHTML = ""; // Limpiar loaders
+
+                const nextVideos = items.slice(1, 4);
+
+                nextVideos.forEach((item, index) => {
+                    const videoId = getVideoId(item);
+                    if (!videoId) return;
+
+                    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+                    const thumbUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                    const title = item.title || `Video #${index + 2}`;
+
+                    const itemHtml = `
+                        <a href="${videoUrl}" target="_blank" rel="noopener noreferrer" 
+                           title="${title}"
+                           class="group relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md hover:border-brand-neon/60 transition-all duration-300">
+                            <img src="${thumbUrl}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
+                                    <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                    thumbsContainer.insertAdjacentHTML("beforeend", itemHtml);
+                });
+            }
+        })
+        .catch(err => {
+            console.error("Error al cargar la playlist de YouTube:", err);
+        });
+});
+</script>
 
         </div> 
        
