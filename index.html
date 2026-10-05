@@ -885,6 +885,122 @@ html {
     </div>
 </section>
 
+<!-- SECCIÓN: ÚLTIMOS 4 VIDEOS / TRANSMISIONES -->
+<section id="latest-videos-section" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-xl border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-7 transition-all duration-300 shadow-2xl relative overflow-hidden">
+    
+    <!-- Decoración de fondo Glow -->
+    <div class="absolute -top-24 -left-24 w-60 h-60 bg-brand-neon/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-brand-neonPink/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Encabezado -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60 relative z-10">
+        <div class="flex items-center space-x-3">
+            <div class="w-2.5 h-7 bg-gradient-to-b from-brand-neon to-brand-neonPink rounded-full shadow-lg shadow-brand-neon/20"></div>
+            <div>
+                <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-100 flex items-center gap-2">
+                    <i class="fa-brands fa-youtube text-red-500 text-lg animate-pulse"></i> 
+                    Últimas Transmisiones y Videos
+                </h4>
+                <p class="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">Explora los contenidos más recientes del canal</p>
+            </div>
+        </div>
+        
+        <a href="https://youtube.com/playlist?list=PLIjqDRnaTRqM" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 text-[10px] font-black tracking-wider uppercase px-4 py-2 rounded-xl border border-brand-neon/40 bg-brand-neon/10 text-brand-neon hover:bg-brand-neon hover:text-black transition-all duration-300 shadow-md hover:shadow-brand-neon/20 self-start sm:self-auto">
+            <i class="fa-solid fa-layer-group text-xs"></i> Ver Playlist Completa
+        </a>
+    </div>
+
+    <!-- Grid Principal: 1 Destacado + 3 Tarjetas de Solo Video -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 relative z-10">
+        
+        <!-- VIDEO PRINCIPAL / DESTACADO -->
+        <div class="lg:col-span-7 xl:col-span-8 flex flex-col justify-between bg-zinc-900/40 dark:bg-black/40 p-3 rounded-2xl border border-zinc-200/40 dark:border-zinc-800/50">
+            <div class="relative w-full overflow-hidden rounded-xl border border-zinc-800 shadow-xl bg-black aspect-video group">
+                <iframe 
+                    id="main-video-player"
+                    class="absolute top-0 left-0 w-full h-full rounded-xl" 
+                    src="https://www.youtube.com/embed/videoseries?list=PLIjqDRnaTRqM&index=1" 
+                    title="Último video destacado" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="mt-3 px-2 flex items-center justify-between">
+                <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-red-500/10 text-red-500 border border-red-500/20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
+                    Último Estreno / En Vivo
+                </span>
+                <span class="text-[11px] text-zinc-400 font-medium">Video #1</span>
+            </div>
+        </div>
+
+        <!-- LISTA DE LOS OTROS 3 VIDEOS (Solo Miniaturas / Reproductores) -->
+        <div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-3 justify-between">
+            
+            <!-- Video Item 2 -->
+            <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" class="group relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md hover:border-brand-neon/60 transition-all duration-300">
+                <img src="https://img.youtube.com/vi/VIDEO_ID_2/mqdefault.jpg" alt="Video 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
+                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                    </div>
+                </div>
+               
+            </a>
+
+            <!-- Video Item 3 -->
+            <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank" class="group relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md hover:border-brand-neon/60 transition-all duration-300">
+                <img src="https://img.youtube.com/vi/VIDEO_ID_3/mqdefault.jpg" alt="Video 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
+                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                    </div>
+                </div>
+               
+            </a>
+
+            <!-- Video Item 4 -->
+            <a href="https://www.youtube.com/watch?v=VIDEO_ID_4" target="_blank" class="group relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md hover:border-brand-neon/60 transition-all duration-300">
+                <img src="https://img.youtube.com/vi/VIDEO_ID_4/mqdefault.jpg" alt="Video 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
+                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                    </div>
+                </div>
+                
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Pie de sección -->
+    <div class="mt-6 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400 relative z-10">
+        <div class="flex items-center gap-2 font-medium">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+            </span>
+            <span>Contenido sincronizado desde YouTube</span>
+        </div>
+
+        <a href="https://www.youtube.com/@EliaquinMarin?sub_confirmation=1" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-brand-neonPink text-white text-[10px] font-black uppercase tracking-wider hover:opacity-90 transition-all shadow-md">
+            <i class="fa-solid fa-bell text-xs"></i> Suscribirse al Canal
+        </a>
+    </div>
+
+</section>
+
 
         </div> 
        
@@ -1717,61 +1833,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     </div>
 </section>
 
-<!-- SECCIÓN: PLAYLIST RECIENTE (ÚLTIMO VIDEO EN VIVO) -->
-<section id="latest-playlist-section" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl neon-glow">
-    
-    <!-- Encabezado con badge e identidad visual -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60">
-        <div class="flex items-center space-x-3">
-            <div class="w-2 h-6 bg-gradient-to-b from-brand-neon to-brand-neonPink rounded-full"></div>
-            <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
-                <i class="fa-brands fa-youtube text-red-500 text-base animate-pulse"></i> 
-                Última Transmisión <span class="text-zinc-400 dark:text-zinc-600 font-light">|</span> 
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-neonPink">Video más Reciente</span>
-            </h4>
-        </div>
-        
-        <a href="https://youtube.com/playlist?list=PLIjqDRnaTRqM" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="inline-flex items-center gap-1.5 text-[9px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full border border-brand-neon/30 bg-brand-neon/10 text-brand-neon hover:bg-brand-neon hover:text-black transition-all duration-300 shadow-sm">
-            <i class="fa-solid fa-list-ul text-xs"></i> Ver Playlist Completa
-        </a>
-    </div>
-
-    <!-- Contenedor del Reproductor de Video Adaptativo (16:9) -->
-    <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-2xl bg-black aspect-video group">
-        <iframe 
-            id="latest-playlist-player"
-            class="absolute top-0 left-0 w-full h-full rounded-2xl" 
-            src="https://www.youtube.com/embed/videoseries?list=PLIjqDRnaTRqM" 
-            title="Último video de la Playlist - Radio FE 4:18" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- Pie de sección con llamada a la acción -->
-    <div class="mt-4 pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400">
-        <div class="flex items-center gap-2 font-medium">
-            <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-            </span>
-            <span>Contenido actualizado automáticamente desde YouTube</span>
-        </div>
-
-        <a href="https://www.youtube.com/@EliaquinMarin?sub_confirmation=1" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="text-[10px] font-black uppercase tracking-wider text-brand-neonPink hover:underline flex items-center gap-1">
-            <i class="fa-solid fa-bell"></i> Suscribirse al Canal
-        </a>
-    </div>
-
-</section>
-
 <!-- MÓDULO: TARJETA DE PRESENTACIÓN - ELIAQUIN MARÍN -->
 <section class="w-full bg-brand-lightCard/80 dark:bg-brand-card/90 backdrop-blur-xl border border-brand-neon/40 rounded-3xl p-5 sm:p-6 transition-all duration-300 shadow-xl relative overflow-hidden group hover:border-brand-neon/70">
     
@@ -1830,10 +1891,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 </section>
 
 
- </div>
-    </main>
-
-
 <section class="w-full max-w-7xl mx-auto mt-8 px-4 select-none">
     <div class="w-full bg-brand-lightCard/70 dark:bg-zinc-950/40 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 transition-colors duration-300 shadow-xl neon-glow">
         
@@ -1890,6 +1947,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         </div>
     </div>
 </section>
+
+
+ </div>
+    </main>
+
+
 
 
 <footer class="w-full bg-brand-lightCard/90 dark:bg-brand-card/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800/80 mt-12 pt-8 pb-24 md:pb-8 px-4 sm:px-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 relative z-50">
@@ -4519,8 +4582,8 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(item => item.trim())
             .filter(item => item.length > 2);
 
-        // Forzar estrictamente las primeras 4 canciones obtenidas del desglose
-        let ultimasCuatro = canciones.slice(0, 4);
+        // Forzar estrictamente las primeras 9 canciones obtenidas del desglose
+        let ultimasCuatro = canciones.slice(0, 9);
 
         if (ultimasCuatro.length === 0) {
             displayContainer.innerHTML = `
