@@ -2684,11 +2684,12 @@ function actualizarProgramacion() {
     const elArtist = document.getElementById('sonic_artist');
     const elArt = document.getElementById('track-cover');
 
-    if (programaEncontrado) {
+if (programaEncontrado) {
         programaEnVivoActivo = true;
         programaActualData = programaEncontrado;
         if (elTitle) elTitle.textContent = programaEncontrado.nombre;
-        if (elArtist) elArtist.textContent = formatearHora(programaEncontrado.horaInicio) + " - " + formatearHora(programaEncontrado.horaFin);
+        // CAMBIO AQUÍ: Muestra el nombre del locutor/DJ en vez de la hora
+        if (elArtist) elArtist.textContent = "Con " + programaEncontrado.dj;
         if (elArt) elArt.src = programaEncontrado.img;
     } else {
         programaEnVivoActivo = false;
@@ -2703,9 +2704,10 @@ const protectionObserver = new MutationObserver(() => {
         if (elTitle && elTitle.textContent !== programaActualData.nombre) {
             elTitle.textContent = programaActualData.nombre;
         }
-        let textoHora = formatearHora(programaActualData.horaInicio) + " - " + formatearHora(programaActualData.horaFin);
-        if (elArtist && elArtist.textContent !== textoHora) {
-            elArtist.textContent = textoHora;
+        // CAMBIO AQUÍ: Mantiene el nombre del locutor en lugar del rango de horas
+        let textoLocutor = "Con " + programaActualData.dj;
+        if (elArtist && elArtist.textContent !== textoLocutor) {
+            elArtist.textContent = textoLocutor;
         }
     }
 });
