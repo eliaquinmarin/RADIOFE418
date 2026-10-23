@@ -299,7 +299,6 @@ html {
       })();
     </script>
 
-
 </head>
 <body class="bg-brand-lightBg dark:bg-brand-dark text-zinc-800 dark:text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen flex flex-col transition-colors duration-300">
     
@@ -886,201 +885,86 @@ html {
     </div>
 </section>
 
-<!-- SECCIÓN: ÚLTIMOS 4 VIDEOS / TRANSMISIONES (SIN SHORTS) -->
-<section id="latest-videos-section" class="w-full bg-white dark:bg-brand-card/60 backdrop-blur-xl border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-7 transition-all duration-300 shadow-2xl relative overflow-hidden">
+<!-- SECCIÓN ESPECIAL: PLAYLIST DE ENTREVISTAS CON LISTA VISIBLE -->
+<section id="matrimonios-playlist" class="w-full bg-brand-lightCard/70 dark:bg-brand-card/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-5 sm:p-6 transition-colors duration-300 shadow-xl neon-glow">
     
-    <!-- Decoración de fondo Glow -->
-    <div class="absolute -top-24 -left-24 w-60 h-60 bg-brand-neon/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-brand-neonPink/10 rounded-full blur-3xl pointer-events-none"></div>
-
-    <!-- Encabezado -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60 relative z-10">
+    <!-- Encabezado con Identidad y Badge -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 pb-4 border-b border-zinc-200/60 dark:border-zinc-800/60">
         <div class="flex items-center space-x-3">
-            <div class="w-2.5 h-7 bg-gradient-to-b from-brand-neon to-brand-neonPink rounded-full shadow-lg shadow-brand-neon/20"></div>
-            <div>
-                <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-100 flex items-center gap-2">
-                    <i class="fa-brands fa-youtube text-red-500 text-lg animate-pulse"></i> 
-                    Últimas Transmisiones y Videos
-                </h4>
-                <p class="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">Explora los contenidos más recientes del canal</p>
-            </div>
+            <div class="w-2 h-6 bg-gradient-to-b from-brand-neonPink to-pink-500 rounded-full"></div>
+            <h4 class="font-black tracking-widest uppercase text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+                <i class="fa-solid fa-microphone text-brand-neonPink text-base animate-pulse"></i> 
+                Serie Especial <span class="text-zinc-400 dark:text-zinc-600 font-light">|</span> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neonPink to-pink-500">ENTREVISTAS418</span>
+            </h4>
         </div>
-        
-        <a href="https://www.youtube.com/playlist?list=PLIjqDRnaTRqM" 
+        <a href="https://www.youtube.com/embed/videoseries?si=4TBbaR2r15_sjxct&amp;list=PLIjqDRnaTRqM" 
            target="_blank" 
            rel="noopener noreferrer" 
-           class="inline-flex items-center gap-2 text-[10px] font-black tracking-wider uppercase px-4 py-2 rounded-xl border border-brand-neon/40 bg-brand-neon/10 text-brand-neon hover:bg-brand-neon hover:text-black transition-all duration-300 shadow-md hover:shadow-brand-neon/20 self-start sm:self-auto">
-            <i class="fa-solid fa-layer-group text-xs"></i> Ver Playlist Completa
+           class="inline-flex items-center gap-1.5 text-[9px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full border border-brand-neonPink/30 bg-brand-neonPink/10 text-brand-neonPink hover:bg-brand-neonPink hover:text-white transition-all duration-300">
+            <i class="fa-brands fa-youtube text-xs"></i> Ver Playlist en YouTube
         </a>
     </div>
 
-    <!-- Grid Principal: 1 Destacado + 3 Tarjetas de Solo Video -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 relative z-10 items-stretch">
+    <!-- Layout Grid: Reproductor Principal + Lista de Videos -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
         
-        <!-- VIDEO PRINCIPAL / DESTACADO -->
-        <div class="lg:col-span-7 xl:col-span-8 flex flex-col justify-between bg-white dark:bg-black/40 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/50 shadow-sm">
-            <div>
-                <div class="relative w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-lg bg-black aspect-video group">
-                    <iframe 
-                        id="main-video-player"
-                        class="absolute top-0 left-0 w-full h-full rounded-xl" 
-                        src="" 
-                        title="Último video destacado" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                
-                <!-- Título y Descripción del Video Principal -->
-                <div class="mt-4 flex flex-col gap-1.5">
-                    <h3 id="main-video-title" class="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 line-clamp-1">Cargando título...</h3>
-                    <p id="main-video-desc" class="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">Cargando descripción del video...</p>
-                </div>
-            </div>
-
-            <!-- Botón de Suscribirse ancho abajo -->
-            <div class="mt-5 pt-3 border-t border-zinc-100 dark:border-zinc-800">
-                <a href="https://www.youtube.com/@EliaquinMarin?sub_confirmation=1" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-brand-neonPink text-white text-[11px] font-black uppercase tracking-wider hover:opacity-90 transition-all shadow-md">
-                    Suscribirse al Canal
-                </a>
-            </div>
+        <!-- Reproductor Dinámico (Ocupa 2 columnas en PC) -->
+        <div class="lg:col-span-2 relative w-full overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-lg bg-black aspect-video">
+            <iframe 
+                id="main-matrimonio-player"
+                class="absolute top-0 left-0 w-full h-full" 
+                src="https://www.youtube.com/embed/4TBbaR2r15_sjxct&amp;list=PLIjqDRnaTRqM" 
+                title="Playlist Especial ENTREVISTAS418 - con Eliaquin Marin" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
         </div>
 
-        <!-- LISTA DE LOS OTROS 3 VIDEOS (Contenedor Dinámico) -->
-        <div id="playlist-thumbs-container" class="lg:col-span-5 xl:col-span-4 flex flex-col justify-between gap-3">
-            <div class="w-full aspect-video rounded-2xl bg-zinc-100 dark:bg-zinc-800/40 animate-pulse"></div>
-            <div class="w-full aspect-video rounded-2xl bg-zinc-100 dark:bg-zinc-800/40 animate-pulse"></div>
-            <div class="w-full aspect-video rounded-2xl bg-zinc-100 dark:bg-zinc-800/40 animate-pulse"></div>
+        <!-- Lista de Reproducción Scrollable con Acceso Directo -->
+        <div class="lg:col-span-1 flex flex-col justify-between bg-zinc-100/60 dark:bg-zinc-900/50 border border-zinc-200/60 dark:border-zinc-800/60 rounded-2xl p-3 max-h-[320px] lg:max-h-full overflow-y-auto space-y-2 custom-scrollbar">
+            <div class="text-[10px] font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-400 px-2 pt-1 pb-2 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+                <span>Lista de Temas</span>
+                <i class="fa-solid fa-list-ul text-brand-neonPink"></i>
+            </div>
+
+            <!-- Botones/Items de la lista -->
+            <button onclick="cambiarVideoMatrimonio('videoseries?list=PLIjqDRnaTRqM&si=4TBbaR2r15_sjxct')" class="w-full text-left p-2.5 rounded-xl hover:bg-brand-neonPink/10 border border-transparent hover:border-brand-neonPink/30 transition-all duration-200 flex items-center gap-3 group">
+                <div class="w-7 h-7 rounded-lg bg-brand-neonPink/20 text-brand-neonPink flex items-center justify-center font-bold text-xs group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-play text-[10px]"></i>
+                </div>
+                <div class="overflow-hidden">
+                    <p class="text-xs font-bold text-zinc-800 dark:text-zinc-200 truncate">Reproducir Todo / Serie COMPLETA</p>
+                    <p class="text-[10px] text-zinc-500">Lista continua en orden</p>
+                </div>
+            </button>
+
+            <!-- Acceso directo para abrir la lista desplegada -->
+            <a href="https://youtube.com/playlist?list=PLIjqDRnaTRqM&si=4TBbaR2r15_sjxct" 
+               target="_blank" 
+               class="w-full text-center p-3 rounded-xl bg-zinc-200/50 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-xs font-bold text-zinc-700 dark:text-zinc-300 transition-colors flex items-center justify-center gap-2 mt-auto">
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-brand-neonPink"></i>
+                <span>Abrir la lista en YouTube</span>
+            </a>
         </div>
+
+    </div>
+
+    <!-- Botón de Contacto por WhatsApp -->
+    <div class="pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex justify-center">
+        <a href="https://wa.me/584225183677?text=Hola,%20Dios%20les%20bendiga.%20Quisiera%20conversar%20sobre%20el%20como%20lograr%20una%20ENTREVISTA%20con%20Ustedes.." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-xs font-black tracking-widest uppercase rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-md hover:shadow-emerald-500/20 active:scale-95 group">
+            <i class="fa-brands fa-whatsapp text-base transition-transform duration-300 group-hover:scale-110"></i>
+            <span>¿Quieres hablar o preguntar? Escríbenos</span>
+        </a>
     </div>
 
 </section>
 
-<!-- SCRIPT DE CARGA Y REPRODUCCIÓN INTERNA -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const playlistId = "PLIjqDRnaTRqM";
-    const apiEndpoints = [
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`)}`,
-        `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`)}`
-    ];
 
-    function parseYouTubeXML(xmlText) {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        const entries = Array.from(xmlDoc.querySelectorAll("entry"));
-        
-        return entries.map(entry => {
-            const videoIdNode = entry.querySelector("videoId");
-            const titleNode = entry.querySelector("title");
-            const descNode = entry.querySelector("group") ? entry.querySelector("group description") : entry.querySelector("description");
-            
-            return {
-                videoId: videoIdNode ? videoIdNode.textContent : null,
-                title: titleNode ? titleNode.textContent : "Video de YouTube",
-                description: descNode ? descNode.textContent : "Sin descripción disponible para este contenido."
-            };
-        }).filter(item => item.videoId && !item.title.toLowerCase().includes("#shorts"));
-    }
-
-    // Función auxiliar para cambiar el video principal en el reproductor al hacer clic en miniaturas
-    window.playInMainPlayer = function(videoId, title, description, element) {
-        const mainPlayer = document.getElementById("main-video-player");
-        const mainTitle = document.getElementById("main-video-title");
-        const mainDesc = document.getElementById("main-video-desc");
-        
-        if (mainPlayer) mainPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-        if (mainTitle) mainTitle.textContent = title;
-        if (mainDesc) mainDesc.textContent = description;
-
-        // Resaltar visualmente la miniatura activa
-        document.querySelectorAll(".playlist-thumb-card").forEach(card => {
-            card.classList.remove("border-brand-neon", "ring-2", "ring-brand-neon/50");
-            card.classList.add("border-zinc-200", "dark:border-zinc-800");
-        });
-        if (element) {
-            element.classList.remove("border-zinc-200", "dark:border-zinc-800");
-            element.classList.add("border-brand-neon", "ring-2", "ring-brand-neon/50");
-        }
-    };
-
-    async function loadYouTubeVideos() {
-        let videos = [];
-
-        try {
-            const res = await fetch(apiEndpoints[0]);
-            if (res.ok) {
-                const text = await res.text();
-                videos = parseYouTubeXML(text);
-            }
-        } catch (e) {
-            console.warn("Intento 1 falló, usando respaldo...", e);
-        }
-
-        if (videos.length === 0) {
-            try {
-                const res = await fetch(apiEndpoints[1]);
-                const data = await res.json();
-                if (data.status === "ok" && data.items) {
-                    videos = data.items.map(item => {
-                        let id = null;
-                        if (item.guid) id = item.guid.split(":").pop();
-                        return { 
-                            videoId: id, 
-                            title: item.title,
-                            description: item.description || item.content || "Sin descripción disponible."
-                        };
-                    }).filter(item => item.videoId && !item.title.toLowerCase().includes("#shorts"));
-                }
-            } catch (e) {
-                console.error("Error al cargar la API alternativa:", e);
-            }
-        }
-
-        const container = document.getElementById("playlist-thumbs-container");
-        if (videos.length > 0) {
-            // Cargar el video principal inicial
-            const mainVideo = videos[0];
-            document.getElementById("main-video-player").src = `https://www.youtube.com/embed/${mainVideo.videoId}?autoplay=0`;
-            document.getElementById("main-video-title").textContent = mainVideo.title;
-            document.getElementById("main-video-desc").textContent = mainVideo.description;
-
-            container.innerHTML = "";
-            videos.slice(1, 4).forEach((video, index) => {
-                const thumbUrl = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
-                const safeTitle = video.title.replace(/"/g, '&quot;');
-                const safeDesc = video.description.replace(/"/g, '&quot;').replace(/\n/g, ' ');
-                
-                const html = `
-                    <div onclick="playInMainPlayer('${video.videoId}', '${safeTitle}', '${safeDesc}', this)" 
-                         title="${safeTitle}"
-                         class="playlist-thumb-card group relative w-full aspect-video rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border ${index === 0 ? 'border-brand-neon ring-2 ring-brand-neon/50' : 'border-zinc-200 dark:border-zinc-800'} shadow-sm hover:border-brand-neon/60 transition-all duration-300 cursor-pointer block">
-                        <img src="${thumbUrl}" alt="${safeTitle}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
-                        <div class="absolute bottom-2 left-3 right-3 z-10">
-                            <p class="text-[11px] font-medium text-white line-clamp-1 drop-shadow-md">${video.title}</p>
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-10 h-10 rounded-full bg-brand-neon/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-brand-neon transition-all duration-300">
-                                <i class="fa-solid fa-play text-xs ml-0.5"></i>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML("beforeend", html);
-            });
-        } else {
-            container.innerHTML = `<p class="text-xs text-zinc-400 text-center py-4">No se pudieron cargar los videos en este momento.</p>`;
-        }
-    }
-
-    loadYouTubeVideos();
-});
-</script>
         </div> 
        
         <div class="lg:col-span-5 space-y-6 w-full">
