@@ -4511,72 +4511,62 @@ document.getElementById('close-app-btn').addEventListener('click', function() {
 document.addEventListener("DOMContentLoaded", () => {
     const targetSpan = document.getElementById('sonic_listeners');
     const iconContainer = document.getElementById('live-listeners-icon');
-    
-    // Bandera de control para prevenir recursión infinita en el MutationObserver
+
+    if (!targetSpan || !iconContainer) return;
+
     let isUpdating = false;
 
     /**
-     * Evalúa la audiencia en tiempo real y gestiona de forma profesional
-     * la visualización de los componentes del contador.
+     * Sincroniza la UI con los datos de audiencia en tiempo real.
      */
-    function gestionarFlujoAudiencia() {
-        if (!targetSpan || !iconContainer) return;
+    function actualizarFlujoAudiencia() {
+        if (isUpdating) return;
 
-        // Recuperar el valor numérico bruto de forma segura (Prioriza el atributo persistente)
-        const rawValue = targetSpan.getAttribute('data-real-value') || targetSpan.textContent;
+        // Obtener el valor crudo (priorizando el atributo de datos o el texto actual)
+        const rawValue = targetSpan.dataset.realValue || targetSpan.textContent;
         const totalListeners = parseInt(rawValue, 10) || 0;
 
-        // Almacenar el valor real en caché de nodo para mantener la persistencia de datos
-        targetSpan.setAttribute('data-real-value', totalListeners);
+        // Mantener persistencia en el atributo de datos
+        targetSpan.dataset.realValue = totalListeners;
 
-        if (totalListeners >= 10) {
-            // Umbral alcanzado: Renderizar y activar empaquetado visual
-            if (iconContainer.classList.contains('hidden')) {
-                iconContainer.classList.remove('hidden');
-                iconContainer.classList.add('inline-flex', 'animate-fade-in');
-            }
-            
-            // Inyectar el string numérico solo si ha cambiado
-            if (targetSpan.textContent !== String(totalListeners)) {
-                isUpdating = true;
-                targetSpan.textContent = totalListeners;
-                isUpdating = false;
-            }
-        } else {
-            // Audiencia discreta: Ocultar el módulo y limpiar buffers visuales
-            if (!iconContainer.classList.contains('hidden')) {
-                iconContainer.classList.remove('inline-flex', 'animate-fade-in');
-                iconContainer.classList.add('hidden');
-            }
-            
-            // Evitar contaminación visual dejando el nodo de texto despejado
-            if (targetSpan.textContent !== '') {
-                isUpdating = true;
-                targetSpan.textContent = '';
-                isUpdating = false;
-            }
+        const shouldShow = totalListeners >= 10;
+        const isCurrentlyHidden = iconContainer.classList.contains('hidden');
+
+        // Optimización de clases: solo modificar el DOM si el estado visual cambia
+        if (shouldShow && isCurrentlyHidden) {
+            iconContainer.classList.remove('hidden');
+            iconContainer.classList.add('inline-flex', 'animate-fade-in');
+        } else if (!shouldShow && !isCurrentlyHidden) {
+            iconContainer.classList.remove('inline-flex', 'animate-fade-in');
+            iconContainer.classList.add('hidden');
+        }
+
+        // Determinar el nuevo texto a mostrar
+        const targetText = shouldShow ? String(totalListeners) : '';
+
+        if (targetSpan.textContent !== targetText) {
+            isUpdating = true;
+            targetSpan.textContent = targetText;
+            isUpdating = false;
         }
     }
 
-    if (targetSpan && iconContainer) {
-        // Monitoreo reactivo asíncrono acoplado a mutaciones externas de Supabase
-        const listenerObserver = new MutationObserver((mutations) => {
-            if (isUpdating) return;
-            gestionarFlujoAudiencia();
-        });
+    // Configurar y observar mutaciones externas de forma eficiente
+    const listenerObserver = new MutationObserver(() => {
+        actualizarFlujoAudiencia();
+    });
 
-        // Configuración de interceptores para cambios de texto e inyecciones de nodos hijos
-        listenerObserver.observe(targetSpan, { 
-            childList: true, 
-            characterData: true, 
-            subtree: true 
-        });
+    listenerObserver.observe(targetSpan, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    });
 
-        // Ejecución inmediata del ciclo de verificación inicial
-        gestionarFlujoAudiencia();
-    }
+    // Ejecución inicial
+    actualizarFlujoAudiencia();
 });
 </script>
+
 <!-- SCRIPT DE OPTIMIZACIÓN DE RENDIMIENTO Y FLUIDEZ DE CARGA -->
 <script>
     (function() {
