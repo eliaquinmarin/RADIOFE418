@@ -413,7 +413,7 @@ html {
     <p class="text-[11px] sm:text-xs font-black tracking-widest flex items-center gap-2 m-0 text-zinc-600 dark:text-zinc-400 uppercase">
         <span>Al Aire</span> 
         
-        <span id="live-listeners-icon" class="hidden items-center gap-1 bg-zinc-200/50 dark:bg-zinc-900/60 px-2 py-0.5 rounded-md border border-zinc-300/30 dark:border-zinc-800/50 font-mono text-zinc-800 dark:text-brand-neon font-black shadow-inner animate-fade-in">
+<span id="live-listeners-icon" class="hidden items-center gap-1 bg-zinc-200/50 dark:bg-zinc-900/60 px-2 py-0.5 rounded-md border border-zinc-300/30 dark:border-zinc-800/50 font-mono text-zinc-800 dark:text-brand-neon font-black shadow-inner animate-fade-in">
     <i class="fa-solid fa-user-group text-[10px] text-brand-neonPink animate-pulse mr-0.5"></i>
     <span id="sonic_listeners">0</span>
 </span>
@@ -4509,64 +4509,56 @@ document.getElementById('close-app-btn').addEventListener('click', function() {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+    // Endpoint directo configurado con tu puerto 8032
+    const SONICPANEL_URL = "https://guri.tepuyserver.net/cp/get_info.php?p=8032";
+    
     const targetSpan = document.getElementById('sonic_listeners');
     const iconContainer = document.getElementById('live-listeners-icon');
 
     if (!targetSpan || !iconContainer) return;
 
-    let isUpdating = false;
-
-    /**
-     * Sincroniza la UI con los datos de audiencia en tiempo real.
-     */
-    function actualizarFlujoAudiencia() {
-        if (isUpdating) return;
-
-        // Obtener el valor crudo (priorizando el atributo de datos o el texto actual)
-        const rawValue = targetSpan.dataset.realValue || targetSpan.textContent;
-        const totalListeners = parseInt(rawValue, 10) || 0;
-
-        // Mantener persistencia en el atributo de datos
-        targetSpan.dataset.realValue = totalListeners;
-
+    function actualizarUI(totalListeners) {
+        // Umbral configurado a 10 oyentes (puedes cambiarlo si deseas que se muestre desde 1)
         const shouldShow = totalListeners >= 10;
-        const isCurrentlyHidden = iconContainer.classList.contains('hidden');
+        const isHidden = iconContainer.classList.contains('hidden');
 
-        // Optimización de clases: solo modificar el DOM si el estado visual cambia
-        if (shouldShow && isCurrentlyHidden) {
+        if (shouldShow && isHidden) {
             iconContainer.classList.remove('hidden');
             iconContainer.classList.add('inline-flex', 'animate-fade-in');
-        } else if (!shouldShow && !isCurrentlyHidden) {
+        } else if (!shouldShow && !isHidden) {
             iconContainer.classList.remove('inline-flex', 'animate-fade-in');
             iconContainer.classList.add('hidden');
         }
 
-        // Determinar el nuevo texto a mostrar
         const targetText = shouldShow ? String(totalListeners) : '';
-
         if (targetSpan.textContent !== targetText) {
-            isUpdating = true;
             targetSpan.textContent = targetText;
-            isUpdating = false;
         }
     }
 
-    // Configurar y observar mutaciones externas de forma eficiente
-    const listenerObserver = new MutationObserver(() => {
-        actualizarFlujoAudiencia();
-    });
+    async function obtenerOyentesSonicPanel() {
+        try {
+            // Nota: Si experimentas problemas de CORS al hacer fetch directamente, 
+            // asegúrate de que tu navegador permita peticiones al servidor o usa un proxy si fuera necesario.
+            const response = await fetch(SONICPANEL_URL);
+            if (!response.ok) throw new Error("Error al conectar con SonicPanel");
 
-    listenerObserver.observe(targetSpan, {
-        childList: true,
-        characterData: true,
-        subtree: true
-    });
+            const data = await response.json();
+            
+            // Extraer la cantidad de oyentes del JSON que retorna SonicPanel
+            const oyentes = parseInt(data.listeners || data.unique_listeners || 0, 10);
+            
+            actualizarUI(oyentes);
+        } catch (error) {
+            console.warn("No se pudo actualizar el contador de oyentes:", error);
+        }
+    }
 
-    // Ejecución inicial
-    actualizarFlujoAudiencia();
+    // Ejecutar al cargar y actualizar cada 15 segundos
+    obtenerOyentesSonicPanel();
+    setInterval(obtenerOyentesSonicPanel, 15000);
 });
 </script>
-
 <!-- SCRIPT DE OPTIMIZACIÓN DE RENDIMIENTO Y FLUIDEZ DE CARGA -->
 <script>
     (function() {
